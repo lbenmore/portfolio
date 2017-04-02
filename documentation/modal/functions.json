@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Modal",
+    "syntax": "Modal(options)",
+    "description": "Intialization function for a new modal popup for a message or prompt.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "options",
+        "type": "Object",
+        "description": "\"type\"*: Type of modal to present to the user. Options: \"confirm\", \"prompt\".<br><br>\"message\"*: Message or question to be presented to the user.<br><br>\"options\"*: JSON object for configuration of buttons. Contains:<br><br>&nbsp;&nbsp;&nbsp;&nbsp;\"text\"*: Call to action copy for the visual button.<br><br>&nbsp;&nbsp;&nbsp;&nbsp;\"callback\": Function or function reference to be called on click of button.<br><br>&nbsp;&nbsp;&nbsp;&nbsp;\"callbackParams\": Parameter or array of parameters to be sent to callback function. Always sent as array; for prompts, the first item is always the inputed text."
+      }
+    ],
+    "example": "\r\rfunction cbNegative (target) {\r\tdocument.querySelector(target).innerHTML += '&lt;div style=\"font-family: sans-serif; font-size: 10vw; text-align: center;\"&gt;RUDE!&lt;/div&gt;';\r}\r\rfunction negative () {\r\tnew Modal({\r\t\t'type': 'confirm',\r\t\t'message': 'Well, that just seems uncalled for.',\r\t\t'options': [{\r\t\t\t'text': 'Sorry, not sorry.',\r\t\t\t'callback': cbNegative,\r\t\t\t'callbackParams': ['#container']\r\t\t}]\r\t})\r}\r\rfunction greeting (response) {\r\tnew Modal({\r\t\t'type': 'confirm',\r\t\t'message': 'Nice to meet you, ' + response[0],\r\t\t'options': [{\r\t\t\t'text': 'Same to you!'\r\t\t}]\r\t});\r}\r\rnew Modal({\r\t'type': 'prompt',\r\t'message': 'What's your name?',\r\t'options': [\r\t\t{\r\t\t\t'text': 'Hello!',\r\t\t\t'callback': greeting,\r\t\t},\r\t\t{\r\t\t\t'text': 'I'm not telling you.',\r\t\t\t'callback': negative,\r\t\t}\r\t]\r});"
+  }
+]
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Magnifying Glass</title>
+    <style>
+      :root {
+        --bkg: url('https://images.unsplash.com/photo-1466853817435-05b43fe45b39?dpr=2&auto=format&fit=crop&w=1500&h=1090&q=80&cs=tinysrgb&crop=');
+        --top: 35%;
+        --left: 35%;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      
+      main {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-attachment: fixed;
+        background-image: var(--bkg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      
+      section {
+        position: absolute;
+        top: var(--top);
+        left: var(--left);
+        width: 20vw;
+        height: 20vh;
+        background-attachment: fixed;
+        background-image: var(--bkg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 50%;
+        filter: drop-shadow(0px 0px 10px #000);
+        transform: scale(1.5);
+      }    
+    </style>
+  </head>
+  <body>
+    <main>
+      <section></section>
+    </main>
+    <script>
+      let glass = document.getElementsByTagName('section')[0];
+      
+      const setPosition = (e) => {
+        let pos = {},
+            size = {};
+        
+        pos.x = e.clientX;
+        pos.y = e.clientY;
+        
+        size.width = parseInt(window.getComputedStyle(glass).width);
+        size.height = parseInt(window.getComputedStyle(glass).height);
+        
+        document.body.style.setProperty('--top', (pos.y - (size.height / 2)) + 'px');
+        document.body.style.setProperty('--left', (pos.x - (size.width / 2)) + 'px');
+      },
+            
+      resetPosition = () => {
+        document.body.style.setProperty ('--top', '35%');
+        document.body.style.setProperty ('--left', '35%');
+      };
+      
+      document.onmousemove = setPosition;
+      document.onmouseout = resetPosition;
+      
+    </script>
+  </body>
+</html>

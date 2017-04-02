@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Digital Clock</title>
+    <style>
+      html, body {
+        background: #333;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #container {
+        position: relative;
+        margin-top: 50vh;
+        margin-left: 50vw;
+        width: 628px;
+        height: 154px;
+        transform: translate(-50%, -50%);
+      }
+
+      .digit {
+        position: relative;
+        display: inline-block;
+        width: 90px;
+        height: 150px;
+        perspective: 100vw;
+      }
+
+      .colon {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 150px;
+      }
+
+      .cell {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        box-sizing: border-box;
+        transition: all 0.5s;
+      }
+
+      .digit .cell {
+        animation-name: unflip;
+        animation-direction: normal;
+        animation-duration: 0.5s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+
+      .digit .cell:nth-of-type(3n + 2) {
+        left: 30px;
+      }
+
+      .digit .cell:nth-of-type(3n + 3) {
+        left: 60px;
+      }
+
+      .digit .cell:nth-of-type(n + 4), .colon .cell:nth-of-type(2) {
+        top: 30px;
+      }
+
+      .digit .cell:nth-of-type(n + 7), .colon .cell:nth-of-type(3) {
+        top: 60px;
+      }
+
+      .digit .cell:nth-of-type(n + 10), .colon .cell:nth-of-type(4) {
+        top: 90px;
+      }
+
+      .digit .cell:nth-of-type(n + 13), .colon .cell:nth-of-type(5) {
+        top: 120px;
+      }
+
+      .digit .cell.active {
+        box-shadow: 0px 0px 5px #0ff;
+        animation-name: flip;
+        animation-duration: 0.5s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+
+      .colon .cell.active {
+        background-color: #0ff;
+        box-shadow: 0px 0px 5px #0ff;
+      }
+
+      @keyframes flip {
+        0% {
+          transform: rotateX(0deg);
+          background-color: transparent;
+        }
+
+        49% {
+          background-color: transparent;
+        }
+
+        50% {
+          transform: rotateX(90deg);
+          background-color: #666;
+        }
+
+        100% {
+          transform: rotateX(0deg);
+          background-color: #0ff;
+        }
+      }
+
+      @keyframes unflip {
+        0% {
+          transform: rotateX(0deg);
+          background-color: #0ff;
+        }
+
+        49% {
+          background-color: #0ff;
+        }
+
+        50% {
+          transform: rotateX(90deg);
+          background-color: transparent;
+        }
+
+        100% {
+          transform: rotateX(0deg);
+          background-color: transparent;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='hourone' class='digit'></div>
+      <div id='hourtwo' class='digit'></div>
+      <div class='colon'>
+        <div class='cell'></div>
+        <div class='cell active'></div>
+        <div class='cell'></div>
+        <div class='cell active'></div>
+        <div class='cell'></div>
+      </div>
+      <div id='minuteone' class='digit'></div>
+      <div id='minutetwo' class='digit'></div>
+      <div class='colon'>
+        <div class='cell'></div>
+        <div class='cell active'></div>
+        <div class='cell'></div>
+        <div class='cell active'></div>
+        <div class='cell'></div>
+      </div>
+      <div id='secondone' class='digit'></div>
+      <div id='secondtwo' class='digit'></div>
+    </div>
+
+    <script>
+      var $, digits, rotateInterval, currDigit, initDigits, initTime, updateDigits;
+
+      $ = function (el) {
+        if (el.slice(0, 1) == '#') {
+          return document.querySelector(el);
+        } else {
+          return document.querySelectorAll(el);
+        }
+      }
+
+      digits = [
+      [1,1,1,1,0,1,1,0,1,1,0,1,1,1,1],[0,1,0,0,1,0,0,1,0,0,1,0,0,1,0],[1,1,1,0,0,1,1,1,1,1,0,0,1,1,1],[1,1,1,0,0,1,1,1,1,0,0,1,1,1,1],[1,0,1,1,0,1,1,1,1,0,0,1,0,0,1],[1,1,1,1,0,0,1,1,1,0,0,1,1,1,1],[1,1,1,1,0,0,1,1,1,1,0,1,1,1,1],[1,1,1,0,0,1,0,0,1,0,0,1,0,0,1],[1,1,1,1,0,1,1,1,1,1,0,1,1,1,1],[1,1,1,1,0,1,1,1,1,0,0,1,0,0,1]
+      ];
+
+      updateDigits = function (div, num) {
+        var digit = document.querySelector('#' + div),
+            cells = digit.getElementsByClassName('cell');
+
+        for (var i = 0; i < cells.length; i++) {
+          if (digits[num][i]) {
+            cells[i].classList.add('active');
+          } else {
+            cells[i].classList.remove('active');
+          }
+        }
+      }
+
+      updateTime = function () {
+        setInterval(function () {
+          var now = new Date(),
+              hour = now.getHours(),
+              minute = now.getMinutes(),
+              second = now.getSeconds(),
+              hourone, hourtwo, minuteone, minutetwo, secondone, secondtwo;
+
+          if (hour > 12) {
+            hour = hour - 12;
+          }
+
+          if (hour == 0) {
+            hour = 12;
+          }
+
+          if (hour < 10) {
+            hour = '0' + hour;
+          }
+
+          if (minute < 10) {
+            minute = '0' + minute;
+          }
+
+          if (second < 10) {
+            second = '0' + second;
+          }
+
+        hourone = Number(hour.toString().slice(0, 1));
+        hourtwo = Number(hour.toString().slice(1, 2));
+        minuteone = Number(minute.toString().slice(0, 1));
+        minutetwo = Number(minute.toString().slice(1, 2));
+        secondone = Number(second.toString().slice(0, 1));
+        secondtwo = Number(second.toString().slice(1, 2));
+
+        updateDigits('hourone', hourone);
+        updateDigits('hourtwo', hourtwo);
+        updateDigits('minuteone', minuteone);
+        updateDigits('minutetwo', minutetwo);
+        updateDigits('secondone', secondone);
+        updateDigits('secondtwo', secondtwo);
+      }, 1000);
+    }
+
+    initDigits = function () {
+      for (var i = 0; i < $('.digit').length; i++) {
+        for (var j = 0; j < 15; j++) {
+          var cell = document.createElement('div');
+          cell.classList.add('cell');
+          $('.digit')[i].appendChild(cell);
+        }
+      }
+
+      updateTime();
+    };
+
+    initDigits();
+
+    </script>
+  </body>
+</html>

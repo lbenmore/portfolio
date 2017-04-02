@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Twinkle Stars</title>
+    <style>
+      html,body{margin:0}
+      #container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #000;
+        color: #fff;
+      }
+      
+      .star {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='container'></div>  
+  
+    <script>
+      class Star {
+        constructor () {
+          this.rand = Number(String(Math.random()).slice(0, 4));
+          this.star = document.createElement('div');
+          this.star.className = 'star';
+          this.star.style.top = Math.floor(Math.random() * window.innerHeight) + 'px';
+          this.star.style.left = Math.floor(Math.random() * window.innerWidth) + 'px';
+          this.star.style.opacity = this.rand;
+          
+          document.body.appendChild(this.star);
+          
+          this.twinkle();
+        }
+        
+        twinkle () {
+          let counter = this.rand - 0.5;
+          let rand = this.rand;
+          let star = this.star;
+          let dir = 'forwards';
+          star.style.opacity = counter; 
+         
+          setTimeout(function () {
+            setInterval(function () {
+              switch (dir) {
+                case 'forwards':
+                  if (counter < rand) {
+                    counter += 0.05;
+                    star.style.opacity = counter; 
+                  } else {
+                    dir = 'backwards';
+                  }
+                break;
+      
+                case 'backwards':
+                  if (counter > rand - 0.5) {
+                    counter -= 0.05;
+                    star.style.opacity = counter; 
+                  } else {
+                    dir = 'forwards';
+                  }
+                break;
+              }
+            }, 75);
+          }, Math.random() * 1000);
+        } 
+      }
+      
+      for (let i = 0; i < ((window.innerWidth * window.innerHeight) / 500); i++) {
+        var star = new Star();
+      }      
+    </script>
+  </body>
+</html>

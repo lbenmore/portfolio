@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>HSL Color Picker</title>
+    <style>
+      :root {
+        --hue: 0;
+        --sat: 0%;
+        --ltns: 0%;
+      }
+      
+      html, body { margin: 0; }
+      
+      .bar {
+        position: relative;
+        display: block;
+        margin-top: 5vh;
+        margin-left: 5vw;
+        width: 90vw;
+        height: 50px;
+        border: 1px solid #808080;
+        border-radius: 50px;
+      }
+      
+      .slider {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      
+      #hue {
+        background: linear-gradient(to right, #f00, #f80, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+      }
+      
+      #saturation {
+        background: linear-gradient(to right, #808080, hsl(var(--hue), 100%, 50%));
+      }
+      
+      #lightness {
+         background: linear-gradient(to right, #000, hsl(var(--hue), 100%, 50%), #fff);
+      }
+      
+      #result {
+        background-color: hsl(var(--hue), var(--sat), var(--ltns));
+      }
+      
+      #codes {
+        position: relative;
+        margin-top: 5vh;
+        margin-left: 5vw;
+        font-family: 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+      }    
+    </style>
+  </head>
+  <body>
+    <div id='hue' class='bar'>
+      <div class='slider'></div>
+    </div>
+    <div id='saturation' class='bar'>
+      <div class='slider'></div>
+    </div>
+    <div id='lightness' class='bar'>
+      <div class='slider'></div>
+    </div>
+    <div id='result' class='bar'></div>
+    <div id='codes'></div>    
+    
+    <script>
+      var barHue = document.querySelector('#hue');
+      var barSat = document.querySelector('#saturation');
+      var barLtns = document.querySelector('#lightness');
+      
+      var hue = 0, sat = 0, ltns = 0;
+      
+      var updateValue = function (e) {
+        if (!e.target.classList.contains('bar')) {
+          return;
+        }
+          var sldrWidth = Math.floor(parseInt(window.getComputedStyle(document.querySelector('.slider')).width));
+          var barWidth = Math.floor(parseInt(window.getComputedStyle(document.querySelector('.bar')).width));
+          var sldrX = Math.floor(Math.floor(e.layerX) - Math.floor((sldrWidth / 2)));
+          var sldrPos = Math.floor((((sldrX + sldrWidth / 2) / barWidth) * 100));
+      
+        document.querySelector('#' + e.target.id + ' .slider').style.left = sldrPos + '%';
+        
+        switch (e.target.id) {
+          case 'hue':
+            hue = Math.floor((sldrPos / 100) * 360);
+            document.body.style.setProperty('--hue', (sldrPos / 100) * 360);
+          break;
+            
+          case 'saturation':
+            sat = sldrPos;
+            document.body.style.setProperty('--sat', sldrPos + '%');
+          break;
+            
+          case 'lightness':
+            ltns = sldrPos;
+            document.body.style.setProperty('--ltns', sldrPos + '%');
+          break;
+            
+          default:
+            console.log(e.target);
+          break;
+        }
+        
+        var result = document.querySelector('#result');
+        var rgb = window.getComputedStyle(result).backgroundColor;
+        var r = Number(rgb.replace('rgb(', '').replace(')', '').split(', ')[0].toString(16));
+        var g = Number(rgb.replace('rgb(', '').replace(')', '').split(', ')[1].toString(16));
+        var b = Number(rgb.replace('rgb(', '').replace(')', '').split(', ')[2].toString(16));
+        document.querySelector('#codes').innerHTML =`hsl(${hue}, ${sat}, ${ltns}) ${rgb} #${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+      }
+      
+      var onBarMouseDown = function (e) {
+        document.body.addEventListener('mousemove', updateValue);
+      }
+      
+      var onMouseUp = function () {
+        document.body.removeEventListener('mousemove', updateValue);
+      }
+      
+      barHue.addEventListener('mousedown', onBarMouseDown);
+      barSat.addEventListener('mousedown', onBarMouseDown);
+      barLtns.addEventListener('mousedown', onBarMouseDown);
+      
+      document.body.addEventListener('mouseup', onMouseUp);      
+    </script>
+  </body>
+</html>

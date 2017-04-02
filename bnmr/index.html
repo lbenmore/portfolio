@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no'>
+		<title>BNMR Testing</title>
+		<style>
+			html,
+			body {
+				position: fixed;
+				margin: 0;
+			}
+
+				#container {
+					width: 100vw;
+					height: 100vh;
+				}
+		</style>
+	</head>
+	<body>
+		<div id='container'>
+		</div>
+
+		<script id='bnmr'></script>
+		<script>
+			function initFns () {
+				onContainerSwipeRight = () => {
+					alert('swipe right');
+				};
+				
+				onContainerSwipeLeft = () => {
+					alert('swipe left');
+				};
+				
+				onContainerSwipeUp = () => {
+					alert('swipe up');
+				};
+				
+				onContainerSwipeDown = () => {
+					alert('swipe down');
+				};
+				
+				onContainerTap = () => {
+					alert('tap');
+				};
+	
+				$$('#container').on('swiperight', onContainerSwipeRight);
+				$$('#container').on('swipeleft', onContainerSwipeLeft);
+				$$('#container').on('swipeup', onContainerSwipeUp);
+				$$('#container').on('swipedown', onContainerSwipeDown);
+				$$('#container').on('tap', onContainerTap);
+				
+				$$('#container').animate({
+					'background-color' : '#000',
+					'width' : '50vw',
+					'height' : '50vh',
+					'color' : '#fff'
+				}, 1000, 2000);
+				
+				$$('#container').css('font-family', 'Lucida Sans Unicode', 3000);
+				
+				$$.ajax({
+					'url' : './test.txt'
+				}, (data) => {
+					$$('#container').innerHTML += data;
+				});
+				
+				$$.json({
+					'url' : './test.json'
+				}, (data) => {
+					for (const i of data) {
+						for (const key in i) {
+							$$('#container').innerHTML += `
+								<br>
+								${key} : ${i[key]}
+							`;
+						}
+					}
+				});
+			}
+		</script>
+		<script>
+			if ((/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i).test(navigator.userAgent) == true) {
+				document.querySelector('#bnmr').src = './m.bnmr-1.1.0.js';
+			} else {
+				document.querySelector('#bnmr').src = './bnmr-1.1.0.js';
+			}
+			
+			var loader = setInterval(function () {
+				if ($$) {
+					clearInterval(loader);
+					initFns();
+				}
+			}, 50);
+		</script>
+	</body>
+</html>

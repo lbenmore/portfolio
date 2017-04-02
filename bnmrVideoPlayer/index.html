@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no'>
+		<title>Video Player</title>
+		<link rel='stylesheet' href='styles/BnmrVideoPlayer.css'>
+		<style>
+			html,body{margin:0;}
+
+			#video-container,
+			#video2 {
+				top:50%;
+				left:50%;
+				transform:translate(-50%, -50%);
+			}
+
+			#video-container {
+				z-index:10;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='container'>
+			<div id='video-container'></div>
+			<div id='video2'></div>
+		</div>
+
+		<script type='text/javascript' src='./scripts/BnmrVideoPlayer.js'></script>
+		<script type='text/javascript'>
+			var my_vid = new BnmrVideoPlayer();
+			var my_vid2 = new BnmrVideoPlayer();
+
+			my_vid.setup({
+				autoplay : 'true',
+				controls : 'true',
+				height : 180,
+				location : '#video-container',
+				loop : 'true',
+				muted : 'true',
+				playlist : [
+					'videos/video4.mp4',
+					'videos/video5.mp4',
+					'videos/video6.mp4',
+					'videos/video1.mp4',
+					'videos/video2.mp4',
+					'videos/video3.mp4'
+				],
+				width : 320
+			});
+
+			my_vid2.setup({
+				autoplay : 'false',
+				controls : 'true',
+				file : 'videos/video.mp4',
+				height : 450,
+				location : '#video2',
+				loop : 'false',
+				muted : 'true',
+				width : 800
+			});
+		</script>
+	</body>
+</html>

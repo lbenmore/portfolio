@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Comparator</title>
+    <style>
+      html,
+      body {
+        position: fixed;
+        width:100vw;
+        height:1000vh;
+      }
+      
+      #container {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 450px;
+        height: 679px;
+        border: 1px solid #000;
+        overflow: hidden;
+      }
+      
+      #left {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background-image: url('http://img11.deviantart.net/478e/i/2010/183/7/d/retouch_before_and_after_66_by_holly6669666.jpg');
+        background-position: left top;
+        pointer-events: none;
+      }
+      
+      #right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height:100%;
+        background-image: url('http://img11.deviantart.net/478e/i/2010/183/7/d/retouch_before_and_after_66_by_holly6669666.jpg');
+        background-position: right top;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='left'></div>
+      <div id='right'></div>
+    </div>
+  
+    <script>
+      var container = document.querySelector('#container'),
+      left = document.querySelector('#left'),
+      right = document.querySelector('#right'),
+      
+      onContainerMouseMove = function (e) {
+        var x = e.offsetX || e.touches[0].pageX - e.touches[0].target.offsetLeft + 225,
+        leftWidth = x,
+        rightWidth = parseInt(window.getComputedStyle(container).width) - x;
+        
+        left.style.width = leftWidth + 'px';
+        right.style.width = rightWidth + 'px';
+      };
+      
+      container.onmousemove = onContainerMouseMove;
+      container.ontouchmove = onContainerMouseMove;      
+    </script>
+  </body>
+</html>

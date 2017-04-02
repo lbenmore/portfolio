@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Warp Speed</title>
+    <style>
+      #container {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #000;
+      }
+      .pane {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        animation-name: warpSpeedScotty;
+        animation-duration: 10s;
+        animation-timing-func: linear;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+      }
+      
+      .star {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        background-color: #fff;
+      /*   -webkit-filter: brightness(500%); */
+      }
+      
+      @keyframes warpSpeedScotty {
+        0% {
+          transform: perspective(100px) translateZ(-200px);
+        }
+        
+        100% {
+          transform: perspective(100px) translateZ(200px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id='container'></div>
+  
+    <script>
+      let numPanes = 20;
+      let numStars = (window.innerWidth * window.innerHeight) / 2500;
+      
+      class Pane {
+        constructor (index) {
+          this.pane = document.createElement('div');
+          this.pane.className = 'pane';
+          this.pane.style.animationDelay = (index * -1) + 's';
+          
+          for (let i = 0; i < numStars; i++) {
+            new Star(this.pane);
+          }
+          
+          document.body.appendChild(this.pane);
+        }
+      }
+      
+      class Star {
+        constructor (loc) {
+          this.star = document.createElement('div');
+          this.star.className = 'star';
+          this.star.style.top = Math.random() * window.innerHeight + 'px';
+          this.star.style.left = Math.random() * window.innerWidth + 'px';
+          // this.star.style.backgroundColor = 'rgb(' + Math.floor(Math.random () * 255) + ', ' + Math.floor(Math.random () * 255) + ', ' + Math.floor(Math.random () * 255) +')';
+          
+          loc.appendChild(this.star);
+        }
+      }
+      
+      for (let i = 0; i < numPanes; i++) {
+        new Pane(i);
+      }
+     
+    </script>
+  </body>
+</html>

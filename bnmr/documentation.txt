@@ -1,0 +1,41 @@
+$$('#elementId');
+how to currently return element by id.
+
+$$('.elementClass');
+returns array of elements of class. specifying by index will not work with other $$() functions.
+
+$$('elementTag');
+returns array of elements by tag. specifying by index will not work with other $$() functions.
+
+$$('selector').css(property:string, value:string [, delay:number]);
+changes inline style of element with optional delay in milliseconds.
+
+$$('selector').animate(properties:object [, duration:number, delay:number, ease:string]);
+properties object should contain keys of javascript syntax css properties with keys that are valid css values. 
+triggers css transition with option to set duration in milliseconds, delay in milliseconds, and ease.
+
+$$('selector').listener(event:string, action:function);
+adds an event listener with fallback for legacy browsers.
+
+$$.json(options:object, callback:function);
+options object must have a key for url with a string value, optional keys are method with a string value and async with a boolean value.
+returns the contents of a json file.
+
+$$.ajax(options:object, callback:function);
+options object must have a key for url with a string value, optional keys are method with a string value and async with a boolean value.
+returns the content of an external file.
+
+$$.preload(assetPath:string|array, callback:function);
+preloads an asset or assets if passed an array. currently preloads images or videos.
+
+$$.load(assetPath:string|array, callback:function);
+load an asset or assets if passed an array. currently loads stylesheets into the head and script files to the end of the body.
+
+$$.contains(originalText:string, textToSearchFor:string);
+returns a boolean of whether or not the original text contains the text to search for.
+
+$$.addCSS(cssSelector:string, property:string, value:string);
+adds a rule to the last called stylesheet. differs from $$().css in that it is added to the stylesheet instead of inline and can include pseudo elements.
+
+$$.getParam(parameterName:string);
+searches the parameters of the location and returns the value of the parameter name passed.

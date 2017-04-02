@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Calendar</title>
+    <style>
+      #calendar {
+        position: absolute;
+        top: 5vh;
+        left: 5vw;
+        width: 90vw;
+        height: 90vh;
+        border: 1px solid #808080;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+      }
+      
+      #prev {
+        position: absolute;
+        top: 9vh;
+        left: 3vw;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+      
+      #next {
+        position: absolute;
+        top: 9vh;
+        right: 3vw;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+      
+      #month {
+        text-align: center;
+        line-height: calc(18vh - 16px);
+        font-size: 40px;
+      }
+      
+      #days {
+        position: absolute;
+        top: calc(18vh - 16px);
+        width: 100%;
+        height: 16px;
+      }
+      
+      .dayLabel {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        width: 14.2857%;
+        font-size: 9px;
+        border: 1px solid #808080;
+        border-left: none;
+        box-sizing: border-box;
+        text-align: center;
+      } .dayLabel:last-child {
+        border-right: none;
+      }
+      
+      #dates {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 80%;
+      }
+      
+      .row {
+        position: relative;
+        display: block;
+        margin: 0;
+        width: 100%;
+        height: 16.5%;
+        border-bottom: 1px solid #808080;
+      } .row:last-child {
+        border: none;
+      }
+      
+      .cell {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        margin: 0;
+        width: 14.2857%;
+        height: 100%;
+        border-right: 1px solid #808080;
+        box-sizing: border-box;
+        padding: 5px;
+      } .cell:last-child {
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='calendar'>
+      <div id='prev'>&lt;</div>
+      <div id='next'>&gt;</div>
+      <div id='month'>
+      </div>
+      <div id='days'>
+        <div class='dayLabel'>Sunday</div><div class='dayLabel'>Monday</div><div class='dayLabel'>Tuesday</div><div class='dayLabel'>Wednesday</div><div class='dayLabel'>Thursday</div><div class='dayLabel'>Friday</div><div class='dayLabel'>Saturday</div>
+      </div>
+      <div id='dates'></div>
+    </div>
+  
+    <script>
+      const 
+      $ = (el) => {
+        if (el.slice(0, 1) == '#') {
+          return document.querySelector(el);
+        } else {
+          return document.querySelectorAll(el);
+        }
+      }
+      
+      months = [
+        {
+          'name' : 'January',
+          'days' : 31
+        },
+        {
+          'name' : 'February',
+          'days' : 28
+        },
+        {
+          'name' : 'March',
+          'days' : 31
+        },
+        {
+          'name' : 'April',
+          'days' : 30
+        },
+        {
+          'name' : 'May',
+          'days' : 31
+        },
+        {
+          'name' : 'June',
+          'days' : 30
+        },
+        {
+          'name' : 'July',
+          'days' : 31
+        },
+        {
+          'name' : 'August',
+          'days' : 31
+        },
+        {
+          'name' : 'September',
+          'days' : 30
+        },
+        {
+          'name' : 'October',
+          'days' : 31
+        },
+        {
+          'name' : 'November',
+          'days' : 30
+        },
+        {
+          'name' : 'December',
+          'days' : 31
+        },
+      ];  
+      
+      let now = new Date(),
+          year = now.getFullYear(),
+          month = now.getMonth(),
+          date = now.getDate(),
+          day = now.getDay(),
+      
+          setStart = new Date();
+      
+      const      
+      writeCalendar = () => {
+        let startDay = setStart.getDay(),
+            startCell = $('.row')[0].getElementsByClassName('cell')[startDay],
+            numDays = months[month].days,
+            currCell = startCell,
+            currDate = 1;
+        
+        for (let i = startDay; i < numDays + startDay; i++) {
+          $('.cell')[i].innerHTML = currDate;
+          currDate++;
+        }
+        
+        $('#month').innerHTML = `${months[month].name} ${year}`;
+      },
+            
+      clearCalendar = () => {
+        $('#month').innerHTML = '';
+        for (let cell of $('.cell')) {
+          cell.innerHTML = '';
+        }
+      },
+            
+      updateCalendar = (e) => {
+        clearCalendar();
+        
+        switch (e.target) {
+          case $('#prev'):
+            if (month == 0) {
+              year--;
+            }
+            
+            if (month > 0) {
+              month--;
+            } else {
+              month = months.length - 1;
+            }
+          break;
+            
+          case $('#next'):
+            if (month == 11) {
+              year++;
+            }
+            
+            if (month < months.length - 1) {
+              month++;
+            } else {
+              month = 0;
+            }
+          break;
+        }
+        
+        setStart.setYear(year);
+        setStart.setMonth(month);
+        setStart.setDate(1);
+        
+        writeCalendar();
+      },
+        
+      initCalendar = () => {
+        setStart.setYear(year);
+        setStart.setMonth(month);
+        setStart.setDate(1);
+        
+        for (let i = 0; i < 6; i++) {
+          let row = document.createElement('div');
+          row.classList.add('row');
+          
+          for (let j = 0; j < 7; j++) {
+            let cell = document.createElement('div');
+            cell.classList.add('cell');
+            row.appendChild(cell);
+          }
+          
+          $('#dates').appendChild(row);
+        }
+        
+        writeCalendar();
+      };
+      
+      initCalendar();
+      $('#prev').onclick = $('#next').onclick = updateCalendar;      
+    </script>
+  </body>
+</html>

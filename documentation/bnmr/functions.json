@@ -1,0 +1,228 @@
+[
+  {
+    "name": "$$()",
+    "syntax": "$$(selector)",
+    "description": "Returns an element or array of elements based on selector type.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "selector",
+        "type": "String",
+        "description": "CSS syntax for an element selector. Can be stringed and use attribute selectors."
+      }
+    ],
+    "example": "$$(\"#container\");"
+  },
+  {
+    "name": "on",
+    "syntax": "on(event, callback)",
+    "description": "Attaches function to various types of events.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "event",
+        "type": "String",
+        "description": "JavaScript event name."
+      },
+      {
+        "required": true,
+        "name": "callback",
+        "type": "Function",
+        "description": "Function or function reference to be called on trigger of event."
+      }
+    ],
+    "example": "$$(\"#container\").on(\"click\", handleClick);\r$$(\"#container\").on(\"swipeleft\", function (e) {\r\talert(\"Swiped left on: \" + e.target.id);\r});"
+  },
+  {
+    "name": "css",
+    "syntax": "css(property, value [, delay])",
+    "description": "Sets a CSS property.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "property",
+        "type": "String",
+        "description": "CSS property name."
+      },
+      {
+        "required": true,
+        "name": "value",
+        "type": "Function",
+        "description": "Valid value for the property given."
+      },
+      {
+        "required": false,
+        "name": "delay",
+        "type": "Number",
+        "description": "Length of the delay in milliseconds. Default: 0."
+      }
+    ],
+    "example": "$$(\"#container\").css(\"background-color\", \"#e1e1e1\");\r$$(\"#container\").css(\"background-color\", \"#e1e1e1\", 1000);"
+  },
+  {
+    "name": "animate",
+    "syntax": "animate(properties [, duration, delay, ease])",
+    "description": "Uses CSS transition to apply a simple animation to an element",
+    "parameters": [
+      {
+        "required": true,
+        "name": "properties",
+        "type": "Object",
+        "description": "Object of CSS properties as keys and corresponding valid CSS values as their values."
+      },
+      {
+        "required": false,
+        "name": "duration",
+        "type": "Number",
+        "description": "Length of the duration of the animation in milliseconds. Default: 500."
+      },
+      {
+        "required": false,
+        "name": "delay",
+        "type": "Number",
+        "description": "Length of the delay of the animation in milliseconds. Default: 0."
+      },
+      {
+        "required": false,
+        "name": "ease",
+        "type": "String",
+        "description": "CSS name of easing function. Default is \"ease.\""
+      }
+    ],
+    "example": "$$(\"#container\").animate({\r\t\"background-color\": \"#e1e1e1\",\r\t\"color\": \"#333\"\r}, 500, 1000, \"linear\");"
+  },
+  {
+    "name": "$$.addCSS",
+    "syntax": "$$.addCSS(element, property, value)",
+    "description": "Adds a new CSS rule to the page",
+    "parameters": [
+      {
+        "required": true,
+        "name": "element",
+        "type": "String",
+        "description": "CSS selector for the element that the new CSS rule should apply to."
+      },
+      {
+        "required": true,
+        "name": "property",
+        "type": "String",
+        "description": "CSS property name."
+      },
+      {
+        "required": true,
+        "name": "value",
+        "type": "Function",
+        "description": "Valid value for the property given."
+      }
+    ],
+    "example": "$$.addCSS(#container::after, \"content\", \"This goes at the end of the container element\")"
+  },
+  {
+    "name": "$$.ajax",
+    "syntax": "$$.ajax(options [, callback, file])",
+    "description": "Creates an AJAX call to an external file.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "options",
+        "type": "Object",
+        "description": "\"url\"*: Path to the file being requested.<br><br>\"type\": Response type expected. Options: \"ajax\", \"json\". Default: \"ajax\".<br><br>\"method\": HTTP method for requesting the data. Options: any HTTP request method. Default: \"GET\".<br><br>\"async\": Boolean of whether the call should be made asynchrously. Default: true."
+      },
+      {
+        "required": false,
+        "name": "callback",
+        "type": "Function",
+        "description": "Function to execute after request is complete. Passes the returned data through the first (and only) parameter."
+      },
+      {
+        "required": false,
+        "name": "file",
+        "type": "File",
+        "description": "Used when sending file data using the Files API"
+      }
+    ],
+    "example": "$$.ajax({\r\t\"type\": \"json\",\r\t\"method\": \"POST\",\r\t\"url\": \"./path/to/file.json\",\r\t\"async\": false\r}, function (data) {\r\tdata.foreach(function(item){\r\t\tconsole.log(item);\r\t});\r});"
+  },
+  {
+    "name": "$$.contains",
+    "syntax": "$$.contains(haystack, needle)",
+    "description": "Returns boolean of whether a substring is contained within a larger string",
+    "parameters": [
+      {
+        "required": true,
+        "name": "haystack",
+        "type": "String",
+        "description": "The string to be searched."
+      },
+      {
+        "required": true,
+        "name": "needle",
+        "type": "String",
+        "description": "The substring being searched for"
+      }
+    ],
+    "example": "$$.contains(\"hello, world.\", \"ell\");\r$$.contains(navigator.vendor, \"Google\");"
+  },
+  {
+    "name": "$$.getParam",
+    "syntax": "$$.getParam(urlQueryParameter)",
+    "description": "Returns the value of a URL query parameter",
+    "parameters": [
+      {
+        "required": true,
+        "name": "urlQueryParameter",
+        "type": "String",
+        "description": "The key of the URL query parameter."
+      }
+    ],
+    "example": "$$.getParam(\"search\");\r$$.getParam(\"page\");"
+  },
+  {
+    "name": "$$.isMobile",
+    "syntax": "$$.isMobile",
+    "description": "Returns boolean of whether the device being used is a mobile or tablet device",
+    "parameters": [
+      {
+        "required": false,
+        "name": "none",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example": "$$.isMobile();\rif ($$.isMobile()){\r\t// initialize mobile functions\r}"
+  },
+  {
+    "name": "$$.preload",
+    "syntax": "$$.preload(asset[s])",
+    "description": "Preloads an asset(s).",
+    "parameters": [
+      {
+        "required": true,
+        "name": "assets",
+        "type": "String/Array",
+        "description": "Path to asset asset or array of paths to assets to be preloaded."
+      }
+    ],
+    "example": "$$.preload(\"bkg.png\");\r$$.prelad([\r\t\"image01.png\",\r\t\"image02.png\",\r\t\"image03.png\",\r]);"
+  },
+  {
+    "name": "$$.rand",
+    "syntax": "$$.rand(min, max)",
+    "description": "Returns a random integer between two given integers.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "min",
+        "type": "Number",
+        "description": "Minimum integer that can be returned."
+      },
+      {
+        "required": true,
+        "name": "max",
+        "type": "Number",
+        "description": "Maximum integer that can be returned."
+      }
+    ],
+    "example": "$$.rand();"
+  }
+]

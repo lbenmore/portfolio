@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Modal</title>
+    <style></style>
+  </head>
+  <body>
+    <div id='container'></div>
+    
+    <script src='./modal.js'></script>
+    <script>
+      function cbNegative (target) { console.log(document.querySelector(target));
+        document.querySelector(target).innerHTML += '<div style="font-family: sans-serif; font-size: 10vw; text-align: center;">RUDE!</div>';
+      }
+    
+      function negative () {
+        new Modal({
+          'type': 'confirm',
+          'message': 'Well, that just seems uncalled for.',
+          'options': [{
+            'text': 'Sorry, not sorry.',
+            'callback': cbNegative,
+            'callbackParams': ['#container']
+          }]
+        })
+      }
+    
+      function greeting (response) {
+        new Modal({
+          'type': 'confirm',
+          'message': 'Nice to meet you, ' + response[0],
+          'options': [{
+            'text': 'Same to you!'
+          }]
+        });
+      }
+    
+      new Modal({
+        'type': 'prompt',
+        'message': 'What\'s your name?',
+        'options': [
+          {
+            'text': 'Hello!',
+            'callback': greeting,
+          },
+          {
+            'text': 'I\'m not telling you.',
+            'callback': negative,
+          }
+        ]
+      });
+    </script>
+  </body>
+</html>

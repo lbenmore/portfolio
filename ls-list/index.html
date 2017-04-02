@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>List via Local Storage</title>
+    <style>
+      :root {
+        --meteorite: #4f486f;
+        --torch-red: #ff004f;
+        --medium-spring-green: #00f08a;
+        --lucida: 'Lucida Sans Unicode', sans-serif;
+      }
+      
+      #container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--meteorite);
+      } #container, #container * {
+        font-family: var(--lucida);
+      }
+      
+      #listContainer {
+        position: absolute;
+        top: 50vh;
+        left: 50vw;
+        transform: translate(-50%, -50%);
+        width:75vw;
+        height: 75vh;
+        background-color: #fff;
+        border-radius: 12px;
+      }
+      
+      #listInputRegion {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10%;
+        border-bottom: 1px solid var(--torch-red);
+        box-sizing: border-box;
+        text-align: center;
+      }
+      
+      #listInput {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 4px;
+        width: 40%;
+        box-sizing: border-box;
+      }
+      
+      #listBtnAdd {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 10%;
+        height: 60%;
+        border: none;
+        background-color: var(--medium-spring-green);
+        color: #fff;
+        font-size: 12px;
+      }
+      
+      #listBtnClear {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 10%;
+        height: 60%;
+        border: none;
+        background-color: var(--torch-red);
+        color: #fff;
+        font-size: 12px;
+      }
+      
+      #listView {
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        overflow: scroll;
+      }
+      
+      #list {
+        overflow: hidden;
+        padding: 0;
+      }
+      
+      #list li {
+        display: block;
+        list-style: none;
+        padding: 4px 8px;
+      }
+      
+      #list li:nth-child(2n + 1) {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id=container>
+      <div id=listContainer>
+        <div id=listInputRegion>
+          <input type=text id=listInput> <button id=listBtnAdd>+</button> <button id='listBtnClear'>Clear</button>
+        </div>
+        <div id=listView>
+          <ul id=list>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <script>
+      let listInput,
+          listBtnAdd,
+          list,
+          bnmrList,
+          arrList = [];
+      
+      const      
+      onListBtnClearClick = () => {
+        localStorage.clear();
+        arrList = [];
+        list.innerHTML = '';
+        listInput.focus();
+      },
+            
+      onListBtnAddClick = () => {
+        let newItemValue = listInput.value;
+        let newItem = document.createElement('li');
+        newItem.innerHTML = newItemValue;
+        list.appendChild(newItem);
+        
+        arrList.push(newItemValue);
+        localStorage.setItem('bnmrList', arrList.join(',', ','));
+        
+        listInput.value = '';
+        listInput.focus();
+      },
+            
+      eventListeners = () => {
+        listBtnAdd.onclick = onListBtnAddClick;
+        listBtnClear.onclick = onListBtnClearClick;
+        
+        listInput.onkeyup = (e) => {
+          if (e.keyCode == 13) {
+            listBtnAdd.click();
+          }
+        }
+      },
+                
+      getExistingList = () => {
+        if (window.localStorage) {
+          if (bnmrList) {
+            arrList = bnmrList.split(',');
+            for (let item of arrList) {
+              let newItem = document.createElement('li');
+              newItem.innerHTML = item;
+              list.appendChild(newItem);
+            };
+          } else {
+            console.log('bummer');
+          }
+        } else {
+          console.error('Local Storage not available');
+        }
+      },
+            
+      initFns = () => {
+        listInput = document.querySelector('#listInput');
+        listBtnAdd = document.querySelector('#listBtnAdd');
+        list = document.querySelector('#list');
+        
+        listInput.focus();
+      
+        bnmrList = localStorage.getItem('bnmrList');
+      
+        getExistingList();
+        eventListeners();
+      }
+      
+      document.onreadystatechange = () => {
+        if (document.readyState == 'complete') {
+          initFns();
+        }
+      }      
+    </script>
+  </body>
+</html>
