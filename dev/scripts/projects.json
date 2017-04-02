@@ -1,0 +1,270 @@
+[
+  {
+    "name": "bnmr Library",
+    "technologies": "JavaScript (ES5 &amp; ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "A lightweight library for common tasks using JavaScript and CSS.",
+    "links": [
+      {
+        "name": "View Documentation",
+        "url": "http://www.lisabenmore.com/documentation/bnmr"
+      },
+      {
+        "name": "View Source Code (ES6)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/bnmr-1.1.1.js"
+      },
+      {
+        "name": "View Source Code (ES5)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/m.bnmr-1.1.1.js"
+      }
+    ]
+  },
+  {
+    "name": "bnmr Video Player",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "An HTML5 video component with built-in, pure CSS controls and configurable options for setup including playlisting.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/bnmrVideoPlayer"
+      },
+      {
+        "name": "View Documentation",
+        "url": "http://www.lisabenmore.com/documentation/bnmrVideoPlayer"
+      },
+      {
+        "name": "View Source Code",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/bnmrVideoPlayer"
+      }
+    ]
+  },
+  {
+    "name": "bnmr Modal",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "A lightweight modal popup system",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/modal"
+      },
+      {
+        "name": "View Documentation",
+        "url": "http://www.lisabenmore.com/documentation/modal"
+      },
+      {
+        "name": "View Source Code",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/modal/modal.js"
+      }
+    ]
+  },
+  {
+    "name": "Color Picker",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Full screen color picker with the ability to copy the Hex code.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/color-picker"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/color-picker/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Magnifying Glass",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, Edge 15+, Safari",
+    "description": "Use the mouse to magnify part of a full screen image.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/magnifying-glass"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/magnifying-glass/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Floating Balloons",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Creates a depth of field perspective using a single image.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/floating-balloons"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/floating-balloons/index.html"
+      }
+    ]
+  },
+  {
+    "name": "HSL Color Picker",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, Edge 15+, Safari",
+    "description": "Use sliders for hue, lightness, and saturation to generate a color.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/hsl-picker"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/hsl-picker/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Load Screen",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, Edge 15+, Safari",
+    "description": "Nearly pure CSS loading screen.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/loading"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/loading/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Digital Clock",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, IE 8+, Edge 15, Safari",
+    "description": "Uses local time to creat  an animated digital clock with flip animation.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/digital-clock"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/digital-clock/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Glitch Text",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, Edge 15+, Safari",
+    "description": "Adds a glitch effect to 10 random characters of a given DOM element.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/glitch-text"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/glitch-text/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Pure CSS3 Parallax Header",
+    "technologies": "HTML5, CSS3",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Pure CSS parallax page header.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/parallax-header"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/parallax-header/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Comparator",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Compare images (such as before &amp; after) using the mouse or touch on mobile",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/comparator"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/comparator/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Warp Speed",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Emulation of flying through space.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/warp-speed"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/warp-speed/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Twinkle",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Creates the effect of twinkling stars in the night sky.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/twinkle"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/twinkle/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Calculator",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Full screen calculator for simple functions with web app capability enabled for iOS.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/calculator"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/calculator/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Calendar",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Generates a simple, navigable calendar starting with the current month.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/calendar"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/calendar/index.html"
+      }
+    ]
+  }
+]
