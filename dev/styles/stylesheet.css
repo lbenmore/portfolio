@@ -34,7 +34,7 @@
     .about__content {
       position: absolute;
       top: 50%;
-      width: 100%;
+      width: calc(100% - 32px);
       -webkit-transform: translateY(-50%);
       transform: translateY(-50%);
     }
