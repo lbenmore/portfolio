@@ -132,8 +132,8 @@
     "example": "$$(\"#container\").removeClass(\"active\", 1000);"
   },
   {
-    "name": "addClass",
-    "syntax": "addClass(currentClassName, replacementClassName [, delay])",
+    "name": "replaceClass",
+    "syntax": "replaceClass(currentClassName, replacementClassName [, delay])",
     "description": "Add a CSS class to the element.",
     "parameters": [
       {
@@ -156,6 +156,26 @@
       }
     ],
     "example": "$$(\"#container\").replaceClass(\"active\", \"inactive\", 1000);"
+  },
+  {
+    "name": "toggleClass",
+    "syntax": "toggleClass(className [, delay])",
+    "description": "If element has specified class, class is removed. Otherwise, class is added to element.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "className",
+        "type": "String",
+        "description": "Class name to be toggled."
+      },
+      {
+        "required": false,
+        "name": "delay",
+        "type": "Number",
+        "description": "Length of delay before toggling class in milliseconds. Default: 0."
+      }
+    ],
+    "example": "$$(\"#container\").toggleClass(\"active\", 1000);"
   },
   {
     "name": "$$.addCSS",
