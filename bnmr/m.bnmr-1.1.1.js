@@ -10,12 +10,15 @@ var $$ = function(sel) {
         getParam,
         isMobile,
         load,
-        preload;
+        loadAsset,
+        preload,
+        preloadAsset,
+        setProp;
 
     el.slice(0, 1) == '#' ? _this = document.querySelector(el) : _this = document.querySelectorAll(el);
     (typeof _this == 'object' && _this.length == 1) ? _this = _this[0]: null;
 
-    function setProp(prop, val) {
+    setProp = function (prop, val) {
         if (_this.length) {
             for (i = 0; i < _this.length; i++) {
                 _this[i].style[prop] = val;
@@ -25,7 +28,7 @@ var $$ = function(sel) {
         }
     }
 
-    function preloadAsset(asset) {
+    preloadAsset = function (asset) {
         var ext = asset.split('.')[asset.split('.').length - 1].toLowerCase();
 
         switch (ext) {
@@ -46,7 +49,7 @@ var $$ = function(sel) {
         }
     }
 
-    function loadAsset(asset) {
+    loadAsset = function (asset) {
         var ext = asset.split('.')[asset.split('.').length - 1].toLowerCase();
 
         switch (ext) {
@@ -69,6 +72,103 @@ var $$ = function(sel) {
                 break;
         }
     }
+
+    ajax = function(options, callback, file) {
+        var xhr = new XMLHttpRequest(),
+            type = options.type || 'ajax',
+            method = options.method || 'GET',
+            url = options.url || '',
+            isAsync = options.async || true;
+
+        xhr.open(method, url, isAsync);
+        if (file) {
+            xhr.setRequestHeader('X_FILENAME', file.name);
+            xhr.send(file);
+        } else {
+            xhr.send();
+        }
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                switch (type) {
+                    case 'json':
+                        if (callback) {
+                            callback(JSON.parse(xhr.responseText));
+                        }
+                        return JSON.parse(xhr.responseText);
+                        break;
+
+                    default:
+                        if (callback) {
+                            callback(xhr.responseText);
+                        }
+                        return xhr.responseText;
+                        break;
+                }
+            }
+        };
+    };
+
+    preload = function(assets) {
+        if (assets instanceof Array) {
+            for (i = 0; i < assets.length; i++) {
+                preloadAsset(assets[i]);
+            }
+        } else {
+            preloadAsset(assets);
+        }
+    };
+
+    load = function(assets, callback) {
+        if (assets instanceof Array) {
+            for (i = 0; i < assets.length; i++) {
+                loadAsset(assets[i]);
+            }
+        } else {
+            loadAsset(assets);
+        }
+
+        if (callback) {
+            callback();
+        }
+    };
+
+    contains = function(string, substring) {
+        return string.indexOf(substring) > -1;
+    };
+
+    addCSS = function(el, prop, val) {
+        var ss = document.styleSheets[document.styleSheets.length - 1];
+
+        if (ss) {
+            var sslen = ss.cssRules ? ss.cssRules.length : ss.rules.length;
+            ss.insertRule(el + ' {' + prop + ': ' + val + '; }', sslen);
+        } else if (document.getElementsByTagName('style').length) {
+            var styleTag = document.getElementsByTagName('style')[document.getElementsByTagName('style').length - 1];
+            styleTag.innerHTML += ' \r' + el + '{' + prop + ':' + val + '}';
+        } else {
+            var styleTag = document.createElement('style');
+            styleTag.innerHTML = el + '{' + prop + ':' + val + '}';
+        }
+    };
+
+    getParam = function(key) {
+        var params = String(window.location).split('?')[1];
+
+        if (params && params !== null && params !== undefined && params !== '') {
+            var pairs = params.split('&');
+
+            for (var i = 0; i < pairs.length; i++) {
+                if (pairs[i].split('=')[0] == key) {
+                    return pairs[i].split('=')[1];
+                }
+            }
+        }
+    };
+
+    isMobile = function() {
+        return (/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i).test(navigator.userAgent);
+    };
 
     function evalTouch(dir, fn) {
         var startTouch, endTouch;
@@ -213,101 +313,40 @@ var $$ = function(sel) {
         }
     };
 
-    ajax = function(options, callback, file) {
-        var xhr = new XMLHttpRequest(),
-            type = options.type || 'ajax',
-            method = options.method || 'GET',
-            url = options.url || '',
-            isAsync = options.async || true;
+  	_this.addClass = function (cName, delay) {
+  		setTimeout(function () {
+  			if (document.body.classList) {
+  				_this.classList.add(cName);
+  			} else {
+  				_this.className += ' ' + cName;
+  			}
+  		}, delay || 0);
+  	};
 
-        xhr.open(method, url, isAsync);
-        if (file) {
-            xhr.setRequestHeader('X_FILENAME', file.name);
-            xhr.send(file);
+  	_this.removeClass = function (cName, delay) {
+  		setTimeout(function () {
+  			if (document.body.classList) {
+  				_this.classList.remove(cName);
+  			} else {
+  				_this.className = _this.className.replace(' ' + cName, '');
+  			}
+  		}, delay || 0);
+  	};
+
+  	_this.replaceClass = function (cName1, Name2, delay)  {
+  		setTimeout(function () {
+  			_this.className = _this.className.relace(cName1, cName2);
+  		}, delay || 0);
+  	};
+
+    _this.toggleClass = function (cName, delay) {
+      setTimeout(function () {
+        if (_this.className.indexOf(cName) == -1) {
+          _this.addClass(cName);
         } else {
-            xhr.send();
+          _this.removeClass(cName);
         }
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
-                switch (type) {
-                    case 'json':
-                        if (callback) {
-                            callback(JSON.parse(xhr.responseText));
-                        }
-                        return JSON.parse(xhr.responseText);
-                        break;
-
-                    default:
-                        if (callback) {
-                            callback(xhr.responseText);
-                        }
-                        return xhr.responseText;
-                        break;
-                }
-            }
-        };
-    };
-
-    preload = function(assets) {
-        if (assets instanceof Array) {
-            for (i = 0; i < assets.length; i++) {
-                preloadAsset(assets[i]);
-            }
-        } else {
-            preloadAsset(assets);
-        }
-    };
-
-    load = function(assets, callback) {
-        if (assets instanceof Array) {
-            for (i = 0; i < assets.length; i++) {
-                loadAsset(assets[i]);
-            }
-        } else {
-            loadAsset(assets);
-        }
-
-        if (callback) {
-            callback();
-        }
-    };
-
-    contains = function(string, substring) {
-        return string.indexOf(substring) > -1;
-    };
-
-    addCSS = function(el, prop, val) {
-        var ss = document.styleSheets[document.styleSheets.length - 1];
-
-        if (ss) {
-            var sslen = ss.cssRules ? ss.cssRules.length : ss.rules.length;
-            ss.insertRule(el + ' {' + prop + ': ' + val + '; }', sslen);
-        } else if (document.getElementsByTagName('style').length) {
-            var styleTag = document.getElementsByTagName('style')[document.getElementsByTagName('style').length - 1];
-            styleTag.innerHTML += ' \r' + el + '{' + prop + ':' + val + '}';
-        } else {
-            var styleTag = document.createElement('style');
-            styleTag.innerHTML = el + '{' + prop + ':' + val + '}';
-        }
-    };
-
-    getParam = function(key) {
-        var params = String(window.location).split('?')[1];
-
-        if (params && params !== null && params !== undefined && params !== '') {
-            var pairs = params.split('&');
-
-            for (var i = 0; i < pairs.length; i++) {
-                if (pairs[i].split('=')[0] == key) {
-                    return pairs[i].split('=')[1];
-                }
-            }
-        }
-    };
-
-    isMobile = function() {
-        return (/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i).test(navigator.userAgent);
+      }, delay || 0);
     };
 
     $$.addCSS = addCSS;

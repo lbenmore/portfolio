@@ -16,7 +16,7 @@
   {
     "name": "on",
     "syntax": "on(event, callback)",
-    "description": "Attaches function to various types of events.",
+    "description": "Attaches function to various types of events on the element.",
     "parameters": [
       {
         "required": true,
@@ -36,7 +36,7 @@
   {
     "name": "css",
     "syntax": "css(property, value [, delay])",
-    "description": "Sets a CSS property.",
+    "description": "Sets a CSS property on the element.",
     "parameters": [
       {
         "required": true,
@@ -62,7 +62,7 @@
   {
     "name": "animate",
     "syntax": "animate(properties [, duration, delay, ease])",
-    "description": "Uses CSS transition to apply a simple animation to an element",
+    "description": "Uses CSS transition to apply a simple animation to the element.",
     "parameters": [
       {
         "required": true,
@@ -90,6 +90,72 @@
       }
     ],
     "example": "$$(\"#container\").animate({\r\t\"background-color\": \"#e1e1e1\",\r\t\"color\": \"#333\"\r}, 500, 1000, \"linear\");"
+  },
+  {
+    "name": "addClass",
+    "syntax": "addClass(className [, delay])",
+    "description": "Add a CSS class to the element.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "className",
+        "type": "String",
+        "description": "Name of the CSS class to be added to the element."
+      },
+      {
+        "required": false,
+        "name": "delay",
+        "type": "Number",
+        "description": "Length of delay before adding class in milliseconds. Default: 0."
+      }
+    ],
+    "example": "$$(\"#container\").addClass(\"active\", 1000);"
+  },
+  {
+    "name": "removeClass",
+    "syntax": "removeClass(className [, delay])",
+    "description": "Remove a CSS class from the element.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "className",
+        "type": "String",
+        "description": "Name of the CSS class to be removed to the element."
+      },
+      {
+        "required": false,
+        "name": "delay",
+        "type": "Number",
+        "description": "Length of delay before removing class in milliseconds. Default: 0."
+      }
+    ],
+    "example": "$$(\"#container\").removeClass(\"active\", 1000);"
+  },
+  {
+    "name": "addClass",
+    "syntax": "addClass(currentClassName, replacementClassName [, delay])",
+    "description": "Add a CSS class to the element.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "currentClassName",
+        "type": "String",
+        "description": "Name of the current CSS class to be replaced."
+      }
+      {
+        "required": true,
+        "name": "replacementClassName",
+        "type": "String",
+        "description": "Name of the CSS class to be added to the element."
+      },
+      {
+        "required": false,
+        "name": "delay",
+        "type": "Number",
+        "description": "Length of delay before replacing class in milliseconds. Default: 0."
+      }
+    ],
+    "example": "$$(\"#container\").replaceClass(\"active\", \"inactive\", 1000);"
   },
   {
     "name": "$$.addCSS",
