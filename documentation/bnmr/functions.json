@@ -141,7 +141,7 @@
         "name": "currentClassName",
         "type": "String",
         "description": "Name of the current CSS class to be replaced."
-      }
+      },
       {
         "required": true,
         "name": "replacementClassName",
