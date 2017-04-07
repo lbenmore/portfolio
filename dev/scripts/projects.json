@@ -40,6 +40,26 @@
     ]
   },
   {
+    "name": "bnmr Carousel",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "An image carousel component with flexible options",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/bnmrCarousel"
+      },
+      {
+        "name": "View Documentation",
+        "url": "http://www.lisabenmore.com/documentation/bnmorCarousel"
+      },
+      {
+        "name": "View Source Code",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmrCarousel/scripts/bnmrCarousel-1.0.0.js"
+      }
+    ]
+  },
+  {
     "name": "bnmr Modal",
     "technologies": "HTML5, CSS3, JavaScript (ES5)",
     "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
