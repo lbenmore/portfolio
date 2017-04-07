@@ -169,7 +169,7 @@ class BnmrCarousel {
 
 				if (thisImg > this.currImg) {
 					thisDir = 'right';
-					this.currImg = NumthisImg - 1;
+					this.currImg = thisImg - 1;
 				} else {
 					thisDir = 'left';
 					this.currImg = thisImg + 1;
