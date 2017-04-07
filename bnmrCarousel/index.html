@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit'>
+    <title>bnmr Carousel</title>
+    <style>
+      .carousel__arrow {
+      	background-color: rgba(255, 255, 255, 0.2);
+      	font-size: 24px;
+      	transition: background-color 0.5s;
+        cursor: pointer;
+      }
+
+      .carousel__arrow:hover {
+      	background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .carousel__arrow::after {
+      	display: block;
+      	width: 100%;
+      	height: 100%;
+      	line-height: 100%;
+      	text-align: center;
+      }
+
+      .carousel__arrow--left::after {
+      	content: '<';
+      }
+
+      .carousel__arrow--right::after {
+      	content: '>';
+      }
+    </style>
+  </head>
+  <body>
+    <div id='carousel'></div>
+
+    <script src='./scripts/BnmrCarousel-1.0.0.js'></script>
+    <script>
+      let carousel = new BnmrCarousel({
+      	location: '#carousel',
+      	width: 500,
+      	height: 500,
+      	images: [
+      		'https://images.unsplash.com/photo-1459179379156-37103a6cfa72?dpr=2&auto=format&fit=crop&w=1500&h=1125&q=80&cs=tinysrgb&crop=&bg=',
+      		'https://images.unsplash.com/photo-1465056836041-7f43ac27dcb5?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=&bg=',
+      		'https://images.unsplash.com/photo-1491328480217-db46cf0876c5?dpr=2&auto=format&fit=crop&w=1500&h=999&q=80&cs=tinysrgb&crop=&bg=',
+      		'https://images.unsplash.com/photo-1467681336765-a6d1c58c61e9?dpr=2&auto=format&fit=crop&w=1500&h=1001&q=80&cs=tinysrgb&crop=&bg=',
+      		'https://images.unsplash.com/photo-1484856299450-fb14549bca50?dpr=2&auto=format&fit=crop&w=1500&h=872&q=80&cs=tinysrgb&crop=&bg='
+      	]
+      });
+    </script>
+  </body>
+</html>
