@@ -28,6 +28,14 @@ class BnmrCarousel {
 		clearInterval(this.autorotateInterval);
 	}
 
+	updatePagination () {
+		for (let bubble of this.$('.carousel__indicator')) {
+			bubble.classList.remove('carousel__indicator--active');
+		}
+
+		this.$('.carousel__indicator')[this.currImg].classList.add('carousel__indicator--active');
+	}
+
 	slide (e, dir) {
 		if (e.type == 'click') {
 			this.stop();
@@ -92,6 +100,10 @@ class BnmrCarousel {
 			holder.classList.add('carousel__inView');
 			holder.classList.remove('carousel__outView');
 		}, 100);
+
+		if (this.pagination) {
+			this.updatePagination();
+		}
 	}
 
 	initArrows () {
@@ -126,7 +138,52 @@ class BnmrCarousel {
 	}
 
 	initPagination () {
+		this.bubbles = document.createElement('div');
+		this.bubbles.style.position = 'absolute';
+		this.bubbles.style.right = '0';
+		this.bubbles.style.bottom = '5px';
+		this.bubbles.style.left = '0';
+		this.bubbles.style.height = '20px';
+		this.bubbles.style.textAlign = 'center';
+		this.bubbles.classList.add('carousel__pagination');
 
+		let bubbleCounter = 0;
+		for (let img of this.images) {
+			let bubble = document.createElement('div');
+			bubble.style.position = 'relative';
+			bubble.style.width = '10px';
+			bubble.style.height = '10px';
+			bubble.style.display = 'inline-block';
+			bubble.style.marginRight = '4px';
+			bubble.style.boxSizing = 'border-box';
+			bubble.style.border = '2px solid #fff';
+			bubble.style.borderRadius = '50%';
+			bubble.classList.add('carousel__indicator');
+			bubble.setAttribute('data-image', bubbleCounter);
+
+			bubbleCounter++;
+
+			bubble.addEventListener('click', (e) => {
+				let thisImg = Number(e.target.getAttribute('data-image')),
+						thisDir;
+
+				if (thisImg > this.currImg) {
+					thisDir = 'right';
+					this.currImg = NumthisImg - 1;
+				} else {
+					thisDir = 'left';
+					this.currImg = thisImg + 1;
+				}
+
+				this[this.transition](e, thisDir);
+			});
+
+			this.bubbles.appendChild(bubble);
+		}
+
+		this.container.appendChild(this.bubbles);
+
+		this.$('.carousel__indicator')[this.currImg].classList.add('carousel__indicator--active');
 	}
 
 	initAutorotate () {
