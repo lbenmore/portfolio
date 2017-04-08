@@ -1,4 +1,5 @@
 // JavaScript Document
+
 const $$ = (sel) => {
 	let _this,
 			el = sel || 'body';
@@ -84,7 +85,7 @@ const $$ = (sel) => {
 		}
 	},
 
-  ajax = (options, callback, file) => {
+  ajax = (options, callback, params) => {
     let xhr,
     		type = options.type || 'ajax',
         method = options.method || 'GET',
@@ -94,29 +95,52 @@ const $$ = (sel) => {
     xhr = new XMLHttpRequest();
     xhr.open(method, url, isAsync);
 
-		if (file) {
-			xhr.setRequestHeader('X_FILENAME', file.name);
-			xhr.send(file);
+		if (type == 'upload') {
+			xhr.setRequestHeader('X_FILENAME', params.name);
+		}
+
+		if (params) {
+			xhr.send(params);
 		} else {
       xhr.send();
 		}
 
     xhr.onreadystatechange = () => {
       if (xhr.readyState == 4) {
-      	if (callback) {
-			    switch (type) {
-			    	case 'json':
-				        callback(JSON.parse(xhr.responseText));
-			    	break;
+				let data;
 
-			    	default:
-				        callback(xhr.responseText);
-			    	break;
-			    }
-      	}
-      }
-    };
+		    switch (type) {
+		    	case 'json':
+			        data = JSON.parse(xhr.responseText);
+		    	break;
+
+		    	default:
+			        data = xhr.responseText;
+		    	break;
+		    }
+
+				if (callback) {
+					callback(data);
+				}
+
+				return data;
+    	}
+		};
   },
+
+	log = (msg, type) => {
+	  let logType = type || 'log',
+	      err = new Error(),
+	      stack = err.stack,
+	      caller = stack.split('at ')[err.stack.split('at ').length - 1];
+
+	  if (window.console.dir && typeof msg != 'string') {
+	    console[logType](caller + ':');
+	    console.dir(msg);
+	  } else {
+	    console[logType](caller + ':\n' + msg);
+	  }
+	},
 
   isMobile = () => {
     return (/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i).test(navigator.userAgent);
@@ -210,7 +234,6 @@ const $$ = (sel) => {
 				break;
 			}
 		});
-
 	};
 
   _this.on = (evt, fn) => {
@@ -332,6 +355,7 @@ const $$ = (sel) => {
   $$.contains = contains;
   $$.getParam = getParam;
   $$.isMobile = isMobile;
+	$$.log = log;
   $$.preload = preload;
   $$.rand = rand;
 

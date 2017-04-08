@@ -278,6 +278,26 @@
     "example": "$$.isMobile();\rif ($$.isMobile()){\r\t// initialize mobile functions\r}"
   },
   {
+    "name": "$$.log",
+    "syntax": "$$.log(msg [, type])",
+    "description": "Prints debugging messages to the console including the caller function and line and character numbers, using directory when available and appropriate.",
+    "parameters": [
+      {
+        "required": "true",
+        "name": "msg",
+        "type": "Mixed",
+        "description": "If a string, passes as a message to the console. If an object and \"console.dir\" is available, prints the tree of the object."
+      },
+      {
+        "required": false,
+        "name": "type",
+        "type": "String",
+        "description": "Name of the message type to pass to the console. Options \"log\", \"warning\", \"error\". Default: \"log\"."
+      }
+    ],
+    "example": "$$.log('Does not compute!', 'error'); \r$$.log(objProperties);"
+  },
+  {
     "name": "$$.preload",
     "syntax": "$$.preload(asset[s])",
     "description": "Preloads an asset(s).",

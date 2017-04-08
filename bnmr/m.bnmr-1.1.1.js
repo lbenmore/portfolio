@@ -11,6 +11,7 @@ var $$ = function(sel) {
         isMobile,
         load,
         loadAsset,
+        log,
         preload,
         preloadAsset,
         setProp;
@@ -73,7 +74,7 @@ var $$ = function(sel) {
         }
     }
 
-    ajax = function(options, callback, file) {
+    ajax = function(options, callback, params) {
         var xhr = new XMLHttpRequest(),
             type = options.type || 'ajax',
             method = options.method || 'GET',
@@ -81,32 +82,52 @@ var $$ = function(sel) {
             isAsync = options.async || true;
 
         xhr.open(method, url, isAsync);
-        if (file) {
-            xhr.setRequestHeader('X_FILENAME', file.name);
-            xhr.send(file);
+
+        if (type == 'upload') {
+    			xhr.setRequestHeader('X_FILENAME', params.name);
+        }
+
+        if (params) {
+            xhr.send(params);
         } else {
             xhr.send();
         }
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
-                switch (type) {
-                    case 'json':
-                        if (callback) {
-                            callback(JSON.parse(xhr.responseText));
-                        }
-                        return JSON.parse(xhr.responseText);
-                        break;
+              let data;
 
-                    default:
-                        if (callback) {
-                            callback(xhr.responseText);
-                        }
-                        return xhr.responseText;
-                        break;
-                }
+              switch (type) {
+                case 'json':
+                  data = JSON.encode(xhr.responseText);
+                break;
+
+                default:
+                  data = xhr.responseText;
+                break;
+              }
+
+              if (callback) {
+                callback(data);
+              }
+
+              return data;
             }
         };
+    };
+
+    log = function (msg, type) {
+      var logType = type || 'log',
+          err = new Error(),
+          stack = err.stack,
+          caller = stack.split('at ')[err.stack.split('at ').length - 1];
+
+      if (window.console.dir && typeof msg != 'string') {
+        console[logType](caller + ':');
+        console.dir(msg);
+      } else {
+        console[logType](caller + ':\n' + msg);
+      }
     };
 
     preload = function(assets) {
@@ -355,6 +376,7 @@ var $$ = function(sel) {
     $$.getParam = getParam;
     $$.isMobile = isMobile;
     $$.load = load;
+    $$.log = log;
     $$.preload = preload;
 
     return _this;
