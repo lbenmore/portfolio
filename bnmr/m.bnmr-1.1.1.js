@@ -99,7 +99,7 @@ var $$ = function(sel) {
 
               switch (type) {
                 case 'json':
-                  data = JSON.encode(xhr.responseText);
+                  data = JSON.parse(xhr.responseText);
                 break;
 
                 default:
