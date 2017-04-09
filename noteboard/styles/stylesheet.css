@@ -1,0 +1,261 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: #a798c2;
+  background: linear-gradient(to bottom, #c4bad6, #bad6c2);
+  color: #333;
+  font-family: 'Ubuntu', 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+}
+
+  .container__header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 48px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    letter-spacing: 1px;
+    line-height: 48px;
+    text-align: center;
+  }
+
+  .container__content {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+    .content__credentials {
+      position: absolute;
+      top: calc((100vh - 48px) * 0.05);
+      left: 50%;
+      width: 90vw;
+      height: calc((100vh - 48px) * 0.9);
+      max-width: 600px;
+      padding: 16px;
+      background-color: #f8f8f8;
+      border: 1px solid #e1e1e1;
+      border-radius: 4px;
+      box-sizing: border-box;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+
+      .credentials__label {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .credentials__input {
+        display: block;
+        width: 100%;
+        height: 36px;
+        padding: 8px;
+        border: 1px solid #e1e1e1;
+        box-sizing: border-box;
+        margin-bottom: 16px;
+      }
+
+      .credentials__button {
+        display: block;
+        margin-bottom: 16px;
+        padding: 8px 24px;
+        background-color: #917eb3;
+        border: none;
+        color: #fff;
+        font-family: 'Ubuntu', 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+        cursor: pointer;
+        -webkit-transition: background-color 0.35s;
+        transition: background-color 0.35s;
+      }
+
+      .credentials__button:focus {
+        outline: none;
+      }
+
+      .credentials__button:hover {
+        background-color: #7d5eb5;
+      }
+
+      .credentials__alternative {
+        color: #666;
+        font-size: 0.8em;
+        font-style: italic;
+        font-weight: 300;
+      }
+
+        .credentials__alternative a {
+          margin-left: 4px;
+          color: #999;
+          font-style: normal;
+          font-weight: 400;
+          -webkit-transition: color 0.35s;
+          transition: color 0.35s;
+        }
+
+        .credentials__alternative a:hover {
+          color: #333;
+        }
+
+  .content__board {
+    position: absolute;
+    top: calc((100vh - 48px) * 0.05);
+    left: 50%;
+    width: 90vw;
+    height: calc((100vh - 48px) * 0.9);
+    padding: 16px;
+    background-color: #f8f8f8;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+    .board__welcome {
+      padding-bottom: 16px;
+      font-size: 24px;
+      text-align: center;
+      border-bottom: 1px solid #e1e1e1;
+    }
+
+      .welcome__logout {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        height:
+      }
+
+        .welcome__logout button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 8px 24px;
+          background-color: #917eb3;
+          border: none;
+          color: #fff;
+          font-family: 'Ubuntu', 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+          white-space: nowrap;
+          cursor: pointer;
+          -webkit-transition: background-color 0.35s;
+          transition: background-color 0.35s;
+        }
+
+        .welcome__logout button:focus {
+          outline: none;
+        }
+
+        .welcome__logout button:hover {
+          background-color: #7d5eb5;
+        }
+
+    .board__notes {
+      height: calc(100% - 96px);
+      overflow-y: auto;
+    }
+
+      .notes__note {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e1e1e1;
+      }
+
+      .notes__note:last-child {
+        border: none;
+        }
+
+        .note__delete {
+          float: right;
+          padding-right: 8px;
+        }
+
+          .note__delete button {
+            color: #ff3e72;
+            font-size: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            -webkit-transition: color 0.35s;
+            transition: color 0.35s;
+          }
+
+          .note__delete button:focus {
+            outline: none;
+          }
+
+          .note__delete button:hover {
+            color: #ff0044;
+          }
+
+    .board__edit {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      left: 16px;
+      height: 30px;
+    }
+
+      .edit__add {
+        display: inline-block;
+        width: calc(100% - 120px);
+      }
+
+        .edit__input {
+          position: relative;
+          bottom: 0;
+          width: calc(100% - 202px);
+          height: 28px;
+          padding: 8px;
+          border: none;
+          border-bottom: 2px solid #917eb3;
+          box-sizing: border-box;
+          background: transparent;
+          font-family: 'Ubuntu', 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+          font-size: 16px;
+          letter-spacing: 1px;
+        }
+
+        .edit__input:focus {
+          outline: none;
+        }
+
+        .edit__button {
+          position: relative;
+          margin-left: 16px;
+          padding: 8px 24px;
+          background-color: #917eb3;
+          border: none;
+          color: #fff;
+          font-family: 'Ubuntu', 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+          white-space: nowrap;
+          cursor: pointer;
+          -webkit-transition: background-color 0.35s;
+          transition: background-color 0.35s;
+        }
+
+        .edit__button:focus {
+          outline: none;
+        }
+
+        .edit__button:hover {
+          background-color: #7d5eb5;
+        }
+
+        .edit__button--delete {
+          background-color: #ff3e72;
+        }
+
+        .edit__button--delete:hover {
+          background-color: #ff0044;
+        }

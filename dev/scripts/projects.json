@@ -63,7 +63,7 @@
     "name": "bnmr Modal",
     "technologies": "HTML5, CSS3, JavaScript (ES5)",
     "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
-    "description": "A lightweight modal popup system",
+    "description": "A lightweight modal popup system.",
     "links": [
       {
         "name": "View Demo",
@@ -76,6 +76,22 @@
       {
         "name": "View Source Code",
         "url": "https://github.com/lbenmore/portfolio/blob/master/modal/modal.js"
+      }
+    ]
+  },
+  {
+    "name": "Noteboard",
+    "technologies": "HTML5, CSS3, JavaScript (ES5), PHP, MySQL",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Simple page to save notes, delete one, and clear all. Must register and log in to view.",
+    "links": [
+      {
+        "name": "View Demo",
+        "url": "http://www.lisabenmore.com/noteboard"
+      },
+      {
+        "name": "View Source Code",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/noteboard"
       }
     ]
   },
