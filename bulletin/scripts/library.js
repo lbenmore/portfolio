@@ -38,7 +38,7 @@ bnmr.fns.loadBoard = function (data) {
     var note = document.createElement('div');
     note.className = 'notes__note';
     note.innerHTML = notes[i];
-    
+
     bnmr.$('.board__notes').appendChild(note);
   }
 };
@@ -54,17 +54,15 @@ bnmr.fns.setInvalidCredentials = function (parentEl) {
     bnmr.vars.input = parentEl[i].className.replace(/ /g, '.');
     (function () {
       if (bnmr.$('.' + bnmr.vars.input).value == '') {
-        bnmr.log('invalid');
         bnmr.$('.' + bnmr.vars.input).addClass('invalid');
       } else {
-        bnmr.log('valid');
         bnmr.$('.' + bnmr.vars.input).removeClass('invalid');
       }
     }());
   }
 };
 
-bnmr.fns.login = function (e) {
+bnmr.fns.login = function () {
   var _username = bnmr.$('.credentials__input--login.credentials__input--username').value,
       _password = bnmr.$('.credentials__input--login.credentials__input--password').value,
       _params;
@@ -124,10 +122,11 @@ bnmr.fns.register = function (e) {
       'url': './utilities/?action=register'
     }, function (data) {
       if (data.indexOf('already exists') > -1) {
-        bnmr.log(data);
         bnmr.$('.credentials__input--register.credentials__input--username').addClass('invalid');
       } else {
-        bnmr.log(data);
+        bnmr.$('.credentials__input--login.credentials__input--username').value = _username;
+        bnmr.$('.credentials__input--login.credentials__input--password').value = _password;
+        bnmr.fns.login();
       }
     }, _params);
   }
@@ -140,8 +139,6 @@ bnmr.fns.eventListeners = function () {
 };
 
 bnmr.fns.initFns = function () {
-  bnmr.log('Loaded.');
-
   switch (window.location.hash) {
     case '#login':
     case '#register':
