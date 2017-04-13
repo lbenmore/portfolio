@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Bulletin</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300i,400" rel="stylesheet">
+    <link rel='stylesheet' href='./styles/stylesheet.css'>
+    <script src='./scripts/utilities.js'></script>
+    <script src='./scripts/library.js'></script>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='container__header'>
+        Bulletin
+      </div>
+      <div class='container__content'>
+        <div class='content__credentials content__credentials--register' id='register'>
+          <label class='credentials__label' for='register__fullname'>Full Name:</label>
+          <input class='credentials__input credentials__input--register credentials__input--fullname' type='text' id='register__fullname'>
+
+          <label class='credentials__label' for='register__username'>Username:</label>
+          <input class='credentials__input credentials__input--register credentials__input--username' type='text' id='register__username'>
+
+          <label class='credentials__label' for='register__password'>Password:</label>
+          <input class='credentials__input credentials__input--register credentials__input--password' type='password' id='register__password'>
+
+          <label class='credentials__label' for='register__confirm'>Confirm Password:</label>
+          <input class='credentials__input credentials__input--register credentials__input--confirm' type='password' id='register__confirm'>
+
+          <button class='credentials__button credentials__button--register'>Register</button>
+
+          <span class='credentials__alternative credentials__alternative--login'>Already registered? <a href='#login'>Login here.</a></span>
+        </div>
+        <div class='content__credentials content__credentials--login' id='login'>
+          <label class='credentials__label' for='login__username'>Userame:</label>
+          <input class='credentials__input credentials__input--login credentials__input--username' type='text' id='login__username'>
+
+          <label class='credentials__label' for='login__password'>Password:</label>
+          <input class='credentials__input credentials__input--login credentials__input--password' type='password' id='login__password'>
+
+         <button class='credentials__button credentials__button--login'>Login</button>
+
+          <span class='credentials__alternative credentials__alternative--login'>Not registered? <a href='#register'>Register here.</a></span>
+        </div>
+        <div class='content__board' id='board'>
+          <div class='board__welcome'></div>
+          <div class='board__notes'></div>
+          <div class='board__add'>
+            <input class='add__input'><button class='add__submit'>Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
