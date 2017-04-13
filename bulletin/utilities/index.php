@@ -101,8 +101,6 @@
     $note = $_POST["note"];
 
     $add_note = send_query("INSERT INTO notes (user_id, note) VALUES ('$user_id', '$note');");
-
-    load();
   }
 
   function initialize_action_function () {
