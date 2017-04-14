@@ -3,44 +3,90 @@
 bnmr.vars = {};
 bnmr.fns = {};
 
+bnmr.fns.loadBoard = function (data) {
+  var _fullname = data['fullname'], _userId = data['user_id'], _notes = data['notes']
+  bnmr.vars.userId = btoa(_userId);
+
+  window.location.hash = 'board';
+
+  bnmr.$('.board__welcome').innerHTML = 'Welcome, ' + _fullname;
+
+  for (var note in _notes) {
+    (function () {
+      var _noteId = note, _noteText = _notes[note];
+
+      var _note = document.createElement('div');
+      _note.className = 'notes__note';
+      _note.innerHTML = _noteText;
+
+      var _delete = document.createElement('span');
+      _delete.className = 'note__delete';
+      _delete.setAttribute('data-note-id', btoa(_noteId));
+      _delete.innerHTML = 'x';
+
+      _delete.onclick = bnmr.fns.deleteNote;
+
+      _note.appendChild(_delete);
+      bnmr.$('.board__notes').appendChild(_note);
+    })();
+  }
+};
+
+bnmr.fns.updateNotes = function () {
+  var _userId = atob(bnmr.vars.userId),
+  _params = 'user_id=' + _userId;
+
+  bnmr.$('.board__notes').innerHTML = '';
+  bnmr.ajax({
+    'method': 'POST',
+    'type': 'json',
+    'url': './utilities/?action=load'
+  }, function (data) {
+    bnmr.$('.add__input').value = '';
+    bnmr.$('.add__input').focus();
+    bnmr.fns.loadBoard(data);
+  }, _params);
+};
+
+bnmr.fns.clearNotes = function () {
+  var _userId = atob(bnmr.vars.userId),
+  _params = 'user_id=' + _userId;
+  bnmr.log(_params);
+  bnmr.ajax({
+    'method': 'POST',
+    'url': './utilities/?action=clear'
+  }, function (data) {
+    bnmr.log(data);
+
+    bnmr.fns.updateNotes();
+  }, _params);
+}
+
+bnmr.fns.deleteNote = function (e) {
+  var _userId = atob(bnmr.vars.userId),
+  _noteId = atob(e.target.getAttribute('data-note-id')),
+  _params = 'user_id=' + _userId + '&note_id=' + _noteId;
+
+  bnmr.ajax({
+    'method': 'POST',
+    'url': './utilities/?action=delete'
+  }, function (data) {
+      bnmr.fns.updateNotes();
+  }, _params);
+};
+
 bnmr.fns.addNote = function () {
   var _note = bnmr.$('.add__input').value,
-      _user_id = atob(bnmr.vars.user_id),
+      _userId = atob(bnmr.vars.userId),
       _params;
 
-  _params = 'user_id=' + _user_id + '&note=' + _note;
+  _params = 'user_id=' + _userId + '&note=' + _note;
   bnmr.ajax({
     'method': 'POST',
     'url': './utilities/?action=add'
   }, function (data) {
-    bnmr.$('.board__notes').innerHTML = '';
-    bnmr.ajax({
-      'method': 'POST',
-      'type': 'json',
-      'url': './utilities/?action=load'
-    }, function (data) {
-      bnmr.$('.add__input').value = '';
-      bnmr.$('.add__input').focus();
-      bnmr.fns.loadBoard(data);
-    }, _params);
+      bnmr.fns.updateNotes();
   }, _params);
-};
-
-bnmr.fns.loadBoard = function (data) {
-  var username = data[0], notes = data.slice(2, data.length);
-  bnmr.vars.user_id = btoa(data[1]);
-
-  window.location.hash = 'board';
-
-  bnmr.$('.board__welcome').innerHTML = 'Welcome, ' + username;
-
-  for (var i = 0; i < notes.length; i++) {
-    var note = document.createElement('div');
-    note.className = 'notes__note';
-    note.innerHTML = notes[i];
-
-    bnmr.$('.board__notes').appendChild(note);
-  }
 };
 
 bnmr.fns.clearInvalidCredentials = function () {
@@ -136,25 +182,33 @@ bnmr.fns.eventListeners = function () {
   bnmr.$('.credentials__button--register').onclick = bnmr.fns.register;
   bnmr.$('.credentials__button--login').onclick = bnmr.fns.login;
   bnmr.$('.add__submit').onclick = bnmr.fns.addNote;
+  bnmr.$('.add__clear').onclick = bnmr.fns.clearNotes;
+};
+
+bnmr.fns.setCookie = function () {
+  bnmr.vars.cookie = document.cookie;
+};
+
+bnmr.fns.readCookie = function () {
+  bnmr.vars.cookie = document.cookie;
+  if (!bnmr.vars.cookie || bnmr.vars.cookie == '') {
+    bnmr.fns.setCookie();
+  }
 };
 
 bnmr.fns.initFns = function () {
   switch (window.location.hash) {
-    case '#login':
     case '#register':
     break;
 
-    case '#board':
-      window.location.hash = '#login';
-    break;
-
     default:
-      window.location.hash = '#register';
+      window.location.hash = '#login';
     break;
   }
 
   document.getElementsByTagName('input')[0].focus();
 
+  bnmr.fns.readCookie();
   bnmr.fns.eventListeners();
 };
 

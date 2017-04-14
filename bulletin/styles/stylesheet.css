@@ -152,6 +152,17 @@
         border-bottom: 1px solid #e1e1e1;
       }
 
+        .note__delete {
+          float: right;
+          margin-right: 8px;
+          color: #ff3e72;
+          cursor: pointer;
+          -webkit-transition: color 0.3s;
+          transition: color 0.3s;
+        } .note__delete:hover {
+          color: #ff0044;
+        }
+
     .board__add {
       position: absolute;
       right: 16px;
@@ -161,7 +172,8 @@
     }
 
       .add__input {
-        width: calc(100% - 100px);
+        float: left;
+        width: calc(100% - 180px);
         height: calc(100% - 2px);
         padding-left: 16px;
         background-color: transparent;
@@ -176,7 +188,8 @@
       }
 
       .add__submit {
-        float: right;
+        float: left;
+        margin-left: 16px;
         padding: 8px 24px;
         color: #fff;
         background-color: #917eb3;
@@ -186,6 +199,19 @@
         transition: background-color 0.3s;
       } .add__submit:hover {
         background-color: #7d5eb5;
+      }
+
+      .add__clear {
+        float: right;
+        padding: 8px 24px;
+        color: #fff;
+        background-color: #ff3e72;
+        border: none;
+        cursor: pointer;
+        -webkit-transition: background-color 0.3s;
+        transition: background-color 0.3s;
+      } .add__clear:hover {
+        background-color: #ff0044;
       }
 
 :target {

@@ -79,28 +79,43 @@
     }
   }
 
-  function load () {
+  function load_board () {
     $user_id = $_POST["user_id"];
     $notes = Array();
 
     $get_fullname = send_query("SELECT fullname FROM users WHERE id='$user_id';")->fetch_assoc();
     $fullname = $get_fullname["fullname"];
-    $notes[] = $fullname;
-    $notes[] = $user_id;
+    $notes["fullname"] = $fullname;
+    $notes["user_id"] = $user_id;
+    $notes["notes"] = Array();
 
     $note_rows = send_query("SELECT * FROM notes WHERE user_id='$user_id'");
     while ($note_row = $note_rows->fetch_assoc()) {
-      $notes[] = $note_row["note"];
+      $notes["notes"][$note_row["id"]] = $note_row["note"];
     }
 
     echo json_encode($notes);
   }
 
-  function add() {
+  function add_note () {
     $user_id = $_POST["user_id"];
     $note = $_POST["note"];
 
     $add_note = send_query("INSERT INTO notes (user_id, note) VALUES ('$user_id', '$note');");
+  }
+
+  function delete_note () {
+    $user_id = $_POST["user_id"];
+    $note_id = $_POST["note_id"];
+
+    $delete_note = send_query("DELETE FROM notes WHERE id='$note_id';");
+  }
+
+  function clear_all_notes () {
+    $user_id = $_POST["user_id"];
+    echo $user_id;
+
+    $clear_notes = send_query("DELETE FROM notes WHERE user_id='$user_id';");
   }
 
   function initialize_action_function () {
@@ -114,11 +129,19 @@
       break;
 
       case "load":
-        load();
+        load_board();
       break;
 
       case "add":
-        add();
+        add_note();
+      break;
+
+      case "delete":
+        delete_note();
+      break;
+
+      case "clear":
+        clear_all_notes();
       break;
 
       default:
