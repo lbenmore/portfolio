@@ -66,6 +66,7 @@ bnmr.ajax = function (options, callback, params) {
   }
 
   if (params) {
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send(params);
   } else {
     xhr.send();
@@ -91,3 +92,51 @@ bnmr.ajax = function (options, callback, params) {
     }
   }
 };
+
+bnmr.readCookie = function (param) {
+    var _cookie = document.cookie,
+    _key = _cookie.split('=')[0];
+
+    if (_cookie) {
+      if (_cookie.indexOf('; ') > -1) {
+        var _pairs = _cookie.split('; ');
+
+        for (var i = 0; i < _pairs.length; i++) {
+          var _key = _pairs[i].split('=')[0];
+          if (_key == param) {
+            var _value = _pairs[i].split('=')[1];
+            return _value;
+          }
+        }
+      } else {
+        if (_key == param) {
+          var _value = _cookie.split('=')[1];
+          return _value;
+        }
+      }
+    } else {
+      return false;
+    }
+};
+
+
+bnmr.loadScreen = function () {
+  this.overlay = document.createElement('div');
+  this.overlay.style.position = 'fixed';
+  this.overlay.style.top = '0';
+  this.overlay.style.right = '0';
+  this.overlay.style.bottom = '0';
+  this.overlay.style.left = '0';
+  this.overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.75)';
+  this.overlay.style.fontFamily = '"Ubuntu", "Lucida Sans Unicode", Lato, Arial, sans-serif';
+  this.overlay.style.textAlign = 'center';
+  this.overlay.style.lineHeight = '100vh';
+
+  this.overlay.innerHTML = 'Loading...';
+
+  document.body.appendChild(this.overlay);
+
+  this.remove = function () {
+    document.body.removeChild(this.overlay);
+  }
+}

@@ -66,7 +66,6 @@ bnmr.ajax = function (options, callback, params) {
   }
 
   if (params) {
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send(params);
   } else {
     xhr.send();
