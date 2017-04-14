@@ -163,7 +163,9 @@ bnmr.fns.setInvalidCredentials = function (parentEl) {
 
 bnmr.fns.logout = function () {
   bnmr.fns.setCookie(false, '', '');
-  
+
+  bnmr.vars.userId = null;
+
   bnmr.$('.credentials__input--login.credentials__input--username').value = '';
   bnmr.$('.credentials__input--login.credentials__input--password').value = '';
 
@@ -192,6 +194,9 @@ bnmr.fns.login = function () {
     }, function (data) {
       _userId = data;
       _params = 'user_id=' + _userId;
+bnmr.log(_userId);
+      bnmr.vars.userId = btoa(_userId);
+
       switch (true) {
         case (data.indexOf('Username does not exist') > -1):
           bnmr.$('.credentials__input--login.credentials__input--username').addClass('invalid');
@@ -202,14 +207,8 @@ bnmr.fns.login = function () {
         break;
 
         default:
-          bnmr.ajax({
-            'method': 'POST',
-            'url': './utilities/?action=load',
-            'type': 'json'
-          }, function (data) {
-            bnmr.fns.loadBoard(data);
-          }, _params);
           bnmr.fns.setCookie('true', _username, _password);
+          bnmr.fns.updateNotes();
         break;
       }
     }, _params);
