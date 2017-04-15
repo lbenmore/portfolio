@@ -186,7 +186,7 @@
 
       .add__input {
         float: left;
-        width: calc(100% - 180px);
+        width: calc(100% - 190px);
         height: calc(100% - 2px);
         padding-left: 16px;
         background-color: transparent;
