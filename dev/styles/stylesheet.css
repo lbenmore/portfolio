@@ -136,6 +136,7 @@
 
           .links__button {
             position: relative;
+            display: inline-block;
             background-color: #eee;
             border: none;
             margin: 4px;
@@ -143,6 +144,8 @@
             cursor: pointer;
             color: #333;
             font-family: 'PT Sans Caption', 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+            font-size: 12px;
+            white-space: nowrap;
           } .links__button:focus {
             outline: none;
           }

@@ -64,10 +64,11 @@ bnmr.fns.initCards = function () {
         card.appendChild(links);
 
           for (var j = 0; j < projects[i].links.length; j++) {
-            var button = document.createElement('button');
+            var button = document.createElement('a');
             button.className = 'links__button';
             button.innerHTML = projects[i].links[j].name;
-            button.setAttribute('data-link', projects[i].links[j].url);
+            button.setAttribute('href', projects[i].links[j].url);
+            button.setAttribute('target', '_blank');
             links.appendChild(button);
 
             button.onclick = function (e) {

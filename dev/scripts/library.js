@@ -63,15 +63,12 @@ bnmr.fns.initCards = () => {
         card.appendChild(links);
 
           for (let link of project.links) {
-            let button = document.createElement('button');
+            let button = document.createElement('a');
             button.className = 'links__button';
             button.innerHTML = link.name;
-            button.setAttribute('data-link', link.url);
+            button.setAttribute('href', link.url);
+            button.setAttribute('target', '_blank');
             links.appendChild(button);
-
-            button.onclick = (e) => {
-              window.open(e.target.getAttribute('data-link'), '_blank');
-            };
           }
     }
   });
