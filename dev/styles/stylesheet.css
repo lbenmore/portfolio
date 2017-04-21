@@ -145,6 +145,7 @@
             color: #333;
             font-family: 'PT Sans Caption', 'Lucida Sans Unicode', Lato, Arial, sans-serif;
             font-size: 12px;
+            text-decoration: none;
             white-space: nowrap;
           } .links__button:focus {
             outline: none;

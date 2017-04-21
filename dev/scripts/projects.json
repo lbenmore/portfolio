@@ -86,7 +86,7 @@
     "description": "Simple page to save notes, delete one, and clear all. Must register and log in to view.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/noteboard"
       },
       {
@@ -102,7 +102,7 @@
     "description": "Full screen color picker with the ability to copy the Hex code.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/color-picker"
       },
       {
@@ -118,7 +118,7 @@
     "description": "Use the mouse to magnify part of a full screen image.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/magnifying-glass"
       },
       {
@@ -134,7 +134,7 @@
     "description": "Creates a depth of field perspective using a single image.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/floating-balloons"
       },
       {
@@ -150,7 +150,7 @@
     "description": "Use sliders for hue, lightness, and saturation to generate a color.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/hsl-picker"
       },
       {
@@ -166,7 +166,7 @@
     "description": "Nearly pure CSS loading screen.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/loading"
       },
       {
@@ -182,7 +182,7 @@
     "description": "Uses local time to creat  an animated digital clock with flip animation.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/digital-clock"
       },
       {
@@ -198,7 +198,7 @@
     "description": "Adds a glitch effect to 10 random characters of a given DOM element.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/glitch-text"
       },
       {
@@ -214,7 +214,7 @@
     "description": "Pure CSS parallax page header.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/parallax-header"
       },
       {
@@ -230,7 +230,7 @@
     "description": "Compare images (such as before &amp; after) using the mouse or touch on mobile",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/comparator"
       },
       {
@@ -246,7 +246,7 @@
     "description": "Emulation of flying through space.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/warp-speed"
       },
       {
@@ -262,7 +262,7 @@
     "description": "Creates the effect of twinkling stars in the night sky.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/twinkle"
       },
       {
@@ -278,7 +278,7 @@
     "description": "Full screen calculator for simple functions with web app capability enabled for iOS.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/calculator"
       },
       {
@@ -294,7 +294,7 @@
     "description": "Generates a simple, navigable calendar starting with the current month.",
     "links": [
       {
-        "name": "View Demo",
+        "name": "View Project",
         "url": "http://www.lisabenmore.com/calendar"
       },
       {
