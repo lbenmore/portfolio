@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Tic Tac Toe</title>
+    <style>
+      * {
+      	box-sizing: border-box;
+        font-family: 'sans-serif';
+      }
+
+      html, body { margin: 0; }
+
+      .board {
+      	position: absolute;
+      	top: calc(50vh - 25vw);
+      	left: 25vw;
+      	width: 50vw;
+      	height: 50vw;
+      }
+
+      input {
+        padding: 4px 16px;
+        width: 100%;
+        color: #666;
+        font-size: 16px;
+        border: none;
+        border-bottom: 2px solid #666;
+      } input:focus {
+        outline: none;
+      }
+
+      button {
+        padding: 8px 24px;
+        background: #e1e1e1;
+        color: #333;
+        border: none;
+        border-radius: 0;
+        font-size: 16px;
+      } button:focus {
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='board'></div>
+
+    <script src='http://www.lisabenmore.com/modal/modal.js'></script>
+    <script>
+      (function () { 'use strict'; }());
+
+      var bnmr = {};
+      bnmr.vars = {};
+      bnmr.fns = {};
+
+      bnmr.$ = function (selector) {
+      	var _this;
+      	selector.slice(0, 1) == '#' ? _this = document.querySelector(selector) : _this = document.querySelectorAll(selector);
+      	(typeof _this == 'object' && _this.length == 1) ? _this = _this[0] : null;
+
+      	return _this;
+      };
+
+      bnmr.fns.win = function (winner) {
+        new Modal ({
+          "type": "confirm",
+          "message": winner.name + " takes the board with all the " + winner.char + "'s",
+          "options": [
+            {
+              "text": "Okay",
+              "callback": bnmr.fns.init
+            }
+          ]
+        });
+      };
+
+      bnmr.fns.evaluateBoard = function () {
+      	var match,
+      			prevCell = bnmr.vars.boardState[0][0];
+
+      	// hoz win
+      	for (var i = 0; i < bnmr.vars.boardSize; i++) {
+      		match = false;
+      		prevCell = bnmr.vars.boardState[i][0];
+
+      		for (var j = 1; j < bnmr.vars.boardSize; j++) {
+      			if (prevCell && prevCell == bnmr.vars.boardState[i][j]) {
+      				match = true;
+      				prevCell = bnmr.vars.boardState[i][j];
+      			} else {
+      				match = false;
+      				break;
+      			}
+      		}
+
+      		if (match) {
+      			bnmr.fns.win(bnmr.vars.players[bnmr.vars.currPlayer]);
+            return;
+      		}
+      	}
+
+      	// vrt win
+      	for (var k = 0; k < bnmr.vars.boardSize; k++) {
+      		match = false;
+      		prevCell = bnmr.vars.boardState[0][k];
+
+      		for (var l = 1; l < bnmr.vars.boardSize; l++) {
+      			if (prevCell && prevCell == bnmr.vars.boardState[l][k]) {
+      				match = true;
+      				prevCell = bnmr.vars.boardState[l][k];
+      			} else {
+      				match = false;
+      				break;
+      			}
+      		}
+
+      		if (match) {
+      			bnmr.fns.win(bnmr.vars.players[bnmr.vars.currPlayer]);
+            return;
+      		}
+      	}
+
+      	// dgl ltr win
+      	prevCell = bnmr.vars.boardState[0][0];
+      	for (var m = 0; m < bnmr.vars.boardSize; m++) {
+      		match = false;
+
+      		if (prevCell && prevCell == bnmr.vars.boardState[m][m]) {
+      			match = true;
+      			prevCell = bnmr.vars.boardState[m][m];
+      		} else {
+      			match = false;
+      			break;
+      		}
+      	}
+
+      	if (match) {
+      		bnmr.fns.win(bnmr.vars.players[bnmr.vars.currPlayer]);
+          return;
+      	}
+
+      	// dgl rtl win
+      	prevCell = bnmr.vars.boardState[0][(bnmr.vars.boardSize - 1)];
+      	for (var n = 0; n < bnmr.vars.boardSize; n++) {
+      		var fromRight = (bnmr.vars.boardSize - 1) - n;
+      		match = false;
+
+      		if (prevCell && prevCell == bnmr.vars.boardState[n][fromRight]) {
+      			match = true;
+      			prevCell = bnmr.vars.boardState[n][fromRight];
+      		} else {
+      			match = false;
+      			break;
+      		}
+      	}
+
+      	if (match) {
+      		bnmr.fns.win(bnmr.vars.players[bnmr.vars.currPlayer]);
+          return;
+      	}
+      };
+
+      bnmr.fns.switchPlayer = function () {
+      	switch (bnmr.vars.currPlayer) {
+      		case 0:
+      			bnmr.vars.currPlayer = 1;
+      		break;
+
+      		case 1:
+      			bnmr.vars.currPlayer = 0;
+      		break;
+      	}
+      };
+
+      bnmr.fns.onCellClick = function (e) {
+      	var coords = e.target.getAttribute('data-coords'),
+      			row = coords.split(',')[0],
+      			col = coords.split(',')[1],
+      			char = bnmr.vars.players[bnmr.vars.currPlayer].char;
+
+        if (!bnmr.vars.boardState[row][col]) {
+        	e.target.innerHTML = char;
+
+        	bnmr.vars.boardState[row][col] = char;
+
+        	bnmr.fns.evaluateBoard();
+        	bnmr.fns.switchPlayer();
+        }
+      };
+
+      bnmr.fns.initCells = function (target, currRow) {
+      	for (var i = 0; i < bnmr.vars.boardSize; i++) {
+      		var cell = document.createElement('div'),
+      				width = 100 / bnmr.vars.boardSize,
+      				left = width * i;
+
+      		cell.style.position = 'absolute';
+      		cell.style.top = '0';
+      		cell.style.left = left + '%';
+      		cell.style.width = width + '%';
+      		cell.style.height = '100%';
+      		cell.style.border = '1px solid #000';
+      		cell.style.fontFamily = 'sans-serif';
+      		cell.style.fontSize = (45 / bnmr.vars.boardSize) + 'vw';
+      		cell.style.textAlign = 'center';
+
+      		cell.setAttribute('data-coords', String(currRow) + ',' + String(i));
+
+      		bnmr.vars.boardState[currRow].push(0);
+
+      		target.appendChild(cell);
+
+      		cell.addEventListener('click', bnmr.fns.onCellClick);
+      	}
+      };
+
+      bnmr.fns.initRows = function () {
+      	for (var i = 0; i < bnmr.vars.boardSize; i++) {
+      		var row = document.createElement('div'),
+      				height = 100 / bnmr.vars.boardSize,
+      				top = height * i;
+
+      		row.style.position = 'absolute';
+      		row.style.top = top + '%';
+      		row.style.left = '0';
+      		row.style.width = '100%';
+      		row.style.height = height + '%';
+      		row.style.border = '1px solid #000';
+
+      		bnmr.$('.board').appendChild(row);
+
+      		bnmr.vars.boardState.push([]);
+
+      		bnmr.fns.initCells(row, i);
+      	}
+      };
+
+      bnmr.fns.setPlayer2 = function () {
+        new Modal({
+          "type": "prompt",
+          "message": "Player 2: What is your name?",
+          "options": [
+            {
+              "text": "Set Player 2 name",
+              "callback": function (response) {
+                response = response != '' ? response : "Player 2";
+                bnmr.vars.players[1] = {};
+                bnmr.vars.players[1].name = response;
+                bnmr.vars.players[1].char = "O";
+                bnmr.fns.initRows();
+              }
+            }
+          ]
+        });
+      };
+
+      bnmr.fns.setPlayer1 = function () {
+        new Modal({
+          "type": "prompt",
+          "message": "Player 1: What is your name?",
+          "options": [
+            {
+              "text": "Set Player 1 name",
+              "callback": function (response) {
+                response = response != '' ? response : "Player 1";
+                bnmr.vars.players[0] = {};
+                bnmr.vars.players[0].name = response;
+                bnmr.vars.players[0].char = "X";
+                bnmr.fns.setPlayer2();
+              }
+            }
+          ]
+        });
+      };
+
+      bnmr.fns.setBoardSize = function (response) {
+        bnmr.vars.boardSize = /^\d+$/.test(response) ? response : 3;
+
+        if (bnmr.vars.players) {
+          bnmr.fns.initRows();
+        } else {
+          bnmr.vars.players = [];
+          bnmr.fns.setPlayer1();
+        }
+      };
+
+      bnmr.fns.init = function () {
+        bnmr.$('.board').innerHTML = '';
+        bnmr.vars.boardState = [];
+        bnmr.vars.currPlayer = 0;
+
+        new Modal({
+          "type": "prompt",
+          "message": "What would you like the board size to be?",
+          "options": [
+            {
+              "text": "Set board size",
+              "callback": bnmr.fns.setBoardSize
+            }
+          ]
+        });
+      };
+
+      document.onreadystatechange = function () {
+      	if (document.readyState == 'complete') {
+      		bnmr.fns.init();
+      	}
+      }
+    </script>
+  </body>
+</html>

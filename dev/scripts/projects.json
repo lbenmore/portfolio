@@ -112,6 +112,22 @@
     ]
   },
   {
+    "name": "Tic Tac Toe",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Slightly customizable Tic Tac Toe game.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/tic-tac-toe"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/tic-tac-toe/index.html"
+      }
+    ]
+  },
+  {
     "name": "Magnifying Glass",
     "technologies": "HTML5, CSS3, JavaScript (ES6)",
     "browsers": "Chrome, Firefox, Opera, Edge 15+, Safari",
