@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=no'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <title>startle</title>
+    <link rel='stylesheet' href='./stylesheet.css'>
+  </head>
+  <body>
+    <div class='container'>
+    	<div class='panel panel--front clock'>
+    		<div class='clock__hand clock__hand--second'></div>
+    		<div class='clock__hand clock__hand--minute'></div>
+    		<div class='clock__hand clock__hand--hour'></div>
+    		<div class='clock__display'>
+    			<span class='display__digit display__digit--hour'>12</span>
+    			<span class='display__digit'>:</span>
+    			<span class='display__digit display__digit--minute'>00</span>
+    		</div>
+    	</div>
+
+     	<div class='panel panel--back config hidden'>
+    		<div class='config__list'>
+    			<ul class='list__ul'>
+    				<li class='list__li list__li--add'>+ Add New</li>
+    				<li class='list__li list__li--delete'>- Delete All</li>
+    			</ul>
+    		</div>
+    		<div class='config__options hidden'>
+    			<div class='options__time'>
+    				Time:
+    				<input class='options__dropdown options__dropdown--time' type='time'>
+    			</div>
+    			<div class='options__sound'>
+    				Alarm Sound:
+    				<select class='options__dropdown options__dropdown--sound'>
+    					<option value='baby'>Baby Wailing</option>
+    					<option value='siren'>Tornado Siren</option>
+    					<option value='worst'>Worst Sound Ever</option>
+    					<option value='game'>Retro Game</option>
+    					<option value='drill'>Power Drill</option>
+    				</select>
+    			</div>
+    			<div class='options__gestures'>
+    				Number of Gestures:
+    				<select class='options__dropdown options__dropdown--gestures'>
+    					<script>
+    						for (var i = 1; i <= 10; i++) {
+    							var option = document.createElement('option');
+    							option.value = i;
+    							option.innerHTML = i;
+    							document.querySelector('.options__dropdown--gestures').appendChild(option);
+    						}
+    					</script>
+    				</select>
+    			</div>
+    			<button class='options__btn options__btn--submit'>Save</button>
+    			<button class='options__btn options__btn--cancel'>Cancel</button>
+    		</div>
+    	</div>
+
+    	<div class='icn icn--info'>
+    		<img src='http://www.iconsdb.com/icons/preview/red/settings-xxl.png'>
+    	</div>
+    </div>
+
+    <audio id='sounds' src='http://www.lisabenmore.com/startle/revisited/sounds.mp3'></audio>
+
+    <script type='text/javascript' src='./library.js'></script>
+  </body>
+</html>

@@ -96,6 +96,22 @@
     ]
   },
   {
+    "name": "Startle",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Web app for an alarm clock using randomized gestures to dismiss the most annoying sounds. Uses Web Storage for alarm settings.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/startle-revisited"
+      },
+      {
+        "name": "View Source Code",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/startle-revisited"
+      }
+    ]
+  },
+  {
     "name": "Color Picker",
     "technologies": "HTML5, CSS3, JavaScript (ES6)",
     "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
