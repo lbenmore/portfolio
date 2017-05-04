@@ -13,11 +13,11 @@
 	--sans: 'Josefin Sans', 'Lucida Sans Unicode', Lato, Arial, sans-serif;
 }
 
-html, body { 
-	margin: 0; 
-	background-color: #000; 
-	user-select: none; 
-	-webkit-user-select: none; 
+html, body {
+	margin: 0;
+	background-color: #000;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
   .container {
@@ -39,21 +39,21 @@ html, body {
     	-webkit-transition: -webkit-transform 1.5s;
     	transition: transform 1.5s;
     }
-  
+
     .panel--front.hidden {
     	-webkit-transform: rotateY(180deg);
     	transform: rotateY(180deg);
     }
-    
+
     .panel--back.hidden {
     	-webkit-transform: rotateY(-180deg);
     	transform: rotateY(-180deg);
     }
-  
+
     .clock {
     	background-color: var(--dk-grey);
     }
-  
+
       .clock__display {
       	position: absolute;
       	bottom: 10px;
@@ -63,7 +63,7 @@ html, body {
       	font-size: 20vw;
       	text-align: center;
       }
-      
+
       .clock__hand {
       	position: absolute;
       	top: 50%;
@@ -74,23 +74,23 @@ html, body {
       	-webkit-transform-origin: 0 0;
       	transform-origin: 0 0;
       }
-      
+
       .clock__hand--second {
       	background: linear-gradient(to top, var(--red) 0%, var(--red) 100%);
       }
-      
+
       .clock__hand--minute {
       	background: linear-gradient(to top, var(--green) 0%, var(--green) 80%, var(--transparent) 80.1%, var(--transparent) 100%);
       }
-      
+
       .clock__hand--hour {
       	background: linear-gradient(to top, var(--purple) 0%, var(--purple) 60%, var(--transparent) 60.1%, var(--transparent) 100%);
       }
-  
+
     .config {
     	background-color: #fff;
     }
-  
+
       .config__list {
       	position: absolute;
       	top: 0;
@@ -100,14 +100,14 @@ html, body {
       	border-right: 1px solid var(--lt-grey);
       	overflow-y: auto;
       }
-  
+
         .list__ul {
         	width: 100%;
         	height: 100%;
         	margin: 0;
         	padding: 0;
         }
-  
+
           .list__li {
           	display: block;
           	width: 100%;
@@ -118,7 +118,7 @@ html, body {
           	box-sizing: border-box;
           	cursor: pointer;
           }
-  
+
       .config__options {
       	position: absolute;
       	top: 0;
@@ -131,19 +131,19 @@ html, body {
       	-webkit-transition: -webkit-transform 0.75s;
       	transition: transform 0.75s;
       }
-  
+
       .config__options.hidden {
       	-webkit-transform: translateX(100%);
       	transform: translateX(100%);
       }
-  
+
         .options__time,
         .options__sound,
         .options__gestures {
         	margin-bottom: 16px;
         	font-size: 1.2em;
         }
-  
+
           .options__dropdown {
           	height: 32px;
           	padding: 0 16px;
@@ -155,7 +155,7 @@ html, body {
           	appearance: none;
           	-webkit-appearance: none;
           }
-  
+
         .options__btn {
         	padding: 8px 24px;
         	background: transparent;
@@ -165,28 +165,28 @@ html, body {
         	font-size: 1em;
         	cursor: pointer;
         }
-        
+
         .options__btn--submit {
         	border-color: var(--purple);
         }
-  
+
         .options__btn--cancel {
         	float: right;
         	border-color: var(--red);
         }
-  
+
     .icn {
-    	width: 20px;
-    	height: 20px;
+    	width: 30px;
+    	height: 30px;
     	cursor: pointer;
     }
-    
+
     .icn img {
     	position: relative;
     	width: 100%;
     	height: auto;
     }
-    
+
     .icn--info {
     	position: fixed;
     	top: 10px;
@@ -213,13 +213,13 @@ html, body {
 		display: block;
 		margin-bottom: 16px;
 	}
-	
+
 	.options__btn {
 		float: none;
 		clear: both;
 		display: block;
 	}
-	
+
 	.options__btn--submit {
 		margin-bottom: 16px;
 	}
