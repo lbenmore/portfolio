@@ -65,6 +65,7 @@ html, body {
       	font-family: var(--slab);
       	font-size: 20vw;
       	text-align: center;
+				text-shadow: 0px 0px 6px var(--blue);
       }
 
       .clock__hand {
@@ -80,14 +81,20 @@ html, body {
 
       .clock__hand--second {
       	background: linear-gradient(to top, var(--red) 0%, var(--red) 100%);
+				-webkit-filter: drop-shadow(0px 0px 6px var(--red));
+				filter: drop-shadow(0px 0px 6px var(--red));
       }
 
       .clock__hand--minute {
       	background: linear-gradient(to top, var(--green) 0%, var(--green) 80%, var(--transparent) 80.1%, var(--transparent) 100%);
+				-webkit-filter: drop-shadow(0px 0px 6px var(--green));
+				filter: drop-shadow(0px 0px 6px var(--green));
       }
 
       .clock__hand--hour {
       	background: linear-gradient(to top, var(--purple) 0%, var(--purple) 60%, var(--transparent) 60.1%, var(--transparent) 100%);
+				-webkit-filter: drop-shadow(0px 0px 6px var(--purple));
+				filter: drop-shadow(0px 0px 6px var(--purple));
       }
 
     .config {
