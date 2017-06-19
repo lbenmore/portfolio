@@ -20,6 +20,19 @@ html, body {
 	-webkit-user-select: none;
 }
 
+  .output {
+    position: relative;
+    color: #f00;
+    font-family: sans-serif;
+    font-size: 16px;
+    z-index: 999;
+    pointer-events: none;
+  }
+  
+    .output span {
+      display: block;
+    }
+
   .container {
   	position: fixed;
   	top: 0;
@@ -32,7 +45,7 @@ html, body {
   }
 
     .panel {
-    	position: absolute;
+    	position: fixed;
 			top: 0;
 			left: 0;
     	width: 100%;
@@ -58,7 +71,7 @@ html, body {
     }
 
       .clock__display {
-      	position: absolute;
+      	position: fixed;
       	bottom: 10px;
       	width: 100%;
       	color: var(--blue);
@@ -77,6 +90,8 @@ html, body {
       	height: 50vh;
       	-webkit-transform-origin: 0 0;
       	transform-origin: 0 0;
+      	-webkit-transition: transform 0.5s;
+      	transition: transform 0.5s;
       }
 
       .clock__hand--second {

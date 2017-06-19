@@ -9,6 +9,13 @@
     <link rel='stylesheet' href='./stylesheet.css'>
   </head>
   <body>
+    <div class='output'>
+      <script>
+        window.onerror = function (messageOrEvent, source, lineno, colno, error) {
+          document.querySelector('.output').innerHTML = '<span>Error: ' + JSON.stringify(error) + '</span>';
+        }
+      </script>
+    </div>
     <div class='container'>
     	<div class='panel panel--front clock'>
     		<div class='clock__hand clock__hand--second'></div>
@@ -62,11 +69,11 @@
     	</div>
 
     	<div class='icn icn--info'>
-    		<img src='http://crsystems.co.uk/wp-content/uploads/2014/03/ICON_6_GEAR.png'>
+    		<img src='//crsystems.co.uk/wp-content/uploads/2014/03/ICON_6_GEAR.png'>
     	</div>
     </div>
 
-    <audio id='sounds' src='http://www.lisabenmore.com/startle/revisited/sounds.mp3'></audio>
+    <audio id='sounds' src='http://www.lisabenmore.com/startle-revisited/sounds.mp3'></audio>
 
     <script type='text/javascript' src='./library.js'></script>
   </body>

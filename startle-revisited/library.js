@@ -80,7 +80,7 @@ bnmr.$ = function (selector) {
 				_this.execTouch(e, event, callback);
 			}
 		});
-	}
+	};
 
 	_this.on = function (event, callback) {
 		switch (event) {
@@ -126,7 +126,7 @@ bnmr.$ = function (selector) {
 
 	_this.toggleClass = function (cName, delay) {
 		if (_this.className.indexOf(cName) > -1) {
-			_this.removeClass(cName, delay)
+			_this.removeClass(cName, delay);
 		} else {
 			 _this.addClass(cName, delay);
 		 }
@@ -214,7 +214,7 @@ bnmr.fns.optionsCancel = function () {
 			bnmr.fns.alarms('remove');
 		break;
 	}
-}
+};
 
 bnmr.fns.optionsSubmit = function () {
 	switch (bnmr.vars.configState) {
@@ -260,7 +260,7 @@ bnmr.fns.addAlarm = function () {
 	bnmr.$('.options__btn--cancel').innerHTML = 'Cancel';
 
 	bnmr.$('.config__options').removeClass('hidden');
-}
+};
 
 bnmr.fns.buildAlarmList = function () {
 	for (var i = document.querySelectorAll('.list__li--alarm').length; i < bnmr.vars.alarms.length; i++) {
@@ -294,7 +294,7 @@ bnmr.fns.alarms = function (type) {
 		break;
 
 		case 'set':
-			var time, sound, gestures, hour, min, mer, name,
+			var hour, min, mer, name,
 					newAlarm = {};
 
 			newAlarm["id"] = String(new Date().getTime());
@@ -403,7 +403,7 @@ bnmr.fns.startAlarm = function () {
 		if (bnmr.$('#sounds').currentTime >= bnmr.vars.objSounds[bnmr.vars.alarmSound].end) {
 			bnmr.$('#sounds').currentTime = bnmr.vars.objSounds[bnmr.vars.alarmSound].start;
 		}
-	}
+	};
 
 	overlay.innerHTML = randGest;
 	overlay.className = 'overlay';
@@ -424,7 +424,7 @@ bnmr.fns.startAlarm = function () {
 
 bnmr.fns.checkForAlarm = function () {
 	bnmr.vars.alarmInterval = setInterval(function () {
-		var now, nHour, nMin, aHour, aMin, aGst;
+		var now, nHour, nMin, aHour, aMin;
 		now = new Date();
 		nHour = String(now.getHours());
 		nMin = String(now.getMinutes());
@@ -444,7 +444,7 @@ bnmr.fns.checkForAlarm = function () {
 			}
 		}
 	}, 1000);
-}
+};
 
 bnmr.fns.eventListeners = function () {
 	bnmr.$('.icn--info').on('tap', bnmr.fns.togglePanel);
@@ -452,6 +452,15 @@ bnmr.fns.eventListeners = function () {
 	bnmr.$('.list__li--delete').on('tap', bnmr.fns.alarms.bind(this, 'clear'));
 	bnmr.$('.options__btn--submit').on('tap', bnmr.fns.optionsSubmit);
 	bnmr.$('.options__btn--cancel').on('tap', bnmr.fns.optionsCancel);
+	
+	var firstRun = true;
+	bnmr.$('.container').on('tap', function () {
+		if (firstRun) {
+			bnmr.$('#sounds').play();
+			bnmr.$('#sounds').pause();
+			firstRun = false;
+		}
+	});
 };
 
 bnmr.fns.init = function () {
@@ -485,7 +494,10 @@ bnmr.fns.init = function () {
 			"start": "35",
 			"end": "39"
 		}
-	}
+	};
+	
+	bnmr.$('#sounds').play();
+	bnmr.$('#sounds').pause();
 
 	bnmr.fns.alarms('get');
 	bnmr.fns.initClockFace();
