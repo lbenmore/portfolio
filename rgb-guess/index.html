@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>RGB Guessing Game</title>
+    <style>
+      html, body {
+        margin: 0;
+        font-family: 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+        }
+
+        .header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 60px;
+        background-color: #fff;
+        z-index: 1;
+        cursor: default;
+        }
+
+        .header__title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        font-size: 1.3em;
+        line-height: 30px;
+        text-align: center;
+        }
+
+        .header__score {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        height: 30px;
+        font-size: 1.1em;
+        padding-left: 10px;
+        line-height: 30px;
+        }
+
+        .header__btn {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        height: 30px;
+        padding-right: 10px;
+        font-size: 1.1em;
+        line-height: 30px;
+        cursor: pointer;
+        transform: translateX(-50%);
+        }
+
+        .header__hiscore {
+        position: absolute;
+        top: 30px;
+        right: 0;
+        height: 30px;
+        font-size: 1.1em;
+        padding-right: 10px;
+        line-height: 30px;
+        }
+
+        .content {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        }
+
+        .content__board {
+        position: relative;
+        /* 	display: inline-block; */
+        margin: 10px auto;
+        width: 314px;
+        }
+
+        .board__values {
+        text-align: center;
+        margin-bottom: 6px;
+        }
+
+        .row__tile {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border: 1px solid #808080;
+        box-sizing: border-box;
+        cursor: pointer;
+        }
+
+        .correct {
+        border: 3px solid #0f4;
+        box-shadow: 0px 0px 8px #0f4;
+        }
+
+        .incorrect {
+        border: 3px solid #f04;
+        box-shadow: 0px 0px 8px #f04;
+        }
+    </style>
+  </head>
+  <body>
+    <div class='header'>
+    	<div class='header__title'>RGB Guess</div>
+    	<div class='header__score'>Score: <span class='score__curr'>0</span></div>
+    	<div class='header__hiscore'>High Score: <span class='hiscore__curr'>0</span></div>
+    	<div class='header__btn'>Replay</div>
+    </div>
+    <div class='content'>
+    	<div class='content__board'>
+    		<div class='board__values'>rgb(255, 255, 255)</div>
+    		<div class='board__tiles'>
+    			<div class='tiles__row'>
+    				<div class='row__tile'></div>
+    				<div class='row__tile'></div>
+    				<div class='row__tile'></div>
+    			</div>
+    			<div class='tiles__row'>
+    				<div class='row__tile'></div>
+    				<div class='row__tile'></div>
+    				<div class='row__tile'></div>
+    			</div>
+    			<div class='tiles__row'>
+    				<div class='row__tile'></div>
+    				<div class='row__tile'></div>
+    				<div class='row__tile'></div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    <script>
+      var arrTiles, tiles, rand, randRgb, replayBtn, score, currScore, hiScore, currHiScore;
+
+      function prompt (options) {
+        var message = options.message || '',
+          buttons = options.buttons || [],
+          overlay, popup, msg;
+
+        overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.right = '0';
+        overlay.style.bottom = '0';
+        overlay.style.left = '0';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.33)';
+        overlay.style.zIndex = '100';
+
+        popup = document.createElement('div');
+        popup.style.position = 'absolute';
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        popup.style.padding = '20px';
+        popup.style.backgroundColor = '#fff';
+
+        msg = document.createElement('div');
+        msg.innerHTML = message;
+
+        document.body.appendChild(overlay);
+        overlay.appendChild(popup);
+        popup.appendChild(msg);
+
+        for (var i = 0; i < buttons.length; i++) {
+          var _btn = document.createElement('button');
+          _btn.style.padding = '8px 24px';
+          _btn.style.background = 'transparent';
+          _btn.style.border = '1px solid';
+          _btn.style.borderRadius = '0';
+          _btn.style.marginRight = '6px';
+          _btn.innerHTML = buttons[i].text;
+          _btn.addEventListener('click', buttons[i].callback);
+          _btn.addEventListener('click', function () {
+            document.body.removeChild(overlay);
+          })
+
+          popup.appendChild(_btn);
+        }
+      }
+
+      function reset (increase) {
+        if (increase) {
+          setScore(true);
+        } else {
+          setScore(false);
+        }
+
+        for (var i = 0; i < arrTiles.length; i++) {
+          arrTiles[i].classList.remove('correct');
+          arrTiles[i].classList.remove('incorrect');
+        }
+        rand = Math.floor(Math.random() * arrTiles.length);
+        setColors();
+      }
+
+      function lsHiScore (type) {
+        switch (type) {
+          case 'get':
+            currHiScore = window.localStorage ? Number(localStorage.getItem('hiScore')) : 0;
+            return currHiScore;
+          break;
+
+          case 'set':
+            if (currScore > currHiScore) {
+              currHiScore = currScore;
+              hiScore.innerHTML = currHiScore;
+              if (window.localStorage) {
+                localStorage.setItem('hiScore', currHiScore);
+              }
+            }
+          break;
+        }
+      }
+
+      function setScore (increase) {
+        if (increase) {
+          currScore++;
+        } else {
+          currScore = 0;
+        }
+
+        score.innerHTML = currScore;
+        lsHiScore('set');
+        }
+
+        function onTileClick (e) {
+        if (arrTiles.indexOf(e.target) == rand) {
+          reset(true);
+        } else {
+          arrTiles[rand].classList.add('correct');
+          e.target.classList.add('incorrect');
+          new prompt({
+            'message': 'You suck! Try again?',
+            'buttons': [
+              {
+                'text': 'Okay.',
+                'callback': function () {
+                  reset(false);
+                }
+              },
+              {
+                'text': 'No, thank you.',
+                'callback': function () { return; }
+              }
+            ]
+          });
+        }
+      }
+
+      function setColors () {
+        randRgb = 'rgb(' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ')';
+        for (var i = 0; i < arrTiles.length; i++) {
+          arrTiles[i].style.backgroundColor = 'rgb(' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ')';
+        }
+        arrTiles[rand].style.backgroundColor = randRgb;
+        document.querySelector('.board__values').innerHTML = randRgb;
+      }
+
+      function init () {
+        arrTiles = [];
+        tiles = document.querySelectorAll('.row__tile');
+        btnReplay = document.querySelector('.header__btn');
+        score = document.querySelector('.score__curr');
+        hiScore = document.querySelector('.hiscore__curr');
+        rand = Math.floor(Math.random() * tiles.length);
+        currScore = 0;
+        currHiScore = lsHiScore('get');
+
+        hiScore.innerHTML = currHiScore;
+
+        for (var i = 0; i < tiles.length; i++) {
+          arrTiles.push(tiles[i]);
+        }
+
+        for (var i = 0; i < tiles.length; i++) {
+          tiles[i].onclick = onTileClick;
+        }
+
+        btnReplay.addEventListener('click', reset.bind(this, false));
+
+        setColors();
+      }
+
+      init();
+    </script>
+  </body>
+</html>
