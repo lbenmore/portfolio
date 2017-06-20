@@ -144,6 +144,22 @@
     ]
   },
   {
+    "name": "RGB Guessing Game",
+    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "A game for guessing a color when given its red, green, and blue values.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/rgb-guess"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/rgb-guess/index.html"
+      }
+    ]
+  },
+  {
     "name": "Magnifying Glass",
     "technologies": "HTML5, CSS3, JavaScript (ES6)",
     "browsers": "Chrome, Firefox, Opera, Edge 15+, Safari",
