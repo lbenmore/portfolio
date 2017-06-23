@@ -1,95 +1,71 @@
 // JavaScript Document
 
 let bnmr = {};
-bnmr.vars = {};
+bnmr.globals = {};
 bnmr.fns = {};
 
-bnmr.vars.project = 'Portfolio';
-bnmr.vars.version = '1.0.0';
-bnmr.vars.debugg = true;
-
-bnmr.fns.log = (msg, caller, type) => {
-  type = type || 'log';
-  caller = caller || 'unknown';
-
-  if (bnmr.vars.debugg) {
-    if (typeof msg == 'string' || !window.console.dir) {
-      console[type](bnmr.vars.project + ' :: ' + bnmr.vars.version + ' :: ' + caller + ' :: ' + msg);
-    } else {
-      console[type](bnmr.vars.project + ' :: ' + bnmr.vars.version + ' :: ' + caller);
-      console.dir(msg);
-    }
-  }
-};
-
-bnmr.fns.initCards = () => {
+bnmr.fns.initMenu = () => {
   $$.ajax({
-    'type': 'json',
-    'url': './scripts/projects.json'
+    type: 'json',
+    url: './assets/projects.json'
   }, (projects) => {
-    bnmr.fns.log('Projects retrieved', 'initCards');
+    $$('.projects').removeChild($$('.projects__list'));
+    let list = document.createElement('div');
+    list.classList.add('projects__list');
+    $$('.projects').appendChild(list);
+
     for (let project of projects) {
-      bnmr.fns.log(project, 'initCards Project:');
-      let card = document.createElement('div');
-      card.className = 'projects__card';
-      $$('.content__projects').appendChild(card);
+      let item = document.createElement('div');
+      item.classList.add('projects__item');
+      list.appendChild(item);
 
-        let header = document.createElement('header');
-        header.className = 'card__header';
-        card.appendChild(header);
+      	let title = document.createElement('div');
+    		title.classList.add('projects__name');
+      	title.innerHTML = project.name;
+      	item.appendChild(title);
 
-          let title = document.createElement('h1');
-          title.className = 'card__title';
-          title.innerHTML = project.name;
-          header.appendChild(title);
+      	let tech = document.createElement('div');
+      	tech.classList.add('projects__technologies');
+      	tech.innerHTML = `Technologies: ${project.technologies}`;
+      	item.appendChild(tech);
 
-          let technologies = document.createElement('h2');
-          technologies.className = 'card__subtitle';
-          technologies.innerHTML = '<em>Technologies: ' + project.technologies + '</em>';
-          header.appendChild(technologies);
+      	let browsers = document.createElement('div');
+      	browsers.classList.add('projects__browsers');
+      	browsers.innerHTML = `Supported browsers: ${project.browsers}`;
+      	item.appendChild(browsers);
 
-          let browsers = document.createElement('h2');
-          browsers.className = 'card__subtitle';
-          browsers.innerHTML = '<em>Browsers: ' + project.browsers + '</em>';
-          header.appendChild(browsers);
+      	let desc = document.createElement('div');
+      	desc.classList.add('projects__description');
+      	desc.innerHTML = project.description;
+      	item.appendChild(desc);
 
-        let description = document.createElement('section');
-        description.className = 'card__description';
-        description.innerHTML = project.description;
-        card.appendChild(description);
+    		for (let link of project.links) {
+          let btn = document.createElement('a');
+          btn.classList.add('projects__btn');
+          btn.href = link.url;
 
-        let links = document.createElement('section');
-        links.className = 'card__links';
-        card.appendChild(links);
+            let highlight = document.createElement('span');
+            highlight.classList.add('projects__btn-highlight');
+            btn.appendChild(highlight);
 
-          for (let link of project.links) {
-            let button = document.createElement('a');
-            button.className = 'links__button';
-            button.innerHTML = link.name;
-            button.setAttribute('href', link.url);
-            button.setAttribute('target', '_blank');
-            links.appendChild(button);
-          }
+            let copy = document.createElement('span');
+            copy.classList.add('projects__btn-copy');
+          	copy.innerHTML = link.name;
+            btn.appendChild(copy);
+          item.appendChild(btn);
+        }
     }
   });
 };
 
-
-bnmr.fns.eventListeners = () => {
-
-};
-
 bnmr.fns.initFns = () => {
-  bnmr.fns.log('Begin initialization', 'initFns');
+  $$.log('hello, world.');
 
-  bnmr.fns.eventListeners();
-  bnmr.fns.initCards();
+  bnmr.fns.initMenu();
 };
 
-const libraryLoadInterval = setInterval(() => {
-  bnmr.fns.log('Loading...', 'libraryLoadInterval');
-  if ($$) {
-    clearInterval(libraryLoadInterval);
+document.onreadystatechange = () => {
+  if (document.readyState == 'complete') {
     bnmr.fns.initFns();
   }
-}, 100);
+};
