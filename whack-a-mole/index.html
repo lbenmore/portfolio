@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Whack-a-Mole</title>
+    <style>
+    html,
+    body {
+    	margin: 0;
+    }
+
+    body {
+    	top: 0;
+    	left: 0;
+    	width: 100vw;
+    	height: 100vh;
+    	background: linear-gradient(to bottom, #8cf 0%, #8cf 30%, #860 40%, #860 100%);
+    }
+
+    .container {
+    	position: absolute;
+    	top: 50%;
+    	left: 50%;
+    	width: 800px;
+    	height: 600px;
+    	background-color: #8cf;
+    	background: linear-gradient(to bottom, #8cf 0%, #8cf 30%, #860 40%, #860 100%);
+    	transform: translate(-50%, -50%);
+    }
+
+      .score,
+      .btn--replay {
+      	position: absolute;
+      	top: 0;
+      	right: 0;
+      	padding: 8px 24px;
+      	font-family: 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+      	font-size: 16px;
+      }
+
+      .btn--replay {
+      	right: auto;
+      	left: 0;
+      	cursor: pointer;
+      	display: none;
+      }
+
+      .burrow {
+      	position: absolute;
+      	display: inline-block;
+      	width: 100px;
+      	height: 200px;
+      	background: linear-gradient(to bottom, transparent 0%, transparent 30%, black 30.1%, black 40%, transparent 40.1%, transparent 100%);
+      }
+
+      .burrow--1,
+      .burrow--2,
+      .burrow--3 {
+      	top: 40%;
+      }
+
+      .burrow--1 {
+      	left: 15%;
+      }
+
+      .burrow--2 {
+      	left: 45%;
+      }
+
+      .burrow--3 {
+      	left: 75%;
+      }
+
+      .burrow--4,
+      .burrow--5 {
+      	top: 60%;
+      }
+
+      .burrow--4 {
+      	left: 30%;
+      }
+
+      .burrow--5 {
+      	left: 60%;
+      }
+
+        .burrow__mole {
+        	position: absolute;
+        	top: 0;
+        	left: 25%;
+        	width: 50%;
+        	height: 50%;
+        	transform: translateY(99%);
+        	transition: background-color var(--timer), transform 0.3s;
+        }
+
+        .burrow__mole.active {
+        	transform: translateY(0);
+        }
+
+        .burrow__mole.good {
+        	background-color: #0f0;
+        }
+
+        .burrow__mole.warning {
+        	background-color: #ff0;
+        }
+
+        .burrow__mole.bad {
+        	background-color: #f00;
+        }
+
+        .burrow__hole {
+        	position: absolute;
+        	bottom: 0;
+        	left: 0;
+        	width: 100%;
+        	height: 66.6667%;
+        	background-color: #860;
+        	background: linear-gradient(to top, #860 0%, #860 90%, #000 90.1%, #000 100%);
+        }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+    	<div class='btn btn--replay'>Replay</div>
+    	<div class='score'>0</div>
+    	<div class='burrow burrow--1'>
+    		<div class='burrow__hole'></div>
+    	</div>
+    	<div class='burrow burrow--2'>
+    		<div class='burrow__hole'></div>
+    	</div>
+    	<div class='burrow burrow--3'>
+    		<div class='burrow__hole'></div>
+    	</div>
+    	<div class='burrow burrow--4'>
+    		<div class='burrow__hole'></div>
+    	</div>
+    	<div class='burrow burrow--5'>
+    		<div class='burrow__hole'></div>
+    	</div>
+    </div>
+
+    <script>
+    let
+    score,
+    timer,
+    level,
+    multiplier,
+    popAMole;
+
+    const
+    responsify = () => {
+      let contWd = parseInt(window.getComputedStyle(document.querySelector('.container')).width),
+          contHt = parseInt(window.getComputedStyle(document.querySelector('.container')).height),
+          contRt = contWd / contHt,
+          winWd = window.innerWidth,
+          winHt = window.innerHeight,
+          winRt = winWd / winHt;
+
+      if (contWd > winWd || contHt > winHt) {
+        if (winRt > contRt) {
+          document.querySelector('.container').style.transform = `translate(-50%, -50%) scale(${winHt / contHt})`;
+        } else {
+          document.querySelector('.container').style.transform = `translate(-50%, -50%) scale(${winWd / contWd})`;
+        }
+      } else {
+        document.querySelector('.container').style.transform = 'translate(-50%, -50%)';
+      }
+    },
+
+    eventListeners = () => {
+      window.onresize = responsify;
+      document.querySelector('.btn--replay').onclick = initGameplay;
+    },
+
+    newMole = () => {
+      let rand = Math.floor(Math.random() * document.querySelectorAll('.burrow').length);
+      new Mole(document.querySelectorAll('.burrow')[rand]);
+    },
+
+    gameOver = () => {
+      clearInterval(popAMole);
+      document.querySelector('.btn--replay').style.display = 'block';
+      for (let mole of document.querySelectorAll('.burrow__mole')) {
+        mole.parentNode.removeChild(mole);
+      }
+    },
+
+    levelUp = () => {
+      level++;
+      timer = timer * multiplier;
+      document.body.style.setProperty('--timer', `${timer}ms`);
+
+      clearInterval(popAMole);
+
+      popAMole = setInterval(newMole, Math.pow(multiplier, level) * 2000);
+    },
+
+    updateScore = () => {
+      score++;
+      document.querySelector('.score').innerHTML = score;
+
+      score % 5 == 0 ? levelUp() : null;
+    };
+
+    class Mole {
+      constructor (target) {
+        this.target = target;
+
+        this.mole = document.createElement('div');
+        this.mole.classList.add('burrow__mole');
+        this.mole.classList.add('good');
+        this.mole.addEventListener('click', this.whack.bind(this));
+        this.target.insertBefore(this.mole, this.target.children[0]);
+
+        setTimeout(() => {
+          this.mole.classList.add('active');
+          this.toWarning();
+        }, 100);
+
+        this.finalCountdown = setInterval(() => {
+          gameOver();
+        }, timer * 2);
+      };
+
+      toBad () {
+        this.mole.classList.remove('warning');
+        this.mole.classList.add('bad');
+      };
+
+      toWarning () {
+        this.mole.classList.remove('good');
+        this.mole.classList.add('warning');
+
+        setTimeout(() => {
+          this.toBad();
+        }, timer);
+      };
+
+      whack () {
+        clearTimeout(this.finalCountdown);
+        this.mole.classList.remove('active');
+        setTimeout(() => {
+          this.mole.parentNode.removeChild(this.mole);
+        }, 500);
+
+        updateScore();
+      };
+    };
+
+    const
+    initGameplay = () => {
+      score = 0,
+      timer = 3000,
+      level = 1,
+      multiplier = 0.8;
+
+      document.body.style.setProperty('--timer', `${timer}ms`);
+
+      document.querySelector('.btn--replay').style.display = 'none';
+
+      popAMole = setInterval(newMole, Math.pow(multiplier, level) * 2000);
+    },
+
+    initFns = () => {
+      eventListeners();
+      responsify();
+      initGameplay();
+    };
+
+    document.onreadystatechange = () => {
+      if (document.readyState == 'complete') {
+        initFns();
+      }
+    }
+
+    </script>
+  </body>
+</html>

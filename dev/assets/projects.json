@@ -160,6 +160,22 @@
     ]
   },
   {
+    "name": "Whack-a-Mole",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE15+, Edge, Safari",
+    "description": "A rudimentary whack-a-mole game that escalates after every five whacks.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/whack-a-mole"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/whack-a-mole/index.html"
+      }
+    ]
+  },
+  {
     "name": "Magnifying Glass",
     "technologies": "HTML5, CSS3, JavaScript (ES6)",
     "browsers": "Chrome, Firefox, Opera, Edge 15+, Safari",
