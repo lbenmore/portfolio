@@ -43,6 +43,7 @@ bnmr.fns.initMenu = () => {
           let btn = document.createElement('a');
           btn.classList.add('projects__btn');
           btn.href = link.url;
+          btn.target = '_blank';
 
             let highlight = document.createElement('span');
             highlight.classList.add('projects__btn-highlight');
