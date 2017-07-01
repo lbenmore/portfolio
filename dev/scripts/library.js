@@ -109,6 +109,10 @@ bnmr.fns.initContact = () => {
     submit.innerHTML = 'Send';
     submit.onclick = bnmr.fns.submitContactForm;
     emailForm.appendChild(submit);
+
+    let loading = document.createElement('div');
+    loading.classList.add('loading');
+    emailForm.appendChild(loading);
 };
 
 bnmr.fns.initMenu = () => {
