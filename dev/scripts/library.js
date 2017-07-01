@@ -61,6 +61,7 @@ bnmr.fns.submitContactForm = () => {
 
 bnmr.fns.initContact = () => {
   $$('.contact__list').css('padding-bottom', 'var(--margin)');
+  $$('.contact__email-link').css('display', 'none');
 
   let emailForm = document.createElement('div');
   emailForm.classList.add('contact__form');
@@ -79,7 +80,7 @@ bnmr.fns.initContact = () => {
 
       let nameInput = document.createElement('input');
       nameInput.setAttribute('type', 'text');
-      nameInput.setAttribute('placeholder', 'Negan Snow');
+      nameInput.setAttribute('placeholder', 'Negan Durden');
       name.appendChild(nameInput);
 
     let email = document.createElement('div');
