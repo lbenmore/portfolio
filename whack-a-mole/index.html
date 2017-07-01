@@ -283,6 +283,7 @@
       document.body.style.setProperty('--timer', `${timer}ms`);
 
       document.querySelector('.btn--replay').style.display = 'none';
+      document.querySelector('.score').innerHTML = score;
 
       popAMole = setInterval(newMole, Math.pow(multiplier, level) * 2000);
     },
