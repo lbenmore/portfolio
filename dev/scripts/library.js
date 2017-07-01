@@ -80,7 +80,7 @@ bnmr.fns.initContact = () => {
 
       let nameInput = document.createElement('input');
       nameInput.setAttribute('type', 'text');
-      nameInput.setAttribute('placeholder', 'Negan Durden');
+      nameInput.setAttribute('placeholder', 'Robert Paulson');
       name.appendChild(nameInput);
 
     let email = document.createElement('div');
