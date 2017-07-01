@@ -89,8 +89,11 @@
         	left: 25%;
         	width: 50%;
         	height: 50%;
+          background-position: center top;
+          background-repeat: no-repeat;
+          background-size: contain;
         	transform: translateY(99%);
-        	transition: background-color var(--timer), transform 0.3s;
+        	transition: transform 0.3s;
         }
 
         .burrow__mole.active {
@@ -98,15 +101,15 @@
         }
 
         .burrow__mole.good {
-        	background-color: #0f0;
+          background-image: url('./good.png');
         }
 
         .burrow__mole.warning {
-        	background-color: #ff0;
+          background-image: url('./warning.png');
         }
 
         .burrow__mole.bad {
-        	background-color: #f00;
+          background-image: url('./bad.png');
         }
 
         .burrow__hole {
@@ -143,6 +146,7 @@
 
     <script>
     let
+    moles = [],
     score,
     timer,
     level,
@@ -176,14 +180,15 @@
 
     newMole = () => {
       let rand = Math.floor(Math.random() * document.querySelectorAll('.burrow').length);
-      new Mole(document.querySelectorAll('.burrow')[rand]);
+      let mole = new Mole(document.querySelectorAll('.burrow')[rand]);
+      moles.push(mole);
     },
 
     gameOver = () => {
       clearInterval(popAMole);
       document.querySelector('.btn--replay').style.display = 'block';
-      for (let mole of document.querySelectorAll('.burrow__mole')) {
-        mole.parentNode.removeChild(mole);
+      for (let mole of moles) {
+        mole.toBad();
       }
     },
 
@@ -207,6 +212,7 @@
     class Mole {
       constructor (target) {
         this.target = target;
+        this.moleId = 'mole__' + new Date().getTime();
 
         this.mole = document.createElement('div');
         this.mole.classList.add('burrow__mole');
@@ -216,12 +222,20 @@
 
         setTimeout(() => {
           this.mole.classList.add('active');
-          this.toWarning();
-        }, 100);
+        }, 50);
 
-        this.finalCountdown = setInterval(() => {
+        this.warningTimeout = setTimeout(() => {
+          this.toWarning();
+        }, timer);
+
+        this.finalCountdown = setTimeout(() => {
           gameOver();
         }, timer * 2);
+      };
+
+      toWarning () {
+        this.mole.classList.remove('good');
+        this.mole.classList.add('warning');
       };
 
       toBad () {
@@ -229,20 +243,23 @@
         this.mole.classList.add('bad');
       };
 
-      toWarning () {
-        this.mole.classList.remove('good');
-        this.mole.classList.add('warning');
+      remove () {
+        clearTimeout(this.warningTimeout);
+        clearTimeout(this.finalCountdown);
+        this.mole.parentNode.removeChild(this.mole);
 
-        setTimeout(() => {
-          this.toBad();
-        }, timer);
-      };
+        for (let mole of moles) {
+          if (mole.moleId == this.moleId) {
+            moles.splice(moles.indexOf(mole), 1);
+          }
+        }
+      }
 
       whack () {
         clearTimeout(this.finalCountdown);
         this.mole.classList.remove('active');
         setTimeout(() => {
-          this.mole.parentNode.removeChild(this.mole);
+          this.remove();
         }, 500);
 
         updateScore();
@@ -251,9 +268,16 @@
 
     const
     initGameplay = () => {
-      score = 0,
-      timer = 3000,
-      level = 1,
+      if (moles.length > 0) {
+        let tempMolesLength = moles.length - 1;
+        for (let i = tempMolesLength; i >= 0; i--) {
+          moles[i].remove();
+        }
+      }
+
+      score = 0;
+      timer = 3000;
+      level = 1;
       multiplier = 0.8;
 
       document.body.style.setProperty('--timer', `${timer}ms`);
