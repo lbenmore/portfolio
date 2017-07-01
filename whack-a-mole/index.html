@@ -162,15 +162,15 @@
           winHt = window.innerHeight,
           winRt = winWd / winHt;
 
-      if (contWd > winWd || contHt > winHt) {
+      // if (contWd > winWd || contHt > winHt) {
         if (winRt > contRt) {
           document.querySelector('.container').style.transform = `translate(-50%, -50%) scale(${winHt / contHt})`;
         } else {
           document.querySelector('.container').style.transform = `translate(-50%, -50%) scale(${winWd / contWd})`;
         }
-      } else {
-        document.querySelector('.container').style.transform = 'translate(-50%, -50%)';
-      }
+      // } else {
+      //   document.querySelector('.container').style.transform = 'translate(-50%, -50%)';
+      // }
     },
 
     eventListeners = () => {
