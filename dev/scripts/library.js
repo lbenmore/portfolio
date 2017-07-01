@@ -4,6 +4,113 @@ let bnmr = {};
 bnmr.globals = {};
 bnmr.fns = {};
 
+bnmr.fns.submitContactForm = () => {
+  let
+  name = $$('.contact__input--name input').value,
+  email = $$('.contact__input--email input').value,
+  msg = $$('.contact__input--msg textarea').value,
+  params = new FormData(),
+  valid = true;
+
+  if (!name) {
+    $$('.contact__input--name').setAttribute('data-warning', 'Who are you?');
+    valid = false;
+  } else {
+    $$('.contact__input--name').setAttribute('data-warning', '');
+  }
+
+  if (!email) {
+    $$('.contact__input--email').setAttribute('data-warning', 'Who are you?');
+    valid = false;
+  } else {
+    $$('.contact__input--email').setAttribute('data-warning', '');
+  }
+
+  if (!msg) {
+    $$('.contact__input--msg').setAttribute('data-warning', 'What, nothing to say?');
+    valid = false;
+  } else {
+    $$('.contact__input--msg').setAttribute('data-warning', '');
+  }
+
+  if (valid) {
+    $$('.loading').css('display', 'block');
+
+    params.append('name', name);
+    params.append('email', email);
+    params.append('msg', msg);
+
+    $$.ajax({
+      method: 'POST',
+      url: '../assets/email.php',
+      params: params
+    }, (data) => {
+      $$.log(data);
+      $$('.loading').css('display', 'none');
+
+      $$('.contact__input--name').setAttribute('data-warning', '');
+      $$('.contact__input--email').setAttribute('data-warning', '');
+      $$('.contact__input--msg').setAttribute('data-warning', '');
+
+      $$('.contact__input--name input').value = '';
+      $$('.contact__input--email input').value = '';
+      $$('.contact__input--msg textarea').value = '';
+    });
+  }
+};
+
+bnmr.fns.initContact = () => {
+  $$('.contact__list').css('padding-bottom', 'var(--margin)');
+
+  let emailForm = document.createElement('div');
+  emailForm.classList.add('contact__form');
+  $$('.contact').insertBefore(emailForm, null);
+
+    let formHeader = document.createElement('h3');
+    formHeader.className = 'contact__form-header';
+    formHeader.innerHTML = 'Or just hit me up...';
+    emailForm.append(formHeader);
+
+    let name = document.createElement('div');
+    name.classList.add('contact__input');
+    name.classList.add('contact__input--name');
+    name.setAttribute('data-label', 'Your Name');
+    emailForm.appendChild(name);
+
+      let nameInput = document.createElement('input');
+      nameInput.setAttribute('type', 'text');
+      nameInput.setAttribute('placeholder', 'Negan Snow');
+      name.appendChild(nameInput);
+
+    let email = document.createElement('div');
+    email.classList.add('contact__input');
+    email.classList.add('contact__input--email');
+    email.setAttribute('data-label', 'Your Email');
+    emailForm.appendChild(email);
+
+      let emailInput = document.createElement('input');
+      emailInput.setAttribute('type', 'email');
+      emailInput.setAttribute('placeholder', 'bigboNed3@aol.com');
+      email.appendChild(emailInput);
+
+    let msg = document.createElement('div');
+    msg.classList.add('contact__input');
+    msg.classList.add('contact__input--msg');
+    msg.setAttribute('data-label', 'Message');
+    emailForm.appendChild(msg);
+
+      let msgInput = document.createElement('textarea');
+      msgInput.setAttribute('rows', '6');
+      msgInput.setAttribute('placeholder', 'If you don\'t have anything nice to say, please write it here so I can send it straight to my spam folder.');
+      msg.appendChild(msgInput);
+
+    let submit = document.createElement('button');
+    submit.classList.add('contact__submit');
+    submit.innerHTML = 'Send';
+    submit.onclick = bnmr.fns.submitContactForm;
+    emailForm.appendChild(submit);
+};
+
 bnmr.fns.initMenu = () => {
   $$.ajax({
     type: 'json',
@@ -60,9 +167,8 @@ bnmr.fns.initMenu = () => {
 };
 
 bnmr.fns.initFns = () => {
-  $$.log('hello, world.');
-
   bnmr.fns.initMenu();
+  bnmr.fns.initContact();
 };
 
 document.onreadystatechange = () => {

@@ -223,13 +223,7 @@
     data;
 
     xhr.open(method, url, isAsync);
-
-    if (params != null) {
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.send(params);
-    } else {
-      xhr.send();
-    }
+    params ? xhr.send(params) : xhr.send();
 
     xhr.onreadystatechange = () => {
       if (xhr.readyState == 4) {
