@@ -94,8 +94,8 @@ a:visited {
   background: linear-gradient(20deg, var(--prp), var(--grn));
   font-family: var(--open-sans);
   text-align: center;
-  -webkit-transform: translate3d(0, 0, -1px) scale(2.02);
-  transform: translate3d(0, 0, -1px) scale(2.02);
+  -webkit-transform: translate3d(0, 0, -1px) scale(2.05);
+  transform: translate3d(0, 0, -1px) scale(2.05);
 }
 
 .header__copy {
