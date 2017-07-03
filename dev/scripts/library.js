@@ -4,6 +4,36 @@ let bnmr = {};
 bnmr.globals = {};
 bnmr.fns = {};
 
+bnmr.fns.initMobile = () => {
+  if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i)) {
+    let mobileState = 'less'
+
+    $$('.projects').css('height', '100vh');
+    $$('.projects').css('overflow', 'hidden');
+
+    let btnMore = document.createElement('div');
+    btnMore.classList.add('projects__more');
+    btnMore.innerHTML = 'MORE';
+    $$('.projects').appendChild(btnMore);
+
+    $$('.projects__more').on('tap', () => {
+      switch (mobileState) {
+        case 'less':
+          $$('.projects').css('height', 'auto');
+          $$('.projects__more').innerHTML = 'LESS';
+          mobileState = 'more';
+        break;
+
+        case 'more':
+          $$('.projects').css('height', '100vh');
+          $$('.projects__more').innerHTML = 'MORE';
+          mobileState = 'less';
+        break;
+      }
+    });
+  }
+};
+
 bnmr.fns.submitContactForm = () => {
   let
   name = $$('.contact__input--name input').value,
@@ -21,6 +51,12 @@ bnmr.fns.submitContactForm = () => {
 
   if (!email) {
     $$('.contact__input--email').setAttribute('data-warning', 'Who are you?');
+    valid = false;
+  } else if (!email.includes('@')) {
+    $$('.contact__input--email').setAttribute('data-warning', 'Real email address, please.');
+    valid = false;
+  } else if (!email.split('@')[1].includes('.')) {
+    $$('.contact__input--email').setAttribute('data-warning', 'Real email address, please.');
     valid = false;
   } else {
     $$('.contact__input--email').setAttribute('data-warning', '');
@@ -60,7 +96,7 @@ bnmr.fns.submitContactForm = () => {
 };
 
 bnmr.fns.initContact = () => {
-  $$('.contact__list').css('padding-bottom', 'var(--margin)');
+  $$('.contact__list').css('padding-bottom', 'calc(var(--margin) * 2)');
   $$('.contact__email-link').css('display', 'none');
 
   let emailForm = document.createElement('div');
@@ -102,7 +138,7 @@ bnmr.fns.initContact = () => {
 
       let msgInput = document.createElement('textarea');
       msgInput.setAttribute('rows', '6');
-      msgInput.setAttribute('placeholder', 'If you don\'t have anything nice to say, please write it here so I can send it straight to my spam folder.');
+      msgInput.setAttribute('placeholder', 'Tell me how you really feel.');
       msg.appendChild(msgInput);
 
     let submit = document.createElement('button');
@@ -174,6 +210,7 @@ bnmr.fns.initMenu = () => {
 bnmr.fns.initFns = () => {
   bnmr.fns.initMenu();
   bnmr.fns.initContact();
+  bnmr.fns.initMobile();
 };
 
 document.onreadystatechange = () => {
