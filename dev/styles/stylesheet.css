@@ -92,7 +92,10 @@ a:visited {
 .header {
   width: 100%;
   height: var(--header-height);
-  background: linear-gradient(20deg, var(--prp), var(--grn));
+  /*background: linear-gradient(20deg, var(--prp), var(--grn));*/
+  background-image: url('http://www.texturex.com/albums/Fractal-Textures/Fractal%20art%20picture%20definition%20stock%20image%20design%20free%20wallpaper%20fractured%20fractal%20texture.jpg');
+  background-position: center;
+  background-size: cover;
   font-family: var(--open-sans);
   text-align: center;
   -webkit-transform: translate3d(0, 0, -1px) scale(2.05);
@@ -102,9 +105,18 @@ a:visited {
 .header__copy {
   position: absolute;
   top: 50%;
-  width: 100%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-mix-blend-mode: color-dodge;
+  mix-blend-mode: color-dodge;
+}
+
+.header__text {
+  background: linear-gradient(to right , var(--prp), var(--grn));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .header__title {
@@ -114,19 +126,19 @@ a:visited {
 .header__title--big {
   display: block;
   margin-right: -2vw;
-  font-size: 12vw;
-  letter-spacing: 2vw;
+  font-size: 16vw;
+  letter-spacing: 2.5vw;
   line-height: 0.8;
 }
 
 .header__title--small {
-  font-size: 6vw;
+  font-size: 8vw;
 }
 
 .header__subtitle {
   margin-right: -0.2vw;
-  font-size: 2vw;
-  letter-spacing: 0.2vw;
+  font-size: 3vw;
+  letter-spacing: 0.1vw;
 }
 
 .about {
@@ -137,6 +149,7 @@ a:visited {
 
 .about__title {
   margin-bottom: var(--margin);
+  font-style: italic;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -154,6 +167,7 @@ a:visited {
 
 .projects__title {
   margin-bottom: var(--margin);
+  font-style: italic;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-align: center;
@@ -299,6 +313,7 @@ a:visited {
 
 .contact__title {
   margin-bottom: var(--margin);
+  font-style: italic;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
