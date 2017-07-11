@@ -4,7 +4,7 @@
   $msg = $_POST["msg"];
 
   $my_email = "lbenmore@gmail.com";
-  $subject = "$name at $email sent a message from Portfolio page. DO NOT DELETE.";
+  $subject = "$name sent you a message. DO NOT DELETE.";
   $headers = "From: $email \r\nReply-To: $email\r\nX-Mailer: PHP/" . phpversion();
 
   if (mail($my_email, $subject, $msg, $headers)) {

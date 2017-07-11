@@ -70,7 +70,7 @@ bnmr.fns.submitContactForm = () => {
   }
 
   if (valid) {
-    $$('.loading').css('display', 'block');
+    $$('.contact__loading').css('display', 'block');
 
     params.append('name', name);
     params.append('email', email);
@@ -82,7 +82,7 @@ bnmr.fns.submitContactForm = () => {
       params: params
     }, (data) => {
       $$.log(data);
-      $$('.loading').css('display', 'none');
+      $$('.contact__loading').css('display', 'none');
 
       $$('.contact__input--name').setAttribute('data-warning', '');
       $$('.contact__input--email').setAttribute('data-warning', '');
@@ -91,6 +91,11 @@ bnmr.fns.submitContactForm = () => {
       $$('.contact__input--name input').value = '';
       $$('.contact__input--email input').value = '';
       $$('.contact__input--msg textarea').value = '';
+
+      for (let input of $$('.contact__input input, .contact__input textarea')) {
+        input.parentNode.classList.remove('active');
+        input.parentNode.classList.remove('nonempty');
+      }
     });
   }
 };
@@ -116,29 +121,26 @@ bnmr.fns.initContact = () => {
 
       let nameInput = document.createElement('input');
       nameInput.setAttribute('type', 'text');
-      nameInput.setAttribute('placeholder', 'Robert Paulson');
       name.appendChild(nameInput);
 
     let email = document.createElement('div');
     email.classList.add('contact__input');
     email.classList.add('contact__input--email');
-    email.setAttribute('data-label', 'Your Email');
+    email.setAttribute('data-label', 'Email Address');
     emailForm.appendChild(email);
 
       let emailInput = document.createElement('input');
       emailInput.setAttribute('type', 'email');
-      emailInput.setAttribute('placeholder', 'bigboNed3@aol.com');
       email.appendChild(emailInput);
 
     let msg = document.createElement('div');
     msg.classList.add('contact__input');
     msg.classList.add('contact__input--msg');
-    msg.setAttribute('data-label', 'Message');
+    msg.setAttribute('data-label', 'Tell me how you really feel...');
     emailForm.appendChild(msg);
 
       let msgInput = document.createElement('textarea');
       msgInput.setAttribute('rows', '6');
-      msgInput.setAttribute('placeholder', 'Tell me how you really feel.');
       msg.appendChild(msgInput);
 
     let submit = document.createElement('button');
@@ -148,8 +150,24 @@ bnmr.fns.initContact = () => {
     emailForm.appendChild(submit);
 
     let loading = document.createElement('div');
-    loading.classList.add('loading');
+    loading.classList.add('contact__loading');
     emailForm.appendChild(loading);
+
+    for (let input of $$('.contact__input input, .contact__input textarea')) {
+      input.onfocus = (e) => {
+        e.target.parentNode.classList.add('active');
+      };
+
+      input.onblur = (e) => {
+        if (e.target.value == '') {
+          e.target.parentNode.classList.remove('active');
+          e.target.parentNode.classList.remove('nonempty');
+        } else {
+          e.target.parentNode.classList.remove('active');
+          e.target.parentNode.classList.add('nonempty');
+        }
+      };
+    }
 };
 
 bnmr.fns.initMenu = () => {
@@ -201,7 +219,7 @@ bnmr.fns.initMenu = () => {
             copy.classList.add('projects__btn-copy');
           	copy.innerHTML = link.name;
             btn.appendChild(copy);
-          item.appendChild(btn);
+            item.appendChild(btn);
         }
     }
   });

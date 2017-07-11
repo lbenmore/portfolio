@@ -339,7 +339,7 @@ a:visited {
 }
 
 .contact__form-header {
-  margin-bottom: var(--margin);
+  margin-bottom: 24px;
   color: var(--blk);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -347,13 +347,13 @@ a:visited {
 
 .contact__input {
   display: block;
-  margin-bottom: var(--margin);
+  margin-bottom: 24px;
 }
 
 .contact__input input,
 .contact__input textarea {
   vertical-align: top;
-  width: 50%;
+  width: 75%;
   height: 24px;
   padding-bottom: 6px;
   padding-left: 4px;
@@ -379,12 +379,30 @@ a:visited {
   overflow: auto;
 }
 
+.contact__input input:focus,
+.contact__input textarea:focus {
+  border-bottom: 2px solid var(--prp);
+}
+
 .contact__input::before {
-  content: attr(data-label) ":\00A0\00A0";
-  display: inline-block;
-  width: 95px;
+  content: attr(data-label);
+  position: absolute;
   color: var(--blk);
   text-align: left;
+  -webkit-transition: -webkit-transform 0.25s, font 0.25s;
+  transition: transform 0.25s, font 0.25s;
+}
+
+.contact__input.active::before,
+.contact__input.nonempty::before {
+  font-size: 9px;
+  color: var(--prp);
+  -webkit-transform: translateY(-16px);
+  transform: translateY(-16px);
+}
+
+.contact__input.nonempty::before {
+  color: var(--blk);
 }
 
 .contact__input::after {
@@ -420,18 +438,18 @@ a:visited {
   transition: height 0.2s ease 0.4s, width 0.2s ease 0.6s;
 }
 
-.loading {
+.contact__loading {
   position: absolute;
   display: none;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(48, 48, 56, 0.75);
 }
 
-.loading::before,
-.loading::after {
+.contact__loading::before,
+.contact__loading::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -453,7 +471,7 @@ a:visited {
   animation-iteration-count: infinite;
 }
 
-.loading::after {
+.contact__loading::after {
   width: 4vw;
   height: 4vw;
 
