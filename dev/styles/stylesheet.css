@@ -367,6 +367,7 @@ a:visited {
 .contact__form-header {
   margin-bottom: 24px;
   color: var(--blk);
+  font-style: italic;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -450,18 +451,6 @@ a:visited {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-}
-
-.contact__submit::after {
-  top: 0;
-  right: -1px;
-  width: 1px;
-  height: 0;
-} .contact__submit:hover::after {
-  width: calc(100% + 1px);
-  height: calc(100% + 1px);
-  -webkit-transition: height 0.2s ease 0.4s, width 0.2s ease 0.6s;
-  transition: height 0.2s ease 0.4s, width 0.2s ease 0.6s;
 }
 
 .contact__loading {
