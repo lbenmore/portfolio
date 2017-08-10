@@ -224,6 +224,22 @@
     ]
   },
   {
+    "name": "Lego Loader Reinterpretation",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Lego block loading screen using CSS transitions and ES6 to reinterpret the SVG version created by chrisgannon on CodePen.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/lego-loader"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/lego-loader/index.html"
+      }
+    ]
+  },
+  {
     "name": "Load Screen",
     "technologies": "HTML5, CSS3, JavaScript (ES6)",
     "browsers": "Chrome, Firefox, Opera, Edge 15+, Safari",
