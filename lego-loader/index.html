@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Lego Loader Reinterpretation</title>
+    <style>
+      * {
+      	box-sizing: border-box;
+        font-family: 'sans-serif';
+      }
+
+      html, body { margin: 0; }
+
+      body {
+      	margin: 0;
+      	background: #303038;
+      }
+
+      .container {
+      	position: absolute;
+      	top: calc(50% - 20px);
+      	left: calc(50% + 100px);
+      	width: 204px;
+      	height: 252px;
+      	transform: translate(-50%, -50%);
+      }
+
+      .lego {
+      	position: absolute;
+      	display: inline-block;
+      	top: 0;
+      	left: 0;
+      	width: 100px;
+      	height: 80px;
+      	background: grey;
+      	transition: transform 0.5s;
+      }
+
+      .lego span {
+      	position: absolute;
+      	display: inline-block;
+      	width: 25px;
+      	height: 20px;
+      	border-radius: 50%;
+      	background: inherit;
+      	filter: drop-shadow(5px 5px 0 rgba(0, 0, 0, 0.5));
+      }
+
+      .lego span:nth-of-type(1) {
+      	top: 10px;
+      	left: 10px;
+      }
+
+      .lego span:nth-of-type(2) {
+      	top: 10px;
+      	right: 20px;
+      }
+
+      .lego span:nth-of-type(3) {
+      	bottom: 20px;
+      	left: 10px;
+      }
+
+      .lego span:nth-of-type(4) {
+      	bottom: 20px;
+      	right: 20px;
+      }
+
+      .lego::before,
+      .lego::after {
+      	content: '';
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      	width: 100%;
+      	height: 100%;
+      	background: inherit;
+      	transform-origin: 0 0;
+      }
+
+      .lego::before {
+      	transform: translateY(100%) scaleY(0.3) skewX(20deg);
+      	filter: brightness(0.75);
+      }
+
+      .lego::after {
+      	transform: translateX(100%) scaleX(0.3) skewY(15deg);
+      	filter: brightness(0.5);
+      }
+
+      .lego--red {
+      	background: #f04;
+      }
+
+      .lego--orange {
+      	background: #f80;
+      }
+
+      .lego--green {
+      	background: #0f8;
+      }
+
+      .lego--blue {
+      	background: #08f;
+      }
+
+      .lego--purple {
+      	background: #80f;
+      }
+
+      div[data-position=pos1] {
+      	transform: translate(0, 0) skew(-15deg) rotateZ(35deg);
+      	z-index: 1;
+      }
+
+      div[data-position=pos2] {
+      	transform: translate(66px, 57px) skew(-15deg) rotateZ(35deg);
+      	z-index: 2;
+      }
+
+      div [data-position=pos3] {
+      	transform: translate(3px, 123px) skew(-15deg) rotateZ(35deg);
+      	z-index: 3;
+      }
+
+      div [data-position=pos4] {
+      	transform: translate(-61px, 189px) skew(-15deg) rotateZ(35deg);
+      	z-index: 4;
+      }
+
+      div [data-position=pos5] {
+      	transform: translate(-127px, 131px) skew(-15deg) rotateZ(35deg);
+      	z-index: 3;
+      }
+
+      div [data-position=pos6] {
+      	transform: translate(-63px, 66px) skew(-15deg) rotateZ(35deg);
+      	z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+    Inspired by:
+    https://codepen.io/chrisgannon/pen/yXmbMg?editors=1010
+    -->
+    <div class='container'>
+    </div>
+
+    <script>
+      const COLORS = [
+        'red',	'orange',		'green',
+        'blue',	'purple'
+      ];
+
+      class Lego {
+        constructor (target, index) {
+          this.lego = document.createElement('div');
+          this.lego.classList.add('lego');
+          this.lego.classList.add(`lego--${COLORS[index]}`);
+          this.lego.setAttribute('data-position', `pos${index + 1}`);
+          target.appendChild(this.lego);
+
+          for (let i = 0; i < 4; i++) {
+            let span = document.createElement('span');
+            this.lego.appendChild(span);
+          }
+        };
+
+        anim () {
+          let pos = Number(this.lego.getAttribute('data-position').replace('pos', ''));
+
+          pos = pos < COLORS.length + 1 ? pos + 1 : 1;
+
+          this.lego.setAttribute('data-position', `pos${pos}`);
+        };
+        }
+
+        for (let i = 0; i < 5; i++) {
+        let lego = new Lego(document.querySelector('.container'), i);
+
+        // initial animation
+        setTimeout(() => {
+          lego.anim();
+        }, (COLORS.length - i) * 500);
+
+        // repeating animation
+        setTimeout(() => {
+          setInterval(() => {
+            lego.anim();
+          }, COLORS.length * 500);
+        }, (COLORS.length - i) * 500);
+      };
+    </script>
+  </body>
+</html>
