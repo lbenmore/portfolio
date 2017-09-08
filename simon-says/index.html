@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no'>
+    <title>Simon Says</title>
+    <style>
+      body {
+      	background: #222;
+      }
+
+        .header {
+        	padding: 16px;
+        	text-align: center;
+        }
+
+          .btnStart {
+          	padding: 8px 24px;
+          	background: transparent;
+          	border-image: linear-gradient(to right, #f00, #ff0, #0f0, #00f) 1 1;
+          	color: #fff;
+          	font-size: 16px;
+          	cursor: pointer;
+          	transition: background 0.3s, color 0.3s;
+          }
+
+          .btnStart:focus {
+          	outline: none;
+          }
+
+          .btnStart:hover {
+          	animation-duration: 3s;
+          	animation-name: rainbowize;
+          	animation-iteration-count: infinite;
+          	animation-timing-function: linear;
+          }
+
+          @keyframes rainbowize {
+          	to { filter: hue-rotate(360deg); }
+          }
+
+        .container {
+          position: absolute;
+        	top: 50%;
+        	left: 50%;
+          width: 400px;
+          height: 400px;
+        	transform: translate(-50%, -50%);
+        }
+
+          .corner {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            filter: brightness(50%);
+            transition: filter 0.25s, background-color 0.25s;
+          }
+
+          .corner.active {
+            filter: brightness(100%);
+          }
+
+          .corner--top {
+            top: 0;
+          }
+
+          .corner--right {
+            right: 0;
+          }
+
+          .corner--bottom {
+            bottom: 0;
+          }
+
+          .corner--left {
+            left: 0;
+            border-left-radius: 50%;
+          }
+
+          .corner--top.corner--left {
+            border-top-left-radius: 100%;
+          }
+
+          .corner--top.corner--right {
+            border-top-right-radius: 100%;
+          }
+
+          .corner--bottom.corner--right {
+            border-bottom-right-radius: 100%;
+          }
+
+          .corner--bottom.corner--left {
+            border-bottom-left-radius: 100%;
+          }
+
+          .corner--red {
+            background-color: #f00;
+          }
+
+          .corner--yellow {
+            background-color: #ff0;
+          }
+
+          .corner--green {
+            background-color: #0f0;
+          }
+
+          .corner--blue {
+            background-color: #00f;
+          }
+
+          .corner.success {
+            background-color: #0f0;
+          }
+
+          .corner.fail {
+            background-color: #f00;
+          }
+    </style>
+  </head>
+  <body>
+    <div class='header'>
+    	<button class='btnStart'>
+    		Start Game
+    	</button>
+    </div>
+    <div class='container'>
+      <div class='corner corner--top corner--left corner--red'></div>
+      <div class='corner corner--top corner--right corner--yellow'></div>
+      <div class='corner corner--bottom corner--left corner--green'></div>
+      <div class='corner corner--bottom corner--right corner--blue'></div>
+    </div>
+
+    <script>
+      const
+      CORNERS = [
+      	document.querySelector('.corner--red'),
+      	document.querySelector('.corner--yellow'),
+      	document.querySelector('.corner--green'),
+      	document.querySelector('.corner--blue')
+      ];
+
+      let
+      sequence,
+      setGameOver;
+
+      gameOver = () => {
+      	console.log('fail');
+        for (let corner of CORNERS) {
+        	corner.classList.add('fail');
+        	corner.classList.add('active');
+          setTimeout(() => {
+            corner.classList.remove('fail');
+            corner.classList.remove('active');
+          }, 500);
+        }
+      };
+
+      evaluateMove = (i, e) => {
+        e.target.classList.add('active');
+        setTimeout(() => {
+        	e.target.classList.remove('active');
+        }, 250);
+
+      	if (i < sequence.length - 1) {
+        	if (e.target == CORNERS[sequence[i]]) {
+            clearTimeout(setGameOver);
+        		document.querySelector('.container').onclick = evaluateMove.bind(null, ++i);
+          } else {
+          	clearTimeout(setGameOver);
+          	gameOver();
+          }
+        } else if (i == sequence.length - 1 && e.target == CORNERS[sequence[i]]) {
+          clearTimeout(setGameOver);
+          setTimeout(() => {
+            setPattern();
+          }, 1000);
+        } else {
+      		gameOver();
+      	}
+      }
+
+      userInput = () => {
+      	setGameOver = setTimeout(() => {
+        	gameOver();
+        }, 1500);
+
+        document.querySelector('.container').onclick = evaluateMove.bind(null, 0);
+      }
+
+      promptInput = () => {
+      	for (let corner of CORNERS) {
+        	corner.classList.add('active');
+          setTimeout(() => {
+          	corner.classList.remove('active');
+          }, 250);
+        }
+
+        setTimeout(() => {
+        	 userInput();
+        }, 500);
+      };
+
+      showPattern = () => {
+      	for (var i = 0; i < sequence.length; i++) {
+        	let corner = CORNERS[sequence[i]];
+        	setTimeout(() => {
+            corner.classList.add('active');
+            setTimeout(() => {
+              corner.classList.remove('active');
+            }, 500);
+          }, 1000 * i);
+        }
+
+        setTimeout(() => {
+        	promptInput();
+        }, 1000 * sequence.length);
+      }
+
+      setPattern = () => {
+      	let
+        newMove = Math.floor(Math.random() * CORNERS.length);
+        sequence.push(newMove);
+        showPattern();
+      }
+
+      startGame = () => {
+      	setPattern();
+      };
+
+      initialize = () => {
+      	sequence = [];
+        startGame();
+      };
+
+      document.querySelector('.btnStart').onclick = initialize;
+    </script>
+  </body>
+</html>

@@ -118,10 +118,7 @@ a:visited {
 .header {
   width: 100%;
   height: var(--header-height);
-  /*background: linear-gradient(20deg, var(--prp), var(--grn));*/
-  background-image: url('http://www.texturex.com/albums/Fractal-Textures/Fractal%20art%20picture%20definition%20stock%20image%20design%20free%20wallpaper%20fractured%20fractal%20texture.jpg');
-  background-position: center;
-  background-size: cover;
+  background: linear-gradient(20deg, var(--prp), var(--grn));
   font-family: var(--open-sans);
   text-align: center;
   -webkit-transform: translate3d(0, 0, -1px) scale(2.05);
@@ -134,15 +131,8 @@ a:visited {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  -webkit-mix-blend-mode: color-dodge;
-  mix-blend-mode: color-dodge;
-}
-
-.header__text {
-  background: linear-gradient(to right , var(--prp), var(--grn));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  -webkit-mix-blend-mode: overlay;
+  mix-blend-mode: overlay;
 }
 
 .header__title {

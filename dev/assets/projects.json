@@ -144,6 +144,22 @@
     ]
   },
   {
+    "name": "Simon Says",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE15+, Edge, Safari",
+    "description": "A pattern matching game.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/simon-says"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/simon-says/index.html"
+      }
+    ]
+  },
+  {
     "name": "RGB Guessing Game",
     "technologies": "HTML5, CSS3, JavaScript (ES5)",
     "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
