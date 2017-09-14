@@ -155,6 +155,8 @@
       }
 
     .board__notes {
+      display: inline-block;
+      width: 70%;
       height: calc(100% - 48px - 30px - 16px);
       overflow-y: auto;
     }
@@ -178,9 +180,11 @@
 
     .board__add {
       position: absolute;
+      display: inline-block;
       right: 16px;
       bottom: 16px;
       left: 16px;
+      width: 68%;
       height: 30px;
     }
 
@@ -226,6 +230,108 @@
       } .add__clear:hover {
         background-color: #ff0044;
       }
+
+    .board__files {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      float: right;
+      width: 29%;
+      height: calc(100% - 24px);
+      border-left: 1px solid #e1e1e1;
+    }
+
+      .files__upload {
+        position: relative;
+        padding: 16px;
+        height: 50%;
+        border-bottom: 1px solid #e1e1e1;
+        box-sizing: border-box;
+      }
+
+        .upload__label {
+          position: relative;
+          display: block;
+          width: 100%;
+          height: calc(100% - 30px);
+        }
+
+          .upload__label::before {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px dashed #e1e1e1;
+          } .upload__label.active::before {
+            border-color: #08f;
+          }
+
+          .upload__label::after {
+            content: attr(data-content);
+            display: block;
+            padding: 16px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            white-space: pre;
+          }
+
+        .upload__input {
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: calc(100% - 30px);
+          opacity: 0;
+        }
+
+        .upload__progress {
+          position: relative;
+          margin-top: 20px;
+          width: 100%;
+          height: 10px;
+          background-color: #d8d8d8;
+          border-radius: 5px;
+          --prog: 0%;
+        }
+
+          .upload__progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: var(--prog);
+            border-radius: inherit;
+            background-image: repeating-linear-gradient(120deg, #08f 0, #08f 20px, #0af 21px, #0af 40px);
+          }
+
+      .files__list {
+        -webkit-padding-start: 0;
+        list-style: none;
+      }
+
+        .list__item {
+          padding: 4px 16px;
+        }
+
+        .list__item:nth-of-type(2n + 1) {
+          background-color: #e1e1e1;
+        }
+
+          .list__item button {
+            float: right;
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            cursor: pointer;
+          } .list__item button:focus {
+            outline: none;
+          }
 
 :target {
   display: block;

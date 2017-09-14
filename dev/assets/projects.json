@@ -83,7 +83,7 @@
     "name": "Noteboard",
     "technologies": "HTML5, CSS3, JavaScript (ES5), PHP, MySQL",
     "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
-    "description": "Simple page to save and delete notes. Must register and log in to view.",
+    "description": "Simple page to save and delete notes and files. Must register and log in to view.",
     "links": [
       {
         "name": "View Project",

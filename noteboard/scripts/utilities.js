@@ -31,7 +31,7 @@ bnmr.$ = function (selector) {
     setTimeout(function () {
       _this.className = _this.className.replace(cName1, cName2);
     }, delay || 0);
-};
+  };
 
   return _this;
 };
@@ -50,27 +50,15 @@ bnmr.log = function (msg, type) { err = new Error();
   }
 };
 
-bnmr.ajax = function (options, callback, params) {
+bnmr.ajax = function (options, callback) {
   var reqType = options.type || 'ajax',
       method = options.method || 'GET',
       url = options.url || './',
       isAsync = options.async || true,
-      xhr,
+      params = options.params || null,
+      progress = options.progress || null,
+      xhr = new XMLHttpRequest(),
       data;
-
-  xhr = new XMLHttpRequest();
-  xhr.open(method, url, isAsync);
-
-  if (reqType == 'upload') {
-    xhr.setRequestHeader('X-FILENAME', params[0].name);
-  }
-
-  if (params) {
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.send(params);
-  } else {
-    xhr.send();
-  }
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4) {
@@ -90,7 +78,14 @@ bnmr.ajax = function (options, callback, params) {
 
       return data;
     }
+  };
+
+  if (progress) {
+    xhr.upload.addEventListener('progress', progress);
   }
+
+  xhr.open(method, url, isAsync);
+  params ? xhr.send(params) : xhr.send();
 };
 
 bnmr.readCookie = function (param) {
@@ -118,6 +113,15 @@ bnmr.readCookie = function (param) {
       return false;
     }
 };
+
+
+bnmr.truncate = function (str, len) {
+  if (str.length > len) {
+    return str.slice(0, len - 3) + '...';
+  } else {
+    return str;
+  }
+}
 
 
 bnmr.loadScreen = function () {
