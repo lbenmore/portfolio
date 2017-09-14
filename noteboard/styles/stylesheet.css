@@ -311,8 +311,11 @@
           }
 
       .files__list {
+        height: 50%;
+        margin: 0;
         -webkit-padding-start: 0;
         list-style: none;
+        overflow: auto;
       }
 
         .list__item {
