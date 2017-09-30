@@ -83,7 +83,7 @@
     "name": "Noteboard",
     "technologies": "HTML5, CSS3, JavaScript (ES5), PHP, MySQL",
     "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
-    "description": "Simple page to save and delete notes. Must register and log in to view.",
+    "description": "Simple page to save and delete notes and files. Must register and log in to view.",
     "links": [
       {
         "name": "View Project",
@@ -140,6 +140,22 @@
       {
         "name": "View Source",
         "url": "https://github.com/lbenmore/portfolio/blob/master/tic-tac-toe/index.html"
+      }
+    ]
+  },
+  {
+    "name": "Simon Says",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE15+, Edge, Safari",
+    "description": "A pattern matching game.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/simon-says"
+      },
+      {
+        "name": "View Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/simon-says/index.html"
       }
     ]
   },
