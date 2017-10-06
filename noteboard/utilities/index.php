@@ -118,39 +118,108 @@
     $clear_notes = send_query("DELETE FROM notes WHERE user_id='$user_id';");
   }
 
-  function initialize_action_function () {
-    switch ($_GET["action"]) {
-      case "register":
-        register();
-      break;
+  function list_files () {
+    $output = array();
+    $output["action"] = $_POST["action"];
 
-      case "login":
-        login();
-      break;
+    $user_id = $_POST["user_id"];
+    $output["user"] = $user_id;
 
-      case "load":
-        load_board();
-      break;
+    $arr_files = scandir("../uploads/$user_id");
+    $str_files = "";
 
-      case "add":
-        add_note();
-      break;
-
-      case "delete":
-        delete_note();
-      break;
-
-      case "clear":
-        clear_all_notes();
-      break;
-
-      default:
-        echo "No valid action selected. \n";
-      break;
+    foreach ($arr_files as $file) {
+      if (substr($file, 0, 1) != "." && substr($file, 0, 1) != "_") {
+        $str_files .= "$file,";
+      }
     }
+
+    $str_files = rtrim($str_files, ",");
+
+    $output["files"] = $str_files;
+
+    $output["response"] = "Successfully listed files.";
+
+    echo json_encode($output);
   }
 
-  if (isset($_GET["action"])) {
-    initialize_action_function();
+  function upload_file () {
+    $output = array();
+    $output["action"] = $_POST["action"];
+
+    $user_id = $_POST["user_id"];
+    $file = $_FILES["file"];
+    $file_name = $_POST["file_name"];
+
+    if (!is_dir("../uploads")) {
+      mkdir("../uploads");
+    }
+
+    if (!is_dir("../uploads/$user_id")) {
+      mkdir("../uploads/$user_id");
+    }
+
+    file_put_contents("../uploads/$user_id/$file_name", file_get_contents($file["tmp_name"]));
+    unlink($file["tmp_name"]);
+
+    $output["response"] = "Successfully uploaded $file_name.";
+
+    echo json_encode($output);
+  }
+
+  function delete_file () {
+    $output = array();
+    $output["action"] = $_POST["action"];
+
+    $user_id = $_POST["user_id"];
+    $file_name = $_POST["file_name"];
+
+    unlink("../uploads/$user_id/$file_name");
+
+    $output["response"] = "Successfully deleted $file_name.";
+
+    echo json_encode($output);
+  }
+
+  switch ($_POST["action"]) {
+    case "register":
+      register();
+    break;
+
+    case "login":
+      login();
+    break;
+
+    case "load":
+      load_board();
+    break;
+
+    case "add":
+      add_note();
+    break;
+
+    case "delete":
+      delete_note();
+    break;
+
+    case "clear":
+      clear_all_notes();
+    break;
+
+    case "list_files":
+      list_files();
+    break;
+
+    case "upload_file":
+      upload_file();
+    break;
+
+    case "delete_file":
+      delete_file();
+    break;
+
+    default:
+      echo "No valid action selected. \n";
+    break;
   }
 ?>

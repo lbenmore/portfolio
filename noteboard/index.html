@@ -6,8 +6,6 @@
     <title>Noteboard</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300i,400" rel="stylesheet">
     <link rel='stylesheet' href='./styles/stylesheet.css'>
-    <script src='./scripts/utilities.js'></script>
-    <script src='./scripts/library.js'></script>
   </head>
   <body>
     <div class='container'>
@@ -51,8 +49,20 @@
           <div class='board__add'>
             <input class='add__input'><button class='add__submit'>Add</button><button class='add__clear'>Clear</button>
           </div>
+          <div class='board__files'>
+            <div class='files__upload'>
+              <label class='upload__label' for='upload__input' data-content='Click Here to Select or &#xa;Drag Files Here to Upload'></label>
+              <input class='upload__input' type='file' multiple id='upload__input'>
+              <div class='upload__progress'></div>
+            </div>
+            <ul class='files__list'>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+
+    <script src='./scripts/utilities.js'></script>
+    <script src='./scripts/library.js'></script>
   </body>
 </html>

@@ -38,7 +38,120 @@ bnmr.fns.inputReturnHandler = function (e) {
       break;
     }
   }
-}
+};
+
+bnmr.fns.deleteFile = function (fileName) {
+  var _userId = atob(bnmr.vars.userId),
+  _params = new FormData();
+
+  _params.append('action', 'delete_file');
+  _params.append('user_id', _userId);
+  _params.append('file_name', fileName);
+
+  bnmr.ajax({
+    type: 'json',
+    method: 'POST',
+    url: './utilities/',
+    params: _params
+  }, bnmr.fns.listFiles);
+};
+
+bnmr.fns.downloadFile = function (fileName) {
+  var link = document.createElement('a');
+  link.setAttribute('download', fileName);
+  link.setAttribute('href', './uploads/' + atob(bnmr.vars.userId) + '/' + fileName);
+  link.click();
+};
+
+bnmr.fns.handleXHRProgress = function (e) {
+  var loaded = e.loaded,
+  total = e.total,
+  perc = Math.floor(loaded / total * 100);
+
+  bnmr.$('.upload__progress').style.setProperty('--prog', perc + '%');
+};
+
+bnmr.fns.handleFileUpload = function (e) {
+  var _files = e.target.files,
+  _userId = atob(bnmr.vars.userId),
+  _fileNames = [],
+  _curr = 1;
+  _total = _files.length;
+
+  for (var i = 0; i < _files.length; i++) {
+    var _params = new FormData();
+    _params.append('action', 'upload_file');
+    _params.append('user_id', _userId);
+    _params.append('file', _files[i]);
+    _params.append('file_name', _files[i].name);
+
+    _fileNames.push(_files[i].name);
+
+    bnmr.ajax({
+      type: 'json',
+      method: 'POST',
+      url: './utilities/',
+      params: _params,
+      progress: bnmr.fns.handleXHRProgress
+    }, function () {
+      _curr == _total ? bnmr.fns.listFiles() : _curr++;
+    });
+  }
+
+  bnmr.$('.upload__label').setAttribute('data-content', _fileNames.join('\n'));
+};
+
+bnmr.fns.handleFileDnD = function (e) {
+  switch (e.type) {
+    case 'dragenter':
+      bnmr.$('.upload__label').addClass('active');
+    break;
+
+    case 'dragleave':
+    case 'drop':
+      bnmr.$('.upload__label').removeClass('active');
+    break;
+  }
+};
+
+bnmr.fns.listFiles = function () {
+  var _userId = atob(bnmr.vars.userId),
+  _params = new FormData();
+
+  bnmr.$('.files__list').innerHTML = '';
+    bnmr.$('.upload__progress').style.setProperty('--prog', '0%');
+    bnmr.$('.upload__label').setAttribute('data-content', 'Click Here to Select or \nDrag Files Here to Upload');
+
+  _params.append('action', 'list_files');
+  _params.append('user_id', _userId);
+
+  bnmr.ajax({
+    type: 'json',
+    method: 'POST',
+    url: './utilities/',
+    params: _params
+  }, function (data) {
+    var _files = data.files.split(',');
+    if (_files.length && _files[0] != "") {
+      for (var i = 0; i < _files.length; i++) {
+        var li = document.createElement('li'),
+        btnDelete = document.createElement('button'),
+        btnDownload = document.createElement('button');
+
+        li.innerHTML = bnmr.truncate(_files[i], 30);
+        li.classList.add('list__item');
+        bnmr.$('.files__list').appendChild(li);
+
+        btnDelete.innerHTML = 'x';
+        btnDelete.onclick = bnmr.fns.deleteFile.bind(null, _files[i]);
+        btnDownload.innerHTML = '&darr;';
+        btnDownload.onclick = bnmr.fns.downloadFile.bind(null, _files[i]);
+        li.appendChild(btnDelete);
+        li.appendChild(btnDownload);
+      }
+    }
+  });
+};
 
 bnmr.fns.loadBoard = function (data) {
   var _fullname = data['fullname'], _userId = data['user_id'], _notes = data['notes']
@@ -68,6 +181,8 @@ bnmr.fns.loadBoard = function (data) {
     })();
   }
 
+  bnmr.fns.listFiles();
+
   if (bnmr.vars.loadScreen) {
     bnmr.vars.loadScreen.remove();
     bnmr.vars.loadScreen = null;
@@ -76,70 +191,86 @@ bnmr.fns.loadBoard = function (data) {
 
 bnmr.fns.updateNotes = function () {
   var _userId = atob(bnmr.vars.userId),
-  _params = 'user_id=' + _userId;
+  _params = new FormData();
+
+  _params.append('action', 'load');
+  _params.append('user_id', _userId);
 
   bnmr.$('.board__notes').innerHTML = '';
   bnmr.ajax({
-    'method': 'POST',
-    'type': 'json',
-    'url': './utilities/?action=load'
+    method: 'POST',
+    type: 'json',
+    url: './utilities/',
+    params: _params
   }, function (data) {
     bnmr.$('.add__input').value = '';
     bnmr.$('.add__input').focus();
     bnmr.fns.loadBoard(data);
-  }, _params);
+  });
 };
 
 bnmr.fns.clearNotes = function () {
   var _userId = atob(bnmr.vars.userId),
-  _params = 'user_id=' + _userId;
+  _params = new FormData();
+
+  _params.append('action', 'clear');
+  _params.append('user_id', _userId);
 
   if (!bnmr.vars.loadScreen) {
     bnmr.vars.loadScreen = new bnmr.loadScreen();
   }
 
   bnmr.ajax({
-    'method': 'POST',
-    'url': './utilities/?action=clear'
+    method: 'POST',
+    url: './utilities/',
+    params: _params
   }, function (data) {
     bnmr.fns.updateNotes();
-  }, _params);
+  });
 }
 
 bnmr.fns.deleteNote = function (e) {
   var _userId = atob(bnmr.vars.userId),
   _noteId = atob(e.target.getAttribute('data-note-id')),
-  _params = 'user_id=' + _userId + '&note_id=' + _noteId;
+  _params = new FormData();
+
+  _params.append('action', 'delete');
+  _params.append('user_id', _userId);
+  _params.append('note_id', _noteId);
 
   if (!bnmr.vars.loadScreen) {
     bnmr.vars.loadScreen = new bnmr.loadScreen();
   }
 
   bnmr.ajax({
-    'method': 'POST',
-    'url': './utilities/?action=delete'
+    method: 'POST',
+    url: './utilities/',
+    params: _params
   }, function (data) {
       bnmr.fns.updateNotes();
-  }, _params);
+  });
 };
 
 bnmr.fns.addNote = function () {
   var _note = bnmr.$('.add__input').value,
       _userId = atob(bnmr.vars.userId),
-      _params;
+      _params = new FormData();
 
-  _params = 'user_id=' + _userId + '&note=' + _note;
+  _params.append('action', 'add');
+  _params.append('user_id', _userId);
+  _params.append('note', _note);
 
   if (!bnmr.vars.loadScreen) {
     bnmr.vars.loadScreen = new bnmr.loadScreen();
   }
 
   bnmr.ajax({
-    'method': 'POST',
-    'url': './utilities/?action=add'
+    method: 'POST',
+    url: './utilities/',
+    params: _params
   }, function (data) {
       bnmr.fns.updateNotes();
-  }, _params);
+  });
 };
 
 bnmr.fns.clearInvalidCredentials = function () {
@@ -187,14 +318,20 @@ bnmr.fns.login = function () {
   if (_username == '' || _password == '') {
     bnmr.fns.setInvalidCredentials(bnmr.$('.credentials__input--login'));
   } else {
-    _params = 'username=' + _username + '&password=' + _password;
+    _params = new FormData();
+
+    _params.append('action', 'login');
+    _params.append('username', _username);
+    _params.append('password', _password);
+
     bnmr.ajax({
-      'method': 'POST',
-      'url': './utilities/?action=login'
+      method: 'POST',
+      url: './utilities/',
+      params: _params
     }, function (data) {
       _userId = data;
       _params = 'user_id=' + _userId;
-bnmr.log(_userId);
+
       bnmr.vars.userId = btoa(_userId);
 
       switch (true) {
@@ -230,13 +367,19 @@ bnmr.fns.register = function (e) {
       bnmr.$('.credentials__input--register.credentials__input--password').addClass('invalid');
       bnmr.$('.credentials__input--register.credentials__input--confirm').addClass('invalid');
   } else {
-   _params = 'fullname=' + _fullname + '&username=' + _username + '&password=' + _password;
+   _params = new FormData();
+
+   _params.append('action', 'register');
+   _params.append('fullname', _fullname);
+   _params.append('username', _username);
+   _params.append('password', _password);
 
    bnmr.vars.loadScreen = new bnmr.loadScreen();
 
     bnmr.ajax({
-      'method': 'POST',
-      'url': './utilities/?action=register'
+      method: 'POST',
+      url: './utilities/',
+      params: _params
     }, function (data) {
       if (data.indexOf('already exists') > -1) {
         bnmr.$('.credentials__input--register.credentials__input--username').addClass('invalid');
@@ -259,6 +402,12 @@ bnmr.fns.eventListeners = function () {
   for (var i = 0; i < bnmr.$('input').length; i++) {
     bnmr.$('input')[i].onkeypress = bnmr.fns.inputReturnHandler;
   }
+
+  bnmr.$('.upload__input').ondragenter = bnmr.fns.handleFileDnD;
+  bnmr.$('.upload__input').ondragleave = bnmr.fns.handleFileDnD;
+  bnmr.$('.upload__input').ondrop = bnmr.fns.handleFileDnD;
+
+  bnmr.$('.upload__input').onchange = bnmr.fns.handleFileUpload;
 };
 
 bnmr.fns.initFns = function () {
