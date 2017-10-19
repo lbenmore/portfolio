@@ -1,5 +1,4 @@
 let
-debug = true,
 table = {},
 numRows,
 numCols,
@@ -249,10 +248,9 @@ importData = (e) => {
       $$.ajax({
         type: 'json',
         method: 'POST',
-        url: './com',
+        url: './com/utilities.php',
         params: importParams
       }, (response) => {
-        $$.log(response);
         let
         data = JSON.parse(response.data),
         headers = JSON.parse(response.headers),
@@ -287,9 +285,9 @@ exportData = () => {
   $$.ajax({
     type: 'json',
     method: 'POST',
-    url: './com',
+    url: './com/utilities.php',
     params: exportParams
-  }, (response) => {
+  }, (response) => { $$.log(response);
     let
     a = document.createElement('a'),
     clearParams = new FormData();
@@ -302,14 +300,11 @@ exportData = () => {
     clearParams.append('folder_path', '../output');
 
     $$.ajax({
-      type: 'json',
       method: 'POST',
-      url: './com',
+      url: './com/utilities.php',
       params: clearParams
-    }, (response) => {
-      $$.log(response);
     });
-  })
+  });
 };
 
 initFns = () => {
