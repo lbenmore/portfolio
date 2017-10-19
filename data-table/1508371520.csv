@@ -1,0 +1,6 @@
+uid,label,group,copy_1,copy_2
+1,one,g1,"foo 1","bar 1"
+2,two,g1,"foo 2","bar 2"
+3,three,g2,"foo 3","bar 3"
+6,six,g2,eeeyyyyy,maaaan
+7,,,boo,yah
