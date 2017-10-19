@@ -141,15 +141,17 @@ class Cell {
     currCol = parseInt(cell.getAttribute('data-col').split('-')[1]),
     newHeader = cell.textContent;
 
-    if (currRow == 0 && table.headers[currCol] != newHeader) {
-      let thisCol = table.headers[currCol];
-      for (let cellData of table.data) {
-        cellData[newHeader] = cellData[thisCol];
-        delete cellData[thisCol];
-      }
+    if (currRow == 0) {
+      if (table.headers[currCol] != newHeader) {
+        let thisCol = table.headers[currCol];
+        for (let cellData of table.data) {
+          cellData[newHeader] = cellData[thisCol];
+          delete cellData[thisCol];
+        }
 
-      table.headers[currCol] = newHeader;
-      ls('set', 'table', JSON.stringify(table));
+        table.headers[currCol] = newHeader;
+        ls('set', 'table', JSON.stringify(table));
+      }
     } else {
       table.data[currRow][table.headers[currCol]] = newHeader;
     }
@@ -241,6 +243,9 @@ populateTable = () => {
     new Row($$('.table'), row);
     ++row;
   }
+
+  postMessage(JSON.stringify(table), '*');
+
   $$.log('table initialized');
 };
 
