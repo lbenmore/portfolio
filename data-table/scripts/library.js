@@ -36,9 +36,16 @@ setKeyBindings = () => {
       newCell;
 
       switch (e.keyCode) {
+        case 9:
+          e.preventDefault();
+          newCol = e.shiftKey ? --newCol : ++newCol;
+          if (newCol == col) addColumn();
+        break;
+
         case 13:
           e.preventDefault();
           newRow = e.shiftKey ? --newRow : ++newRow;
+          if (newRow == row) addRow();
         break;
 
         case 37:
@@ -148,6 +155,8 @@ class Cell {
     }
 
     ls('set', 'table', JSON.stringify(table));
+
+    postMessage(JSON.stringify(table), '*');
 
     $$.log('table data saved');
     $$.log(table.data, 'dir');
