@@ -1,0 +1,85 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.btn--menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  z-index: 1;
+}
+
+  .btn--menu span {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 1px;
+    background-color: #444;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition: transform 0.5s;
+    transition: transform 0.5s;
+  }
+
+    .btn--menu span::before,
+    .btn--menu span::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      -webkit-transition: inherit;
+      transition: inherit;
+    }
+
+    .btn--menu span::before {
+      transform: translateY(-6px);
+    }
+
+    .btn--menu span::after {
+      transform: translateY(6px);
+    }
+
+.table {
+  margin-top: 48px;
+}
+
+.menu {
+  position: fixed;
+  display: block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  font-size: 16px;
+  line-height: 2;
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-transition: transform 0.5s;x
+  transition: transform 0.5s;
+}
+
+#btn--menu:checked ~ .menu {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+#btn--menu:checked ~ .btn--menu span {
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#btn--menu:checked ~ .btn--menu span::before {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+#btn--menu:checked ~ .btn--menu span::after {
+  -webkit-transform: translateY(0) rotate(-90deg);
+  transform: translateY(0) rotate(-90deg);
+}

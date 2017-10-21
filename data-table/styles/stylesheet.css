@@ -10,7 +10,7 @@ body {
 	margin: 0;
 }
 
-  input[type=radio] {
+  input {
   	display: none;
   }
 
@@ -94,6 +94,7 @@ body {
   	color: #444;
   	font-family: 'Lucida Sans Unicode', Lato, Arial, sans-serif;
   	font-size: 12px;
+		overflow-y: scroll;
   }
 
   .menu.show {
@@ -101,7 +102,7 @@ body {
   }
 
     .menu__header {
-    	font-size: 14px;
+    	font-size: 1.2em;
     	font-weight: bold;
     	letter-spacing: 2px;
     	text-transform: uppercase;

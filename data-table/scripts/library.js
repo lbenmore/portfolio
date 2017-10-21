@@ -158,8 +158,6 @@ class Cell {
 
     ls('set', 'table', JSON.stringify(table));
 
-    postMessage(JSON.stringify(table), '*');
-
     $$.log('table data saved');
     $$.log(table.data, 'dir');
   };
@@ -243,8 +241,6 @@ populateTable = () => {
     new Row($$('.table'), row);
     ++row;
   }
-
-  postMessage(JSON.stringify(table), '*');
 
   $$.log('table initialized');
 };
@@ -333,6 +329,27 @@ initFns = () => {
   $$('#menu__action--import').on('change', importData);
   addEventListener('contextmenu', toggleContextMenu);
   addEventListener('click', toggleContextMenu);
+
+  if (window.orientation != undefined) {
+    let
+    mobileStyles = document.createElement('link'),
+    chkMenu = document.createElement('input'),
+    btnMenu = document.createElement('label');
+
+    mobileStyles.setAttribute('rel', 'stylesheet');
+    mobileStyles.setAttribute('href', './styles/stylesheet.mobile.css');
+    $$('head').appendChild(mobileStyles);
+
+    chkMenu.setAttribute('type', 'checkbox');
+    chkMenu.setAttribute('id', 'btn--menu');
+    document.body.insertBefore(chkMenu, document.body.childNodes[0]);
+
+    btnMenu.classList.add('btn');
+    btnMenu.classList.add('btn--menu');
+    btnMenu.setAttribute('for', 'btn--menu');
+    btnMenu.innerHTML = '<span></span>';
+    $$('body').appendChild(btnMenu);
+  }
 
   populateTable();
   setKeyBindings();
