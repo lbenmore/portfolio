@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=no'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-title' content='T O D O'>
+    <title>T O D O</title>
+    <link rel='stylesheet' href='./styles/stylesheet.css'>
+  </head>
+  <body>
+    <div class='container'>
+    	<div class='header'>TODO</div>
+
+    	<input class='footer__input footer__radio' id='footer__radio--all' type='radio' name='filter' checked>
+    	<label class='footer__label' for='footer__radio--all'>All</label>
+
+    	<input class='footer__input footer__radio' id='footer__radio--active' type='radio' name='filter'>
+    	<label class='footer__label' for='footer__radio--active'>Active</label>
+
+    	<input class='footer__input footer__radio' id='footer__radio--completed' type='radio' name='filter'>
+    	<label class='footer__label' for='footer__radio--completed'>Completed</label>
+
+      <div class='list'></div>
+    </div>
+
+    <script type='text/javascript' src='./scripts/library.js'></script>
+  </body>
+</html>
