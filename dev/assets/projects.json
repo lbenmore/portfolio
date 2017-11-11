@@ -11,17 +11,17 @@
       },
       {
         "name": "View Source Code (ES6)",
-        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/bnmr-1.1.1.js"
+        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/bnmr-1.2.0.js"
       },
       {
         "name": "View Source Code (ES5)",
-        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/m.bnmr-1.1.1.js"
+        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/legacy.bnmr-1.2.0.js"
       }
     ]
   },
   {
     "name": "bnmr Video Player",
-    "technologies": "HTML5, CSS3, JavaScript (ES5)",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
     "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
     "description": "An HTML5 video component with built-in, pure CSS controls and configurable options for setup including playlisting.",
     "links": [
@@ -108,6 +108,38 @@
       {
         "name": "View Source Code",
         "url": "https://github.com/lbenmore/portfolio/blob/master/startle-revisited"
+      }
+    ]
+  },
+  {
+    "name": "Data Table",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Online spreadsheet capable of holding string data for infinite rows and columns. Uses Local Storage to store data as well as a custom context menu to import and export data as a .csv file or theme the page.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/data-table"
+      },
+      {
+        "name": "View Source Code",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/data-table"
+      }
+    ]
+  },
+  {
+    "name": "Todo",
+    "technologies": "HTML5, CSS3, JavaScript (ES6)",
+    "browsers": "Chrome, Firefox, Opera, IE8+, Edge, Safari",
+    "description": "Web app for a to-do list using CSS for all primary functionality. Local Storage used to make list persistent.",
+    "links": [
+      {
+        "name": "View Project",
+        "url": "http://www.lisabenmore.com/todo-list"
+      },
+      {
+        "name": "View Source Code",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/todo-list"
       }
     ]
   },

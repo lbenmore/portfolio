@@ -1,31 +1,17 @@
 [
   {
-    "name": "BnmrVideoPlayer",
-    "syntax": "BnmrVideoPlayer()",
+    "name": "VideoPlayer",
+    "syntax": "$$.VideoPlayer(options)",
     "description": "Class used to setup a new video player component.",
-    "parameters": [
-      {
-        "required": false,
-        "name": "N/A",
-        "type": "N/A",
-        "description": "N/A"
-      }
-    ],
-    "example": "var video = new BnmrVideoPlayer();"
-  },
-  {
-    "name": "setup",
-    "syntax": "setup(options)",
-    "description": "Initializes configuration for video player component.",
     "parameters": [
       {
         "required": true,
         "name": "options",
         "type": "Object",
-        "description": "\"autoplay\": Boolean of whether the video should start playing upon load. Default: true.<br><br>\"controls\": Boolean of whether the video should have controls visible when the user mouses over the video. Default true.<br><br>\"file\"*: If no playlist is provided, the string value of the path to the video file.<br><br>\"height\": Number value of the number of pixels the video should have in height or the string \"auto\". Default: \"auto\".<br><br>\"location\"*: CSS selector for the DOM element to contain the video. Default: \"body\".<br><br>\"loop\": Boolean of whether the video should restart upon completion. If a playlist, plays through all before replaying. Default: true.<br><br>\"muted\": Boolean of whether the video should start muted. Default: false.<br><br>\"playlist\"*: If no file is provided, an array of string values of the paths to video files.<br><br>\"poster\": String value of the path to a poster image for the video. Default: null.<br><br>\"width\": Number value of the number of pixels the video should have in height or the string \"auto\". Default: \"auto\"."
+        "description": "\"location\": CSS selector of the element that will hold the video player. Default: \"body\".\"type\": File extension of the video(s). Default: \"mp4\".\"path\"*: Either string value of the path to the video file or an array of string values of paths. \"autoplay\": Boolean value of whether the video should begin playing automatically on load. Default: true.\"muted\": Boolean value of whether the video should begin muted. Default: false.\"loop\": Boolean value of whether the video should replay upon completion. Default: false.\"controls\": Boolean value of whether the video player should have controls. Default: true.\"width\": Number or String value of the width of the video player. Default: \"auto\".\"height\": Number or String value of the height of the video player. Default: \"auto\".\"label\": String value of the labeling used for the video player elements. Default: \"bnmrVideoPlayer\"."
       }
     ],
-    "example" : "&lt;div id=\"video-container\"&gt;&lt;/div&gt;\r&lt;div id=\"video2\"&gt;&lt;/div&gt;\r&lt;script type=\"text/javascript\"&gt;\rvar video = new BnmrVideoPlayer();\rvar video2 = new BnmrVideoPlayer();\r\rvideo.setup({\r\tautoplay : \"true\",\r\tcontrols : \"true\",\r\theight : 180,\r\tlocation : \"#video-container\",\r\tloop : \"true\",\r\tmuted : \"false\",\r\tplaylist : [\r\t\t\"videos/video4.mp4\",\r\t\t\"videos/video5.mp4\",\r\t\t\"videos/video6.mp4\",\r\t\t\"videos/video1.mp4\",\r\t\t\"videos/video2.mp4\",\r\t\t\"videos/video3.mp4\"\r\t],\r\twidth : 320\r});\r\rvideo2.setup({\r\tautoplay : \"false\",\r\tcontrols : \"true\",\r\tfile : \"videos/video.mp4\",\r\theight : 450,\r\tlocation : \"#video2\",\r\tloop : \"false\",\r\tmuted : \"true\",\r\twidth : 800\r});\r&lt;/script&gt;"
+    "example": "let video = new $$.VideoPlayer({/tlocation: \".videoPlayer--2\",/ttype: \"mp4\",/tpath: [\t\t\"//www.wedistill.io/videos/Distill-Header-Video.mp4\",\t\t\"//www.lifeofvids.com/videos/cows.mp4\",\t\t\"//xal.rocks/homepage/assets/global/video.mp4\"/t],/tautoplay: \"false\",/tmuted: \"false\",/tloop: \"false\",/tcontrols: \"true\",/twidth: \"320\",/theight: \"180\",/tlabel: \"video_player\"});"
   },
   {
     "name": "play",
@@ -39,7 +25,7 @@
         "description": "N/A"
       }
     ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.play();"
+    "example" : "video.play();"
   },
   {
     "name": "pause",
@@ -53,12 +39,12 @@
         "description": "N/A"
       }
     ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.pause();"
+    "example" : "video.pause();"
   },
   {
-    "name": "pause",
-    "syntax": "pause()",
-    "description": "Pauses playback of video.",
+    "name": "togglePlay",
+    "syntax": "togglePlay()",
+    "description": "Toggles playback of video.",
     "parameters": [
       {
         "required": false,
@@ -67,21 +53,7 @@
         "description": "N/A"
       }
     ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.pause();"
-  },
-  {
-    "name": "volume",
-    "syntax": "volume()",
-    "description": "Toggles whether the video is muted or unmuted.",
-    "parameters": [
-      {
-        "required": false,
-        "name": "N/A",
-        "type": "N/A",
-        "description": "N/A"
-      }
-    ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.volume();"
+    "example" : "video.togglePlay();"
   },
   {
     "name": "mute",
@@ -95,7 +67,7 @@
         "description": "N/A"
       }
     ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.mute();"
+    "example" : "video.mute();"
   },
   {
     "name": "unmute",
@@ -109,12 +81,12 @@
         "description": "N/A"
       }
     ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.unmute();"
+    "example" : "video.unmute();"
   },
   {
-    "name": "replay",
-    "syntax": "replay()",
-    "description": "Restarts video or playlist of videos",
+    "name": "toggleMute",
+    "syntax": "toggleMute()",
+    "description": "Toggles the mute state of the video.",
     "parameters": [
       {
         "required": false,
@@ -123,7 +95,7 @@
         "description": "N/A"
       }
     ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.replay();"
+    "example" : "video.toggleMute();"
   },
   {
     "name": "next",
@@ -137,7 +109,7 @@
         "description": "N/A"
       }
     ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.next();"
+    "example" : "video.next();"
   },
   {
     "name": "previous",
@@ -151,6 +123,6 @@
         "description": "N/A"
       }
     ],
-    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.previous();"
+    "example" : "video.previous();"
   }
 ]

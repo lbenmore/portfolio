@@ -1,64 +1,70 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset='UTF-8'>
-		<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no'>
-		<title>Video Player</title>
-		<link rel='stylesheet' href='styles/BnmrVideoPlayer.css'>
-		<style>
-			html,body{margin:0;}
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=no'>
+    <title>bnmr Video Testing</title>
+    <link rel='stylesheet' href='./styles/bnmr.video.css'>
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
 
-			#video-container,
-			#video2 {
-				top:50%;
-				left:50%;
-				transform:translate(-50%, -50%);
-			}
+        .videoPlayer--1 {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+        }
 
-			#video-container {
-				z-index:10;
-			}
-		</style>
-	</head>
-	<body>
-		<div id='container'>
-			<div id='video-container'></div>
-			<div id='video2'></div>
-		</div>
+          .videoPlayer--1 video {
+            min-width: 100vw;
+            min-height: 100vh;
+            width: auto;
+            height: auto;
+          }
 
-		<script type='text/javascript' src='./scripts/BnmrVideoPlayer.js'></script>
-		<script type='text/javascript'>
-			var my_vid = new BnmrVideoPlayer();
-			var my_vid2 = new BnmrVideoPlayer();
+        .videoPlayer--2 {
 
-			my_vid.setup({
-				autoplay : 'true',
-				controls : 'true',
-				height : 180,
-				location : '#video-container',
-				loop : 'true',
-				muted : 'true',
-				playlist : [
-					'videos/video4.mp4',
-					'videos/video5.mp4',
-					'videos/video6.mp4',
-					'videos/video1.mp4',
-					'videos/video2.mp4',
-					'videos/video3.mp4'
-				],
-				width : 320
-			});
+        }
+    </style>
+  </head>
+  <body>
+    <div class='videoPlayer videoPlayer--1'></div>
+    <div class='videoPlayer videoPlayer--2'></div>
 
-			my_vid2.setup({
-				autoplay : 'false',
-				controls : 'true',
-				file : 'videos/video.mp4',
-				height : 450,
-				location : '#video2',
-				loop : 'false',
-				muted : 'true',
-				width : 800
-			});
-		</script>
-	</body>
+    <script src='./bnmr.js'></script>
+    <script src='./bnmr.video.js'></script>
+    <script>
+      let video1 = new $$.VideoPlayer({
+        location: '.videoPlayer--1',
+        type: 'mp4',
+        path: '// www.lifeofvids.com/videos/cows.mp4',
+        autoplay: 'true',
+        muted: 'true',
+        loop: 'true',
+        controls: 'false',
+        label: 'da_cow'
+      }),
+
+      video2 = new $$.VideoPlayer({
+        location: '.videoPlayer--2',
+        type: 'mp4',
+        path: [
+          '//www.wedistill.io/videos/Distill-Header-Video.mp4',
+          '//www.lifeofvids.com/videos/cows.mp4',
+          '//xal.rocks/homepage/assets/global/video.mp4'
+        ],
+        autoplay: 'false',
+        muted: 'false',
+        loop: 'false',
+        controls: 'true',
+        width: '320',
+        height: '180',
+        label: 'vitjuhs'
+      });
+    </script>
+  </body>
 </html>

@@ -1,0 +1,188 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.hide {
+  display: none;
+}
+
+div[class*=__videoRegion] {
+  position: relative;
+  line-height: 0;
+}
+
+  /*div[class*=__video]:not(div[class*=__videoRegion]) { /* not sure why this isn't working, the :not works, but doesn't select video */
+  div[class*=__videoRegion] video {
+    width: 100%;
+    height: auto;
+  }
+
+  div[class*=__controls] {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+  } div[class*=__videoRegion]:hover div[class*=__controls] {
+    opacity: 1;
+  }
+
+    div[class*=__btnPlayState],
+    div[class*=__btnPrevious],
+    div[class*=__btnNext],
+    div[class*=__btnVolumeState] {
+      position: absolute;
+      top: 7px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+      div[class*=__btnPlayState]::before,
+      div[class*=__btnPlayState]::after,
+      div[class*=__btnPrevious]::before,
+      div[class*=__btnPrevious]::after,
+      div[class*=__progressBar]::after,
+      div[class*=__btnNext]::before,
+      div[class*=__btnNext]::after,
+      div[class*=__btnVolumeState]::before,
+      div[class*=__btnVolumeState]::after {
+        content: '';
+        position: absolute;
+        cursor: pointer;
+      }
+
+    div[class*=__btnPlayState ]{
+      left: 16px;
+    }
+
+      div[class*=__btnPlayState].paused::before {
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 16px solid #fff;
+      }
+
+      div[class*=__btnPlayState].playing::before,
+      div[class*=__btnPlayState].playing::after {
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: #fff;
+      }
+
+      div[class*=__btnPlayState].playing::before {
+        left: 3px;
+      }
+
+      div[class*=__btnPlayState].playing::after {
+        right: 3px;
+      }
+
+    div[class*=__btnVolumeState] {
+      right: 16px;
+    }
+
+      div[class*=__btnVolumeState]::before {
+        top: 4px;
+        left: 0;
+        width: 4px;
+        height: 8px;
+        border-radius: 2px;
+        background-color: #fff;
+      }
+
+      div[class*=__btnVolumeState]::after {
+        border-top: 8px solid transparent;
+        border-right: 16px solid #fff;
+        border-bottom: 8px solid transparent;
+      }
+
+      div[class*=__inpVolume] {
+        position: absolute;
+        top: -16px;
+        left: 8px;
+        width: 100px;
+        -webkit-transform-origin: 0 50%;
+        transform-origin: 0 50%;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+      }
+
+        div[class*=__inpVolume] input {
+          width: 100%;
+          opacity: 0;
+          cursor: pointer;
+          -webkit-transition: opacity 0.3s;
+          transition: opacity 0.3s;
+        } div[class*=__btnVolumeState]:hover div[class*=__inpVolume] input,
+          div[class*=__inpVolume] input:hover,
+          div[class*=__inpVolume]:hover input {
+          opacity: 1;
+        }
+
+    div[class*=__btnPrevious] {
+      left: 48px;
+    }
+
+      div[class*=__btnPrevious]::before,
+      div[class*=__btnPrevious]::after {
+        border-top: 8px solid transparent;
+        border-right: 10px solid #fff;
+        border-bottom: 8px solid transparent;
+      }
+
+      div[class*=__btnPrevious]::before {
+        -webkit-transform: translateX(-4px);
+        transform: translateX(-4px);
+      }
+
+      div[class*=__btnPrevious]::after {
+        -webkit-transform: translateX(4px);
+        transform: translateX(4px);
+      }
+
+    div[class*=__btnNext] {
+      right: 48px;
+    }
+
+      div[class*=__btnNext]::before,
+      div[class*=__btnNext]::after {
+        border-top: 8px solid transparent;
+        border-left: 10px solid #fff;
+        border-bottom: 8px solid transparent;
+      }
+
+      div[class*=__btnNext]::before {
+        -webkit-transform: translateX(4px);
+        transform: translateX(4px);
+      }
+
+      div[class*=__btnNext]::after {
+        -webkit-transform: translateX(-4px);
+        transform: translateX(-4px);
+      }
+
+    div[class*=__progressBar] {
+      position: absolute;
+      top: 12px;
+      left: 25%;
+      width: 50%;
+      height: 6px;
+      border-radius: 3px;
+      background-color: #808080;
+      cursor: pointer;
+      --prog: 50%;
+    }
+
+      div[class*=__progressBar]::after {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: inherit;
+        width: var(--prog);
+        background-color: #fff;
+        pointer-events: none;
+      }
