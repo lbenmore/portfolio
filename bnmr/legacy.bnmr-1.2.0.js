@@ -163,7 +163,7 @@
 
       case 'object':
         for (var i = 0; i < assets.length; i++) {
-          loadAsset(asset[i]);
+          loadAsset(assets[i]);
         }
       break;
     }
