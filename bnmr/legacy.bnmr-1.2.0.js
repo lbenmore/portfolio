@@ -130,7 +130,7 @@
   },
 
   loadAsset = function (asset) {
-    let
+    var
     fileNameBits = asset.split('.'),
     ext = fileNameBits.pop().toLowerCase();
 
