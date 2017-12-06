@@ -108,6 +108,20 @@
     params ? xhr.send(params) : xhr.send();
   },
 
+  exists = function (value) {
+    if (value) {
+      if (value !== null &&
+          value !== undefined &&
+          value !== 'null' &&
+          value !== 'undefined' &&
+          value !== '') {
+            return true;
+      }
+    }
+
+    return false;
+  },
+
   getParam = function (param) {
     var
     loc = String(window.location),
@@ -372,6 +386,7 @@
   };
 
   $$.ajax = ajax;
+  $$.exists = exists;
   $$.getParam = getParam;
   $$.log = log;
   $$.preload = preload;
