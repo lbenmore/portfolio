@@ -181,17 +181,19 @@
     };
   },
 
-  preload = function (assets) {
+  preload = function (assets, callback) {
+    var cb = callback || null;
+
     switch (typeof assets) {
       case 'string':
         numAssets = 1;
-        loadAsset(assets);
+        loadAsset(assets, cb);
       break;
 
       case 'object':
         numAssets = assets.length;
         for (var i = 0; i < assets.length; i++) {
-          loadAsset(assets[i]);
+          loadAsset(assets[i], cb);
         }
       break;
     }

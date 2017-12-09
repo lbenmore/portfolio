@@ -3,7 +3,10 @@
   let
   sel = selector ? selector : 'body',
   _this = sel.slice(0, 1) == '#' ? document.querySelector(sel) : document.querySelectorAll(sel);
-  _this = _this.length == 1 ? _this[0] : _this;
+  _this = _this.length == 1 ? _this[0] : _this,
+
+  numAssets = 0,
+  currAsset = 0;
 
   const
   log = (msg, style) => {
@@ -143,9 +146,6 @@
     return false;
   },
 
-  numAssets = 0,
-  currAsset = 0,
-
   loadAsset = (asset, callback) => {
     let
     file,
@@ -182,7 +182,7 @@
   },
 
   preload = (assets, callback) => {
-    var cb = callback || null;
+    let cb = callback || null;
 
     switch (typeof assets) {
       case 'string':
