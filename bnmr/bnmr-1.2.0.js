@@ -143,8 +143,12 @@
     return false;
   },
 
-  loadAsset = (asset) => {
+  numAssets = 0,
+  currAsset = 0,
+
+  loadAsset = (asset, callback) => {
     let
+    file,
     fileNameBits = asset.split('.'),
     ext = fileNameBits.pop().toLowerCase();
 
@@ -156,28 +160,40 @@
       case 'png':
       case 'tiff':
       case 'webp':
-        new Image().src = asset;
+        file = new Image();
+        file.src = asset;
       break;
 
       case 'mp4':
       case 'ogv':
       case 'webm':
-        let video = document.createElement('video');
-        video.src = asset;
-        video.load();
+        file = document.createElement('video');
+        file.src = asset;
+        file.load();
       break;
+    }
+
+    file.onload = () => {
+      ++currAsset;
+      if (currAsset == numAssets && exists(callback)) {
+        callback.call();
+      }
     }
   },
 
-  preload = (assets) => {
+  preload = (assets, callback) => {
+    var cb = callback || null;
+
     switch (typeof assets) {
       case 'string':
-        loadAsset(assets);
+        numAssets = 1;
+        loadAsset(assets, cb);
       break;
 
       case 'object':
+        numAssets = assets.length;
         for (let asset of assets) {
-          loadAsset(asset);
+          loadAsset(asset, cb);
         }
       break;
     }
@@ -308,10 +324,14 @@
       } else {
         if (_this.length) {
           for (let __this of _this) {
-            __this.className += ` ${name}`;
+            if (__this.className.indexOf(name) == -1) {
+              __this.className += ` ${name}`;
+            }
           }
         } else {
-          _this.className += ` ${name}`;
+          if (_this.className.indexOf(name) == -1) {
+            _this.className += ` ${name}`;
+          }
         }
       }
     }, delay || 0);

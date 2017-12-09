@@ -143,8 +143,12 @@
     return false;
   },
 
-  loadAsset = function (asset) {
+  numAssets = 0,
+  currAsset = 0,
+
+  loadAsset = function (asset, callback) {
     var
+    file,
     fileNameBits = asset.split('.'),
     ext = fileNameBits.pop().toLowerCase();
 
@@ -156,26 +160,36 @@
       case 'png':
       case 'tiff':
       case 'webp':
-        new Image().src = asset;
+        file = new Image();
+        file.src = asset;
       break;
 
       case 'mp4':
       case 'ogv':
       case 'webm':
-        var video = document.createElement('video');
-        video.src = asset;
-        video.load();
+        file = document.createElement('video');
+        file.src = asset;
+        file.load();
       break;
     }
+
+    file.onload = function () {
+      ++currAsset;
+      if (currAsset == numAssets && exists(callback)) {
+        callback.call();
+      }
+    };
   },
 
   preload = function (assets) {
     switch (typeof assets) {
       case 'string':
+        numAssets = 1;
         loadAsset(assets);
       break;
 
       case 'object':
+        numAssets = assets.length;
         for (var i = 0; i < assets.length; i++) {
           loadAsset(assets[i]);
         }
@@ -299,10 +313,14 @@
     setTimeout(function () {
       if (_this.length) {
         for (var i = 0; i < _this.length; i++) {
-          _this[i].className += ' ' + name;
+          if (_this[i].className.indexOf(name) == -1) {
+            _this[i].className += ' ' + name;
+          }
         }
       } else {
-        _this.className += ' ' + name;
+        if (_this.className.indexOf(name) == -1) {
+          _this.className += ' ' + name;
+        }
       }
     }, delay || 0);
   };

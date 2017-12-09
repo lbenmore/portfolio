@@ -111,7 +111,7 @@ bnmr.fns.initContact = () => {
     let formHeader = document.createElement('h3');
     formHeader.className = 'contact__form-header';
     formHeader.innerHTML = 'Or just hit me up...';
-    emailForm.append(formHeader);
+    emailForm.appendChild(formHeader);
 
     let name = document.createElement('div');
     name.classList.add('contact__input');
