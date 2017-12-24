@@ -131,8 +131,8 @@ a:visited {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  -webkit-mix-blend-mode: overlay;
-  mix-blend-mode: overlay;
+  /*-webkit-mix-blend-mode: overlay;*/
+  /*mix-blend-mode: overlay;*/
 }
 
 .header__title {

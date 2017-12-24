@@ -175,6 +175,7 @@ bnmr.fns.initMenu = () => {
     type: 'json',
     url: './assets/projects.json'
   }, (projects) => {
+    let i = 0, n = 0;
     $$('.projects').removeChild($$('.projects__list'));
     let list = document.createElement('div');
     list.classList.add('projects__list');
@@ -221,6 +222,17 @@ bnmr.fns.initMenu = () => {
             btn.appendChild(copy);
             item.appendChild(btn);
         }
+
+      if (i % 4 == 0) ++n;
+      ++i;
+    }
+
+    while ((i + 1) % n != 0) {
+      let filler = document.createElement('div');
+      filler.style.visibility = 'hidden';
+      filler.classList.add('projects__item');
+      list.appendChild(filler);
+      ++i;
     }
   });
 };
