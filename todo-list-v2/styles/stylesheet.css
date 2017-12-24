@@ -1,0 +1,209 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body,
+body * {
+
+	box-sizing: border-box;
+	font-family: 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
+}
+
+.container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+	.header {
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+		height: 60px;
+		background-color: #60f;
+		text-align: center;
+		box-shadow: 0px 0px 8px #000;
+		z-index: 1;
+	}
+
+		.header span {
+			position: absolute;
+			top: 50%;
+			color: #fff;
+			font-size: 2em;
+			cursor: pointer;
+			-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+		}
+
+		.header span:first-of-type {
+			left: 5vw;
+		}
+
+		.header span:last-of-type {
+			right: 5vw;
+		}
+
+		.header input {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 50%;
+			padding: 4px;
+			border: none;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+			border-radius: 0;
+			background: transparent;
+			color: #fff;
+			font-family: 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+			font-size: 1.5em;
+			letter-spacing: 0.2em;
+			text-align: center;
+			-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+		}
+
+		.header input:focus {
+			outline: none;
+			border-bottom: 2px solid rgba(255, 255, 255, 1);
+		}
+
+	.list {
+		position: fixed;
+		top: 60px;
+		right: 0;
+		bottom: 60px;
+		left: 0;
+		overflow-y: auto;
+	}
+
+		.list__container {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			overflow-y: auto;
+			margin: 0;
+			list-style: none;
+			-webkit-margin-start: 0;
+			-webkit-margin-before: 0;
+			-webkit-padding-start: 0;
+		}
+
+			.list__item {
+				position: relative;
+				padding: 0 5vw;
+				height: 50px;
+			}
+
+				.list__item * {
+					position: relative;
+					display: inline-block;
+				}
+
+					.list__chk {
+						display: none;
+					}
+
+					.list__label {
+						 width: 24px;
+						 height: 24px;
+					}
+
+						.list__label::before {
+							content: '';
+							display: inline-block;
+							vertical-align: middle;
+							left: 0;
+							width: 24px;
+							height: 24px;
+							border: 1px solid #808088;
+							border-radius: 50%;
+							cursor: pointer;
+						}
+
+						.list__label::after {
+							content: '';
+							position: absolute;
+							top: 50%;
+							left: 0;
+							width: 24px;
+							height: 24px;
+							background-image: url('https://d30y9cdsu7xlg0.cloudfront.net/png/6156-200.png');
+							background-position: center;
+							background-repeat: no-repeat;
+							background-size: contain; 0;
+							color: #0f6;
+							pointer-events: none;
+							opacity: 0;
+							-webkit-transform: scale(0.5) translateY(-50%);
+							transform: scale(0.5) translateY(-50%);
+							-webkit-transform-origin: 50% 0;
+							transform-origin: 50% 0;
+							-webkit-transition: all 0.3s;
+							transition: all 0.3s;
+						}
+
+						.list__chk:checked + .list__label::after {
+							opacity: 1;
+							-webkit-transform: scale(1) translateY(-50%);
+							transform: scale(1) translateY(-50%);
+						}
+
+					.list__item input[type=text] {
+						width: calc(100% - 60px);
+						margin: 8px;
+						padding: 8px;
+						background: transparent;
+						border: none;
+						border-bottom: 1px solid #808088;
+						border-radius: 0;
+						letter-spacing: 0.1em;
+					}
+
+					.list__item input[type=text]:focus {
+						outline: none;
+					}
+
+					.list__delete {
+						color: #f06;
+						cursor: pointer;
+					}
+
+	.footer {
+		display: flex;
+		justify-content: space-evenly;
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		height: 60px;
+		background: #303038;
+		color: #fff;
+		font-size: 0.6em;
+		font-weight: lighter;
+		letter-spacing: 0.5em;
+		line-height: 40px;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+		.footer input {
+			display: none;
+		}
+
+		.footer label {
+			flex-basis: 30%;
+			padding: 4px;
+		}
+
+		.footer input:checked + label {
+			border-bottom: 2px solid #0f6;
+		}
+
+.hide { display: none; }
