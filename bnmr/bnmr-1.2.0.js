@@ -13,10 +13,10 @@
     let
     err = new Error().stack,
     errLines = String(err).split('\n'),
-    errLine = errLines[errLines.length - 2],
+    errLine = errLines[2],
     logLoc = errLine.match(/\/\/(.*)/).pop(),
-    logFile = logLoc.split(':')[0].split('/').pop(),
-    logLineNo = logLoc.split(':')[1],
+    logFile = logLoc.split(':')[logLoc.split(':').length - 3].split('/').pop(),
+    logLineNo = logLoc.split(':')[logLoc.split(':').length - 2],
     logLabel = `${logFile} (line ${logLineNo}): `,
     logMsg = typeof msg == 'object' ? msg : logLabel + msg,
     logStyle,
@@ -146,7 +146,7 @@
     return false;
   },
 
-  loadAsset = (asset, callback) => {
+  loadAsset = (asset, callback, numAssets, numLoaded) => {
     let
     file,
     fileNameBits = asset.split('.'),
@@ -174,8 +174,7 @@
     }
 
     file.onload = () => {
-      ++currAsset;
-      if (currAsset == numAssets && exists(callback)) {
+      if (numLoaded == numAssets && exists(callback)) {
         callback.call();
       }
     }
@@ -186,24 +185,40 @@
 
     switch (typeof assets) {
       case 'string':
-        numAssets = 1;
-        loadAsset(assets, cb);
+        loadAsset(assets, cb, 1, 1);
       break;
 
       case 'object':
-        numAssets = assets.length;
+        let i = 0;
         for (let asset of assets) {
-          loadAsset(asset, cb);
+          ++i;
+          loadAsset(asset, cb, i, assets.length);
         }
       break;
     }
   },
 
   rand = (min, max, float) => {
-    if (float) {
-      return Math.random() * (max - min + 1) + min;
+    if (typeof min == 'object') {
+      let
+      array = min,
+      results = [];
+
+      for (let i = 0; i < array.length; i++) {
+        let newIndex = Math.floor(Math.random() * array.length);
+        while (results.indexOf(array[newIndex]) > -1) {
+          newIndex = Math.floor(Math.random() * array.length);
+        }
+        results.push(array[newIndex]);
+      }
+
+      return results;
     } else {
-      return Math.floor(Math.random() * (max - min + 1) + min);
+      if (float) {
+        return Math.random() * (max - min + 1) + min;
+      } else {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
     }
   },
 
