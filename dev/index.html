@@ -6,7 +6,15 @@
     <meta name='description' content='Portfolio for Lisa Benmore, front-end web developer in Los Angeles, CA'>
     <meta name='keywords' content='web developer, front-end, client-side, full stack'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Ubuntu|Open+Sans'>
-    <link rel='stylesheet' href='./styles/stylesheet.css'>
+
+    <!--[if IE]>
+    <link rel='stylesheet' href='./styles/legacy.stylesheet.css'>
+    <![endif]-->
+
+    <!--[if !IE]><!-->
+    <link id='styles--stylesheet' rel='stylesheet' href='./styles/stylesheet.css'>
+    <!--<![endif]-->
+
     <title>Lisa Benmore | Front-End Web Developer</title>
   </head>
   <body>
@@ -80,7 +88,16 @@
       </div>
     </div>
 
-    <script type='text/javascript' src='./scripts/bnmr.js' defer></script>
-    <script type='text/javascript' src='./scripts/library.js' defer></script>
+    <!--[if IE]>
+    <script type='text/javascript' src='./scripts/legacy.bnmr.js' defer></script>
+    <script type='text/javascript' src='./scripts/legacy.library.js' defer></script>
+    <![endif]-->
+
+    <!--[if !IE]><!-->
+    <script id='scripts--bnmr' type='text/javascript' defer></script>
+    <script id='scripts--library' type='text/javascript' defer></script>
+    <script type='text/javascript' src='./scripts/init.js' defer></script>
+    <!--<![endif]-->
+
   </body>
 </html>
