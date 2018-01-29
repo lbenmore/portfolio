@@ -1,239 +1,97 @@
 // JavaScript Document
-
 ($$ = (selector) => {
   let
-  _this,
+  sel = selector ? selector : 'body',
+  _this = sel.slice(0, 1) == '#' ? document.querySelector(sel) : document.querySelectorAll(sel);
+  _this = _this.length == 1 ? _this[0] : _this,
 
-  // $$.___() FUNCTIONS
-  ajax,
-  log,
+  numAssets = 0,
+  currAsset = 0;
 
-  // HELPER FUNCTIONS
-  evalTouch,
-  execTouch,
+  const
+  log = (msg, style) => {
+    let
+    err = new Error().stack,
+    errLines = String(err).split('\n'),
+    errLine = errLines[2],
+    logLoc = errLine.match(/\/\/(.*)/).pop(),
+    logFile = logLoc.split(':')[logLoc.split(':').length - 3].split('/').pop(),
+    logLineNo = logLoc.split(':')[logLoc.split(':').length - 2],
+    logLabel = `${logFile} (line ${logLineNo}): `,
+    logMsg = typeof msg == 'object' ? msg : logLabel + msg,
+    logStyle,
+    logType;
 
-  // GLOBAL VARIABLE HOLDER
-  globals = {};
-
-    ///////////////////
-   // DOM SELECTION //
-  ///////////////////
-
-  selector = !selector ? 'body' : selector;
-  _this = selector.slice(0, 1) == `#` ? document.querySelector(selector) : document.querySelectorAll(selector);
-  _this = (typeof _this == `object` && _this.length == 1) ? _this[0] : _this;
-
-
-    ////////////////////
-   // EVENT HANDLING //
-  ////////////////////
-
-  _this.listener = (evt, fn) => {
-    if (window.addEventListener) {
-      _this.addEventListener(evt, fn);
-    } else {
-      _this.attachEvent(`on${evt}`, fn);
-    }
-  };
-
-  execTouch = (e, evt, fn) => {
-    switch (evt) {
-      case `swipeup`:
-        if (Math.abs(globals.startY - globals.endY > 100) && globals.startY > globals.endY) {
-          fn(e);
+    switch (style) {
+      case null:
+      case undefined:
+        if (typeof msg == 'object') {
+          style = 'dir';
+        } else {
+          style = 'log';
         }
-      break;
 
-      case `swipedown`:
-        if (Math.abs(globals.startY - globals.endY > 100) && globals.startY < globals.endY) {
-          fn(e);
-        }
-      break;
-
-      case `swipeleft`:
-        if (Math.abs(globals.startX - globals.endX > 100) && globals.startX > globals.endX) {
-          fn(e);
-        }
-      break;
-
-      case `swiperight`:
-        if (Math.abs(globals.startX - globals.endX > 100) && globals.startX < globals.endX) {
-          fn(e);
-        }
-      break;
-
-      case `tap`:
-        if (Math.abs(globals.startX - globals.endX < 50) && Math.abs(globals.startY - globals.endY < 50)) {
-          fn(e);
-        }
-      break;
-    }
-  };
-
-  evalTouch = (evt, fn) => {
-    let isTouch = false;
-
-    _this.on(`touchstart`, function (e) {
-      isTouch = true;
-
-      globals.startX = e.changedTouches[0].clientX;
-      globals.startY = e.changedTouches[0].clientY;
-    });
-    _this.on(`mousedown`, function (e) {
-      globals.startX = e.clientX;
-      globals.startY = e.clientY;
-    });
-
-    _this.on(`touchend`, function (e) {
-      globals.endX = e.changedTouches[0].clientX;
-      globals.endY = e.changedTouches[0].clientY;
-
-      execTouch(e, evt, fn);
-    });
-    _this.on(`mouseup`, function (e) {
-      if (!isTouch) {
-        globals.endX = e.clientX;
-        globals.endY = e.clientY;
-
-        execTouch(e, evt, fn);
-      }
-    });
-  };
-
-  _this.on = (evt, fn) => {
-    switch (evt) {
-      case `swipeup`:
-      case `swipedown`:
-      case `swipeleft`:
-      case `swiperight`:
-      case `tap`:
-        evalTouch(evt, fn);
+      case 'assert':      case 'clear':     case 'count':     case 'dir':
+      case 'dirxml':      case 'error':     case 'group':     case 'groupCollapsed':
+      case 'groupEnd':    case 'info':      case 'log':       case 'profile':
+      case 'profileEnd':  case 'table':     case 'time':      case 'timeEnd':
+      case 'timeStamp':   case 'trace':     case 'warn':
+        logType = 'standard';
       break;
 
       default:
-        _this.listener(evt, fn);
+        logType = 'stylized';
       break;
     }
-  };
 
+    switch (logType) {
+      case 'standard':
+        console[style](logMsg);
+      break;
 
-    //////////////////////////////////
-   // CLASS MANIPULATION FUNCTIONS //
-  //////////////////////////////////
+      case 'stylized':
+        logStyle = '';
 
-  _this.addClass = (cName, delay) => {
-    setTimeout(() => {
-      if (document.body.classList) {
-        if (!_this.classList.contains(cName)) {
-          _this.classList.add(cName);
+        switch (typeof style) {
+          case 'string':
+            logStyle = style;
+          break;
+
+          case 'object':
+            for (let _style in style) {
+              logStyle += `${_style}: ${style[_style]};`;
+            }
+
+            logStyle = logStyle.slice(0, logStyle.length - 1);
         }
-      } else {
-        if (_this.className.indexOf(cName) == -1) {
-          _this.className += ` ${cName}`;
-        }
-      }
-    }, delay || 0);
-  };
 
-  _this.removeClass = (cName, delay) => {
-    setTimeout(() => {
-      if (document.body.classList) {
-        _this.classList.remove(cName);
-      } else {
-        _this.className = _this.className.replace(new RegExp(cName, `g`), ``);
-      }
-    }, delay || 0);
-  };
-
-  _this.replaceClass = (cName, cName2, delay) => {
-    setTimeout(() => {
-      _this.className = _this.className.replace(new RegExp(cName, `g`), cName2);
-    }, delay || 0);
-  };
-
-  _this.toggleClass = (cName, delay) => {
-    setTimeout(() => {
-      if (document.body.classList.toggle) {
-        _this.classList.toggle(cName);
-      } else {
-        if (_this.className.indexOf(cName) == -1) {
-          _this.addClass(cName);
-        } else {
-          _this.removeClass(cName);
-        }
-      }
-    }, delay || 0);
-  };
-
-
-    ///////////////////////////////////
-   // STYLE AND ANIMATION FUNCTIONS //
-  ///////////////////////////////////
-
-  _this.css = (prop, val, del) => {
-    let delay = typeof prop == `string` ? del : val;
-
-    setTimeout(() => {
-      if (typeof prop == `string`) {
-        _this.style[prop] = val;
-      } else {
-        for (let property in prop) {
-          _this.style[property] = prop[property];
-        }
-      }
-    }, delay || 0);
-  };
-
-  _this.animate = (properties, duration, delay, ease) => {
-    let
-    props = properties,
-    dur = duration || 500,
-    del = delay || 0,
-    eas = ease || `ease`,
-    transitionStyles = ``;
-
-    if (_this.style.transition && _this.style.transition != ``) {
-      transitionStyles = _this.style.transition;
+        console.log('%c%s', logStyle, logMsg);
+      break;
     }
-
-    for (let prop in props) {
-      transitionStyles += `${prop} ${dur}ms ${eas},`;
-      _this.css(property, props[property], delay);
-    }
-
-    transitionStyles = transitionStyles.slice(0, transitionStyles.length - 1);
-
-    _this.style.transition = transitionStyles;
-    _this.style.webkitTransition = transitionStyles;
-  };
-
-
-    ///////////////////////
-   // UTILITY FUNCTIONS //
-  ///////////////////////
+  },
 
   ajax = (options, callback) => {
     let
-    xhr = new XMLHttpRequest(),
-    type = options.type || `ajax`,
-    method = options.method || `GET`,
-    url = options.url || `./`,
+    type = options.type || 'ajax',
+    method = options.method || 'GET',
+    url = options.url || './',
     isAsync = options.async || true,
     params = options.params || null,
+    progress = options.progress || null,
+    xhr = new XMLHttpRequest(),
     data;
 
-    xhr.open(method, url, isAsync);
-    params ? xhr.send(params) : xhr.send();
+    progress ? xhr.upload.onprogress = progress : null;
 
     xhr.onreadystatechange = () => {
       if (xhr.readyState == 4) {
         switch (type) {
-          case `json`:
-            data = JSON.parse(xhr.responseText);
+          case 'xml':
+            data = xhr.responseXML;
           break;
 
-          case `xml`:
-            data = xhr.responseXML;
+          case 'json':
+            data = JSON.parse(xhr.responseText);
           break;
 
           default:
@@ -247,21 +105,347 @@
 
         return data;
       }
+    }
+
+    xhr.open(method, url, isAsync);
+    params ? xhr.send(params) : xhr.send();
+  },
+
+  exists = (value) => {
+    if (value) {
+      if (value !== null &&
+          value !== undefined &&
+          value !== 'null' &&
+          value !== 'undefined' &&
+          value !== '') {
+            return true;
+      }
+    }
+
+    return false;
+  },
+
+  getParam = (param) => {
+    let
+    loc = String(window.location),
+    query = loc.indexOf('?') > -1 ? loc.split('?')[1] : null,
+    pairs = query ? query.split('&') : null,
+    key,
+    value;
+
+    if (pairs) {
+      for (let pair of pairs) {
+        key = pair.split('=')[0];
+        if (key == param) {
+          value = pair.split('=')[1];
+          return value;
+        }
+      }
+    }
+
+    return false;
+  },
+
+  loadAsset = (asset, callback, numAssets, numLoaded) => {
+    let
+    file,
+    fileNameBits = asset.split('.'),
+    ext = fileNameBits.pop().toLowerCase();
+
+    switch (ext) {
+      case 'bmp':
+      case 'gif':
+      case 'jpeg':
+      case 'jpg':
+      case 'png':
+      case 'tiff':
+      case 'webp':
+        file = new Image();
+        file.src = asset;
+      break;
+
+      case 'mp4':
+      case 'ogv':
+      case 'webm':
+        file = document.createElement('video');
+        file.src = asset;
+        file.load();
+      break;
+    }
+
+    file.onload = () => {
+      if (numLoaded == numAssets && exists(callback)) {
+        callback.call();
+      }
+    }
+  },
+
+  preload = (assets, callback) => {
+    let cb = callback || null;
+
+    switch (typeof assets) {
+      case 'string':
+        loadAsset(assets, cb, 1, 1);
+      break;
+
+      case 'object':
+        let i = 0;
+        for (let asset of assets) {
+          ++i;
+          loadAsset(asset, cb, i, assets.length);
+        }
+      break;
+    }
+  },
+
+  rand = (min, max, float) => {
+    if (typeof min == 'object') {
+      let
+      array = min,
+      results = [];
+
+      for (let i = 0; i < array.length; i++) {
+        let newIndex = Math.floor(Math.random() * array.length);
+        while (results.indexOf(array[newIndex]) > -1) {
+          newIndex = Math.floor(Math.random() * array.length);
+        }
+        results.push(array[newIndex]);
+      }
+
+      return results;
+    } else {
+      if (float) {
+        return Math.random() * (max - min + 1) + min;
+      } else {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+    }
+  },
+
+  evalTouch = (points, evt, fn, e) => {
+    switch (evt) {
+      case 'swipeup':
+        if (Math.abs(points.start.y - points.end.y) > 100 &&
+          Math.abs(points.start.x - points.end.x) < 20 &&
+          points.start.y > points.end.y) {
+            fn(e);
+        }
+      break;
+
+      case 'swiperight':
+        if (Math.abs(points.start.x - points.end.x) > 100 &&
+          Math.abs(points.start.y - points.end.y) < 20 &&
+          points.start.x < points.end.x) {
+            fn(e);
+        }
+      break;
+
+      case 'swipedown':
+        if (Math.abs(points.start.y - points.end.y) > 100 &&
+          Math.abs(points.start.x - points.end.x) < 20 &&
+          points.start.y < points.end.y) {
+            fn(e);
+        }
+      break;
+
+      case 'swipeleft':
+        if (Math.abs(points.start.x - points.end.x) > 100 &&
+          Math.abs(points.start.y - points.end.y) < 20 &&
+          points.start.x > points.end.x) {
+            fn(e);
+        }
+      break;
+
+      case 'tap':
+        if (Math.abs(points.start.x - points.end.x) < 20 &&
+          Math.abs(points.start.y - points.end.y) < 20) {
+            fn(e);
+        }
+      break;
+    }
+  },
+
+  setPoints = (evt, fn) => {
+    let points = {
+      start: {},
+      end: {},
+      touch: false
     };
+
+    _this.on('touchstart', (e) => {
+      points.touch = true;
+      points.start.x = e.changedTouches[0].clientX;
+      points.start.y = e.changedTouches[0].clientY;
+    });
+
+    _this.on('touchend', (e) => {
+      points.end.x = e.changedTouches[0].clientX;
+      points.end.y = e.changedTouches[0].clientY;
+      evalTouch(points, evt, fn,e );
+    });
+
+    _this.on('mousedown', (e) => {
+      points.start.x = e.clientX;
+      points.start.y = e.clientY;
+    });
+
+    _this.on('mouseup', (e) => {
+      points.end.x = e.clientX;
+      points.end.y = e.clientY;
+      if (!points.touch) evalTouch(points, evt, fn, e);
+    });
   };
 
-  log = (msg, type) => {
-    let logType = type || `log`;
+  _this.on = (evt, fn) => {
+    switch (evt) {
+      case 'swipeup':
+      case 'swiperight':
+      case 'swipedown':
+      case 'swipeleft':
+      case 'tap':
+        setPoints(evt, fn);
+      break;
 
-    if (window.console.dir && typeof msg == `object`) {
-      console.dir(msg);
-    } else {
-      console[logType](msg);
+      default:
+        if (_this.length) {
+          for (let __this of _this) {
+            if (window.addEventListener) {
+              __this.addEventListener(evt, fn);
+            } else {
+              __this.attachEvent(`on${evt}`, fn);
+            }
+          }
+        } else {
+          if (window.addEventListener) {
+            _this.addEventListener(evt, fn);
+          } else {
+            _this.attachEvent(`on${evt}`, fn);
+          }
+        }
+      break;
+    }
+  };
+
+  _this.addClass = (name, delay) => {
+    setTimeout(() => {
+      if (document.classList) {
+        if (_this.length) {
+          for (let __this of _this) {
+            __this.classList.add(name);
+          }
+        } else {
+          _this.classList.add(name);
+        }
+      } else {
+        if (_this.length) {
+          for (let __this of _this) {
+            if (__this.className.indexOf(name) == -1) {
+              __this.className += ` ${name}`;
+            }
+          }
+        } else {
+          if (_this.className.indexOf(name) == -1) {
+            _this.className += ` ${name}`;
+          }
+        }
+      }
+    }, delay || 0);
+  };
+
+  _this.removeClass = (name, delay) => {
+    setTimeout(() => {
+      if (document.classList) {
+        if (_this.length) {
+          for (let __this of _this) {
+            __this.classList.remove(name);
+          }
+        } else {
+          _this.classList.remove(name);
+        }
+      } else {
+        if (_this.length) {
+          for (let __this of _this) {
+            __this.className = __this.className.replace(name, '');
+          }
+        } else {
+          _this.className = _this.className.replace(name, '');
+        }
+      }
+    }, delay || 0);
+  };
+
+  _this.replaceClass = (oldName, newName, delay) => {
+    setTimeout(() => {
+      if (_this.length) {
+        for (let __this of _this) {
+          __this.className = __this.className.replace(oldName, newName);
+        }
+      } else {
+        _this.className = _this.className.replace(oldName, newName);
+      }
+    }, delay || 0);
+  };
+
+  _this.toggleClass = (name, delay) => {
+    setTimeout(() => {
+      if (_this.length) {
+        for (let __this of _this) {
+          if (__this.className.indexOf(name) == -1) {
+            __this.addClass(name);
+          } else {
+            __this.removeClass(name);
+          }
+        }
+      } else {
+        if (_this.className.indexOf(name) == -1) {
+          _this.addClass(name);
+        } else {
+          _this.removeClass(name);
+        }
+      }
+    }, delay || 0);
+  };
+
+  _this.css = (property, value, delay) => {
+    setTimeout(() => {
+      if (_this.length) {
+        for (let __this of _this) {
+          __this.style[property] = value;
+        }
+      } else {
+        _this.style[property] = value;
+      }
+    }, delay || 0);
+  };
+
+  _this.animate = (properties, duration, delay, ease) => {
+    let
+    props = properties || null,
+    dur = duration || 500,
+    del = delay || 0,
+    eas = ease || 'ease',
+    transStyles = '';
+
+    for (let prop in props) {
+      transStyles += `${prop} ${dur}ms ${eas},`;
+    }
+
+    transStyles = transStyles.slice(0, transStyles.length - 1);
+
+    _this.css('transition', transStyles);
+    _this.css('webkitTransition', transStyles);
+
+    for (let prop in props) {
+      _this.css(prop, props[prop], delay);
     }
   };
 
   $$.ajax = ajax;
+  $$.exists = exists;
+  $$.getParam = getParam;
   $$.log = log;
+  $$.preload = preload;
+  $$.rand = rand;
 
   return _this;
 })();

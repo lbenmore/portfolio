@@ -102,7 +102,7 @@ bnmr.fns.submitContactForm = function () {
 };
 
 bnmr.fns.initContact = function () {
-  $$('.contact__list').css('padding-bottom', 'calc(var(--margin) * 2)');
+  $$('.contact__list').css('padding-bottom', '4vw');
   $$('.contact__email-link').css('display', 'none');
 
   var emailForm = document.createElement('div');
