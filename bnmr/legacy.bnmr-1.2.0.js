@@ -6,11 +6,38 @@
   _this = _this.length == 1 ? _this[0] : _this;
 
   var
+  exists = function (value) {
+    if (value) {
+      if (value !== null &&
+          value !== undefined &&
+          value !== 'null' &&
+          value !== 'undefined' &&
+          value !== '') {
+            return true;
+      }
+    }
+
+    return false;
+  },
+  
   log = function (msg, style) {
     var
     err = new Error().stack,
     errLines = String(err).split('\n'),
-    errLine = errLines[2],
+    errLine,
+    logLoc,
+    logFile,
+    logLineNo,
+    logLabel,
+    logMsg,
+    logStyle,
+    logType;
+    
+    for (var i = 0; i < errLines.length; i++) {
+      if (!exists(errLines[i])) errLines.splice(i, 1);
+    }
+    
+    errLine = errLines[errLines.length - 1].indexOf('setPoints') > -1 ? errLines[errLines.length - 3] : errLines[errLines.length - 1],
     logLoc = errLine.match(/\/\/(.*)/).pop(),
     logFile = logLoc.split(':')[logLoc.split(':').length - 3].split('/').pop(),
     logLineNo = logLoc.split(':')[logLoc.split(':').length - 2],
@@ -106,20 +133,6 @@
 
     xhr.open(method, url, isAsync);
     params ? xhr.send(params) : xhr.send();
-  },
-
-  exists = function (value) {
-    if (value) {
-      if (value !== null &&
-          value !== undefined &&
-          value !== 'null' &&
-          value !== 'undefined' &&
-          value !== '') {
-            return true;
-      }
-    }
-
-    return false;
   },
 
   getParam = function (param) {

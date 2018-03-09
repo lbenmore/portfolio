@@ -9,11 +9,38 @@
   currAsset = 0;
 
   const
+  exists = (value) => {
+    if (value) {
+      if (value !== null &&
+          value !== undefined &&
+          value !== 'null' &&
+          value !== 'undefined' &&
+          value !== '') {
+            return true;
+      }
+    }
+
+    return false;
+  },
+
   log = (msg, style) => {
     let
     err = new Error().stack,
     errLines = String(err).split('\n'),
-    errLine = errLines[2],
+    errLine,
+    logLoc,
+    logFile,
+    logLineNo,
+    logLabel,
+    logMsg,
+    logStyle,
+    logType;
+
+    for (let line of errLines) {
+      if (!exists(line)) errLines.splice(errLines.indexOf(line), 1);
+    }
+
+    errLine = errLines[errLines.length - 1].includes('setPoints') ? errLines[errLines.length - 3] : errLines[errLines.length - 1],
     logLoc = errLine.match(/\/\/(.*)/).pop(),
     logFile = logLoc.split(':')[logLoc.split(':').length - 3].split('/').pop(),
     logLineNo = logLoc.split(':')[logLoc.split(':').length - 2],
@@ -109,20 +136,6 @@
 
     xhr.open(method, url, isAsync);
     params ? xhr.send(params) : xhr.send();
-  },
-
-  exists = (value) => {
-    if (value) {
-      if (value !== null &&
-          value !== undefined &&
-          value !== 'null' &&
-          value !== 'undefined' &&
-          value !== '') {
-            return true;
-      }
-    }
-
-    return false;
   },
 
   getParam = (param) => {
