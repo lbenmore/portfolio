@@ -19,7 +19,7 @@
 
     return false;
   },
-  
+
   log = function (msg, style) {
     var
     err = new Error().stack,
@@ -32,11 +32,11 @@
     logMsg,
     logStyle,
     logType;
-    
+
     for (var i = 0; i < errLines.length; i++) {
       if (!exists(errLines[i])) errLines.splice(i, 1);
     }
-    
+
     errLine = errLines[errLines.length - 1].indexOf('setPoints') > -1 ? errLines[errLines.length - 3] : errLines[errLines.length - 1],
     logLoc = errLine.match(/\/\/(.*)/).pop(),
     logFile = logLoc.split(':')[logLoc.split(':').length - 3].split('/').pop(),
@@ -420,8 +420,8 @@
 
     transStyles = transStyles.slice(0, transStyles.length - 1);
 
-    _this.css('transition', transStyles);
-    _this.css('webkitTransition', transStyles);
+    _this.css('transition', transStyles, (del >= 20 ? del - 20 : 0));
+    _this.css('-webkit-transition', transStyles, (del >= 20 ? del - 20 : 0));
 
     for (var prop in props) {
       _this.css(prop, props[prop], delay);

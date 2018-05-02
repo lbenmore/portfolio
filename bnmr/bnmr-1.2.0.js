@@ -445,8 +445,8 @@
 
     transStyles = transStyles.slice(0, transStyles.length - 1);
 
-    _this.css('transition', transStyles);
-    _this.css('webkitTransition', transStyles);
+    _this.css('transition', transStyles, (del >= 20 ? del - 20 : 0));
+    _this.css('-webkit-transition', transStyles, (del >= 20 ? del - 20 : 0));
 
     for (let prop in props) {
       _this.css(prop, props[prop], delay);
