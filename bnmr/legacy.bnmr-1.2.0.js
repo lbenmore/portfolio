@@ -2,7 +2,7 @@
 ($$ = function (selector) {
   var
   sel = selector || 'body',
-  _this = sel.slice(0, 1) == '#' || document.querySelectorAll(sel).length > 1 ? document.querySelector(sel) : document.querySelectorAll(sel);
+  _this = sel.slice(0, 1) == '#' || document.querySelectorAll(sel).length == 1 ? document.querySelector(sel) : document.querySelectorAll(sel);
 
   log = function (msg, type) {
     var
