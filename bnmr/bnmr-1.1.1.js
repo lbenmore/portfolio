@@ -1,11 +1,9 @@
 // JavaScript Document
 
 const $$ = (sel) => {
-	let _this,
-			el = sel || 'body';
-
-  el.slice(0, 1) == '#' ? _this = document.querySelector(el) : _this = document.querySelectorAll(el);
-	(typeof _this == 'object' && _this.length == 1) ? _this = _this[0] : null;
+	let
+	el = sel || 'body',
+	_this = el.slice(0, 1) == '#' || document.querySelectorAll(sel).length == 1 ? document.querySelector(el) : document.querySelectorAll(sel);
 
   const
   loader = (asset) => {

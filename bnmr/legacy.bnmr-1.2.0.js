@@ -1,8 +1,8 @@
 // JavaScript Document
 ($$ = function (selector) {
-  var
-  sel = selector || 'body',
-  _this = sel.slice(0, 1) == '#' || document.querySelectorAll(sel).length == 1 ? document.querySelector(sel) : document.querySelectorAll(sel);
+	var 
+	el = sel || 'body',
+	_this = el.slice(0, 1) == '#' || document.querySelectorAll(sel).length == 1 ? document.querySelector(el) : document.querySelectorAll(sel);
 
   log = function (msg, type) {
     var
