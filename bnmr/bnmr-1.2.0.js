@@ -1,8 +1,8 @@
 // JavaScript Document
 ($$ = (selector) => {
-  let
-  sel = selector ? selector : 'body',
-  _this = sel.slice(0, 1) == '#' || document.querySelectorAll(sel).length == 1 ? document.querySelector(sel) : document.querySelectorAll(sel);
+	let
+	el = selector || 'body',
+	_this = el.slice(0, 1) == '#' || document.querySelectorAll(el).length == 1 ? document.querySelector(el) : document.querySelectorAll(el);
 
   const
   exists = (value) => {
@@ -70,7 +70,7 @@
       if (typeof typ == 'object') {
         style = '';
         for (var prop in typ) {
-          style += `${prop}: ${typ[prop];}`;
+          style += `${prop}: ${typ[prop]};`;
         }
       } else {
         style = typ;
