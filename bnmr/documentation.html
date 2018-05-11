@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable.=no, shrink-to-fit=no'>
+    <title>bnmr Library | Documentation</title>
+    <style>
+      *:active,
+      *:focus,
+      *:visited {
+      color: inherit;
+      }
+
+      *:focus {
+      outline: none;
+      }
+
+      body {
+      margin: 0;
+      }
+
+      body * {
+      position: relative;
+      box-sizing: border-box;
+      font-family: sans-serif;
+      }
+
+      .container {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      }
+
+      .header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 80px;
+        border-bottom: 1px solid #e1e1e1;
+      }
+
+        .header span {
+          position: absolute;
+          display: inline-block;
+          top: 50%;
+          left: 0;
+          width: 100%;
+          color: #333;
+          font-family: serif;
+          font-size: 2.4em;
+          font-style: italic;
+          font-weight: 100;
+          text-align: center;
+          transform: translateY(-50%);
+        }
+
+      .sidebar {
+        position: fixed;
+        top: 80px;
+        bottom: 0;
+        left: 0;
+        width: 240px;
+        padding: 16px;
+        border-right: 1px solid #e1e1e1;
+        overflow-y: auto;
+      }
+
+        .sidebar__link {
+          display: block;
+          margin-bottom: 8px;
+          color: #444;
+        }
+
+        .sidebar__link:hover {
+          color: #000;
+        }
+
+      .content {
+        position: fixed;
+        top: 80px;
+        right: 0;
+        bottom: 0;
+        left: 240px;
+        padding: 16px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+      }
+
+        .content__function.function {
+          margin-bottom: 24px;
+          padding: 16px;
+          min-width: 320px;
+          background-color: #f4f4f4;
+        }
+
+          .function > * {
+            margin-bottom: 16px;
+          }
+
+          .function__title {
+            color: #333;
+            font-family: serif;
+            font-size: 1.4em;
+          }
+
+          .function__group {
+            margin-bottom: 16px;
+            padding: 8px 0;
+          }
+
+            .function__label {
+              padding-bottom: 4px;
+              color: #333;
+              font-size: 0.8em;
+              font-weight: 700;
+              letter-spacing: 0.2em;
+              text-transform: uppercase;
+            }
+
+            .function__description {
+            }
+
+            .function__parameters.table {
+              display: table;
+              width: 100%;
+              background-color: #eaeaea;
+            }
+
+              .table__row {
+                display: table-row;
+                /* height: 30px; */
+                padding: 8px;
+              }
+
+              .table__row:nth-of-type(2n + 1) {
+                background-color: #dcdcdc;
+              }
+
+                .table__cell {
+                  display: table-cell;
+                  vertical-align: middle;
+                  padding:8px;
+                }
+
+            .function__return {
+            }
+
+            .function__example {
+              font-family: monospace;
+              white-space: pre-wrap;
+            }
+
+              .function__example .console {
+                font-family: monospace;
+                white-space: pre-wrap;
+                color: #808080;
+              }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='header'>
+        <span>bnmr Library</span>
+      </div>
+      <div class='sidebar'>
+        <a href='#function--main' class='sidebar__link'>$$()</a>
+        <a href='#function--on' class='sidebar__link'>$$().on()</a>
+        <a href='#function--addClass' class='sidebar__link'>$$().addClass()</a>
+        <a href='#function--removeClass' class='sidebar__link'>$$().removeClass()</a>
+        <a href='#function--replaceClass' class='sidebar__link'>$$().replaceClass()</a>
+        <a href='#function--css' class='sidebar__link'>$$().css()</a>
+        <a href='#function--animate' class='sidebar__link'>$$().animate()</a>
+        <a href='#function--ajax' class='sidebar__link'>$$.ajax()</a>
+        <a href='#function--exists' class='sidebar__link'>$$.exists()</a>
+        <a href='#function--getParam' class='sidebar__link'>$$.getParam()</a>
+        <a href='#function--log' class='sidebar__link'>$$.log()</a>
+        <a href='#function--preload' class='sidebar__link'>$$.preload()</a>
+        <a href='#function--rand' class='sidebar__link'>$$.rand()</a>
+      </div>
+      <div class='content'>
+
+
+
+        <div class='content__function function' id='function--main'>
+          <div class='function__title'>$$(selector)</div>
+
+          <div class='function__group'>
+            <div class='function__label'>Description</div>
+            <div class='function__description'>Dynamic DOM element selector</div>
+          </div>
+
+          <div class='function__group'>
+            <div class='function__label'>Parameters</div>
+            <div class='function__parameters table'>
+              <div class='table__row'>
+                <div class='table__cell'>selector</div>
+                <div class='table__cell'>String</div>
+                <div class='table__cell'>Any valid CSS selector. Default: 'body'.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class='function__group'>
+            <div class='function__label'>Returns</div>
+            <div class='function__return'>Returns DOM node or NodeList if multiple exist.</div>
+          </div>
+
+          <div class='function__group'>
+            <div class='function__label'>Examples</div>
+            <div class='function__example'>$$('#container'); <span class='console'>// => (element with container ID)</span>
+    $$('.link'); <span class='console'>// => (all elements with link class)</span>
+    $$('.link:not(.grey), .text'); <span class='console'>// => (all elements with link class but not grey class and all elements with text class)</span></div>
+          </div>
+        </div>
+
+
+
+        <div class='content__function function' id='function--on'>
+          <div class='function__title'>$$(selector).on(event, callback)</div>
+
+          <div class='function__group'>
+            <div class='function__label'>Description</div>
+            <div class='function__description'>DOM event attacher with legacy and mobile support.</div>
+          </div>
+
+          <div class='function__group'>
+            <div class='function__label'>Parameters</div>
+            <div class='function__parameters table'>
+              <div class='table__row'>
+                <div class='table__cell'>selector</div>
+                <div class='table__cell'>String</div>
+                <div class='table__cell'>Any valid CSS selector. Default: 'body'.</div>
+              </div>
+              <div class='table__row'>
+                <div class='table__cell'>event</div>
+                <div class='table__cell'>String</div>
+            <div class='table__cell'>Name of event to listen for.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>callback</div>
+            <div class='table__cell'>Function</div>
+            <div class='table__cell'>Function to execute on event occurrence.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$('.btn').on('tap', (e) => {
+  $$.log(e.target);
+});
+
+$$('.slideshow').on('swipeleft', updateSlideshow.bind(null, 'forward'));</div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--addClass'>
+      <div class='function__title'>$$(selector).addClass(className[, delay])</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Adds class to DOM element(s).</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>selector</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Any valid CSS selector. Default: 'body'.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>className</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Name of class to add to element(s).</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>delay</div>
+            <div class='table__cell'>Number</div>
+            <div class='table__cell'>Time of delay from function call to application of class in milliseconds.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$('.btn').addClass('purple') // adds 'purple' class to any elements with 'btn' class;
+
+$$('#container').addClass('opac-1', 1000); <span class='console'>// adds class 'opac-1' to element with 'container' ID after 1 second</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--removeClass'>
+      <div class='function__title'>$$(selector).removeClass(className[, delay])</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Removes class from DOM element(s).</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>selector</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Any valid CSS selector. Default: 'body'.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>className</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Name of class to remove from element(s).</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>delay</div>
+            <div class='table__cell'>Number</div>
+            <div class='table__cell'>Time of delay from function call to removal of class in milliseconds.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$('.btn').removeClass('purple') // removes 'purple' class from any elements with 'btn' class;
+
+$$('#container').removeClass('opac-0', 1000); <span class='console'>// removes class 'opac-0' from element with 'container' ID after 1 second</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--replaceClass'>
+      <div class='function__title'>$$(selector).replaceClass(fromClassName, toClassName[, delay])</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Replaces class on DOM element(s).</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>selector</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Any valid CSS selector. Default: 'body'.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>fromClassName</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Name of class to remove from element(s).</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>toClassName</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Name of class to add to element(s).</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>delay</div>
+            <div class='table__cell'>Number</div>
+            <div class='table__cell'>Time of delay from function call to replacement of class in milliseconds.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$('.btn').removeClass('purple', 'red') // replaces 'purple' class with 'red' class on any elements with 'btn' class;
+
+$$('#container').replaceClass('opac-0', 'fadeIn', 1000); <span class='console'>// replaces class 'opac-0' with 'fadeIn' class on element with 'container' ID after 1 second</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--css'>
+      <div class='function__title'>$$(selector).css(property, value[, delay])</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Applies an inline CSS rule to DOM element(s).</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>selector</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Any valid CSS selector. Default: 'body'.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>property</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Any valid CSS property.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>value</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Any valid CSS property.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>delay</div>
+            <div class='table__cell'>Number</div>
+            <div class='table__cell'>Time of delay from function call to application of CSS rule in milliseconds.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$('.btn').css('background-color', 'purple') <span class='console'>// applies inline CSS rule of purple background color to any elements with the class names 'btn'</span>;
+
+$$('#container').css('opacity', '1', 500) <span class='console'>// applies inline CSS rule of 1 for opacity after a half second to element with ID of 'container'</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--animate'>
+      <div class='function__title'>$$(selector).animate(properties, duration, delay, ease)</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Applies a CSS transitional animation to a DOM element(s).</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>selector</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Any valid CSS selector. Default: 'body'.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>properties</div>
+            <div class='table__cell'>Object</div>
+            <div class='table__cell'>As an object, CSS property keys with valid property values to be applied.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>duration</div>
+            <div class='table__cell'>Number</div>
+            <div class='table__cell'>Duration of animation in milliseconds. Default is 500.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>delay</div>
+            <div class='table__cell'>Number</div>
+            <div class='table__cell'>Delay before animation in milliseconds. Default is 0.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>ease</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Any valid CSS value for timing function. Default is 'ease'.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$('.btn').animate({
+  opacity: '1',
+  '-webkit-transform': 'translateY(-10px)',
+  transform: 'translateY(-10px)'
+}, 1000, 250, 'cubic-bezier(.68,-0.55,.27,1.55)'); <span class='console'>// animates all elements with the class of 'btn' to have an opacity of 1 and up 10px over one second after delaying for a quarter second with a bounce effect</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--ajax'>
+      <div class='function__title'>$$.ajax(options[, callback])</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Basic AJAX request utility</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>options</div>
+            <div class='table__cell'>Object</div>
+            <div class='table__cell'>Configuration settings for the request.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>options.type</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>Expected return type from request. Options are 'xml', 'json' or 'text'. Default is 'text'.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>options.method</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>HTTP method for requesting data. Options are 'GET' or 'POST'. Default is 'GET'.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>options.url</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>File path or absolute path to the request source. Default is './'.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>options.async</div>
+            <div class='table__cell'>Boolean</div>
+            <div class='table__cell'>Whether the request should be asynchronous. Default is true.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>options.params</div>
+            <div class='table__cell'>FormData Object or String</div>
+            <div class='table__cell'>Parameters to be passed to the request. String can be used for GET requests and an object for POST requests. Default is null.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>options.progress</div>
+            <div class='table__cell'>Function</div>
+            <div class='table__cell'>Function to execute on progress event of request. Default is null.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>callback</div>
+            <div class='table__cell'>Function</div>
+            <div class='table__cell'>Function to execute on successful return of request.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>function onAjaxProgress = function (e) {
+  if (e.lengthComputable) $$.log(e.loaded / e.total);
+};
+
+var params = new FormData();
+
+params.append('action', 'verify_user');
+params.append('username', username);
+params.append('password', password);
+
+$$.ajax({
+  type: 'json',
+  method: 'POST',
+  url: './com/user_functions.php',
+  isAsync: true,
+  params: params,
+  progress: onAjaxProgress
+}, function (response) {
+  $$.log(response);
+});</div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--exists'>
+      <div class='function__title'>$$.exists(value)</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Tests for the existence of a value.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>value</div>
+            <div class='table__cell'>Mixed</div>
+            <div class='table__cell'>Tests for a truthy value.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Returns true if truthy and false if not.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$.exists(true) <span class='console'>// => true</span>
+$$.exists(null) <span class='console'>// => false</span>
+$$.exists("null") <span class='console'>// => false</span>
+$$.exists("") <span class='console'>// => false</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--getParam'>
+      <div class='function__title'>$$.getParam(key)</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Gets query string parameter value from window location.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>key</div>
+            <div class='table__cell'>String</div>
+            <div class='table__cell'>The key of the key/value pair to be returned.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Returns the value of the key passed or false if none is present.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>window.location = 'https://www.path.to/url?param1=foo&amp;param2=bar&amp;param3=baz';
+
+$$.getParam('param2') <span class='console'>// => bar</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--log'>
+      <div class='function__title'>$$.log(message[, style])</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Creates a console message with label and optional styling.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>message</div>
+            <div class='table__cell'>Mixed</div>
+            <div class='table__cell'>String or Object to be printed in the console.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>style</div>
+            <div class='table__cell'>Mixed</div>
+            <div class='table__cell'>Either string of console type (built-in functions) or CSS styling, or object of CSS styling.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$.log('hello, world.'); <span class='console'>// -> library.js:1:1 -> hello, world.</span>
+
+$$.log({foo: bar, baz: false}); <span class='console'>// -> library.js:3:1 -> Object (link break, then directory of object)</span>
+
+$$.log('Danger, Will Robinson!', 'error'); <span class='console'>// -> library.js:5:1 -> Danger, Will Robinson! (as a console.error message)</span>
+
+$$.log('hello, world', 'font-size: 16px; color: #f06;'); <span class='console'>// -> library.js:7:1 -> hello, world. (styled)</span>
+
+$$.log('hello, world', {'font-size': '16px', 'color': '#f06'}); <span class='console'>// -> library.js:9:1 -> hello, world. (styled)</span>
+
+$$.log({foo: bar, baz: false}, 'font-size: 16px; color: blueviolet;'); <span class='console'>// -> library.js:11:1 -> Object (styled, then line break, then directory of object)</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--preload'>
+      <div class='function__title'>$$.preload(assets[, callback])</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Preloads one more image or video assets.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>assets</div>
+            <div class='table__cell'>Mixed</div>
+            <div class='table__cell'>String of file path or array of file paths.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>callback</div>
+            <div class='table__cell'>Function</div>
+            <div class='table__cell'>Function to execute after all assets have loaded.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Does not return any values.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$.preload('./path/to/file.jpg');
+
+$$.preload('https://www.path.to/file.jpg', function () {
+  $$.log('loaded');
+});
+
+$$.preload(['./path/to/file1.jpg', './path/to/file2.jpg'], initOnImgsLoad); <span class='console'>// executes initOnImgsLoad function once both images have loaded</span></div>
+      </div>
+    </div>
+
+
+
+    <div class='content__function function' id='function--rand'>
+      <div class='function__title'>$$.rand([min, max, isFloat])</div>
+
+      <div class='function__group'>
+        <div class='function__label'>Description</div>
+        <div class='function__description'>Returns a random value between two given values. Alternatively, returns a randomization of a given array.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Parameters</div>
+        <div class='function__parameters table'>
+          <div class='table__row'>
+            <div class='table__cell'>min</div>
+            <div class='table__cell'>Number [or Array]</div>
+            <div class='table__cell'>Lowest number the returned value should be. Alternatively, an array to be randomized.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>max</div>
+            <div class='table__cell'>Number</div>
+            <div class='table__cell'>Greatest number the returned value should be.</div>
+          </div>
+          <div class='table__row'>
+            <div class='table__cell'>float</div>
+            <div class='table__cell'>Boolean</div>
+            <div class='table__cell'>Whether the returned value should have decimal places or not.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Returns</div>
+        <div class='function__return'>Returns a value between the two values given. Alternatively, returns a randomized version of given array.</div>
+      </div>
+
+      <div class='function__group'>
+        <div class='function__label'>Examples</div>
+        <div class='function__example'>$$.rand(1, 10) <span class='console'>// => (a whole number between 1 and 10)</span>
+
+$$.rand(0, 5, true) <span class='console'>// => (a number between 0 and 5 to the 15th decimal place)</span>
+
+$$.rand([0, 1, 2, 3, 4, 5]) <span class='console'>// => (randomized version of array)</span></div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+  </body>
+</html>
