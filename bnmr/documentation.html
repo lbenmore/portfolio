@@ -2,7 +2,7 @@
 <html lang='en'>
   <head>
     <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable.=no, shrink-to-fit=no'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no'>
     <title>bnmr Library | Documentation</title>
     <style>
       @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i|Ubuntu:400,400i,700');
@@ -15,6 +15,10 @@
 
       *:focus {
         outline: none;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
       }
 
       body {
@@ -96,6 +100,7 @@
           bottom: 0;
           left: 240px;
           padding: 16px;
+          overflow-x: hidden;
           overflow-y: auto;
           scroll-behavior: smooth;
         }
@@ -115,6 +120,7 @@
               color: #333;
               font-family: 'Playfair Display', serif;
               font-size: 1.4em;
+              word-break: break-all;
             }
 
             .function__group {
@@ -183,8 +189,8 @@
         }
 
         .header__title {
-          left: 64px;
-          width: calc(100% - 64px);
+          left: 56px;
+          width: calc(100% - 56px);
         }
 
         .header__menu {
@@ -193,7 +199,7 @@
           top: 16px;
           left: 16px;
           bottom: 16px;
-          width: 48px;
+          width: 24px;
         }
 
           .header__menu span {
@@ -221,11 +227,11 @@
             }
 
             .header__menu span::before {
-              transform: translateY(-16px);
+              transform: translateY(-8px);
             }
 
             .header__menu span::after {
-              transform: translateY(16px);
+              transform: translateY(8px);
             }
 
             #handler--menu:checked ~ .header .header__menu span {
@@ -536,7 +542,7 @@ $$('#container').replaceClass('opac-0', 'fadeIn', 1000); <span class='console'>/
 
           <div class='function__group'>
             <div class='function__label'>Examples</div>
-            <div class='function__example'>$$('.btn').css('background-color', 'purple') <span class='console'>// applies inline CSS rule of purple background color to any elements with the class names 'btn'</span>;
+            <div class='function__example'>$$('.btn').css('background-color', 'purple'); <span class='console'>// applies inline CSS rule of purple background color to any elements with the class names 'btn'</span>
 
 $$('#container').css('opacity', '1', 500) <span class='console'>// applies inline CSS rule of 1 for opacity after a half second to element with ID of 'container'</span></div>
           </div>
