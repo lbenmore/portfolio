@@ -8,163 +8,254 @@
       *:active,
       *:focus,
       *:visited {
-      color: inherit;
+        color: inherit;
       }
 
       *:focus {
-      outline: none;
+        outline: none;
       }
 
       body {
-      margin: 0;
+        margin: 0;
       }
 
       body * {
-      position: relative;
-      box-sizing: border-box;
-      font-family: sans-serif;
+        position: relative;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      .handler {
+        display: none;
       }
 
       .container {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      }
-
-      .header {
         position: fixed;
         top: 0;
         right: 0;
+        bottom: 0;
         left: 0;
-        height: 80px;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
-        z-index: 1;
       }
 
-        .header span {
-          position: absolute;
-          display: inline-block;
-          top: 50%;
+        .header {
+          position: fixed;
+          top: 0;
+          right: 0;
           left: 0;
-          width: 100%;
-          color: #333;
-          font-family: serif;
-          font-size: 2.4em;
-          font-style: italic;
-          font-weight: 100;
-          text-align: center;
-          transform: translateY(-50%);
+          height: 80px;
+          box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+          z-index: 1;
         }
 
-      .sidebar {
-        position: fixed;
-        top: 80px;
-        bottom: 0;
-        left: 0;
-        width: 240px;
-        padding: 16px;
-        background-color: #f4f4f4;
-        overflow-y: auto;
-      }
-
-        .sidebar__link {
-          display: block;
-          margin-bottom: 8px;
-          color: #444;
-        }
-
-        .sidebar__link:hover {
-          color: #000;
-        }
-
-      .content {
-        position: fixed;
-        top: 80px;
-        right: 0;
-        bottom: 0;
-        left: 240px;
-        padding: 16px;
-        overflow-y: auto;
-        scroll-behavior: smooth;
-      }
-
-        .content__function.function {
-          margin-bottom: 24px;
-          padding: 16px;
-          min-width: 320px;
-          background-color: #f4f4f4;
-        }
-
-          .function > * {
-            margin-bottom: 16px;
-          }
-
-          .function__title {
+          .header__title {
+            position: absolute;
+            display: inline-block;
+            top: 50%;
+            left: 0;
+            width: 100%;
             color: #333;
             font-family: serif;
-            font-size: 1.4em;
+            font-size: 2.4em;
+            font-style: italic;
+            font-weight: 100;
+            text-align: center;
+            transform: translateY(-50%);
           }
 
-          .function__group {
-            margin-bottom: 16px;
-            padding: 8px 0;
+          .header__menu {
+            display: none;
           }
 
-            .function__label {
-              padding-bottom: 4px;
+        .sidebar {
+          position: fixed;
+          top: 80px;
+          bottom: 0;
+          left: 0;
+          width: 240px;
+          padding: 16px;
+          background-color: #f4f4f4;
+          overflow-y: auto;
+        }
+
+          .sidebar__link {
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+          }
+
+          .sidebar__link:hover {
+            color: #000;
+          }
+
+        .content {
+          position: fixed;
+          top: 80px;
+          right: 0;
+          bottom: 0;
+          left: 240px;
+          padding: 16px;
+          overflow-y: auto;
+          scroll-behavior: smooth;
+        }
+
+          .content__function.function {
+            margin-bottom: 24px;
+            padding: 16px;
+            min-width: 320px;
+            background-color: #f4f4f4;
+          }
+
+            .function > * {
+              margin-bottom: 16px;
+            }
+
+            .function__title {
               color: #333;
-              font-size: 0.8em;
-              font-weight: 700;
-              letter-spacing: 0.2em;
-              text-transform: uppercase;
+              font-family: serif;
+              font-size: 1.4em;
             }
 
-            .function__description {
+            .function__group {
+              margin-bottom: 16px;
+              padding: 8px 0;
             }
 
-            .function__parameters.table {
-              display: table;
-              width: 100%;
-              background-color: #eaeaea;
-            }
-
-              .table__row {
-                display: table-row;
-                /* height: 30px; */
-                padding: 8px;
+              .function__label {
+                margin-bottom: 8px;
+                color: #333;
+                font-size: 0.8em;
+                font-weight: 700;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
               }
 
-              .table__row:nth-of-type(2n + 1) {
-                background-color: #dcdcdc;
+              .function__description {
               }
 
-                .table__cell {
-                  display: table-cell;
-                  vertical-align: middle;
-                  padding:8px;
+              .function__parameters.table {
+                display: table;
+                width: 100%;
+                background-color: #eaeaea;
+              }
+
+                .table__row {
+                  display: table-row;
+                  /* height: 30px; */
+                  padding: 8px;
                 }
 
-            .function__return {
-            }
+                .table__row:nth-of-type(2n + 1) {
+                  background-color: #dcdcdc;
+                }
 
-            .function__example {
-              font-family: monospace;
-              white-space: pre-wrap;
-            }
+                  .table__cell {
+                    display: table-cell;
+                    vertical-align: middle;
+                    padding:8px;
+                  }
 
-              .function__example .console {
+              .function__return {
+              }
+
+              .function__example {
                 font-family: monospace;
                 white-space: pre-wrap;
-                color: #808080;
               }
+
+                .function__example .console {
+                  font-family: monospace;
+                  white-space: pre-wrap;
+                  color: #808080;
+                }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          right: 0;
+          bottom: auto;
+          width: auto;
+          max-height: 0;
+          padding: 0;
+          background-color: #e0e0e0;
+          z-index: 1;
+          transition: max-height 0.3s, padding 0.3s step-end;
+        }
+
+        .header__title {
+          left: 64px;
+          width: calc(100% - 64px);
+        }
+
+        .header__menu {
+          position: absolute;
+          display: block;
+          top: 16px;
+          left: 16px;
+          bottom: 16px;
+          width: 48px;
+        }
+
+          .header__menu span {
+            position: absolute;
+            display: inline-block;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e0e0e0;
+            transform: translateY(-50%);
+            transition: transform 0.3s;
+          }
+
+            .header__menu span::before,
+            .header__menu span::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: inherit;
+              transition: transform 0.3s;
+            }
+
+            .header__menu span::before {
+              transform: translateY(-16px);
+            }
+
+            .header__menu span::after {
+              transform: translateY(16px);
+            }
+
+            #handler--menu:checked ~ .header .header__menu span {
+              transform: rotate(45deg);
+            }
+
+            #handler--menu:checked ~ .header .header__menu span::before {
+              transform: translateY(0);
+            }
+
+            #handler--menu:checked ~ .header .header__menu span::after {
+              transform: translateY(0) rotate(90deg);
+            }
+
+            #handler--menu:checked ~ .sidebar {
+              max-height: 50vh;
+              padding: 16px;
+              transition: max-height 0.3s, padding 0.3s step-start;
+            }
+
+        .content {
+          left: 0;
+        }
+      }
     </style>
   </head>
   <body>
     <div class='container'>
+      <input type='checkbox' class='handler' id='handler--menu'>
       <div class='header'>
-        <span>bnmr Library</span>
+        <span class='header__title'>bnmr Library</span>
+        <label class='header__menu' for='handler--menu'><span></span></label>
       </div>
       <div class='sidebar'>
         <a href='#function--main' class='sidebar__link'>$$()</a>
@@ -212,8 +303,8 @@
           <div class='function__group'>
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$('#container'); <span class='console'>// => (element with container ID)</span>
-    $$('.link'); <span class='console'>// => (all elements with link class)</span>
-    $$('.link:not(.grey), .text'); <span class='console'>// => (all elements with link class but not grey class and all elements with text class)</span></div>
+$$('.link'); <span class='console'>// => (all elements with link class)</span>
+$$('.link:not(.grey), .text'); <span class='console'>// => (all elements with link class but not grey class and all elements with text class)</span></div>
           </div>
         </div>
 
@@ -256,10 +347,10 @@
           <div class='function__group'>
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$('.btn').on('tap', (e) => {
-      $$.log(e.target);
-    });
+  $$.log(e.target);
+});
 
-    $$('.slideshow').on('swipeleft', updateSlideshow.bind(null, 'forward'));</div>
+$$('.slideshow').on('swipeleft', updateSlideshow.bind(null, 'forward'));</div>
           </div>
         </div>
 
@@ -303,7 +394,7 @@
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$('.btn').addClass('purple') // adds 'purple' class to any elements with 'btn' class;
 
-    $$('#container').addClass('opac-1', 1000); <span class='console'>// adds class 'opac-1' to element with 'container' ID after 1 second</span></div>
+$$('#container').addClass('opac-1', 1000); <span class='console'>// adds class 'opac-1' to element with 'container' ID after 1 second</span></div>
           </div>
         </div>
 
@@ -347,7 +438,7 @@
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$('.btn').removeClass('purple') // removes 'purple' class from any elements with 'btn' class;
 
-    $$('#container').removeClass('opac-0', 1000); <span class='console'>// removes class 'opac-0' from element with 'container' ID after 1 second</span></div>
+$$('#container').removeClass('opac-0', 1000); <span class='console'>// removes class 'opac-0' from element with 'container' ID after 1 second</span></div>
           </div>
         </div>
 
@@ -394,9 +485,9 @@
 
           <div class='function__group'>
             <div class='function__label'>Examples</div>
-            <div class='function__example'>$$('.btn').removeClass('purple', 'red') // replaces 'purple' class with 'red' class on any elements with 'btn' class;
+            <div class='function__example'>$$('.btn').replaceClass('purple', 'red') // replaces 'purple' class with 'red' class on any elements with 'btn' class;
 
-    $$('#container').replaceClass('opac-0', 'fadeIn', 1000); <span class='console'>// replaces class 'opac-0' with 'fadeIn' class on element with 'container' ID after 1 second</span></div>
+$$('#container').replaceClass('opac-0', 'fadeIn', 1000); <span class='console'>// replaces class 'opac-0' with 'fadeIn' class on element with 'container' ID after 1 second</span></div>
           </div>
         </div>
 
@@ -445,7 +536,7 @@
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$('.btn').css('background-color', 'purple') <span class='console'>// applies inline CSS rule of purple background color to any elements with the class names 'btn'</span>;
 
-    $$('#container').css('opacity', '1', 500) <span class='console'>// applies inline CSS rule of 1 for opacity after a half second to element with ID of 'container'</span></div>
+$$('#container').css('opacity', '1', 500) <span class='console'>// applies inline CSS rule of 1 for opacity after a half second to element with ID of 'container'</span></div>
           </div>
         </div>
 
@@ -498,10 +589,10 @@
           <div class='function__group'>
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$('.btn').animate({
-      opacity: '1',
-      '-webkit-transform': 'translateY(-10px)',
-      transform: 'translateY(-10px)'
-    }, 1000, 250, 'cubic-bezier(.68,-0.55,.27,1.55)'); <span class='console'>// animates all elements with the class of 'btn' to have an opacity of 1 and up 10px over one second after delaying for a quarter second with a bounce effect</span></div>
+  opacity: '1',
+  '-webkit-transform': 'translateY(-10px)',
+  transform: 'translateY(-10px)'
+}, 1000, 250, 'cubic-bezier(.68,-0.55,.27,1.55)'); <span class='console'>// animates all elements with the class of 'btn' to have an opacity of 1 and up 10px over one second after delaying for a quarter second with a bounce effect</span></div>
           </div>
         </div>
 
@@ -569,25 +660,25 @@
           <div class='function__group'>
             <div class='function__label'>Examples</div>
             <div class='function__example'>function onAjaxProgress = function (e) {
-      if (e.lengthComputable) $$.log(e.loaded / e.total);
-    };
+  if (e.lengthComputable) $$.log(e.loaded / e.total);
+};
 
-    var params = new FormData();
+var params = new FormData();
 
-    params.append('action', 'verify_user');
-    params.append('username', username);
-    params.append('password', password);
+params.append('action', 'verify_user');
+params.append('username', username);
+params.append('password', password);
 
-    $$.ajax({
-      type: 'json',
-      method: 'POST',
-      url: './com/user_functions.php',
-      isAsync: true,
-      params: params,
-      progress: onAjaxProgress
-    }, function (response) {
-      $$.log(response);
-    });</div>
+$$.ajax({
+  type: 'json',
+  method: 'POST',
+  url: './com/user_functions.php',
+  isAsync: true,
+  params: params,
+  progress: onAjaxProgress
+}, function (response) {
+  $$.log(response);
+});</div>
           </div>
         </div>
 
@@ -620,9 +711,9 @@
           <div class='function__group'>
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$.exists(true) <span class='console'>// => true</span>
-    $$.exists(null) <span class='console'>// => false</span>
-    $$.exists("null") <span class='console'>// => false</span>
-    $$.exists("") <span class='console'>// => false</span></div>
+$$.exists(null) <span class='console'>// => false</span>
+$$.exists("null") <span class='console'>// => false</span>
+$$.exists("") <span class='console'>// => false</span></div>
           </div>
         </div>
 
@@ -656,7 +747,7 @@
             <div class='function__label'>Examples</div>
             <div class='function__example'>window.location = 'https://www.path.to/url?param1=foo&amp;param2=bar&amp;param3=baz';
 
-    $$.getParam('param2') <span class='console'>// => bar</span></div>
+$$.getParam('param2') <span class='console'>// => bar</span></div>
           </div>
         </div>
 
@@ -695,15 +786,15 @@
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$.log('hello, world.'); <span class='console'>// -> library.js:1:1 -> hello, world.</span>
 
-    $$.log({foo: bar, baz: false}); <span class='console'>// -> library.js:3:1 -> Object (link break, then directory of object)</span>
+$$.log({foo: bar, baz: false}); <span class='console'>// -> library.js:3:1 -> Object (link break, then directory of object)</span>
 
-    $$.log('Danger, Will Robinson!', 'error'); <span class='console'>// -> library.js:5:1 -> Danger, Will Robinson! (as a console.error message)</span>
+$$.log('Danger, Will Robinson!', 'error'); <span class='console'>// -> library.js:5:1 -> Danger, Will Robinson! (as a console.error message)</span>
 
-    $$.log('hello, world', 'font-size: 16px; color: #f06;'); <span class='console'>// -> library.js:7:1 -> hello, world. (styled)</span>
+$$.log('hello, world', 'font-size: 16px; color: #f06;'); <span class='console'>// -> library.js:7:1 -> hello, world. (styled)</span>
 
-    $$.log('hello, world', {'font-size': '16px', 'color': '#f06'}); <span class='console'>// -> library.js:9:1 -> hello, world. (styled)</span>
+$$.log('hello, world', {'font-size': '16px', 'color': '#f06'}); <span class='console'>// -> library.js:9:1 -> hello, world. (styled)</span>
 
-    $$.log({foo: bar, baz: false}, 'font-size: 16px; color: blueviolet;'); <span class='console'>// -> library.js:11:1 -> Object (styled, then line break, then directory of object)</span></div>
+$$.log({foo: bar, baz: false}, 'font-size: 16px; color: blueviolet;'); <span class='console'>// -> library.js:11:1 -> Object (styled, then line break, then directory of object)</span></div>
           </div>
         </div>
 
@@ -742,11 +833,11 @@
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$.preload('./path/to/file.jpg');
 
-    $$.preload('https://www.path.to/file.jpg', function () {
-      $$.log('loaded');
-    });
+$$.preload('https://www.path.to/file.jpg', function () {
+  $$.log('loaded');
+});
 
-    $$.preload(['./path/to/file1.jpg', './path/to/file2.jpg'], initOnImgsLoad); <span class='console'>// executes initOnImgsLoad function once both images have loaded</span></div>
+$$.preload(['./path/to/file1.jpg', './path/to/file2.jpg'], initOnImgsLoad); <span class='console'>// executes initOnImgsLoad function once both images have loaded</span></div>
           </div>
         </div>
 
@@ -790,9 +881,9 @@
             <div class='function__label'>Examples</div>
             <div class='function__example'>$$.rand(1, 10) <span class='console'>// => (a whole number between 1 and 10)</span>
 
-    $$.rand(0, 5, true) <span class='console'>// => (a number between 0 and 5 to the 15th decimal place)</span>
+$$.rand(0, 5, true) <span class='console'>// => (a number between 0 and 5 to the 15th decimal place)</span>
 
-    $$.rand([0, 1, 2, 3, 4, 5]) <span class='console'>// => (randomized version of array)</span></div>
+$$.rand([0, 1, 2, 3, 4, 5]) <span class='console'>// => (randomized version of array)</span></div>
           </div>
         </div>
 
