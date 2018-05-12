@@ -55,7 +55,7 @@ diagonalCardLoad = () => {
 
 	$$('.content__card').css('opacity', '0');
 	$$('.content__card').css('transform', 'scale(0.8)');
-	$$('.content__card').css('transition', 'opacity 0.5s, transform 0.5s, box-shadow 0.3s', 100);
+	$$('.content__card').css('transition', 'opacity 0.5s, transform 0.5s', 100);
 
 	setTimeout(() => {
 		for (let card of $$('.content__card')) {
@@ -66,7 +66,8 @@ diagonalCardLoad = () => {
 				card.style.transform = 'scale(1)';
 
 				setTimeout(() => {
-					card.style.transitionDelay = '0s';
+					card.style.transition = 'opacity 0.5s, transform 0.3s, box-shadow 0.3s';
+					// card.style.transitionDelay = '0s';
 				}, 100 * anim + 100);
 			}, 100);
 
