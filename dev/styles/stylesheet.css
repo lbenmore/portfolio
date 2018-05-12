@@ -138,6 +138,23 @@ strike {
 			width: 120px;
 		}
 
+			.sidebar__blurb--dynamic.dontBlink::after {
+				content: '';
+				position: relative;
+				display: inline-block;
+				vertical-align: bottom;
+				width: 1px;
+				height: 0.9em;
+				background-color: currentcolor;
+				opacity: 0;
+				animation-direction: alternate;
+				animation-duration: 0.2s;
+				animation-iteration-count: infinite;
+				animation-name: blink;
+			}
+
+	@keyframes blink { to { opacity: 1; } }
+
 	.content {
 		position: fixed;
 		top: 0;
@@ -163,23 +180,6 @@ strike {
 		box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
 		transform: scale(1.01) !important;
 	}
-
-	.dontBlink::after {
-		content: '';
-		position: relative;
-		display: inline-block;
-		vertical-align: bottom;
-		width: 1px;
-		height: 0.9em;
-		background-color: currentcolor;
-		opacity: 0;
-		animation-direction: alternate;
-		animation-duration: 0.2s;
-		animation-iteration-count: infinite;
-		animation-name: blink;
-	}
-
-@keyframes blink { to { opacity: 1; } }
 
 @media (min-width: 820px) {
 	.content__card {
