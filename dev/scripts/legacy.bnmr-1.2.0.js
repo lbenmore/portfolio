@@ -1,70 +1,94 @@
 // JavaScript Document
 ($$ = function (selector) {
-  var
-  sel = selector ? selector : 'body',
-  _this = sel.slice(0, 1) == '#' ? document.querySelector(sel) : document.querySelectorAll(sel);
-  _this = _this.length == 1 ? _this[0] : _this;
+	var
+	el = selector || 'body',
+	_this = el.slice(0, 1) == '#' || document.querySelectorAll(el).length == 1 ? document.querySelector(el) : document.querySelectorAll(el);
 
-  var
-  log = function (msg, style) {
+  log = function (msg, type) {
     var
-    err = new Error().stack,
-    errLines = String(err).split('\n'),
-    errLine = errLines[2],
-    logLoc = errLine.match(/\/\/(.*)/).pop(),
-    logFile = logLoc.split(':')[logLoc.split(':').length - 3].split('/').pop(),
-    logLineNo = logLoc.split(':')[logLoc.split(':').length - 2],
-    logLabel = logFile + ' (line ' + logLineNo + '): ',
-    logMsg = typeof msg == 'object' ? msg : logLabel + msg,
-    logStyle,
-    logType;
+    typ = type || 'log',
+    stylized = null,
+    style = null,
+    label = '';
 
-    switch (style) {
-      case null:
-      case undefined:
-        if (typeof msg == 'object') {
-          style = 'dir';
-        } else {
-          style = 'log';
+    try {
+      var
+      err = new Error(),
+      stack = err.stack,
+      lines = stack.split('\n'),
+      line,
+      fileName,
+      lineNo,
+      charNo;
+
+      for (var i = 0; i < lines.length; i++) {
+        if (lines[i] == '') {
+          lines.splice(i, 1);
         }
+      }
 
-      case 'assert':      case 'clear':     case 'count':     case 'dir':
-      case 'dirxml':      case 'error':     case 'group':     case 'groupCollapsed':
-      case 'groupEnd':    case 'info':      case 'log':       case 'profile':
-      case 'profileEnd':  case 'table':     case 'time':      case 'timeEnd':
-      case 'timeStamp':   case 'trace':     case 'warn':
-        logType = 'standard';
+      line = lines[lines.length - 1].indexOf('setTouchPoints') > -1 ? lines[lines.length - 3] : lines[lines.length - 1]
+      fileName = line.split('/')[line.split('/').length - 1].split(':')[0];
+      lineNo = line.split(':')[line.split(':').length - 2];
+      charNo = line.split(':')[line.split(':').length - 1];
+
+      label = typeof msg == 'object' ? fileName + ':' + lineNo + ':' + charNo + ' -> Object' : fileName + ':' + lineNo + ':' + charNo + ' -> ';
+    } catch (e) {
+      msg = msg
+    }
+
+    switch (typ) {
+      case 'assert':      case 'clear':   case 'count':   case 'dir':
+      case 'dirxml':      case 'error':   case 'group':   case 'groupCollapsed':
+      case 'groupEnd':    case 'info':    case 'log':     case 'profile':
+      case 'profileEnd':  case 'table':   case 'time':    case 'timeEnd':
+      case 'timeStamp':   case 'trace':   case 'warn':
+        stylized = false;
       break;
 
       default:
-        logType = 'stylized';
+        stylized = true;
       break;
     }
 
-    switch (logType) {
-      case 'standard':
-        console[style](logMsg);
-      break;
-
-      case 'stylized':
-        logStyle = '';
-
-        switch (typeof style) {
-          case 'string':
-            logStyle = style;
-          break;
-
-          case 'object':
-            for (var _style in style) {
-              logStyle += _style + ': ' + style[_style] + ';';
-            }
-
-            logStyle = logStyle.slice(0, logStyle.length - 1);
+    if (stylized) {
+      if (typeof typ == 'object') {
+        style = '';
+        for (var prop in typ) {
+          style += prop + ': ' + typ[prop] + ';';
         }
+      } else {
+        style = typ;
+      }
 
-        console.log('%c%s', logStyle, logMsg);
-      break;
+      if (typeof msg == 'object') {
+        console.log('%c%s', style, label);
+        console.dir(msg);
+      } else {
+        console.log('%c%s', style, label + msg);
+      }
+    } else {
+      if (typeof msg == 'object') {
+        console[typ](label);
+        console.dir(msg);
+      } else {
+        console[typ](label + msg);
+      }
     }
+  },
+
+  exists = function (value) {
+    if (value) {
+      if (value !== null &&
+          value !== undefined &&
+          value !== 'null' &&
+          value !== 'undefined' &&
+          value !== '') {
+            return true;
+      }
+    }
+
+    return false;
   },
 
   ajax = function (options, callback) {
@@ -106,20 +130,6 @@
 
     xhr.open(method, url, isAsync);
     params ? xhr.send(params) : xhr.send();
-  },
-
-  exists = function (value) {
-    if (value) {
-      if (value !== null &&
-          value !== undefined &&
-          value !== 'null' &&
-          value !== 'undefined' &&
-          value !== '') {
-            return true;
-      }
-    }
-
-    return false;
   },
 
   getParam = function (param) {
@@ -217,77 +227,93 @@
     }
   },
 
-  evalTouch = function (points, evt, fn, e) {
+  listener = function (evt, fn) {
+    if (addEventListener) {
+      if (_this.length) {
+        for (var i = 0; i < _this.length; i++) {
+          _this[i].addEventListener(evt, fn);
+        }
+      } else {
+        _this.addEventListener(evt, fn);
+      }
+    } else {
+      if (_this.length) {
+        for (var i = 0; i < _this.length; i++) {
+          _this[i].attachEvent('on' + evt, fn);
+        }
+      } else {
+        _this.attachEvent('on' + evt, fn);
+      }
+    }
+  },
+
+  evalTouchPoints = function (points, evt, fn, e) {
+    var evtObj = {};
+    for (var key in e) {
+      evtObj[key] = key == 'type' ? evt : e[key];
+    }
+
     switch (evt) {
       case 'swipeup':
-        if (Math.abs(points.start.y - points.end.y) > 100 &&
-          Math.abs(points.start.x - points.end.x) < 20 &&
-          points.start.y > points.end.y) {
-            fn(e);
+        if (Math.abs(points.start.y - points.end.y) >50 && Math.abs(points.start.x - points.end.x) < 20 && points.start.y > points.end.y) {
+          fn(evtObj);
         }
       break;
 
       case 'swiperight':
-        if (Math.abs(points.start.x - points.end.x) > 100 &&
-          Math.abs(points.start.y - points.end.y) < 20 &&
-          points.start.x < points.end.x) {
-            fn(e);
+        if (Math.abs(points.start.x - points.end.x) > 50 && Math.abs(points.start.y - points.end.y) < 20 && points.start.x < points.end.x) {
+          fn(evtObj);
         }
       break;
 
       case 'swipedown':
-        if (Math.abs(points.start.y - points.end.y) > 100 &&
-          Math.abs(points.start.x - points.end.x) < 20 &&
-          points.start.y < points.end.y) {
-            fn(e);
+        if (Math.abs(points.start.y - points.end.y) > 50 && Math.abs(points.start.x - points.end.x) < 20 && points.start.y < points.end.y) {
+          fn(evtObj);
         }
       break;
 
       case 'swipeleft':
-        if (Math.abs(points.start.x - points.end.x) > 100 &&
-          Math.abs(points.start.y - points.end.y) < 20 &&
-          points.start.x > points.end.x) {
-            fn(e);
+        if (Math.abs(points.start.x - points.end.x) > 50 && Math.abs(points.start.y - points.end.y) < 20 && points.start.x > points.end.x) {
+          fn(evtObj);
         }
       break;
 
       case 'tap':
-        if (Math.abs(points.start.x - points.end.x) < 20 &&
-          Math.abs(points.start.y - points.end.y) < 20) {
-            fn(e);
+        if (Math.abs(points.start.x - points.end.x) < 10 && Math.abs(points.start.y - points.end.y) < 10) {
+          fn(evtObj);
         }
       break;
     }
   },
 
-  setPoints = function (evt, fn) {
-    var points = {
-      start: {},
-      end: {},
-      touch: false
-    };
+  setTouchPoints = function (evt, fn) {
+    var points = {};
 
-    _this.on('touchstart', function (e) {
-      points.touch = true;
+    points.start = {};
+    points.end = {};
+    points.touch = false;
+
+    listener('touchstart', function (e) {
       points.start.x = e.changedTouches[0].clientX;
       points.start.y = e.changedTouches[0].clientY;
-    });
+      points.touch = true;
+    })
 
-    _this.on('touchend', function (e) {
+    listener('touchend', function (e) {
       points.end.x = e.changedTouches[0].clientX;
       points.end.y = e.changedTouches[0].clientY;
-      evalTouch(points, evt, fn,e );
+      evalTouchPoints(points, evt, fn, e);
     });
 
-    _this.on('mousedown', function (e) {
+    listener('mousedown', function (e) {
       points.start.x = e.clientX;
       points.start.y = e.clientY;
-    });
+    })
 
-    _this.on('mouseup', function (e) {
+    listener('mouseup', function (e) {
       points.end.x = e.clientX;
       points.end.y = e.clientY;
-      if (!points.touch) evalTouch(points, evt, fn, e);
+      if (!points.touch) evalTouchPoints(points, evt, fn, e);
     });
   };
 
@@ -298,25 +324,11 @@
       case 'swipedown':
       case 'swipeleft':
       case 'tap':
-        setPoints(evt, fn);
+        setTouchPoints(evt, fn);
       break;
 
       default:
-        if (_this.length) {
-          for (var i = 0; i < _this.length; i++) {
-            if (window.addEventListener) {
-              _this[i].addEventListener(evt, fn);
-            } else {
-              _this[i].attachEvent('on' + evt, fn);
-            }
-          }
-        } else {
-          if (window.addEventListener) {
-            _this.addEventListener(evt, fn);
-          } else {
-            _this.attachEvent('on' + evt, fn);
-          }
-        }
+        listener(evt, fn);
       break;
     }
   };
@@ -407,8 +419,8 @@
 
     transStyles = transStyles.slice(0, transStyles.length - 1);
 
-    _this.css('transition', transStyles);
-    _this.css('webkitTransition', transStyles);
+    _this.css('transition', transStyles, (del >= 20 ? del - 20 : 0));
+    _this.css('-webkit-transition', transStyles, (del >= 20 ? del - 20 : 0));
 
     for (var prop in props) {
       _this.css(prop, props[prop], delay);
