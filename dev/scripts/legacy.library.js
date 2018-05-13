@@ -1,6 +1,7 @@
 'use strict';
 
-var rotateDynamicBlurb = function rotateDynamicBlurb(blurbs, i) {
+var
+rotateDynamicBlurb = function rotateDynamicBlurb(blurbs, i) {
 	var str = blurbs[i],
 	    curI = 1,
 	    curStr = $$('.sidebar__blurb--dynamic').textContent,
@@ -31,14 +32,23 @@ var rotateDynamicBlurb = function rotateDynamicBlurb(blurbs, i) {
 		}, 50);
 	}, 3000);
 },
-    initDynamicBlurb = function initDynamicBlurb() {
-	var BLURBS = ['Winter is <strike>coming</strike> here.', 'These violent delights have violent ends.', 'Don\'t turn your back. Don\'t look away. And don\'t blink.', 'Saving people. Hunting things. The family business.', 'Stay in the house, Carl.', 'We are fsociety.', 'Don\'t forget to smile.'];
+initDynamicBlurb = function initDynamicBlurb() {
+	var BLURBS = [
+		'Winter is <strike>coming</strike> here.',
+		'These violent delights have violent ends.',
+		'Don\'t turn your back. Don\'t look away. And don\'t blink.',
+		'Saving people. Hunting things. The family business.',
+		'Stay in the house, Carl.', 'We are fsociety.',
+		'Don\'t forget to smile.',
+		'The law is hard, but it is the law.',
+		'The world is quiet here.'
+	];
 
 	$$('.sidebar__blurb--dynamic').addClass('dontBlink');
 
 	rotateDynamicBlurb($$.rand(BLURBS), 0);
 },
-    diagonalCardLoad = function diagonalCardLoad() {
+diagonalCardLoad = function diagonalCardLoad() {
 	var row = 1,
 	    col = 1;
 
@@ -112,7 +122,7 @@ var rotateDynamicBlurb = function rotateDynamicBlurb(blurbs, i) {
 		}
 	}, 100);
 },
-    initFns = function initFns() {
+initFns = function initFns() {
 	diagonalCardLoad();
 	initDynamicBlurb();
 };

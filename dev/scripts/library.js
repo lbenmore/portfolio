@@ -40,7 +40,9 @@ initDynamicBlurb = () => {
 		'Saving people. Hunting things. The family business.',
 		'Stay in the house, Carl.',
 		'We are fsociety.',
-		'Don\'t forget to smile.'
+		'Don\'t forget to smile.',
+		'The law is hard, but it is the law.',
+		'The world is quiet here.'
 	];
 
 	$$('.sidebar__blurb--dynamic').addClass('dontBlink');
