@@ -203,7 +203,7 @@
 				numAssets = assets.length;
 
         for (let asset of assets) {
-          loadAsset(asset, cb, i, loadEvent);
+          loadAsset(asset, cb, loadEvent);
         }
       break;
     }

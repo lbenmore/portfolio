@@ -192,7 +192,7 @@
 		loaded = 0,
 		numAssets;
 
-		loadEvent.initEvent('bnmr_load_event', true, true);
+		loadEvent.initEvent('bnmr_preload_event', true, true);
 
     switch (typeof assets) {
       case 'string':
@@ -209,7 +209,7 @@
     }
 
 		if (callback) {
-			addEventListener('bnmr_preload_event', function () {
+			addEventListener('bnmr_preload_event', function (e) {
 				++loaded;
 				if (loaded == numAssets) callback.call(null);
 			});
