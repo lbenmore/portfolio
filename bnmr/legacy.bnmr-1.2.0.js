@@ -153,24 +153,13 @@
     return false;
   },
 
-  loadAsset = function (asset, callback, numAssets, numLoaded) {
+  loadAsset = function (asset, callback, evt) {
     var
     file,
     fileNameBits = asset.split('.'),
     ext = fileNameBits.pop().toLowerCase();
 
     switch (ext) {
-      case 'bmp':
-      case 'gif':
-      case 'jpeg':
-      case 'jpg':
-      case 'png':
-      case 'tiff':
-      case 'webp':
-        file = new Image();
-        file.src = asset;
-      break;
-
       case 'mp4':
       case 'ogv':
       case 'webm':
@@ -178,29 +167,53 @@
         file.src = asset;
         file.load();
       break;
+
+			default:
+        file = new Image();
+        file.src = asset;
+			break;
     }
 
     file.onload = function () {
-      if (numLoaded == numAssets && exists(callback)) {
-        callback.call();
-      }
+			dispatchEvent(evt);
     };
+
+		file.onerror = function (e) {
+			console.error('Error loading file: ' + asset);
+			console.dir(e);
+			dispatchEvent(evt);
+		};
   },
 
   preload = function (assets, callback) {
-    var cb = callback || null;
+    var
+		cb = callback || null,
+		loadEvent = document.createEvent('Event'),
+		loaded = 0,
+		numAssets;
+
+		loadEvent.initEvent('bnmr_load_event', true, true);
 
     switch (typeof assets) {
       case 'string':
-        loadAsset(assets, cb, 1, 1);
+				numAssets = 1;
+        loadAsset(assets, cb, loadEvent);
       break;
 
       case 'object':
+				numAssets = assets.length;
         for (var i = 0; i < assets.length; i++) {
-          loadAsset(assets[i], cb, (i + 1), assets.length);
+          loadAsset(assets[i], cb, loadEvent);
         }
       break;
     }
+
+		if (callback) {
+			addEventListener('bnmr_preload_event', function () {
+				++loaded;
+				if (loaded == numAssets) callback.call(null);
+			});
+		}
   },
 
   rand = function (min, max, float) {

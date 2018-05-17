@@ -154,24 +154,13 @@
     return false;
   },
 
-  loadAsset = (asset, callback, numAssets, numLoaded) => {
+  loadAsset = (asset, callback, evt) => {
     let
     file,
     fileNameBits = asset.split('.'),
     ext = fileNameBits.pop().toLowerCase();
 
     switch (ext) {
-      case 'bmp':
-      case 'gif':
-      case 'jpeg':
-      case 'jpg':
-      case 'png':
-      case 'tiff':
-      case 'webp':
-        file = new Image();
-        file.src = asset;
-      break;
-
       case 'mp4':
       case 'ogv':
       case 'webm':
@@ -179,31 +168,52 @@
         file.src = asset;
         file.load();
       break;
+
+			default:
+        file = new Image();
+        file.src = asset;
+			break;
     }
 
     file.onload = () => {
-      if (numLoaded == numAssets && exists(callback)) {
-        callback.call();
-      }
-    }
+			dispatchEvent(evt);
+    };
+
+		file.onerror = (e) => {
+			console.error(`Error loading file: ${asset}`);
+			console.dir(e);
+			dispatchEvent(evt);
+		};
   },
 
   preload = (assets, callback) => {
-    let cb = callback || null;
+    let
+		cb = callback || null,
+		loadEvent = new Event('bnmr_preload_event'),
+		numAssets,
+		loaded = 0;
 
     switch (typeof assets) {
       case 'string':
-        loadAsset(assets, cb, 1, 1);
+				numAssets = 1;
+        loadAsset(assets, cb, loadEvent);
       break;
 
       case 'object':
-        let i = 0;
+				numAssets = assets.length;
+
         for (let asset of assets) {
-          ++i;
-          loadAsset(asset, cb, i, assets.length);
+          loadAsset(asset, cb, i, loadEvent);
         }
       break;
     }
+
+		if (callback) {
+			addEventListener('bnmr_preload_event', () => {
+				++loaded;
+				if (loaded == numAssets) callback.call(null);
+			});
+		}
   },
 
   rand = (min, max, float) => {
