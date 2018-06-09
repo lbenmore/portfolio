@@ -1,4 +1,24 @@
 const
+responsify = () => {
+  let
+  gameW = parseInt(getComputedStyle(document.querySelector('.container')).width),
+  gameH = parseInt(getComputedStyle(document.querySelector('.container')).height),
+  gameR = gameW / gameH,
+  winW = innerWidth,
+  winH = innerHeight,
+  winR = winW / winH;
+
+  if (gameW > winW || gameH > winH) {
+    if (gameR > winR) {
+      document.querySelector('.container').style.transform = `translate(-50%, -50%) scale(${winW / gameW})`;
+    } else {
+      document.querySelector('.container').style.transform = `translate(-50%, -50%) scale(${winH / gameH})`;
+    }
+  } else {
+    document.querySelector('.container').style.transform = 'translate(-50%, -50%)';
+  }
+},
+
 replayGame = (target, btnReplay, steve, cacti, doomCactus, score) => {
   btnReplay.parentNode.removeChild(btnReplay);
 
@@ -15,13 +35,10 @@ replayGame = (target, btnReplay, steve, cacti, doomCactus, score) => {
 
 endGame = (target, steve, cacti, doomCactus, score) => {
   let btnReplay = document.createElement('button');
-
   btnReplay.classList.add('btnReplay');
   target.appendChild(btnReplay);
-  btnReplay.addEventListener('click', replayGame.bind(null, target, btnReplay, steve, cacti, doomCactus, score));
 
-  steve.setGameIsActive(false);
-  steve.stop();
+  btnReplay.addEventListener('click', replayGame.bind(null, target, btnReplay, steve, cacti, doomCactus, score));
 
   cacti.forEach((_cactus) => {
     if (_cactus != doomCactus) {
@@ -29,6 +46,9 @@ endGame = (target, steve, cacti, doomCactus, score) => {
       _cactus.parentNode.removeChild(_cactus);
     }
   });
+
+  steve.setGameIsActive(false);
+  steve.stop();
 },
 
 animSteve = (steve, dir) => {
@@ -205,6 +225,8 @@ class Steve {
     addEventListener('keypress', (e) => {
       if (e.charCode == 32) this.bounce();
     });
+
+    addEventListener('touchstart', this.bounce.bind(this));
   }
 
   walk () {
@@ -281,6 +303,9 @@ initSteve = () => {
 initGame = () => {
   new Background(document.querySelector('.container'));
   initSteve();
+  // the method used in responsify fucks with cacti and steve speed
+  // responsify();
+  // addEventListener('resize', responsify);
 };
 
 document.addEventListener('DOMContentLoaded', initGame);
