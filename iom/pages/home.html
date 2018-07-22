@@ -1,75 +1,14 @@
 <include src='./blocks/header.html'></include>
-<div class='content table w-full text-md text-white'>
+<div class='main-content table w-full text-md text-white'>
 
   <div class='row'>
     <!-- section -->
-    <div class='section col wrapper w-three-quarters bg-black-75'>
+    <div class='section top-voted col wrapper w-three-quarters bg-black-75'>
       <!-- header -->
       <div class='p-b-sm font-bold text-xl l-s-2 text-u-c b-b b-2 b-red'>Top Voted</div>
       <!-- content -->
-      <div class='m-t'>
-        <!-- track -->
-        <div class='track m-t'>
-          <!-- track name -->
-          <div class='text-lg font-bold m-b-xs'>Track Name</div>
-          <!-- track origin user -->
-          <div class='m-b-xs'>Origin User</div>
-          <!-- track social -->
-          <div class='text-xs m-b-sm'>
-            <i class='fa fa-thumbs-up'></i> <span class='b-r b-white p-r-sm m-r-sm'>##</span>
-            <i class='fa fa-comments'></i> <span class=''>##</span>
-          </div>
-          <!-- track tags -->
-          <div class='text-xs'>
-            <i class='fa fa-tags'></i>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>tag 1</span>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>tag 2</span>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>tag 3</span>
-          </div>
-        </div>
-        <!-- end track -->
-
-        <!-- track -->
-        <div class='track m-t b-t b-red p-t'>
-          <!-- track nam -->
-          <div class='text-lg font-bold m-b-xs'>2018-05-18 23:42:57 - Las Vegas, NV, USA</div>
-          <!-- track origin user -->
-          <div class='m-b-xs'>soapstreetmarla@yahoo.com</div>
-          <!-- track social -->
-          <div class='text-xs m-b-sm'>
-            <i class='fa fa-thumbs-up'></i> <span class='b-r b-white p-r-sm m-r-sm'>4,815</span>
-            <i class='fa fa-comments'></i> <span class=''>1,623</span>
-          </div>
-          <!-- track tags -->
-          <div class='text-xs'>
-            <i class='fa fa-tags'></i>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>las vegas, nv, usa</span>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>house</span>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>edc</span>
-          </div>
-        </div>
-        <!-- end track -->
-
-        <!-- track -->
-        <div class='track m-t b-t b-red p-t'>
-          <!-- track nam -->
-          <div class='text-lg font-bold m-b-xs'>Darude - Sandstorm</div>
-          <!-- track origin user -->
-          <div class='m-b-xs'>lbenmore@gmail.com</div>
-          <!-- track social -->
-          <div class='text-xs m-b-sm'>
-            <i class='fa fa-thumbs-up'></i> <span class='b-r b-white p-r-sm m-r-sm'>42</span>
-            <i class='fa fa-comments'></i> <span class=''>0</span>
-          </div>
-          <!-- track tags -->
-          <div class='text-xs'>
-            <i class='fa fa-tags'></i>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>tag 1</span>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>tag 2</span>
-            <span class='tag bg-black-75 b-radius p-v-xs p-h-sm'>tag 3</span>
-          </div>
-        </div>
-        <!-- end track -->
+      <div class='content m-t'>
+        <!-- provided dynamically by populateTracks in home.js -->
       </div>
       <!-- end content -->
     </div>
@@ -80,15 +19,18 @@
       <!-- header -->
       <div class='p-b-sm font-bold text-xl l-s-2 text-u-c b-b b-2 b-red'>Upload New</div>
       <!-- content -->
-      <div class='m-t'>
+      <div class='m-t text-center'>
         <!-- drag and drop upload zone -->
-        <div class='square b b-dotted b-blue'>
-          <div class='trans-center text-center text-sm w-full wrapper-sm font-bold text-u-c text-xs l-s-2'>
-            <span class='dsp-blk m-b'>Drag and Drop Files Here</span>
-            <label class='dsp-inblk btn bg-red text-white'>Or choose file <input type='file' class='dsp-none'></label>
+        <label class='square dsp-blk b b-dotted b-blue'>
+          <div class='trans-center text-sm w-full wrapper-sm'>
+            <span class='dsp-blk m-b text-u-c l-s-2'>Drag and Drop Files Here</span>
+            <label class='btn dsp-inblk bg-red text-white'>Or choose file <input id='upload-new-track' type='file' class='dsp-none'></label>
           </div>
-        </div>
+        </label>
         <!-- end drag and drop upload zone -->
+
+        <!-- upload button -->
+        <button class='btn m-t bg-red text-white' onclick='uploadNewTrack()'>Upload</button>
       </div>
       <!-- end content -->
     </div>
@@ -97,11 +39,12 @@
 
   <div class='row'>
     <!-- section -->
-    <div class='section col wrapper m-t w-three-quarters bg-black-75'>
+    <div class='section most-recent col wrapper m-t w-three-quarters bg-black-75'>
       <!-- header -->
       <div class='p-b-sm font-bold text-xl l-s-2 text-u-c b-b b-2 b-red'>Most Recent</div>
       <!-- content -->
-      <div class='m-t'>
+      <div class='content m-t'>
+        <!-- provided dynamically by populateTracks in home.js -->
       </div>
       <!-- end content -->
     </div>
@@ -113,6 +56,54 @@
       <div class='p-b-sm font-bold text-xl l-s-2 text-u-c b-b b-2 b-red'>Archive</div>
       <!-- content -->
       <div class='m-t'>
+        <ul>
+          <li class='m-b'>
+            <span class='text-red m-r-sm'>•</span><span class='font-bold font-underline'>2018</span>
+            <ul>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>July</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>June</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>May</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>April</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>March</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>February</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>January</span></li>
+            </ul>
+          </li>
+          <li class='m-b'>
+            <span class='text-red m-r-sm'>•</span><span class='font-bold font-underline'>2017</span>
+            <ul>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>December</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>November</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>October</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>September</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>August</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>July</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>June</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>May</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>April</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>March</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>February</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>January</span></li>
+            </ul>
+          </li>
+          <li class='m-b'>
+            <span class='text-red m-r-sm'>•</span><span class='font-bold font-underline'>2016</span>
+            <ul>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>December</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>November</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>October</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>September</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>August</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>July</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>June</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>May</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>April</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>March</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>February</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>January</span></li>
+            </ul>
+          </li>
+        </ul>
       </div>
       <!-- end content -->
     </div>

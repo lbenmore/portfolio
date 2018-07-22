@@ -1,5 +1,11 @@
-loadPage = (pageName) => {
+loadPage = (pageName, params) => {
   window.location.hash = `#/${pageName}`;
+  if ($$.exists(params)) {
+    window.location.hash += '/?';
+    for (let key in params) {
+      window.location.hash += `${key}=${encodeURIComponent(params[key])}&`;
+    }
+  }
   loadWindowLocation();
 }
 
@@ -11,7 +17,7 @@ loadIncludes = () => {
       let div = document.createElement('div');
       div.innerHTML = html;
       include.parentNode.insertBefore(div, include);
-      include.parentNode.removeChild(include);
+      setTimeout(() => { include.parentNode.removeChild(include); }, 100);
     })
   }
 }
@@ -72,13 +78,13 @@ loadWindowLocation = () => {
 }
 
 checkForLocationStringAndLoad = () => {
-  if (!window.location.hash) {
+  if (!$$.exists(window.location.hash)) {
     window.location += '#/signin';
   }
 
   loadWindowLocation();
 
-  onhashchange = loadWindowLocation;
+  onhashchange = () => { window.location.reload(); };
 }
 
 loadConfig = () => {

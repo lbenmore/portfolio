@@ -4,6 +4,8 @@
 
 * {
   position: relative;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   border-radius: 0;
   font-family: 'Montserrat', sans-serif;
@@ -17,6 +19,14 @@ body {
   font-size: 14px;
 }
 
+ul {
+  list-style: none;
+}
+
+  ul ul {
+    margin-left: 24px;
+  }
+
 
 
 /* UI ELEMENTS */
@@ -29,12 +39,12 @@ body {
 
 .btn {
   padding: 8px 24px;
-  background: transparent;
   border: none;
   border-radius: 0;
-  background: transparent;
   color: inherit;
   font: inherit;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 .tag {
@@ -78,7 +88,7 @@ body {
   height: 60px;
 }
 
-.content {
+.main-content {
   top: 60px;
 }
 
@@ -107,4 +117,11 @@ body {
 
 .text-blue {
   color: #4f0072;
+}
+
+
+
+.section .content .track:first-of-type {
+  border-top: none;
+  padding-top: 0;
 }

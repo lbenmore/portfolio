@@ -20,10 +20,16 @@ const app = {
     },
     home: {
       html: './pages/home.html',
-      stylesheets: [
-      ],
+      stylesheets: [],
       scripts: [
         './js/controllers/home.js'
+      ]
+    },
+    track: {
+      html: './pages/track.html',
+      stylesheets: [],
+      scripts: [
+        './js/controllers/track.js'
       ]
     }
   }
