@@ -8,7 +8,6 @@ loadIncludes = () => {
     $$.ajax({
       url: include.getAttribute('src')
     }, (html) => {
-      console.log(html);
       let div = document.createElement('div');
       div.innerHTML = html;
       include.parentNode.insertBefore(div, include);
