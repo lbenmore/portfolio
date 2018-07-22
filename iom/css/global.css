@@ -1,0 +1,85 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,700");
+
+* {
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+}
+
+/* UI COMPONENTS */
+.separator {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font: inherit;
+}
+
+
+
+/* PAGE PARTS */
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  background-blend-mode: darken;
+  background-color: #f06;
+  background-image: url('../assets/img/hero.jpeg');
+  background-position: center;
+  background-size: cover;
+  -webkit-filter: grayscale();
+  filter: grayscale();
+}
+
+.header {
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 50px;
+}
+
+.header .nav {
+  top: 50%;
+  right: 24px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.content {
+  top: 50px;
+}
+
+.section {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.track {
+
+}
+
+
+
+/* HOME PAGE SPECIFIC */
+.section.most-recent {
+  float: left;
+  width: calc((100vw - 48px) / 4 * 3 - 18px);
+}
+
+.section.archive {
+  float: right;
+  width: calc((100vw - 48px) / 4 - 18px);
+}

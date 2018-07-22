@@ -1,0 +1,435 @@
+/* DISPLAY */
+.dsp-blk {
+  display: block;
+}
+
+.dsp-inblk {
+  display: inline-block;
+}
+
+.dsp-none {
+  display: none;
+}
+
+.hbox {
+  display: table;
+}
+
+.hbox .row {
+  display: table-row;
+}
+
+.hbox .col {
+  display: table-cell;
+}
+
+.v-top {
+  vertical-align: top;
+}
+
+.v-middle {
+  vertical-align: middle;
+}
+
+.v-bottom {
+  vertical-align: bottom;
+}
+
+
+
+/* POSITION */
+.pos-rel {
+  position: relative;
+}
+
+.pos-fix {
+  position: fixed;
+}
+
+.pos-abt {
+  position: absolute;
+}
+
+.pos-stk {
+  position: sticky;
+}
+
+
+
+/* PADDING */
+.wrapper {
+  padding: 24px;
+}
+
+.wrapper-md {
+  padding: 16px;
+}
+
+.wrapper-sm {
+  padding: 8px;
+}
+
+.wrapper-xs {
+  padding: 4px;
+}
+
+.p-t {
+  padding-top: 24px;
+}
+
+.p-t-md {
+  padding-top: 16px;
+}
+
+.p-t-sm {
+  padding-top: 8px;
+}
+
+.p-t-xs {
+  padding-top: 4px;
+}
+
+.p-b {
+  padding-bottom: 24px;
+}
+
+.p-b-md {
+  padding-bottom: 16px;
+}
+
+.p-b-sm {
+  padding-bottom: 8px;
+}
+
+.p-b-xs {
+  padding-bottom: 4px;
+}
+
+.p-r {
+  padding-right: 24px;
+}
+
+.p-r-md {
+  padding-right: 16px;
+}
+
+.p-r-sm {
+  padding-right: 8px;
+}
+
+.p-r-xs {
+  padding-right: 4px;
+}
+
+.p-l {
+  padding-left: 24px;
+}
+
+.p-l-md {
+  padding-left: 16px;
+}
+
+.p-l-sm {
+  padding-left: 8px;
+}
+
+.p-l-xs {
+  padding-left: 4px;
+}
+
+
+
+/* MARGIN */
+
+.m {
+  margin: 24px;
+}
+
+.m-md {
+  margin: 16px;
+}
+
+.m-sm {
+  margin: 8px;
+}
+
+.m-xs {
+  margin: 4px;
+}
+
+.m-t {
+  margin-top: 24px;
+}
+
+.m-t-md {
+  margin-top: 16px;
+}
+
+.m-t-sm {
+  margin-top: 8px;
+}
+
+.m-t-xs {
+  margin-top: 4px;
+}
+
+.m-r {
+  margin-right: 24px;
+}
+
+.m-r-md {
+  margin-right: 16px;
+}
+
+.m-r-sm {
+  margin-right: 8px;
+}
+
+.m-r-xs {
+  margin-right: 4px;
+}
+
+.m-b {
+  margin-bottom: 24px;
+}
+
+.m-b-md {
+  margin-bottom: 16px;
+}
+
+.m-b-sm {
+  margin-bottom: 8px;
+}
+
+.m-b-xs {
+  margin-bottom: 4px;
+}
+
+.m-l {
+  margin-left: 24px;
+}
+
+.m-l-md {
+  margin-left: 16px;
+}
+
+.m-l-sm {
+  margin-left: 8px;
+}
+
+.m-l-xs {
+  margin-left: 4px;
+}
+
+
+
+/* DIMENSIONS */
+.w-full {
+  width: 100%;
+}
+
+.w-three-quarters {
+  width: 75%;
+}
+
+.w-half {
+  width: 50%;
+}
+
+.w-quarter {
+  width: 25%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+
+
+/* BORDER */
+.b-n {
+  border: none;
+}
+
+.b {
+  border: 1px solid;
+}
+
+.b-t {
+  border-top: 1px solid;
+}
+
+.b-r {
+  border-right: 1px solid;
+}
+
+.b-b {
+  border-bottom: 1px solid;
+}
+
+.b-l {
+  border-left: 1px solid;
+}
+
+.b-2 {
+  border-width: 2px;
+}
+
+.b-3 {
+  border-width: 3px;
+}
+
+.b-4 {
+  border-width: 4px;
+}
+
+.b-5 {
+  border-width: 5px;
+}
+
+.b-dashed {
+  border-style: dashed;
+}
+
+.b-dotted {
+  border-style: dotted;
+}
+
+.b-white {
+  border-color: #f0f0f0;
+}
+
+.b-red {
+  border-color: #f04;
+}
+
+.b-blue {
+  border-color: #4f0072;
+}
+
+.b-black {
+  border-color: #0f0f0f;
+}
+
+
+
+
+/* BACKGROUND */
+.bg-white {
+  background-color: #f0f0f0;
+}
+
+.bg-red {
+  background-color: #f04;
+}
+
+.bg-blue {
+  background-color: #4f0072;
+}
+
+.bg-black {
+  background-color: #0f0f0f;
+}
+
+
+
+/* TEXT */
+.text-white {
+  color: #f0f0f0;
+}
+
+.text-red {
+  color: #f04;
+}
+
+.text-blue {
+  color: #4f0072;
+}
+
+.text-black {
+  color: #0f0f0f;
+}
+
+.text-xxl {
+  font-size: 32px;
+}
+
+.text-xl {
+  font-size: 24px;
+}
+
+.text-lg {
+  font-size: 20px;
+}
+
+.text-md {
+  font-size: 16px;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.text-xxs {
+  font-size: 10px;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.font-underline {
+  text-decoration: underline;
+}
+
+.font-thin {
+  font-weight: 300;
+}
+
+.l-s-1 {
+  letter-spacing: 0.1em;
+}
+
+.l-s-2 {
+  letter-spacing: 0.2em;
+}
+
+.l-s-3 {
+  letter-spacing: 0.3em;
+}
+
+.l-s-4 {
+  letter-spacing: 0.4em;
+}
+
+.l-s-5 {
+  letter-spacing: 0.5em;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-u-c {
+  text-transform: uppercase;
+}
