@@ -8,7 +8,7 @@
   padding: 0;
   box-sizing: border-box;
   border-radius: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'montserratregular', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   cursor: default;
@@ -26,6 +26,17 @@ ul {
   ul ul {
     margin-left: 24px;
   }
+
+
+
+/* UTILITY OVERRIDES */
+.font-bold {
+  font-family: 'montserratbold', sans-serif;
+}
+
+.font-light {
+  font-family: 'montserratlight', sans-serif;
+}
 
 
 
@@ -76,8 +87,6 @@ ul {
   .container {
     -webkit-background-blend-mode: darken;
     background-blend-mode: darken;
-    -webkit-filter: grayscale();
-    filter: grayscale();
   }
 }
 
@@ -100,7 +109,7 @@ ul {
 }
 
 .b-blue {
-  border-color: #4f0072;
+  border-color: #2a0070;
 }
 
 .bg-red {
@@ -108,7 +117,7 @@ ul {
 }
 
 .bg-blue {
-  background-color: #4f0072;
+  background-color: #2a0070;
 }
 
 .text-red {
@@ -116,7 +125,7 @@ ul {
 }
 
 .text-blue {
-  color: #4f0072;
+  color: #2a0070;
 }
 
 
