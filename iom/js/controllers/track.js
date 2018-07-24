@@ -2,7 +2,6 @@ let track = dummy_track_data.filter((trk) => trk.id == $$.getParam('track_id'))[
 
 $$('#track-name span:first-of-type').innerHTML = decodeURIComponent(track.track_name);
 $$('#track-likes').innerHTML += track.likes;
-
 $$('#track-media').setAttribute('src', `./assets/uploads/${track.user_id}/${track.file_name}`);
 $$('#track-description').value = track.description;
 for (let tag of track.tags) {

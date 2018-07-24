@@ -79,7 +79,7 @@ loadWindowLocation = () => {
 
 checkForLocationStringAndLoad = () => {
   if (!$$.exists(window.location.hash)) {
-    window.location += '#/signin';
+    window.location.hash = '#/signin';
   }
 
   loadWindowLocation();
@@ -95,8 +95,3 @@ loadConfig = () => {
 }
 
 document.addEventListener('DOMContentLoaded', loadConfig);
-
-
-
-// testing
-addEventListener('beforeunload', (e) => { console.dir(e); });
