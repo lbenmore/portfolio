@@ -40,6 +40,33 @@ ul {
 
 
 
+/* THEME COLOR UTILITY ADDITIONS */
+.b-red {
+  border-color: #f04;
+}
+
+.b-blue {
+  border-color: #2a0070;
+}
+
+.bg-red {
+  background-color: #f04;
+}
+
+.bg-blue {
+  background-color: #2a0070;
+}
+
+.text-red {
+  color: #f04;
+}
+
+.text-blue {
+  color: #2a0070;
+}
+
+
+
 /* UI ELEMENTS */
 .separator {
   display: inline-block;
@@ -102,35 +129,24 @@ ul {
 }
 
 
-
-/* THEME COLOR UTILITY ADDITIONS */
-.b-red {
-  border-color: #f04;
-}
-
-.b-blue {
-  border-color: #2a0070;
-}
-
-.bg-red {
-  background-color: #f04;
-}
-
-.bg-blue {
-  background-color: #2a0070;
-}
-
-.text-red {
-  color: #f04;
-}
-
-.text-blue {
-  color: #2a0070;
-}
-
-
-
+/* SPECIFIC UI ELEMENTS */
 .section .content .track:first-of-type {
   border-top: none;
   padding-top: 0;
+}
+
+
+/* MOBILE STYLING. WILL MOVE TO EXTERNAL SHEET */
+@media (max-width: 720px) {
+  .main-content.table .col {
+    display: table-row;
+  }
+
+    .main-content.table .col > * {
+      padding: 24px;
+    }
+
+      .main-content.table .col > *.content {
+        padding-top: 0;
+      }
 }
