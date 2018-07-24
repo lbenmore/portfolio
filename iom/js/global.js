@@ -95,3 +95,8 @@ loadConfig = () => {
 }
 
 document.addEventListener('DOMContentLoaded', loadConfig);
+
+
+
+// testing
+addEventListener('beforeunload', (e) => { console.dir(e); });
