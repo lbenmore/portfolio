@@ -1,0 +1,10 @@
+.bnmr-carousel {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.bnmr-carousel::after {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
