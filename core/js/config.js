@@ -6,10 +6,10 @@ config.pages = {
     "styles": [
     ],
     "scripts": [
-      "./js/components/sidebar.js",
+      "./js/controllers/sidebar.js",
       "./js/controllers/home.js"
     ],
-    "subnav": "home"
+    "nav": "home"
   },
 
   "home/carousel": {
@@ -19,28 +19,29 @@ config.pages = {
       "./css/components/carousel.css"
     ],
     "scripts": [
-      "./js/components/sidebar.js",
+      "./js/controllers/sidebar.js",
       "./js/components/carousel.js",
       "./js/controllers/carousel.js"
     ],
-    "subnav": "home"
+    "nav": "home"
   },
 
   "home/videoplayer": {
     "html": "./html/pages/videoplayer.html",
     "styles": [
-      "./css/components/videoplayer.css"
+      "./css/components/videoplayer.css",
+      "./css/videoplayer.css",
     ],
     "scripts": [
-      "./js/components/sidebar.js",
+      "./js/controllers/sidebar.js",
       "./js/components/videoplayer.js",
-      "./js/controllers/videoplayer.js",
+      "./js/controllers/videoplayer.js"
     ],
-    "subnav": "home"
+    "nav": "home"
   }
 };
 
-config.subnav = {
+config.nav = {
   "home": [
     {
       "title": "Home",

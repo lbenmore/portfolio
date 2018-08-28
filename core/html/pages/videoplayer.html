@@ -2,7 +2,16 @@
 <div class='max-960 table no-spacing' style='margin-top: 100px; min-height: calc(100vh - 200px)'>
   <div class='col sidebar' data-include-src='./html/blocks/sidebar.html'></div>
   <div class='col content bg-grey wrapper'>
-      Video Player
+      <div class='bnmr-video-player'></div>
+      <button class='m-t' onclick='updateVideoPlayer("single")'>Single Video</button>
+      <button class='m-t m-l' onclick='updateVideoPlayer("playlist")'>Playlist</button>
+      <div></div>
+      <button class='m-t m-r' onclick='externalControls("play")'>Play</button>
+      <button class='m-t m-r' onclick='externalControls("pause")'>Pause</button>
+      <button class='m-t m-r' onclick='externalControls("mute")'>Mute</button>
+      <button class='m-t m-r' onclick='externalControls("unmute")'>Unmute</button>
+      <button class='m-t m-r playlistOnly' onclick='externalControls("previous")'>Previous</button>
+      <button class='m-t m-r playlistOnly' onclick='externalControls("next")'>Next</button>
   </div>
 </div>
 <div data-include-src='./html/blocks/footer.html'></div>

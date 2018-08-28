@@ -16,18 +16,9 @@ initCarousel = function () {
   } else {
     setTimeout(initCarousel, 100);
   }
-}
-
-initMenu = function () {
-  if ($$('.sidebar ul').appendChild) {
-    initSubnav();
-  } else {
-    setTimeout(initMenu, 100);
-  }
-}
+},
 
 initFns = function () {
-  initMenu();
   initCarousel();
 };
 

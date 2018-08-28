@@ -27,7 +27,8 @@
         }
       }
 
-      line = lines[lines.length - 1].indexOf('setTouchPoints') > -1 ? lines[lines.length - 3] : lines[lines.length - 1]
+      // line = stack.indexOf('evalTouchPoints') > -1 ? lines[lines.length - 3] : lines[lines.length - 1]; // why this break when in core ????  ¯\_(ツ)_/¯
+			line = lines[2];
       fileName = line.split('/')[line.split('/').length - 1].split(':')[0];
       lineNo = line.split(':')[line.split(':').length - 2];
       charNo = line.split(':')[line.split(':').length - 1];

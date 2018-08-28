@@ -60,13 +60,13 @@ body {
 
 .content {
   vertical-align: top;
-  min-height: calc(100vh - 200px); /* minus header and footer height */
+  height: calc(100vh - 200px); /* minus header and footer height */
 }
 
 .footer {
   width: 100%;
   height: 100px;
-  background-color: #000;
+  background-color: #222;
   text-align: center;
 }
 

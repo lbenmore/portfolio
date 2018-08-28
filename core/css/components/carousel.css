@@ -7,16 +7,16 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-transition: transform 0.5s;
-  transition: transform 0.5s;
 }
 
 .carousel__arrow {
+  display: table;
   position: absolute;
   top: 0;
   bottom: 0;
   width: 40px;
   height: 100%;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -25,10 +25,35 @@
 }
 
   .carousel__arrow i {
-    top: 50%;
-    left: 50%;
-    text-shadow: 0px 0px 8px #fff;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 24px;
+    text-shadow: 0px 0px 16px #fff;
     pointer-events: none;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+  }
+
+.carousel__pagination {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+  transform: translate(-50%);
+}
+
+  .carousel__indicator {
+    display: inline-block;
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .carousel__indicator:not(:last-of-type) {
+    margin-right: 8px;
+  }
+
+  .carousel__indicator.active {
+    background-color: #fff;
   }
