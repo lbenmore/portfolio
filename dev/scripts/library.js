@@ -44,7 +44,12 @@ initDynamicBlurb = () => {
 		'The law is hard, but it is the law.',
 		'The world is quiet here.',
 		'Watch closely.',
-		'Nolite te bastardes carborundorum'
+		'Nolite te bastardes carborundorum.',
+		'You\'re gonna die in there.',
+		'Wheels up.',
+		'Magic always comes with a price.',
+		'I want to testify.',
+		'Hope is undiscovered disappointment.'
 	];
 
 	$$('.sidebar__blurb--dynamic').addClass('dontBlink');
