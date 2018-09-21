@@ -1,0 +1,5 @@
+var
+initFns = function () {
+};
+
+initFns();

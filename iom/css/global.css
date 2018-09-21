@@ -1,0 +1,152 @@
+@charset "UTF-8";
+@import url("./libs/montserrat/stylesheet.css");
+@import url("./libs/fontawesome/all.min.css");
+
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0;
+  font-family: 'montserratregular', sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  cursor: default;
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+}
+
+ul {
+  list-style: none;
+}
+
+  ul ul {
+    margin-left: 24px;
+  }
+
+
+
+/* UTILITY OVERRIDES */
+.font-bold {
+  font-family: 'montserratbold', sans-serif;
+}
+
+.font-light {
+  font-family: 'montserratlight', sans-serif;
+}
+
+
+
+/* THEME COLOR UTILITY ADDITIONS */
+.b-red {
+  border-color: #f04;
+}
+
+.b-blue {
+  border-color: #2a0070;
+}
+
+.bg-red {
+  background-color: #f04;
+}
+
+.bg-blue {
+  background-color: #2a0070;
+}
+
+.text-red {
+  color: #f04;
+}
+
+.text-blue {
+  color: #2a0070;
+}
+
+
+
+/* UI ELEMENTS */
+.separator {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+}
+
+.btn {
+  padding: 8px 24px;
+  border: none;
+  border-radius: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.tag {
+  padding: 4px 8px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 12px;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.tag:hover {
+  color: #f04;
+}
+
+
+
+/* UI COMPONENTS */
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: #f06;
+  background-image: url('../assets/img/hero.jpeg');
+  background-position: center;
+  background-size: cover;
+}
+
+@supports (background-blend-mode: darken) or (-webkit-background-blend-mode: darken) {
+  .container {
+    -webkit-background-blend-mode: darken;
+    background-blend-mode: darken;
+  }
+}
+
+.header {
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 60px;
+}
+
+.main-content {
+  top: 60px;
+}
+
+
+/* SPECIFIC UI ELEMENTS */
+.section .content .track:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+
+/* MOBILE STYLING. WILL MOVE TO EXTERNAL SHEET */
+@media (max-width: 720px) {
+  .main-content.table .col {
+    display: table-row;
+  }
+
+    .main-content.table .col > * {
+      padding: 24px;
+    }
+
+      .main-content.table .col > *.content {
+        padding-top: 0;
+      }
+}

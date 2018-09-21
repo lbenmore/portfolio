@@ -1,0 +1,260 @@
+.videoPlayer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+  .video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .btnReplay {
+
+  }
+
+  .controls {
+    position: absolute;
+    display: table;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 30px;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+  }
+
+  .videoPlayer:hover .controls {
+    opacity: 1;
+  }
+
+    .controls > div {
+      display: table-cell;
+      vertical-align: middle;
+      position: relative;
+    }
+
+    .controls *::before,
+    .controls *::after {
+      content: '';
+      position: absolute;
+    }
+
+    .btnPlayState,
+    .btnPrevious,
+    .btnNext,
+    .btnVolumeState {
+      min-width: 32px;
+    }
+
+    .btnVolumeState span {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+      /*----------- Pause -----------*/
+
+      .video[data-paused=false] ~ .controls .btnPlayState::before,
+      .video[data-paused=false] ~ .controls .btnPlayState::after {
+        top: 7px;
+        width: 3px;
+        height: 16px;
+        background-color: currentcolor;
+      }
+
+      .video[data-paused=false] ~ .controls .btnPlayState::before {
+        right: 6px;
+      }
+
+      .video[data-paused=false] ~ .controls .btnPlayState::after {
+        right: 0;
+      }
+
+
+      /*----------- Play -----------*/
+
+      .video[data-paused=true] ~ .controls .btnPlayState::before {
+        top: 7px;
+        right: 0;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 12px solid currentcolor;
+      }
+
+
+      /*----------- Volume -----------*/
+
+      .video ~ .controls .btnVolumeState::before {
+        top: 12px;
+        width: 3px;
+        height: 6px;
+        border-radius: 1px;
+        background-color: currentcolor;
+      }
+
+      .video ~ .controls .btnVolumeState::after {
+        top: 7px;
+        border-top: 8px solid transparent;
+        border-right: 12px solid currentcolor;
+        border-bottom: 8px solid transparent;
+      }
+
+      /*----------- Unmuted -----------*/
+
+      .video[data-muted=false] ~ .controls .btnVolumeState span::before {
+        position: absolute;
+        top: 11px;
+        right: 14px;
+        width: 6px;
+        height: 6px;
+        border: 1px solid;
+        border-color: currentcolor currentcolor transparent transparent;
+        border-radius: 50%;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      .video[data-muted=false] ~ .controls .btnVolumeState span::after {
+        position: absolute;
+        top: 8px;
+        right: 11px;
+        width: 12px;
+        height: 12px;
+        border: 1px solid;
+        border-color: currentcolor currentcolor transparent transparent;
+        border-radius: 50%;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+
+      /*----------- Previous -----------*/
+
+      .video[data-playlist=true] ~ .controls .btnPrevious::before {
+        display: block;
+        top: 7px;
+        right: 8px;
+        border-top: 8px solid transparent;
+        border-right: 12px solid currentcolor;
+        border-bottom: 8px solid transparent;
+      }
+
+      .video[data-playlist=true] ~ .controls .btnPrevious::after {
+        display: block;
+        top: 7px;
+        right: 0px;
+        border-top: 8px solid transparent;
+        border-right: 12px solid currentcolor;
+        border-bottom: 8px solid transparent;
+      }
+
+
+      /*----------- Next -----------*/
+
+      .video[data-playlist=true] ~ .controls .btnNext::before {
+        display: block;
+        top: 7px;
+        left: 8px;
+        border-top: 8px solid transparent;
+        border-left: 12px solid currentcolor;
+        border-bottom: 8px solid transparent;
+      }
+
+      .video[data-playlist=true] ~ .controls .btnNext::after {
+        display: block;
+        top: 7px;
+        left: 0px;
+        border-top: 8px solid transparent;
+        border-left: 12px solid currentcolor;
+        border-bottom: 8px solid transparent;
+      }
+
+    .progress {
+      position: relative;
+      width: 100%;
+    }
+
+      .progressBar {
+        left: 5%;
+        width: 90%;
+        height: 6px;
+        border-radius: 3px;
+        background-color: #ccc;
+      }
+
+      .progressPlayed {
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        border-radius: 3px;
+        background-color: currentcolor;
+        pointer-events: none;
+        -webkit-transition: width 0.1s;
+        transition: width 0.1s;
+      }
+
+    .inputVolume {
+      position: absolute;
+      top: -8px;
+      right: 20px;
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+      -webkit-transform-origin: 100% 50%;
+      transform-origin: 100% 50%;
+    }
+
+  .btnReplay {
+    display: none;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.8);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+    .btnReplay::before,
+    .btnReplay::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+
+    .btnReplay::before {
+      width: 20px;
+      height: 20px;
+      border: 2px solid;
+      border-color: currentcolor currentcolor currentcolor transparent;
+      border-radius: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .btnReplay::after {
+      border-top-width: 6px;
+      border-right-width: 4px;
+      border-left-width: 4px;
+      border-style: solid;
+      border-color: currentcolor transparent transparent transparent;
+      -webkit-transform: translate(calc(-50% - 10px), calc(-50% - 5px)) rotate(45deg);
+      transform: translate(calc(-50% - 10px), calc(-50% - 5px)) rotate(45deg);
+    }

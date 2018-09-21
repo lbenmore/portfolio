@@ -1,0 +1,113 @@
+<include src='./blocks/header.html'></include>
+<div class='main-content table w-full text-md text-white'>
+
+  <div class='row'>
+    <!-- section -->
+    <div class='section top-voted col wrapper w-three-quarters bg-black-75'>
+      <!-- header -->
+      <div class='p-b-sm font-bold text-xl l-s-2 text-u-c b-b b-2 b-red'>Top Voted</div>
+      <!-- content -->
+      <div class='content m-t'>
+        <!-- provided dynamically by populateTracks in home.js -->
+      </div>
+      <!-- end content -->
+    </div>
+    <!-- end section -->
+
+    <!-- section -->
+    <div class='section col wrapper w-quarter bg-black-75'>
+      <!-- header -->
+      <div class='p-b-sm font-bold text-xl l-s-2 text-u-c b-b b-2 b-red'>Upload New</div>
+      <!-- content -->
+      <div class='m-t text-center'>
+        <!-- drag and drop upload zone -->
+        <label class='square dsp-blk b b-dotted b-blue'>
+          <div class='trans-center text-sm w-full wrapper-sm'>
+            <span class='dsp-blk m-b text-u-c l-s-2'>Drag and Drop Files Here</span>
+            <label class='btn dsp-inblk bg-red text-white'>Or choose file <input id='upload-new-track' type='file' class='dsp-none'></label>
+          </div>
+        </label>
+        <!-- end drag and drop upload zone -->
+
+        <!-- upload button -->
+        <button class='btn m-t bg-red text-white' onclick='uploadNewTrack()'>Upload</button>
+      </div>
+      <!-- end content -->
+    </div>
+    <!-- end section -->
+  </div>
+
+  <div class='row'>
+    <!-- section -->
+    <div class='section most-recent col wrapper m-t w-three-quarters bg-black-75'>
+      <!-- header -->
+      <div class='p-b-sm font-bold text-xl l-s-2 text-u-c b-b b-2 b-red'>Most Recent</div>
+      <!-- content -->
+      <div class='content m-t'>
+        <!-- provided dynamically by populateTracks in home.js -->
+      </div>
+      <!-- end content -->
+    </div>
+    <!-- end section -->
+
+    <!-- section -->
+    <div class='section col wrapper m-t m-l w-quarter bg-black-75'>
+      <!-- header -->
+      <div class='p-b-sm font-bold text-xl l-s-2 text-u-c b-b b-2 b-red'>Archive</div>
+      <!-- content -->
+      <div class='m-t'>
+        <ul>
+          <li class='m-b'>
+            <span class='text-red m-r-sm'>•</span><span class='font-bold font-underline'>2018</span>
+            <ul>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>July</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>June</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>May</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>April</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>March</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>February</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>January</span></li>
+            </ul>
+          </li>
+          <li class='m-b'>
+            <span class='text-red m-r-sm'>•</span><span class='font-bold font-underline'>2017</span>
+            <ul>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>December</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>November</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>October</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>September</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>August</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>July</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>June</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>May</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>April</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>March</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>February</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>January</span></li>
+            </ul>
+          </li>
+          <li class='m-b'>
+            <span class='text-red m-r-sm'>•</span><span class='font-bold font-underline'>2016</span>
+            <ul>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>December</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>November</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>October</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>September</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>August</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>July</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>June</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>May</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>April</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>March</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>February</span></li>
+              <li><span class='text-red m-r-sm'>-</span><span class='font-underline'>January</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- end content -->
+    </div>
+    <!-- end section -->
+  </div>
+
+</div>

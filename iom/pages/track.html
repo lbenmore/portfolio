@@ -1,0 +1,20 @@
+<include src='./blocks/header.html'></include>
+<div class='main-content table w-full text-md text-white'>
+  <!-- section -->
+  <div class='section col wrapper w-full bg-black-75'>
+    <!-- header -->
+    <div class='p-b-sm text-xl l-s-2 text-u-c b-b b-2 b-red' id='track-name'>
+      <span class='font-bold' contenteditable='true'></span><span class='pull-right z-1'><span id='track-likes'></span> <i class='fa fa-thumbs-up'></i></span>
+    </div>
+    <!-- content -->
+    <div class='m-t'>
+      <video class='w-full' id='track-media' autoplay muted controls></video>
+      <textarea class='wrapper m-t w-full b-n bg-black-75 text-white' id='track-description' style='height: 300px; resize: none;' placeholder='Add description...'></textarea>
+      <div class='m-t' id='track-tags'>
+        <i class='fa fa-tags m-r-sm'></i>
+      </div>
+      <div class='m-t' id='track-comments'></div>
+      <textarea class='wrapper m-t w-full b-n bg-black-75 text-white' id='new-comment' style='height: 300px; resize: none;' placeholder='Add comment...'></textarea>
+    </div>
+  </div>
+</div>
