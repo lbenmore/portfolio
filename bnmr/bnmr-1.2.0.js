@@ -356,9 +356,9 @@
 
 	_this.distanceFrom = (direction, element = _this, value = 0) => {
 		const newVal = direction == 'left' ?
-				value + element.offsetLeft :
-				value + element.offsetTop;
-				
+			value + element.offsetLeft :
+			value + element.offsetTop;
+
 		if (element.offsetParent) {
 			return _this.distanceFrom(direction, element.offsetParent, newVal);
 		} else {
@@ -494,12 +494,12 @@
 		objAnim.callback = options.callback || null;
 
 		condition = objAnim.direction == 'negative' ?
-				objAnim.start > objAnim.destination :
-				objAnim.start < objAnim.destination;
+			objAnim.start > objAnim.destination :
+			objAnim.start < objAnim.destination;
 
 		newValue = objAnim.direction == 'negative' ?
-				objAnim.start - objAnim.speed :
-				objAnim.start + objAnim.speed;
+			objAnim.start - objAnim.speed :
+			objAnim.start + objAnim.speed;
 
 		_this.style[objAnim.property] = `${newValue}px`;
 

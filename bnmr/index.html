@@ -20,12 +20,10 @@
 		<script src='./bnmr-1.2.0.js'></script>
 		<!-- <script src='./legacy.bnmr-1.2.0.js'></script> -->
 		<script>
-			$$.log($$('.test').distanceFrom('top'));
 			addEventListener('scroll', function () {
-				$$.log($$.scrollPosition());
-				// if ($$.scrollPosition() > $$('.test').distanceFrom('top') - innerHeight) {
-				// 	$$.log('visible');
-				// }
+				if ($$.scrollPosition() > $$('.test').distanceFrom('top') - innerHeight) {
+					$$.log('visible');
+				}
 			});
 			// $$.preload([
 			// 	'https://images.unsplash.com/photo-1506804880640-f3205deb1b8b',
