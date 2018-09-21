@@ -358,9 +358,9 @@
 		const newVal = direction == 'left' ?
 				value + element.offsetLeft :
 				value + element.offsetTop;
-		console.log((element.className || element.tagName) + ': ' + newVal);
-		if (element.parentNode) {
-			return _this.distanceFrom(direction, element.parentNode, newVal);
+				
+		if (element.offsetParent) {
+			return _this.distanceFrom(direction, element.offsetParent, newVal);
 		} else {
 			return value;
 		}
