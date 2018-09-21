@@ -154,6 +154,13 @@
     return false;
   },
 
+	scrollPosition = (axis) => {
+		const doc = document.documentElement;
+		return axis == 'left' ?
+			(pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0) :
+			(pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+	},
+
   loadAsset = (asset, callback, evt) => {
     let
     file,
@@ -347,6 +354,19 @@
     }
   };
 
+	_this.distanceFrom = (direction, element = _this, value = 0) => {
+		const newVal = direction == 'left' ?
+				value + element.offsetLeft :
+				value + element.offsetTop;
+		console.log(element);
+		console.log(value);
+		if (element.parentNode) {
+			return _this.distanceFrom(direction, element.parentNode, newVal);
+		} else {
+			return value;
+		}
+	};
+
   _this.addClass = (name, delay) => {
     setTimeout(() => {
       if (document.classList) {
@@ -461,12 +481,44 @@
     }
   };
 
+	_this.raf = (options) => {
+		let objAnim = {}, condition, newValue;
+
+		if (!options.property || !options.destination) throw 'Please pass an object parameter with all required properties.';
+
+		objAnim.property = options.property;
+		objAnim.direction = options.direction || 'positive';
+		objAnim.start = options.start || 0;
+		objAnim.destination = options.destination;
+		objAnim.speed = options.speed || 1;
+		objAnim.delay = options.delay || 0;
+		objAnim.callback = options.callback || null;
+
+		condition = objAnim.direction == 'negative' ?
+				objAnim.start > objAnim.destination :
+				objAnim.start < objAnim.destination;
+
+		newValue = objAnim.direction == 'negative' ?
+				objAnim.start - objAnim.speed :
+				objAnim.start + objAnim.speed;
+
+		_this.style[objAnim.property] = `${newValue}px`;
+
+		if (condition) {
+			objAnim.start = newValue;
+			requestAnimationFrame(_this.raf.bind(null, objAnim));
+		} else {
+			if (objAnim.callback) objAnim.callback.call();
+		}
+	};
+
   $$.ajax = ajax;
   $$.exists = exists;
   $$.getParam = getParam;
   $$.log = log;
   $$.preload = preload;
   $$.rand = rand;
+  $$.scrollPosition = scrollPosition;
 
   return _this;
 })();

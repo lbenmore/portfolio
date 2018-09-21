@@ -5,24 +5,37 @@
 		<meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no'>
 		<title>BNMR Testing</title>
 		<style>
+			.test {
+				position: relative;
+				margin-top: 800px;
+				margin-bottom: 800px;
+			}
 		</style>
 	</head>
 	<body>
 		<div id='container'>
+			<div class='test'>hello, world.</div>
 		</div>
 
-		<!-- <script src='./bnmr-1.2.0.js'></script> -->
-		<script src='./legacy.bnmr-1.2.0.js'></script>
+		<script src='./bnmr-1.2.0.js'></script>
+		<!-- <script src='./legacy.bnmr-1.2.0.js'></script> -->
 		<script>
-			$$.preload([
-				'https://images.unsplash.com/photo-1506804880640-f3205deb1b8b',
-			  'https://images.unsplash.com/photo-1511316652-1a5eed7732e5',
-			  'https://images.unsplash.com/photo-1519255122284-c3acd66be602',
-			  'https://images.unsplash.com/photo-1519827737530-b255e4d1d0af',
-			  'https://images.unsplash.com/photo-1520095972714-909e91b038e5'
-			], function () {
-				$$.log('done');
+			$$.log($$('.test').distanceFrom('top'));
+			addEventListener('scroll', function () {
+				$$.log($$.scrollPosition());
+				// if ($$.scrollPosition() > $$('.test').distanceFrom('top') - innerHeight) {
+				// 	$$.log('visible');
+				// }
 			});
+			// $$.preload([
+			// 	'https://images.unsplash.com/photo-1506804880640-f3205deb1b8b',
+			//   'https://images.unsplash.com/photo-1511316652-1a5eed7732e5',
+			//   'https://images.unsplash.com/photo-1519255122284-c3acd66be602',
+			//   'https://images.unsplash.com/photo-1519827737530-b255e4d1d0af',
+			//   'https://images.unsplash.com/photo-1520095972714-909e91b038e5'
+			// ], function () {
+			// 	$$.log('done');
+			// });
 		</script>
 	</body>
 </html>
