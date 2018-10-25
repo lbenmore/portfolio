@@ -20,3 +20,10 @@
   color: #333;
   background-color: #fff;
 }
+
+.videoPlayer__button[disabled],
+.videoPlayer__button[disabled]:hover {
+  border-color: #999;
+  background-color: #666;
+  color: #999;
+}
