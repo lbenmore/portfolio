@@ -1,4 +1,5 @@
-// JavaScript Document
+var $$;
+
 ($$ = function (selector) {
 	var
 	el = selector || 'body',
@@ -27,8 +28,7 @@
         }
       }
 
-      // line = stack.indexOf('evalTouchPoints') > -1 ? lines[lines.length - 3] : lines[lines.length - 1]; // why this break when in core ????  ¯\_(ツ)_/¯
-			line = lines[2];
+      line = lines[lines.length - 1].indexOf('setTouchPoints') > -1 ? lines[lines.length - 3] : lines[lines.length - 1]
       fileName = line.split('/')[line.split('/').length - 1].split(':')[0];
       lineNo = line.split(':')[line.split(':').length - 2];
       charNo = line.split(':')[line.split(':').length - 1];
@@ -82,8 +82,8 @@
     if (value) {
       if (value !== null &&
           value !== undefined &&
-          value !== 'null' &&
-          value !== 'undefined' &&
+          value.toLowerCase() !== 'null' &&
+          value.toLowerCase() !== 'undefined' &&
           value !== '') {
             return true;
       }
@@ -98,6 +98,7 @@
     method = options.method || 'GET',
     url = options.url || './',
     isAsync = options.async || true,
+    headers = options.headers || null,
     params = options.params || null,
     progress = options.progress || null,
     xhr = new XMLHttpRequest(),
@@ -113,7 +114,12 @@
           break;
 
           case 'json':
-            data = JSON.parse(xhr.responseText);
+            try {
+							data = JSON.parse(xhr.responseText);
+						} catch (e) {
+							console.error(e.message);
+							console.log(xhr.responseText);
+						}
           break;
 
           default:
@@ -126,6 +132,12 @@
         }
 
         return data;
+      }
+    }
+
+    if (headers) {
+      for (var header in headers) {
+        xhr.setRequestHeader(header, headers[header]);
       }
     }
 
@@ -180,8 +192,6 @@
     };
 
 		file.onerror = function (e) {
-			console.error('Error loading file: ' + asset);
-			console.dir(e);
 			dispatchEvent(evt);
 		};
   },
@@ -240,6 +250,13 @@
       }
     }
   },
+
+	scrollPosition = function (axis) {
+		var doc = document.documentElement;
+		return axis == 'left' ?
+			(pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0) :
+			(pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+	},
 
   listener = function (evt, fn) {
     if (addEventListener) {
@@ -347,6 +364,17 @@
     }
   };
 
+	_this.distanceFrom = function (direction, element, value) {
+		var
+    el = element || _this,
+    val = value || 0,
+    newVal = direction == 'left' ?
+			val + element.offsetLeft :
+			val + element.offsetTop;
+
+		return el.offsetParent ? _this.distanceFrom(direction, el.offsetParent, newVal) : val;
+	};
+
   _this.addClass = function (name, delay) {
     setTimeout(function () {
       if (_this.length) {
@@ -441,12 +469,47 @@
     }
   };
 
+	_this.raf = function (options) {
+		var
+    condition,
+    newValue,
+    objAnim = {};
+
+		if (!options.property || !options.destination) throw 'Please pass an object parameter with all required properties.';
+
+		objAnim.property = options.property;
+		objAnim.direction = options.direction || 'positive';
+		objAnim.start = options.start || parseInt(getComputedStyle(_this)[objAnim.property]) || 0;
+		objAnim.destination = options.destination || 0;
+		objAnim.speed = options.speed || 1;
+		objAnim.delay = options.delay || 0;
+		objAnim.callback = options.callback || null;
+
+		condition = objAnim.direction == 'negative' ?
+			objAnim.start > objAnim.destination :
+			objAnim.start < objAnim.destination;
+
+		newValue = objAnim.direction == 'negative' ?
+			objAnim.start - objAnim.speed :
+			objAnim.start + objAnim.speed;
+
+		_this.style[objAnim.property] = newValue + 'px';
+
+		if (condition) {
+			objAnim.start = newValue;
+			requestAnimationFrame(_this.raf.bind(null, objAnim));
+		} else {
+			if (objAnim.callback) objAnim.callback.call();
+		}
+	};
+
   $$.ajax = ajax;
   $$.exists = exists;
   $$.getParam = getParam;
   $$.log = log;
   $$.preload = preload;
   $$.rand = rand;
+  $$.scrollPosition = scrollPosition;
 
   return _this;
 })();

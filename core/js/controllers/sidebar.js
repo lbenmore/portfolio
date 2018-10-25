@@ -1,27 +1,24 @@
-var
+core.controllers.Sidebar = function () {
+  var subnav = $$.subnav();
 
-populateNav = function () {
-  var
-  page = window.location.hash.slice(2),
-  nav = config.nav[config.pages[page].nav];
+  $$('.sidebar__nav').innerHTML = '';
 
-  $$('.sidebar ul').innerHTML = '';
+  if (subnav) {
+    $$('body').dataset.sidebarCollapsed = 'false';
 
-  for (var i = 0; i < nav.length; i++) {
-    var li = document.createElement('li');
-    li.setAttribute('onclick', 'go("' + nav[i].page + '")');
-    li.innerHTML = nav[i].title;
-    li.classList.add('cursor-pointer');
-    $$('.sidebar ul').appendChild(li);
-  }
-},
+    for (var i = 0; i < subnav.length; i++) {
+      var
+      link = subnav[i],
+      li = document.createElement('li');
 
-initNav = function () {
-  if ($$('.sidebar ul').appendChild) {
-    populateNav();
+      li.classList.add('sidebar__link');
+      if (i != 0) li.classList.add('m-t-sm');
+      li.innerHTML = '<a>' + link.name + '</a>';
+      li.addEventListener('click', $$.go.bind(core, link.page));
+
+      $$('.sidebar__nav').appendChild(li);
+    }
   } else {
-    setTimeout(initNav, 100);
+    $$('body').dataset.sidebarCollapsed = 'true';
   }
 };
-
-initNav();

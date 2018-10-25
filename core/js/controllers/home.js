@@ -1,5 +1,0 @@
-var
-initFns = function () {
-};
-
-initFns();

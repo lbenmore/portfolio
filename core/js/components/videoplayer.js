@@ -16,16 +16,18 @@ var VideoPlayer = function (options) {
     _this.muted = (typeof options.muted == 'boolean') ? options.muted : false;
     _this.autoplay = (typeof options.autoplay == 'boolean') ? options.autoplay : true;
     _this.loop = (typeof options.loop == 'boolean') ? options.loop : true;
-    _this.active = 0;
     _this.color = options.color || null;
   } catch (e) {
     console.error('Incorrect video player configuration provided...');
     console.error(e.message);
   }
 
+  _this.active = 0;
+
   function loadVideo (path, play) {
     _this.elements.video.setAttribute('src', path);
     _this.elements.video.load();
+    if (_this.muted) _this.elements.video.muted = true;
     if (play) _this.play();
   }
 

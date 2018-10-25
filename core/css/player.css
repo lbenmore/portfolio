@@ -1,0 +1,22 @@
+.bnmr-video-player {
+  width: 640px;
+  height: 360px;
+}
+
+.videoPlayer__button {
+  padding: 8px 24px;
+  border: 1px solid #333;
+  border-radius: 0;
+  background-color: #333;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  -webkit-transition: color 0.3s, background-color 0.3s;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.videoPlayer__button:hover {
+  color: #333;
+  background-color: #fff;
+}

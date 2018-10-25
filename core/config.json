@@ -1,0 +1,121 @@
+{
+  "pages": {
+    "home": {
+      "html": "./html/pages/home.html",
+      "css": [
+      ],
+      "js": [
+        "./js/controllers/header.js",
+        "./js/controllers/sidebar.js"
+      ],
+      "nav": "main"
+    },
+
+      "home/images": {
+        "html": "./html/pages/images.html",
+        "css": [
+        ],
+        "js": [
+          "./js/controllers/header.js",
+          "./js/controllers/sidebar.js"
+        ],
+        "nav": "main",
+        "subnav": "images"
+      },
+
+        "home/images/carousel": {
+          "html": "./html/pages/carousel.html",
+          "css": [
+            "./css/components/carousel.css",
+            "./css/carousel.css"
+          ],
+          "js": [
+            "./js/controllers/header.js",
+            "./js/controllers/sidebar.js",
+            "./js/components/carousel.js",
+            "./js/controllers/carousel.js"
+          ],
+          "nav": "main",
+          "subnav": "images"
+        },
+
+        "home/images/lazyloader": {
+          "html": "./html/pages/lazyloader.html",
+          "css": [
+            "./css/components/lazyloader.css",
+            "./css/lazyloader.css"
+          ],
+          "js": [
+            "./js/controllers/header.js",
+            "./js/controllers/sidebar.js",
+            "./js/controllers/lazyloader.js",
+            "./js/components/lazyloader.js"
+          ],
+          "nav": "main",
+          "subnav": "images"
+        },
+
+      "home/videos": {
+        "html": "./html/pages/videos.html",
+        "css": [
+        ],
+        "js": [
+          "./js/controllers/header.js",
+          "./js/controllers/sidebar.js"
+        ],
+        "nav": "main",
+        "subnav": "videos"
+      },
+
+        "home/videos/player": {
+          "html": "./html/pages/player.html",
+          "css": [
+            "./css/components/videoplayer.css",
+            "./css/player.css"
+          ],
+          "js": [
+            "./js/controllers/header.js",
+            "./js/controllers/sidebar.js",
+            "./js/components/videoplayer.js",
+            "./js/controllers/player.js"
+          ],
+          "nav": "main",
+          "subnav": "videos"
+        }
+  },
+
+  "nav": {
+    "main": [
+      {
+        "name": "Home",
+        "page": "home"
+      },
+      {
+        "name": "Images",
+        "page": "home/images"
+      },
+      {
+        "name": "Videos",
+        "page": "home/videos"
+      }
+    ],
+
+    "images": [
+      {
+        "name": "Carousel",
+        "page": "home/images/carousel"
+      },
+      {
+        "name": "Lazy Loader",
+        "page": "home/images/lazyloader"
+      }
+    ],
+
+    "videos": [
+      {
+        "name": "Video Player",
+        "page": "home/videos/player"
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+.gallery {
+  width: calc(100% - 16px);
+}
+
+  .gallery::after {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+
+  .gallery .lazyloader__item {
+    display: inline-block;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    width: 30%;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .gallery .lazyloader__item:nth-of-type(3n) {
+    margin-right: 0;
+  }
+
+    .gallery .lazyloader__item::after {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }

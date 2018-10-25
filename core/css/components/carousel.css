@@ -9,6 +9,11 @@
   background-size: cover;
 }
 
+.carousel__item--outView {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
 .carousel__arrow {
   display: table;
   position: absolute;

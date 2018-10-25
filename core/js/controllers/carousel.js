@@ -1,6 +1,7 @@
-var
-initCarousel = function () {
-  if ('Carousel' in window) {
+core.controllers.Carousel = function () {
+  var max = 99;
+
+  function initCarousel () {
     new Carousel({
       target: $$('.bnmr-carousel'),
       images: [
@@ -13,13 +14,16 @@ initCarousel = function () {
       arrows: true,
       pagination: true
     });
-  } else {
-    setTimeout(initCarousel, 100);
   }
-},
 
-initFns = function () {
-  initCarousel();
+  function load () {
+    if ('Carousel' in window) {
+      initCarousel();
+    } else {
+      $$.log('carousel load attempt: ' + (99 - --max));
+      if (max) setTimeout(load, 100);
+    }
+  }
+
+  load();
 };
-
-initFns();
