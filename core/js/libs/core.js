@@ -456,7 +456,6 @@ document.addEventListener('DOMContentLoaded', function () {
       $$.allNav = core.navigation.bind(null, config, 'all');
       $$.nav = core.navigation.bind(null, config, 'nav');
       $$.subnav = core.navigation.bind(null, config, 'subnav');
-      $$.allNav = core.navigation.bind(null, config, 'all');
 
       core.init(config);
     } catch (e) {
