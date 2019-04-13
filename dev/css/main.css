@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro|Raleway:100,400,700');
+
 body {
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+  font-family: 'Raleway', Arial, sans-serif;
   font-size: 14px;
   overflow-x: hidden;
 }
@@ -19,4 +21,8 @@ a:active,
 a:focus,
 a:visited {
   color: inherit;
+}
+
+.mono {
+  font-family: 'Source Code Pro', monospace;
 }

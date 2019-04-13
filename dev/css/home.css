@@ -5,7 +5,37 @@ main {
   bottom: 0;
   left: 0;
   background: black;
+  user-select: none;
 }
+
+.me {
+  display: table;
+  width: 100vw;
+  height: 100vh;
+}
+
+  .me__center {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+  }
+
+    .me__name {
+      display: inline-block;
+      font-size: 6vw;
+      letter-spacing: 0.15em;
+      line-height: 1.6;
+      text-transform: lowercase;
+    }
+
+    .me__title {
+      display: inline-block;
+      font-size: 3vw;
+      font-weight: 100;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+    }
 
 .laptop {
   position: fixed;
@@ -81,7 +111,7 @@ main {
           display: inline-block;
           width: 40%;
           color: white;
-          font-family: monospace;
+          font-size: 1.4vw;
           line-height: 1.5;
           text-align: left;
           white-space: pre-wrap;

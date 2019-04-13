@@ -69,29 +69,53 @@
     return `${day} ${hours}:${minutes} ${meridian.toUpperCase()}`;
   },
 
+  eventListeners = () => {
+    $$('.laptop').on('swipedown', () => {
+      $$.ls('clear');
+
+      $$('main')
+        .css('perspective', '100vh')
+        .css('transform-style', 'preserve-3d');
+
+      $$('.laptop')
+        .css('transform-origin', '50% 100%')
+        .animate({
+          'transform': 'rotateX(-90deg)'
+        }, 2000);
+    });
+
+    $$('.me').on('swipeup', () => {
+      $$('.laptop').animate({
+        'transform': 'rotateX(0deg)'
+      }, 2000);
+    });
+},
+
   initFns = () => {
     $$('.laptop__info').innerHTML = getTime();
     setInterval(() => {
       $$('.laptop__info').innerHTML = getTime();
     }, 1000);
 
-    $$('main')
-      .css('perspective', '100vh')
-      .css('transform-style', 'preserve-3d');
+    if ($$.ls('get', 'introHasPlayed')) {
+      generateNav(false);
+    } else {
+      $$('main')
+        .css('perspective', '100vh')
+        .css('transform-style', 'preserve-3d');
 
-    $$('.laptop')
-      .css('transform' ,'rotateX(-90deg)')
-      .css('transform-origin', '50% 100%')
-      .animate({
-        'transform': 'rotateX(0deg)'
-      }, 2000, 500);
+      $$('.laptop')
+        .css('transform' ,'rotateX(-90deg)')
+        .css('transform-origin', '50% 100%')
+        .animate({
+          'transform': 'rotateX(0deg)'
+        }, 2000, 500);
 
-    // if ($$.ls('get', 'introHasPlayed')) {
-    //   generateNav(false);
-    // } else {
       setTimeout(generateNav, 2000, true);
       $$.ls('set', 'introHasPlayed', 'true');
-    // }
+    }
+
+    eventListeners();
   };
 
   initFns();
