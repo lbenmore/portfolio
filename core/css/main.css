@@ -47,11 +47,29 @@ body {
     list-style: none;
   }
 
+  code {
+    padding: 3px 8px;
+    background: #ece8ef;
+    border-radius: 2px;
+    font-size: 0.9em;
+    font-family: 'Ubuntu Mono', 'Lucida Console', Monaco, monospace;
+  }
+
   a {
     color: inherit;
     font: inherit;
     text-decoration: underline;
     cursor: pointer;
+  }
+
+  a[target=_blank]::after {
+    /* content: '\f360'; */
+    content: '\f35d';
+    display: inline-block;
+    position: relative;
+    margin: 0px 4px;
+    font-family: 'Font Awesome 5 Free';
+    font-size: 0.75em;
   }
 
 
@@ -64,7 +82,9 @@ body {
 = Utility Classes =
 ===============================================>>>>>*/
 
-
+.max-600 {
+  max-width: 600px;
+}
 
 
 /*= End of Utility Classes =*/

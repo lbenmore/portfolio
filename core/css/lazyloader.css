@@ -1,5 +1,6 @@
 .gallery {
   width: calc(100% - 16px);
+  height: calc(100vh - 100px);
 }
 
   .gallery::after {
