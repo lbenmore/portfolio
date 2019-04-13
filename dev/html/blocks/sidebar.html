@@ -1,0 +1,24 @@
+<aside></aside>
+
+<script>
+    try {
+      const pageName = location.hash.slice(2);
+
+      document.body.dataset.sidebar = true;
+
+      for (const page in $$.config.pages) {
+        if ($$.config.pages[page].parent) {
+          if ($$.config.pages[page].parent == pageName || page == pageName) {
+            const a = document.createElement('a');
+            a.href = `#/${page}`;
+            a.innerHTML = $$.config.pages[page].name;
+
+            $$('aside').appendChild(a);
+          }
+        }
+      }
+
+    } catch (e) {
+      $$.log('Error loading header nav', 'error');
+    }
+</script>

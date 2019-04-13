@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Lucida Sans Unicode', Lato, Arial, sans-serif;
+  font-size: 14px;
+  overflow-x: hidden;
+}
+
+body *,
+body *::before,
+body *::after {
+  position: relative;
+  box-sizing: inherit;
+  font: inherit;
+}
+
+a,
+a:active,
+a:focus,
+a:visited {
+  color: inherit;
+}

@@ -1,0 +1,29 @@
+{
+  "pages": {
+    "home": {
+      "name": "Home",
+      "html": "./html/pages/home.html",
+      "css": [
+        "./css/home.css"
+      ],
+      "js": [
+        "./js/controllers/home.js"
+      ]
+    },
+    "projects": {
+      "name": "Projects",
+      "html": "./html/pages/projects.html",
+      "css": [
+      ],
+      "js": [
+      ]
+    },
+    "projects/bnmr_library": {
+      "name": "BNMR Library",
+      "html": "./html/pages/projects/bnmrLibrary.html",
+      "css": [],
+      "js": [],
+      "parent": "projects"
+    }
+  }
+}
