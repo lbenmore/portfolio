@@ -19,6 +19,28 @@ loadIncludes = () => {
   }
 },
 
+loadAsset = (path) => {
+  let ext = path.split('.').pop().toLowerCase();
+
+  switch (ext) {
+    case 'css':
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = path;
+
+      $$('.styles').appendChild(link);
+    break;
+
+    case 'js':
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = path;
+
+      $$('.scripts').appendChild(script);
+    break;
+  }
+},
+
 loadPage = () => {
   try {
     const pageName = location.hash.slice(2);
