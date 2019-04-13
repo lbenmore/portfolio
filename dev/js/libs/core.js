@@ -19,14 +19,22 @@ loadIncludes = () => {
   }
 },
 
-loadAsset = (path) => {
-  let ext = path.split('.').pop().toLowerCase();
+executeJs = (scripts) => {
+	for (const script of scripts) {
+		$$('.scripts').appendChild(script);
+	}
+},
+
+loadAsset = (assets, html, tracker) => {
+  const 
+  filename = assets[tracker.current],
+  ext = filename.split('.').pop().toLowerCase();
 
   switch (ext) {
     case 'css':
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = path;
+      link.href = filename;
 
       $$('.styles').appendChild(link);
     break;
@@ -34,48 +42,58 @@ loadAsset = (path) => {
     case 'js':
       const script = document.createElement('script');
       script.type = 'text/javascript';
-      script.src = path;
+      script.src = filename;
 
-      $$('.scripts').appendChild(script);
+      tracker.scripts.push(script);
     break;
   }
+  
+  ++tracker.current;
+  loadAssets(assets, html, tracker);
+},
+
+loadAssets = (assets, html, tracker) => {
+	if (tracker.current < tracker.total) {
+		loadAsset(assets, html, tracker);
+	} else {
+		$$('.container').innerHTML = html;
+		executeJs(tracker.scripts);
+	}
 },
 
 loadPage = () => {
   try {
     const pageName = location.hash.slice(2);
 
-    try {
+    if ($$.config.pages.hasOwnProperty(pageName)) {
       const
       pageObj = $$.config.pages[pageName],
-      assets = [...pageObj.css, ...pageObj.js];
+      assets = [...pageObj.css, ...pageObj.js],
+      tracker = {
+				current: 0,
+				total: assets.length,
+				scripts: []
+			};
 
       $$.ajax({
         url: pageObj.html,
         callback: (html) => {
           $$.preload(assets, () => {
             $$('.styles').innerHTML = '';
-            for (const css of pageObj.css) {
-              loadAsset(css);
-            }
-
-            $$('.container').innerHTML = html;
-
             $$('.scripts').innerHTML = '';
-            for (const js of pageObj.js) {
-              loadAsset(js);
-            }
 
             for (const prop in document.body.dataset) {
               document.body.dataset[prop] = null;
             }
-
+            
+            loadAssets(assets, html, tracker);
             loadIncludes();
           });
         }
       });
-    } catch (e) {
-      $$.log(e, 'error');
+    } else {
+    	$$.log('Requested page does not exist', 'error');
+    	go('home');
     }
   } catch (e) {
     $$.log(e, 'error');

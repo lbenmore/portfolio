@@ -5,10 +5,14 @@
     letters = letters.split('');
 
     letters.forEach(function (letter, i) {
-      const el = els[index].nodeName == '#text' ? document.createElement('span') : document.createElement('a');
+      const el = els[index].nodeName == '#text' 
+      	? document.createElement('span') 
+      	: document.createElement('a');
+      	
       el.style.opacity = '0';
       el.innerHTML = letter;
       if (els[index].href) el.href = els[index].href;
+      
       setTimeout(() => {
         $$('.laptop__text').appendChild(el);
         el.style.opacity = '1';
@@ -28,13 +32,15 @@
 
   generateNav = (playAnim) => {
     let
-    html = 'addEventListener("load", () => {\n';
-    html += '\t<a href="#/projects">about();</a>\n';
-    html += '\t<a href="#/projects">loadProjects();</a>\n';
-    html += '\t<a href="#/projects">contact();</a>\n';
-    html += '});',
+    html = '',
     dummy = document.createElement('div'),
     chunks = [];
+    
+    html += 'addEventListener("load", () => {\n';
+    html += '\t<a href="#/projects">about();</a>\n';
+    html += '\t<a href="#/projects">projects();</a>\n';
+    html += '\t<a href="#/projects">contact();</a>\n';
+    html += '});';
 
     if (playAnim) {
       dummy.innerHTML = html;
@@ -42,9 +48,7 @@
 
       $$('.laptop__text').innerHTML = '';
 
-      prepareTyping(chunks, 0, () => {
-        console.log('fin');
-      });
+      prepareTyping(chunks, 0);
     } else {
       $$('.laptop__text').innerHTML = html;
     }
@@ -68,27 +72,29 @@
 
     return `${day} ${hours}:${minutes} ${meridian.toUpperCase()}`;
   },
+  
+  animLaptop = (direction) => {
+  	switch (direction) {
+  		case 'open':
+				$$('.laptop').animate({
+	      	'transform': 'rotateX(0deg)'
+       	}, 1000);
+  		break;
+  		
+  		case 'close':
+	  		$$.ls('clear');
+	  		
+	      $$('.laptop').animate({
+	        'transform': 'rotateX(-90deg)'
+	      }, 1000);
+  		break;
+  	}
+  }
 
   eventListeners = () => {
-    $$('.laptop').on('swipedown', () => {
-      $$.ls('clear');
-
-      $$('main')
-        .css('perspective', '100vh')
-        .css('transform-style', 'preserve-3d');
-
-      $$('.laptop')
-        .css('transform-origin', '50% 100%')
-        .animate({
-          'transform': 'rotateX(-90deg)'
-        }, 2000);
-    });
-
-    $$('.me').on('swipeup', () => {
-      $$('.laptop').animate({
-        'transform': 'rotateX(0deg)'
-      }, 2000);
-    });
+    $$('.laptop').on('swipedown', animLaptop.bind(null, 'close'));
+    $$('.me').on('swipeup', animLaptop.bind(null, 'open'));
+      
 },
 
   initFns = () => {
@@ -96,23 +102,16 @@
     setInterval(() => {
       $$('.laptop__info').innerHTML = getTime();
     }, 1000);
-
+    
     if ($$.ls('get', 'introHasPlayed')) {
       generateNav(false);
     } else {
-      $$('main')
-        .css('perspective', '100vh')
-        .css('transform-style', 'preserve-3d');
-
-      $$('.laptop')
-        .css('transform' ,'rotateX(-90deg)')
-        .css('transform-origin', '50% 100%')
-        .animate({
-          'transform': 'rotateX(0deg)'
-        }, 2000, 500);
-
-      setTimeout(generateNav, 2000, true);
-      $$.ls('set', 'introHasPlayed', 'true');
+    	$$('.laptop').css('transform', 'rotateX(-90deg)');
+    	
+		  setTimeout(animLaptop, 1000, 'open');
+		
+		  setTimeout(generateNav, 2000, true);
+			$$.ls('set', 'introHasPlayed', 'true');	
     }
 
     eventListeners();
