@@ -5,14 +5,14 @@
     letters = letters.split('');
 
     letters.forEach(function (letter, i) {
-      const el = els[index].nodeName == '#text' 
-      	? document.createElement('span') 
+      const el = els[index].nodeName == '#text'
+      	? document.createElement('span')
       	: document.createElement('a');
-      	
+
       el.style.opacity = '0';
       el.innerHTML = letter;
       if (els[index].href) el.href = els[index].href;
-      
+
       setTimeout(() => {
         $$('.laptop__text').appendChild(el);
         el.style.opacity = '1';
@@ -35,11 +35,11 @@
     html = '',
     dummy = document.createElement('div'),
     chunks = [];
-    
+
     html += 'addEventListener("load", () => {\n';
-    html += '\t<a href="#/projects">about();</a>\n';
+    html += '\t<a href="#/about">about();</a>\n';
     html += '\t<a href="#/projects">projects();</a>\n';
-    html += '\t<a href="#/projects">contact();</a>\n';
+    html += '\t<a href="#/contact">contact();</a>\n';
     html += '});';
 
     if (playAnim) {
@@ -72,7 +72,7 @@
 
     return `${day} ${hours}:${minutes} ${meridian.toUpperCase()}`;
   },
-  
+
   animLaptop = (direction) => {
   	switch (direction) {
   		case 'open':
@@ -80,10 +80,10 @@
 	      	'transform': 'rotateX(0deg)'
        	}, 1000);
   		break;
-  		
+
   		case 'close':
 	  		$$.ls('clear');
-	  		
+
 	      $$('.laptop').animate({
 	        'transform': 'rotateX(-90deg)'
 	      }, 1000);
@@ -94,7 +94,7 @@
   eventListeners = () => {
     $$('.laptop').on('swipedown', animLaptop.bind(null, 'close'));
     $$('.me').on('swipeup', animLaptop.bind(null, 'open'));
-      
+
 },
 
   initFns = () => {
@@ -102,16 +102,16 @@
     setInterval(() => {
       $$('.laptop__info').innerHTML = getTime();
     }, 1000);
-    
+
     if ($$.ls('get', 'introHasPlayed')) {
       generateNav(false);
     } else {
     	$$('.laptop').css('transform', 'rotateX(-90deg)');
-    	
+
 		  setTimeout(animLaptop, 1000, 'open');
-		
+
 		  setTimeout(generateNav, 2000, true);
-			$$.ls('set', 'introHasPlayed', 'true');	
+			$$.ls('set', 'introHasPlayed', 'true');
     }
 
     eventListeners();

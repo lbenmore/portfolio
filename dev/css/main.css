@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro|Raleway:100,400,700');
+@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
+@import url('./menu.css');
 
 body {
   margin: 0;
@@ -6,6 +8,20 @@ body {
   font-family: 'Raleway', Arial, sans-serif;
   font-size: 14px;
   overflow-x: hidden;
+
+  --bkg-primary: #333;
+  --bkg-secondary: grey;
+  --bkg-tertiary: darkgrey;
+
+  --txt-primary: #fff;
+}
+
+body[data-darkmode=true] {
+--bkg-primary: #f8f8f8;
+--bkg-secondary: grey;
+--bkg-tertiary: darkgrey;
+
+--txt-primary: #111;
 }
 
 body *,
@@ -25,4 +41,20 @@ a:visited {
 
 .mono {
   font-family: 'Source Code Pro', monospace;
+}
+
+.hide {
+  display: none;
+}
+
+main {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: var(--bkg-primary);
+  color: var(--txt-primary);
+  transition: all 0.15s;
+}
+
+.content {
+  padding: 24px;
 }

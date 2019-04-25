@@ -1,5 +1,7 @@
 const
 
+LOAD_EVENT = new CustomEvent('LOAD_EVENT');
+
 loadIncludes = () => {
   const incs = document.querySelectorAll('*[data-include]');
 
@@ -14,6 +16,8 @@ loadIncludes = () => {
         for (const script of scripts) {
           eval(script.innerHTML);
         }
+
+        dispatchEvent(LOAD_EVENT);
       }
     })
   }
@@ -23,10 +27,12 @@ executeJs = (scripts) => {
 	for (const script of scripts) {
 		$$('.scripts').appendChild(script);
 	}
+
+  dispatchEvent(LOAD_EVENT);
 },
 
 loadAsset = (assets, html, tracker) => {
-  const 
+  const
   filename = assets[tracker.current],
   ext = filename.split('.').pop().toLowerCase();
 
@@ -47,7 +53,7 @@ loadAsset = (assets, html, tracker) => {
       tracker.scripts.push(script);
     break;
   }
-  
+
   ++tracker.current;
   loadAssets(assets, html, tracker);
 },
@@ -85,7 +91,7 @@ loadPage = () => {
             for (const prop in document.body.dataset) {
               document.body.dataset[prop] = null;
             }
-            
+
             loadAssets(assets, html, tracker);
             loadIncludes();
           });
@@ -126,7 +132,7 @@ onConfigLoad = (config) => {
 initCore = () => {
   $$.ajax({
     type: 'json',
-    url: './assets/json/config.json',
+    url: './config.json',
     callback: onConfigLoad
   });
 };

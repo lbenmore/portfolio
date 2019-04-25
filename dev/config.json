@@ -10,9 +10,25 @@
         "./js/controllers/home.js"
       ]
     },
+    "about": {
+      "name": "About",
+      "html": "./html/pages/about.html",
+      "css": [
+      ],
+      "js": [
+      ]
+    },
     "projects": {
       "name": "Projects",
       "html": "./html/pages/projects.html",
+      "css": [
+      ],
+      "js": [
+      ]
+    },
+    "contact": {
+      "name": "Contact",
+      "html": "./html/pages/contact.html",
       "css": [
       ],
       "js": [
