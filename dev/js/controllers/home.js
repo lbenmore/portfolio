@@ -1,4 +1,4 @@
-(() => {
+core.controllers.Home = () => {
   const
   writeLetters = (els, index, callback) => {
     let letters = els[index].nodeName == '#text' ? els[index].nodeValue : els[index].innerHTML;
@@ -76,17 +76,17 @@
   animLaptop = (direction) => {
   	switch (direction) {
   		case 'open':
-				$$('.laptop').animate({
-	      	'transform': 'rotateX(0deg)'
+  			$$('.laptop').animate({
+        	'transform': 'rotateX(0deg)'
        	}, 1000);
   		break;
 
   		case 'close':
-	  		$$.ls('clear');
+    		$$.ls('clear');
 
-	      $$('.laptop').animate({
-	        'transform': 'rotateX(-90deg)'
-	      }, 1000);
+        $$('.laptop').animate({
+          'transform': 'rotateX(-90deg)'
+        }, 1000);
   		break;
   	}
   }
@@ -95,9 +95,9 @@
     $$('.laptop').on('swipedown', animLaptop.bind(null, 'close'));
     $$('.me').on('swipeup', animLaptop.bind(null, 'open'));
 
-},
+  },
 
-  initFns = () => {
+  initHomeFns = () => {
     $$('.laptop__info').innerHTML = getTime();
     setInterval(() => {
       $$('.laptop__info').innerHTML = getTime();
@@ -108,14 +108,18 @@
     } else {
     	$$('.laptop').css('transform', 'rotateX(-90deg)');
 
-		  setTimeout(animLaptop, 1000, 'open');
+  	  setTimeout(animLaptop, 1000, 'open');
 
-		  setTimeout(generateNav, 2000, true);
-			$$.ls('set', 'introHasPlayed', 'true');
+  	  setTimeout(generateNav, 2000, true);
+  		$$.ls('set', 'introHasPlayed', 'true');
     }
 
     eventListeners();
   };
 
-  initFns();
-})();
+  if ($$.loaded) {
+    initHomeFns()
+  } else {
+    addEventListener('LOAD_EVENT', initHomeFns)
+  }
+};

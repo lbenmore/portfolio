@@ -14,6 +14,7 @@
       "name": "About",
       "html": "./html/pages/about.html",
       "css": [
+        "./css/page.css"
       ],
       "js": [
       ]
@@ -22,14 +23,18 @@
       "name": "Projects",
       "html": "./html/pages/projects.html",
       "css": [
+        "./css/page.css",
+        "./css/projects.css"
       ],
       "js": [
+        "./js/controllers/projects.js"
       ]
     },
     "contact": {
       "name": "Contact",
       "html": "./html/pages/contact.html",
       "css": [
+        "./css/page.css"
       ],
       "js": [
       ]
@@ -37,9 +42,22 @@
     "projects/bnmr_library": {
       "name": "BNMR Library",
       "html": "./html/pages/projects/bnmrLibrary.html",
-      "css": [],
-      "js": [],
-      "parent": "projects"
+      "css": [
+        "./css/page.css"
+      ],
+      "js": []
+    },
+    "projects/carousels": {
+      "name": "BNMR Library",
+      "html": "./html/pages/projects/carousels.html",
+      "css": [
+        "./css/page.css",
+        "./css/carousels.css"
+      ],
+      "js": [
+        "./js/controllers/carousel_one-item.js",
+        "./js/controllers/carousel_three-item.js"
+      ]
     }
   }
 }

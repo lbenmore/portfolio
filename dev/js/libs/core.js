@@ -1,9 +1,20 @@
-const
+const core = {}, LOAD_EVENT = new CustomEvent('LOAD_EVENT');
 
-LOAD_EVENT = new CustomEvent('LOAD_EVENT');
+core.fns = {};
+core.controllers = {};
+core.config = null;
 
-loadIncludes = () => {
-  const incs = document.querySelectorAll('*[data-include]');
+core.fns.loadControllers = () => {
+  const cntls = document.querySelectorAll('*[data-controller]');
+
+  cntls.forEach((cntl) => {
+    cntl.dataset.loaded = 'true';
+    core.controllers[cntl.dataset.controller]();
+  });
+};
+
+core.fns.loadIncludes = () => {
+  const incs = document.querySelectorAll('*[data-include]:not([data-loaded])');
 
   for (const inc of incs) {
     $$.ajax({
@@ -17,21 +28,30 @@ loadIncludes = () => {
           eval(script.innerHTML);
         }
 
+        $$.loaded = true;
         dispatchEvent(LOAD_EVENT);
       }
     })
   }
-},
+};
 
-executeJs = (scripts) => {
+core.fns.executeJs = (scripts) => {
+  const total = scripts.length;
+  let curr = 0;
+
 	for (const script of scripts) {
 		$$('.scripts').appendChild(script);
+    script.onload = () => {
+      ++curr;
+      if (curr == total) core.fns.loadControllers();
+    }
 	}
 
+  $$.loaded = true;
   dispatchEvent(LOAD_EVENT);
-},
+};
 
-loadAsset = (assets, html, tracker) => {
+core.fns.loadAsset = (assets, html, tracker) => {
   const
   filename = assets[tracker.current],
   ext = filename.split('.').pop().toLowerCase();
@@ -55,25 +75,29 @@ loadAsset = (assets, html, tracker) => {
   }
 
   ++tracker.current;
-  loadAssets(assets, html, tracker);
-},
+  core.fns.loadAssets(assets, html, tracker);
+};
 
-loadAssets = (assets, html, tracker) => {
+core.fns.loadAssets = (assets, html, tracker) => {
 	if (tracker.current < tracker.total) {
-		loadAsset(assets, html, tracker);
+		core.fns.loadAsset(assets, html, tracker);
 	} else {
 		$$('.container').innerHTML = html;
-		executeJs(tracker.scripts);
-	}
-},
+		core.fns.executeJs(tracker.scripts);
 
-loadPage = () => {
+    if (html.includes('data-include')) core.fns.loadIncludes();
+	}
+};
+
+core.fns.loadPage = () => {
   try {
     const pageName = location.hash.slice(2);
 
-    if ($$.config.pages.hasOwnProperty(pageName)) {
+    $$.loaded = false;
+
+    if (core.config.pages.hasOwnProperty(pageName)) {
       const
-      pageObj = $$.config.pages[pageName],
+      pageObj = core.config.pages[pageName],
       assets = [...pageObj.css, ...pageObj.js],
       tracker = {
 				current: 0,
@@ -89,54 +113,54 @@ loadPage = () => {
             $$('.scripts').innerHTML = '';
 
             for (const prop in document.body.dataset) {
-              document.body.dataset[prop] = null;
+              // document.body.dataset[prop] = null;
             }
 
-            loadAssets(assets, html, tracker);
-            loadIncludes();
+            core.fns.loadAssets(assets, html, tracker);
           });
         }
       });
     } else {
     	$$.log('Requested page does not exist', 'error');
-    	go('home');
+    	core.fns.go('home');
     }
   } catch (e) {
     $$.log(e, 'error');
   }
-},
+};
 
-go = (pageName) => {
+core.fns.go = (pageName) => {
   try {
-    if ($$.config.pages[pageName]) {
+    if (core.config.pages[pageName]) {
       location.hash = `#/${pageName}`;
     } else {
-      go('home');
+      core.fns.go('home');
     }
   } catch (e) {
     try {
-      go('home');
+      core.fns.go('home');
     } catch (e) {
       $$.log(e, 'error');
     }
   }
-},
+};
 
-onConfigLoad = (config) => {
-  $$.config = config;
-  if (location.hash) loadPage();
-  else go('home');
-  addEventListener('hashchange', loadPage);
-},
+core.fns.onConfigLoad = (config) => {
+  core.config = config;
+  if (location.hash) core.fns.loadPage();
+  else core.fns.go('home');
+  addEventListener('hashchange', core.fns.loadPage);
+};
 
-initCore = () => {
+core.fns.initCore = () => {
   $$.ajax({
     type: 'json',
     url: './config.json',
-    callback: onConfigLoad
+    callback: core.fns.onConfigLoad
   });
 };
 
-$$.go = go;
+$$.go = core.fns.go;
+$$.loaded = false;
 
-document.addEventListener('DOMContentLoaded', initCore);
+document.addEventListener('DOMContentLoaded', core.fns.initCore);

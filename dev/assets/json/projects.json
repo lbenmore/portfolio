@@ -1,11 +1,90 @@
 [
   {
-    "name": "BNMR Library"
+    "name": "BNMR Library",
+    "thumbnail": "https://unsplash.it/300/300/?image=1063",
+    "image": "https://unsplash.it/800/800/?image=1063",
+    "technologies": "JavaScript, ES6",
+    "blurb": "Utility library of commonly used functions including styling and animation, ajax requests, and stylized logging.",
+    "description": "",
+    "links": [
+      {
+        "name": "More Info",
+        "url": "#/projects/bnmr_library"
+      },
+      {
+        "name": "Documentation",
+        "url": "http://lisabenmore.com/bnmr/documentation.html"
+      },
+      {
+        "name": "Source (ES6)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/libs/bnmr.js"
+      },
+      {
+        "name": "Source (JavaScript)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/legacy.bnmr-1.2.0.js"
+      }
+    ]
   },
   {
-    "name": "BNMR Core"
+    "name": "BNMR Core",
+    "thumbnail": "https://unsplash.it/300/300/?image=1028",
+    "image": "https://unsplash.it/800/800/?image=1028",
+    "technologies": "JavaScript, ES6",
+    "blurb": "Framework utilizing the BNMR Library to create a single-page app structure.",
+    "description": "",
+    "links": [
+      {
+        "name": "More Info",
+        "url": "#/projects/bnmr_core"
+      },
+      {
+        "name": "Demo",
+        "url": "http://lisabenmore.com/core/"
+      },
+      {
+        "name": "Source (ES5)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/core/js/libs/core.js"
+      },
+      {
+        "name": "Source (ES6)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/libs/core.js"
+      }
+    ]
   },
   {
-    "name": "BNMR Video Player"
+    "name": "Video Player",
+    "thumbnail": "https://unsplash.it/300/300/?image=1039",
+    "image": "https://unsplash.it/800/800/?image=1039",
+    "technologies": "HTML, CSS, JavaScript",
+    "blurb": "It plays a video! Utilizes BNMR Library.",
+    "description": "",
+    "links": [
+      {
+        "name": "More Info",
+        "url": "#/projects/video_player"
+      },
+      {
+        "name": "Demo",
+        "url": "http://lisabenmore.com/core/#/home/videos/player"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/core/js/components/videoplayer.js"
+      }
+    ]
+  },
+  {
+    "name": "Carousels!",
+    "thumbnail": "https://unsplash.it/300/300/?image=907",
+    "image": "https://unsplash.it/800/800/?image=907",
+    "technologies": "HTML, CSS, JavaScript, ES6",
+    "blurb": "A few infinite-looping carousels.",
+    "description": "",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "#/projects/carousels"
+      }
+    ]
   }
 ]

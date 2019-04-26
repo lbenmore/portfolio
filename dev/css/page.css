@@ -1,0 +1,30 @@
+@import url('./menu.css');
+
+main {
+  padding: 24px;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: var(--bkg-primary);
+  color: var(--txt-primary);
+}
+
+header {
+  margin: 0 auto 60px;
+  max-width: 960px;
+  z-index: 1;
+  transform: translateZ(0);
+}
+
+  header span {
+    font-size: 2em;
+    font-weight: 100;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+}
+
+section {
+  margin: 0 auto;
+  max-width: 960px;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+}

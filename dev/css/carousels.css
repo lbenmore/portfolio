@@ -1,0 +1,140 @@
+section {
+	text-align: center;
+}
+
+.carousel {
+	display: inline-block;
+	width: 100%;
+  height: 50vh;
+}
+
+
+
+.three-item-carousel .carousel {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.three-item-carousel .carousel__panel {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 25%;
+	width: 50%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+	font-family: sans-serif;
+	font-size: 24px;
+	font-weight: 100;
+	letter-spacing: 0.4em;
+	line-height: 50vh;
+	text-align: center;
+	text-shadow: 0px 0px 8px black;
+	text-transform: uppercase;
+	transition: transform 0.5s, opacity 0.3s;
+}
+
+.three-item-carousel .carousel__panel.static {
+	transition: none;
+}
+
+.three-item-carousel .carousel__panel--outView {
+	opacity: 0;
+}
+
+.three-item-carousel .carousel__panel--inView {
+	opacity: 1;
+}
+
+.three-item-carousel .carousel__panel--inView.carousel__panel--left {
+	transform: translate(-50%) scale(0.75);
+	opacity: 0.5;
+}
+
+.three-item-carousel .carousel__panel--inView.carousel__panel--right {
+	transform: translate(50%) scale(0.75);
+	opacity: 0.5;
+}
+
+.three-item-carousel .carousel__panel--inView.carousel__panel--center {
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+
+.three-item-carousel .carousel__panel--outView.carousel__panel--left {
+	opacity: 0;
+	transform: translate(-150%) scale(0.75);
+}
+
+.three-item-carousel .carousel__panel--outView.carousel__panel--right {
+	opacity: 0;
+	transform: translate(150%) scale(0.75);
+}
+
+.three-item-carousel .carousel__arrow {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	color: #fff;
+	font-size: 4vw;
+	line-height: 50vh;
+	text-align: center;
+	text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+	opacity: 0.2;
+	z-index: 2;
+	cursor: pointer;
+	transition: opacity 0.3s;
+}
+
+.three-item-carousel .carousel__arrow--right {
+	right: 0;
+}
+
+.three-item-carousel .carousel__arrow:hover {
+	opacity: 0.8;
+}
+
+
+
+.one-item-carousel .carousel__container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.one-item-carousel .carousel__container * {
+	position: absolute;
+}
+
+.one-item-carousel .carousel__panel {
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-size: cover;
+	transition: transform 0.5s;
+}
+
+.one-item-carousel .carousel__panel.static {
+	transition: none;
+}
+
+.one-item-carousel .carousel__arrow {
+	width: 10%;
+	height: 100%;
+	background-color: #fff2;
+	color: #fff;
+	font-size: 8vw;
+	line-height: 50vh;
+	text-align: center;
+	text-shadow: 0px 0px 6px #000;
+	cursor: pointer;
+}
+
+.one-item-carousel .carousel__arrow--right {
+	right: 0;
+}

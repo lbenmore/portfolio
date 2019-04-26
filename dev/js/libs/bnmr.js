@@ -87,14 +87,24 @@
   },
 
   log = (msg, style) => {
+    let label = '';
+
+    try {
+      const err = new Error();
+      label = err.stack.split('\n')[2].split('/').pop().slice(0, -1);
+    } catch (e) {
+      label = 'Unknown source';
+    }
+
     if (style) {
       if (style in console) {
+        console.log(`${label} ->`);
         console[style](msg);
       } else {
-        console.log('%c%s', style, msg);
+        console.log('%c%s', style, `${label} -> ${msg}`);
       }
     } else {
-      console.log(msg);
+      console.log(`${label} -> ${msg}`);
     }
   },
 
