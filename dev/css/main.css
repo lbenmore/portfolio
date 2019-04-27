@@ -52,6 +52,7 @@ body *::after {
   padding: 0;
   box-sizing: inherit;
   font: inherit;
+  -webkit-text-size-adjust: 100%;
 }
 
 a,
