@@ -126,6 +126,9 @@ main {
           white-space: pre-wrap;
         }
 
+          a:not([href^='#'])::after {
+            content: '';
+
 @media (max-width: 1080px) {
   .laptop__text {
     width: 80%;
