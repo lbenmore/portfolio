@@ -9,6 +9,7 @@
 
   .game {
   	position: relative;
+  	margin: 0 auto;
     width: 480px;
     height: 320px;
     background-color: var(--steve-secondary);
