@@ -55,12 +55,24 @@ core.controllers.Projects = () => {
     animProjects();
   },
 
+  setSectionFiller = (projects) => {
+    if (768 < innerWidth) {
+      if (projects.length % 5 == 0) $$('section').classList.add('filler');
+    } else if (524 < innerWidth || innerWidth <= 768) {
+      $$('section').classList.remove('filler');
+    } else if (innerWidth <= 524) {
+      $$('section').classList.remove('filler');
+    }
+  },
+
   initProjectsFns = () => {
     $$.ajax({
       type: 'json',
       url: './assets/json/projects.json',
       callback: (projects) => {
-        writeProjects(projects, $$('section'))
+        writeProjects(projects, $$('section'));
+        setSectionFiller(projects);
+        addEventListener('resize', setSectionFiller.bind(null, projects));
       }
     })
   };

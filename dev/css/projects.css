@@ -1,3 +1,9 @@
+section.filler::after {
+  content: '';
+  display: block;
+  flex-basis: calc(33% - 8px);
+}
+
 .card {
   flex-basis: calc(33% - 8px);
   background-position: center;
