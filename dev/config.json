@@ -48,24 +48,27 @@
       "js": []
     },
     "projects/carousels": {
-      "name": "BNMR Library",
+      "name": "Carousels",
       "html": "./html/pages/projects/carousels.html",
       "css": [
         "./css/page.css",
-        "./css/carousels.css"
+        "./css/projects/carousels.css"
       ],
       "js": [
-        "./js/controllers/carousel_one-item.js",
-        "./js/controllers/carousel_three-item.js"
+        "./js/controllers/projects/carousel_one-item.js",
+        "./js/controllers/projects/carousel_three-item.js"
       ]
     },
     "projects/steve": {
       "name": "BNMR Library",
       "html": "./html/pages/projects/steve.html",
       "css": [
-        "./css/page.css"
+        "./css/page.css",
+        "./css/projects/steve.css"
       ],
-      "js": []
+      "js": [
+      	"./js/controllers/projects/steve.js"
+      ]
     }
   }
 }
