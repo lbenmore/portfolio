@@ -58,6 +58,14 @@
         "./js/controllers/carousel_one-item.js",
         "./js/controllers/carousel_three-item.js"
       ]
+    },
+    "projects/steve": {
+      "name": "BNMR Library",
+      "html": "./html/pages/projects/steve.html",
+      "css": [
+        "./css/page.css"
+      ],
+      "js": []
     }
   }
 }

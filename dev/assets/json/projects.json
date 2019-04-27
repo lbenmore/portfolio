@@ -4,8 +4,7 @@
     "thumbnail": "https://unsplash.it/300/300/?image=1063",
     "image": "https://unsplash.it/800/800/?image=1063",
     "technologies": "JavaScript, ES6",
-    "blurb": "Utility library of commonly used functions including styling and animation, ajax requests, and stylized logging.",
-    "description": "",
+    "description": "Utility library of commonly used functions including styling and animation, ajax requests, and stylized logging.",
     "links": [
       {
         "name": "More Info",
@@ -30,8 +29,7 @@
     "thumbnail": "https://unsplash.it/300/300/?image=1028",
     "image": "https://unsplash.it/800/800/?image=1028",
     "technologies": "JavaScript, ES6",
-    "blurb": "Framework utilizing the BNMR Library to create a single-page app structure.",
-    "description": "",
+    "description": "Framework utilizing the BNMR Library to create a single-page app structure.",
     "links": [
       {
         "name": "More Info",
@@ -56,8 +54,7 @@
     "thumbnail": "https://unsplash.it/300/300/?image=1039",
     "image": "https://unsplash.it/800/800/?image=1039",
     "technologies": "HTML, CSS, JavaScript",
-    "blurb": "It plays a video! Utilizes BNMR Library.",
-    "description": "",
+    "description": "It plays a video! Utilizes BNMR Library.",
     "links": [
       {
         "name": "More Info",
@@ -78,12 +75,28 @@
     "thumbnail": "https://unsplash.it/300/300/?image=907",
     "image": "https://unsplash.it/800/800/?image=907",
     "technologies": "HTML, CSS, JavaScript, ES6",
-    "blurb": "A few infinite-looping carousels.",
-    "description": "",
+    "description": "A few infinite-looping carousels.",
     "links": [
       {
         "name": "Demo",
         "url": "#/projects/carousels"
+      }
+    ]
+  },
+  {
+    "name": "Steve",
+    "thumbnail": "https://unsplash.it/300/300/?image=1032",
+    "image": "https://unsplash.it/800/800/?image=1032",
+    "technologies": "HTML, CSS, ES6",
+    "description": "A game based on (ripping off) Google Chrome's game that becomes available when no network connection is available",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "#/projects/steve"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/steve"
       }
     ]
   }

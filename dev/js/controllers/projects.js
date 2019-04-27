@@ -38,8 +38,8 @@ core.controllers.Projects = () => {
         <div class="card m-b p bkg-secondary opac-0" data-row="${y}" data-col="${x}" style="background-image: url('${project.thumbnail}')">
           <h1 class="card__title m-b">${project.name}</h1>
           <div class="card__thumb m-b" style="background-image: url('${project.thumbnail}')"></div>
-          <p class="card__blurb m-b">
-            ${project.blurb}
+          <p class="card__description m-b">
+            ${project.description}
           </p>
           <ul class="list-style-none">
             ${
