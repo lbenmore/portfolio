@@ -267,6 +267,42 @@
       break;
     }
   };
+  
+  el.addClass = (cName, delay) => {
+	  setTimeout(() => { 
+	  	if (el.length) {
+	  		for (const item of el) {
+		  		item.classList.add(cName);
+	  		}
+	  	} else {
+	  		el.classList.add(cName);
+	  	}
+  	}, delay || 0);
+  };
+  
+  el.removeClass = (cName, delay) => {
+	  setTimeout(() => { 
+	  	if (el.length) {
+	  		for (const item of el) {
+		  		item.classList.remove(cName);
+	  		}
+	  	} else {
+	  		el.classList.remove(cName);
+	  	}
+  	}, delay || 0);
+  };
+  
+  el.replaceClass = (cName, cName2, delay) => {
+	  setTimeout(() => { 
+	  	if (el.length) {
+	  		for (const item of el) {
+		  		item.className = item.className.replace(cName, cName2);
+	  		}
+	  	} else {
+	  		el.className = el.className.replace(cName, cName2);
+	  	}
+  	}, delay || 0);
+  };
 
   el.css = (prop, value, delay, callback) => {
     if (el.length) {
