@@ -1,125 +1,107 @@
 core.controllers.Home = () => {
-  const
-  writeLetters = (els, index, callback) => {
-    let letters = els[index].nodeName == '#text' ? els[index].nodeValue : els[index].innerHTML;
-    letters = letters.split('');
-
-    letters.forEach(function (letter, i) {
-      const el = els[index].nodeName == '#text'
-      	? document.createElement('span')
-      	: document.createElement('a');
-
-      el.style.opacity = '0';
-      el.innerHTML = letter;
-      if (els[index].href) el.href = els[index].href;
-
-      setTimeout(() => {
-        $$('.laptop__text').appendChild(el);
-        el.style.opacity = '1';
-      }, 80 * i);
-    });
-
-    setTimeout(prepareTyping, letters.length * 80, els, ++index, callback);
-  },
-
-  prepareTyping = (els, index, callback) => {
-    if (index < els.length) {
-      writeLetters(els, index, callback);
-    } else {
-      if (callback) callback.call();
-    }
-  },
-
-  generateNav = (playAnim) => {
-    let
-    html = '',
-    dummy = document.createElement('div'),
-    chunks = [];
-
-    html += 'addEventListener("load", () => {\n';
-    html += '\t<a href="#/about">about();</a>\n';
-    html += '\t<a href="#/projects">projects();</a>\n';
-    html += '\t<a href="#/contact">contact();</a>\n';
-    html += '});';
-
-    if (playAnim) {
-      dummy.innerHTML = html;
-      chunks = dummy.childNodes;
-
-      $$('.laptop__text').innerHTML = '';
-
-      prepareTyping(chunks, 0);
-    } else {
-      $$('.laptop__text').innerHTML = html;
-    }
-  }
-
-  getTime = () => {
-    let
-    now = new Date(),
-    hours = now.getHours(),
-    minutes = now.getMinutes(),
-    days = ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat'],
-    day = days[now.getDay()],
-    meridian;
-
-    meridian = hours > 11 ? 'pm' : 'am';
-
-    if (hours > 12) hours -= 12;
-    if (hours == 0) hours = 12;
-
-    if (minutes < 10) minutes = `0${minutes}`;
-
-    return `${day} ${hours}:${minutes} ${meridian.toUpperCase()}`;
-  },
-
-  animLaptop = (direction) => {
-  	switch (direction) {
-  		case 'open':
-  			$$('.laptop').animate({
-        	'transform': 'rotateX(0deg)'
-       	}, 1000);
-  		break;
-
-  		case 'close':
-    		$$.ls('clear');
-
-        $$('.laptop').animate({
-          'transform': 'rotateX(-90deg)'
-        }, 1000);
-  		break;
-  	}
-  }
-
-  eventListeners = () => {
-    $$('.laptop').on('swipedown', animLaptop.bind(null, 'close'));
-    $$('.me').on('swipeup', animLaptop.bind(null, 'open'));
-
-  },
-
-  initHomeFns = () => {
-    $$('.laptop__info').innerHTML = getTime();
-    setInterval(() => {
-      $$('.laptop__info').innerHTML = getTime();
-    }, 1000);
-
-    if ($$.ls('get', 'introHasPlayed')) {
-      generateNav(false);
-    } else {
-    	$$('.laptop').css('transform', 'rotateX(-90deg)');
-
-  	  setTimeout(animLaptop, 1000, 'open');
-
-  	  setTimeout(generateNav, 2000, true);
-  		$$.ls('set', 'introHasPlayed', 'true');
-    }
-
-    eventListeners();
-  };
+	const 
+	NUM_STARS = innerWidth * innerHeight / 2500,
+	NUM_STARFIELDS = 6,
+	
+	initHomeFns = () => {
+		new Warp($$('main'));
+	};
+	
+	class Star {
+		constructor (target, i) {
+	  	this.target = target;
+	    this.index = i;
+	    this.element = document.createElement('div');
+	    
+	    this.generate();
+	  }
+	  
+	  generate () {
+	  this.element.classList.add('star');
+	    
+	    Object.assign(this.element.style, {
+	    	top: `${Math.floor(Math.random() * innerHeight)}px`,
+	   	 	left: `${Math.floor(Math.random() * innerWidth)}px`
+	    });
+	    
+	    this.target.appendChild(this.element);
+	  }
+	}
+	
+	class Starfield {
+		constructor (target, warp, index) {
+		  this.target = target;
+	    this.index = index;
+	    this.wrapper = document.createElement('div');
+	    this.element = document.createElement('div');
+	    
+	    this.generate();
+	  }
+	  
+	  populate () {
+	  	for (let i = NUM_STARS - 1; i >= 0; i--) {
+	    	new Star(this.element, i);
+	    }
+	  }
+	  
+	  generate () {
+	  	this.wrapper.classList.add('starfield');
+	    
+	    Object.assign(this.wrapper.style, {
+	    	animationDelay: `${this.index * (60 / NUM_STARFIELDS) * -1}s`
+	    });
+	    Object.assign(this.element.style, {
+	    	width: '100%',
+	      height: '100%'
+	    });
+	    
+	    this.wrapper.appendChild(this.element);
+	    this.target.appendChild(this.wrapper);
+	    
+	    this.populate();
+	  }
+	}
+	
+	class Warp {
+		constructor (target) {
+	  	this.target = target;
+	    this.starfields = [];
+	    
+	    for (let i = NUM_STARFIELDS - 1; i >= 0; i--) {
+	      this.starfields.push(new Starfield(this.target, this, i));
+	    }
+	    
+	    this.target.addEventListener('mousemove', this.handleMouseEvent.bind(this));
+	    this.target.addEventListener('mouseout', this.handleMouseEvent.bind(this));
+	  }
+	  
+	  handleMouseEvent (e) {
+	  	switch (e.type) {
+	    	case 'mousemove':
+	        const 
+	        mouseX = e.clientX,
+	        mouseY = e.clientY,
+	        midPointX = innerWidth / 2,
+	        midPointY = innerHeight / 2,
+	        offsetX = (midPointX - mouseX) / 20,
+	        offsetY = (midPointY - mouseY) / 20;
+	        
+	        for (let starfield of this.starfields) {
+	          starfield.element.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+	        }
+		      
+	     	break;
+	       
+				case 'mouseout':
+					e.target.style.transform = 'translate(0px, 0px)';
+				break;
+			}
+	  }
+	}
 
   if ($$.loaded) {
-    initHomeFns()
+    initHomeFns();
   } else {
-    addEventListener('LOAD_EVENT', initHomeFns)
-  }
+    addEventListener('LOAD_EVENT', initHomeFns);
+  }   
 };
