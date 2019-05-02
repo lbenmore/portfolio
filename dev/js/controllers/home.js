@@ -4,7 +4,7 @@ core.controllers.Home = () => {
 	NUM_STARFIELDS = 6,
 	
 	initHomeFns = () => {
-		new Warp($$('main'));
+		new Warp($$('.container__content'));
 	};
 	
 	class Star {
