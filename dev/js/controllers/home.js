@@ -73,14 +73,18 @@ core.controllers.Home = () => {
 	    
 	    this.target.addEventListener('mousemove', this.handleMouseEvent.bind(this));
 	    this.target.addEventListener('mouseout', this.handleMouseEvent.bind(this));
+	    
+	    // this.target.addEventListener('touchmove', this.handleMouseEvent.bind(this));
+	    // this.target.addEventListener('touchend', this.handleMouseEvent.bind(this));
 	  }
 	  
 	  handleMouseEvent (e) {
 	  	switch (e.type) {
 	    	case 'mousemove':
+				case 'touchmove':
 	        const 
-	        mouseX = e.clientX,
-	        mouseY = e.clientY,
+	        mouseX = e.clientX || e.changedTouches[0].clientX,
+	        mouseY = e.clientY || e.changedTouches[0].clientY,
 	        midPointX = innerWidth / 2,
 	        midPointY = innerHeight / 2,
 	        offsetX = (midPointX - mouseX) / 20,
@@ -93,6 +97,7 @@ core.controllers.Home = () => {
 	     	break;
 	       
 				case 'mouseout':
+				case 'touchend':
 					e.target.style.transform = 'translate(0px, 0px)';
 				break;
 			}

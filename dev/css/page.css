@@ -1,11 +1,12 @@
 @import url('./menu.css');
 
 main {
-  padding: 24px;
-  min-width: 100vw;
-  min-height: 100vh;
-  background-color: var(--bkg-primary);
-  color: var(--txt-primary);
+	padding: 24px;
+	min-width: 100vw;
+	min-height: 100vh;
+	min-height: calc(var(--vh) * 100);
+	background-color: var(--bkg-primary);
+	color: var(--txt-primary);
 }
 
 header {

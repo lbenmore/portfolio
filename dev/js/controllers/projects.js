@@ -4,6 +4,7 @@ core.controllers.Projects = () => {
     $$('.card').forEach((card) => {
       setTimeout(() => {
         card.classList.remove('opac-0');
+        card.classList.remove('scale-075');
       }, ((parseInt(card.dataset.row) + parseInt(card.dataset.col)) * 150) + 250);
     });
   },
@@ -35,7 +36,7 @@ core.controllers.Projects = () => {
       }
 
       return `
-        <div class="card m-b p bkg-secondary opac-0" data-row="${y}" data-col="${x}" style="background-image: url('${project.thumbnail}')">
+        <div class="card m-b p bkg-secondary opac-0 scale-075" data-row="${y}" data-col="${x}" style="background-image: url('${project.thumbnail}')">
           <h1 class="card__title m-b">${project.name}</h1>
           <div class="card__thumb m-b" style="background-image: url('${project.thumbnail}')"></div>
           <p class="card__description m-b">

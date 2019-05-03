@@ -10,7 +10,7 @@ section.filler::after {
   background-size: cover;
   cursor: pointer;
   overflow: hidden;
-  transition: opacity 0.5s, box-shadow 0.5s;
+  transition: opacity 0.5s, box-shadow 0.5s, transform 0.5s;
 }
 
 .card:hover {
@@ -39,7 +39,6 @@ body[data-darkmode='false'] .card {
 
   .card__title {
     font-size: 1.2em;
-    font-weight: 200;
     letter-spacing: 0.2em;
     text-align: center;
     text-transform: uppercase;

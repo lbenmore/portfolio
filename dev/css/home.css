@@ -1,3 +1,13 @@
+body {
+	position: fixed;
+	overflow: hidden;
+}
+
+main {
+	height: calc(var(--vh) * 100);
+	overflow: hidden;
+}
+
 .container__content {
 	display: table;
  	position: fixed;
@@ -5,31 +15,33 @@
 	left: 0;
 	width: 100vw;
 	height: 100vh;
+	height: calc(var(--vh) * 100);
 	perspective: 100vw;
 	transform-style: preserve-3d;
+	overflow: hidden;
 }
 
 .container__header {
 	display: table-cell;
 	vertical-align: middle;
-	color: #fff;
+	color: var(--txt-primary);
 	text-align: center;
-	text-shadow: 0px 0px 12px #323036;
+	text-shadow: 0px 0px 12px var(--bkg-primary);
 }
 
 .h1 {
-	magin-bottom: 8px;
-	font-size: 6vw;
-	font-weight: 200;
-	letter-spacing: 0.4em;
+	magin-bottom: 6px;
+	font-size: 8vw;
+	font-weight: 400;
+	letter-spacing: 0.275em;
 	text-transform: lowercase;
 }
 
 .h2 {
 	margin-bottom: 24px;
 	font-size: 4vw;
-	font-weight: 700;
-	letter-spacing: 0.6em;
+	font-weight: 200;
+	letter-spacing: 0.8em;
 	text-transform: uppercase;
 }
 
@@ -68,5 +80,5 @@ nav a:not(:first-of-type) {
 	position: absolute;
 	width: 1px;
 	height: 1px;
-	background: white;
+	background: var(--txt-primary);
 }
