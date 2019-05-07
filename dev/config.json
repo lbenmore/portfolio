@@ -47,6 +47,19 @@
       ],
       "js": []
     },
+    "projects/videoPlayer": {
+      "name": "Video Player",
+      "html": "./html/pages/projects/videoPlayer.html",
+      "css": [
+        "./css/page.css",
+        "./css/projects/vplayer.css",
+        "./css/projects/videoPlayer.css"
+      ],
+      "js": [
+        "./js/controllers/projects/vplayer.js",
+        "./js/controllers/projects/videoPlayer.js"
+      ]
+    },
     "projects/carousels": {
       "name": "Carousels",
       "html": "./html/pages/projects/carousels.html",
@@ -68,6 +81,17 @@
       ],
       "js": [
       	"./js/controllers/projects/steve.js"
+      ]
+    },
+    "projects/whackAMouse": {
+      "name": "Whack-a-Mouse",
+      "html": "./html/pages/projects/whackAMouse.html",
+      "css": [
+        "./css/page.css",
+        "./css/projects/whackAMouse.css"
+      ],
+      "js": [
+      	"./js/controllers/projects/whackAMouse.js"
       ]
     }
   }

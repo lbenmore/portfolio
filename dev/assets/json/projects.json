@@ -7,10 +7,6 @@
     "description": "Utility library of commonly used functions including styling and animation, ajax requests, and stylized logging.",
     "links": [
       {
-        "name": "More Info",
-        "url": "#/projects/bnmr_library"
-      },
-      {
         "name": "Documentation",
         "url": "http://lisabenmore.com/bnmr/documentation.html"
       },
@@ -31,10 +27,6 @@
     "technologies": "JavaScript, ES6",
     "description": "Framework utilizing the BNMR Library to create a single-page app structure.",
     "links": [
-      {
-        "name": "More Info",
-        "url": "#/projects/bnmr_core"
-      },
       {
         "name": "Demo",
         "url": "http://lisabenmore.com/core/"
@@ -57,12 +49,8 @@
     "description": "It plays a video! Utilizes BNMR Library.",
     "links": [
       {
-        "name": "More Info",
-        "url": "#/projects/video_player"
-      },
-      {
         "name": "Demo",
-        "url": "http://lisabenmore.com/core/#/home/videos/player"
+        "url": "#/projects/videoPlayer"
       },
       {
         "name": "Source",
@@ -88,7 +76,7 @@
     "thumbnail": "https://unsplash.it/300/300/?image=1032",
     "image": "https://unsplash.it/800/800/?image=1032",
     "technologies": "HTML, CSS, ES6",
-    "description": "A game based on (ripping off) Google Chrome's game that becomes available when no network connection is available",
+    "description": "A recreation of Google Chrome's game that becomes available when no network connection is available",
     "links": [
       {
         "name": "Demo",
@@ -97,6 +85,40 @@
       {
         "name": "Source",
         "url": "https://github.com/lbenmore/portfolio/tree/master/steve"
+      }
+    ]
+  },
+  {
+    "name": "Noteboard",
+    "thumbnail": "https://unsplash.it/300/300/?image=666",
+    "image": "https://unsplash.it/800/800/?image=666",
+    "technologies": "PHP, HTML, CSS, JavaScript",
+    "description": "A platform to jot down quick notes and store single files. Test account - username: root, password: alpine.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "http://www.lisabenmore.com/noteboard"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/noteboard"
+      }
+    ]
+  },
+  {
+    "name": "Whack-a-Mouse",
+    "thumbnail": "https://unsplash.it/300/300/?image=1016",
+    "image": "https://unsplash.it/800/800/?image=1016",
+    "technologies": "HTML, CSS, ES6",
+    "description": "A whack-a-mole game, but my drawing skills are minimal and the mouse became a mole.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "#/projects/whackAMouse"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/noteboard"
       }
     ]
   }
