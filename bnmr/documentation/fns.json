@@ -1,0 +1,369 @@
+[
+  {
+    "id": "domSelector",
+    "name": "$$()",
+    "description": "DOM Selector",
+    "parameters": [
+      {
+        "name": "selector",
+        "type": "String",
+        "description": "Any valid CSS selector or selector list. Default: 'body'"
+      }
+    ],
+    "return": "If a single element matches the selector passed, that element is returned. If multiple elements match, a node list of all matching elements is returned."
+  },
+  {
+    "id": "on",
+    "name": "$$(selector).on(event, callback)",
+    "description": "Adds an event listener to an element or elements, including custom touch events for swiping",
+    "parameters": [
+      {
+        "name": "selector",
+        "type": "String",
+        "description": "Any valid CSS selector or selector list. Default: 'body'"
+      },
+      {
+        "name": "event",
+        "type": "String",
+        "description": "Event name to listen for"
+      },
+      {
+        "name": "callback",
+        "type": "Function",
+        "description": "Function to execute on occurence of event."
+      }
+    ],
+    "return": "Returns selected element or elements from DOM."
+  },
+  {
+    "id": "addClass",
+    "name": "$$(selector).addClass(class[, delay])",
+    "description": "Adds class to one or more elements with an optional delay on adding the class name",
+    "parameters": [
+      {
+        "name": "selector",
+        "type": "String",
+        "description": "Any valid CSS selector or selector list. Default: 'body'"
+      },
+      {
+        "name": "class",
+        "type": "String",
+        "description": "Class name to be added to the element or elements class."
+      },
+      {
+        "name": "delay",
+        "type": "Integer",
+        "description": "Amount of time in miliseconds before class should be added. Default: 0"
+      }
+    ],
+    "return": "Returns selected element or elements from DOM."
+  },
+  {
+    "id": "removeClass",
+    "name": "$$(selector).removeClass(class[, delay])",
+    "description": "Removes class to one or more elements with an optional delay on adding the class name",
+    "parameters": [
+      {
+        "name": "selector",
+        "type": "String",
+        "description": "Any valid CSS selector or selector list. Default: 'body'"
+      },
+      {
+        "name": "class",
+        "type": "String",
+        "description": "Class name to be removed to the element or elements class."
+      },
+      {
+        "name": "delay",
+        "type": "Integer",
+        "description": "Amount of time in miliseconds before class should be removed. Default: 0"
+      }
+    ],
+    "return": "Returns selected element or elements from DOM."
+  },
+  {
+    "id": "replaceClass",
+    "name": "$$(selector).replaceClass(currentClass, newClass[, delay])",
+    "description": "Adds class to one or more elements with an optional delay on adding the class name",
+    "parameters": [
+      {
+        "name": "selector",
+        "type": "String",
+        "description": "Any valid CSS selector or selector list. Default: 'body'"
+      },
+      {
+        "name": "currentClass",
+        "type": "String",
+        "description": "Class name to be replaced to the element or elements class."
+      },
+      {
+        "name": "newClass",
+        "type": "String",
+        "description": "Class name to be added to the element or elements class."
+      },
+      {
+        "name": "delay",
+        "type": "Integer",
+        "description": "Amount of time in miliseconds before class should be replaced. Default: 0"
+      }
+    ],
+    "return": "Returns selected element or elements from DOM."
+  },
+  {
+    "id": "css",
+    "name": "$$(selector).css(property, value[, delay])",
+    "description": "Updates a CSS property value on one or more elements",
+    "parameters": [
+      {
+        "name": "selector",
+        "type": "String",
+        "description": "Any valid CSS selector or selector list. Default: 'body'"
+      },
+      {
+        "name": "property",
+        "type": "String",
+        "description": "CSS property to be updated on the element or elements."
+      },
+      {
+        "name": "value",
+        "type": "String",
+        "description": "New value to be applied to the property of the element or elements."
+      },
+      {
+        "name": "delay",
+        "type": "Integer",
+        "description": "Amount of time in miliseconds before CSS should be applied. Default: 0"
+      }
+    ],
+    "return": "Returns selected element or elements from DOM."
+  },
+  {
+    "id": "animate",
+    "name": "$$(selector).animate(properties[, duration][, delay][, ease][, callback])",
+    "description": "Applies new CSS property values with a transition to an element or elements",
+    "parameters": [
+      {
+        "name": "selector",
+        "type": "String",
+        "description": "Any valid CSS selector or selector list. Default: 'body'"
+      },
+      {
+        "name": "properties",
+        "type": "Object",
+        "description": "CSS properties and their respective new values to be applied"
+      },
+      {
+        "name": "duration",
+        "type": "Integer",
+        "description": "Amount of time in miliseconds the animation should occur over. Default: 500"
+      },
+      {
+        "name": "delay",
+        "type": "Integer",
+        "description": "Amount of time in miliseconds before animation should occur. Default: 0"
+      },
+      {
+        "name": "ease",
+        "type": "String",
+        "description": "CSS timing function value for the animation being applied. Default: 'ease'"
+      },
+      {
+        "name": "callback",
+        "type": "Function",
+        "description": "Function to execute when animation is complete. Default: null"
+      }
+    ],
+    "return": "Returns selected element or elements from DOM."
+  },
+  {
+    "id": "raf",
+    "name": "$$(selector).raf(options)",
+    "description": "Animation applied using the RequestAnimationFrame API",
+    "parameters": [
+      {
+        "name": "selector",
+        "type": "String",
+        "description": "Any valid CSS selector or selector list. Default: 'body'"
+      },
+      {
+        "name": "options",
+        "type": "Object",
+        "description": "Class name to be added to the element or elements class."
+      },
+      {
+        "name": "options.property",
+        "type": "String",
+        "description": "CSS property to be animated."
+      },
+      {
+        "name": "options.destination",
+        "type": "Integer",
+        "description": "End position of the element or elements"
+      },
+      {
+        "name": "options.start",
+        "type": "Integer",
+        "description": "Start position of the element or elements. Default: 0"
+      },
+      {
+        "name": "options.speed",
+        "type": "Integer",
+        "description": "Amount in pixels that the element will be animated in each iteration. Default: 1"
+      },
+      {
+        "name": "options.callback",
+        "type": "Function",
+        "description": "Function to execute on completion of the animation. Default: null"
+      }
+    ],
+    "return": "Returns selected element or elements from DOM."
+  },
+  {
+    "id": "ajax",
+    "name": "$$.ajax(options)",
+    "description": "Asynchronous request to an external resource",
+    "parameters": [
+      {
+        "name": "options",
+        "type": "Object",
+        "description": "Configuration of AJAX request."
+      },
+      {
+        "name": "options.type",
+        "type": "String",
+        "description": "Type of response expected. Options: 'ajax', 'json', 'xml'. Default: 'ajax'"
+      },
+      {
+        "name": "options.method",
+        "type": "String",
+        "description": "Name of request method to be utilized. Options: 'GET', 'POST', 'PUT', 'DELETE'. Default: 'GET'"
+      },
+      {
+        "name": "options.url",
+        "type": "String",
+        "description": "Either absolute or relative path to the external resource to be requested whether. Default: './'"
+      },
+      {
+        "name": "options.async",
+        "type": "Boolean",
+        "description": "Whether or not the request should be handled asynchronously. Default: true"
+      },
+      {
+        "name": "options.headers",
+        "type": "Object",
+        "description": "Any request headers that need to be passed with the header names as the properties and their values as the corresponding values. Default: null"
+      },
+      {
+        "name": "options.params",
+        "type": "Object",
+        "description": "All parameters that need to be passed in the body of the request. Default: null"
+      },
+      {
+        "name": "options.callback",
+        "type": "Function",
+        "description": "Function to be executed upon successful completion of request with the response passed as a parameter. Default: null"
+      },
+      {
+        "name": "options.error",
+        "type": "Function",
+        "description": "Function to be executed upon unsuccessful completion of request. Default: null"
+      }
+    ],
+    "return": "None"
+  },
+  {
+    "id": "getParam",
+    "name": "$$.getParam(parameter)",
+    "description": "Gets the value of a query parameter in the current URL",
+    "parameters": [
+      {
+        "name": "parameter",
+        "type": "String",
+        "description": "Key name of the parameter value to be returned."
+      }
+    ],
+    "return": "Returns the value of the requested parameter or false if does not exist."
+  },
+  {
+    "id": "log",
+    "name": "$$.log(message[, stylization])",
+    "description": "Custom console logging",
+    "parameters": [
+      {
+        "name": "message",
+        "type": "Mixed",
+        "description": "Payload to be printed in the console"
+      },
+      {
+        "name": "stylization",
+        "type": "String",
+        "description": "Either inherent console type or a string of CSS styling to be applied to the console execution. Default: null"
+      }
+    ],
+    "return": "None"
+  },
+  {
+    "id": "ls",
+    "name": "$$.ls(type[, key][, value])",
+    "description": "Access to Local Storage",
+    "parameters": [
+      {
+        "name": "type",
+        "type": "String",
+        "description": "Functionality to be executed on Local Storage. Options: 'set', 'get', 'clear'"
+      },
+      {
+        "name": "key",
+        "type": "String",
+        "description": "Property name of Local Storage item to either get or set"
+      },
+      {
+        "name": "value",
+        "type": "String",
+        "description": "Value of property being set."
+      }
+    ],
+    "return": "Returns the newly set property if type is 'set'. Returns requested property if type is 'get'. Returns true on success if type is 'clear'."
+  },
+  {
+    "id": "preload",
+    "name": "$$.preload(assets, callback)",
+    "description": "Adds class to one or more elements with an optional delay on adding the class name",
+    "parameters": [
+      {
+        "name": "assets",
+        "type": "Mixed",
+        "description": "Either string of the relative or absolute path to the resource being preloaded or an Array of such paths."
+      },
+      {
+        "name": "callback",
+        "type": "Function",
+        "description": "Function to execute upon successful completion of preload."
+      }
+    ],
+    "return": "Returns selected element or elements from DOM."
+  },
+  {
+    "id": "rand",
+    "name": "$$.rand(min/array[, max][, isFloat])",
+    "description": "Generates a random integer or floating point number; alternatively randomizes an Array",
+    "parameters": [
+      {
+        "name": "min/array",
+        "type": "Mixed",
+        "description": "If generating a number, the minimum acceptable value. If randomizing an Array, the Array to be randomized"
+      },
+      {
+        "name": "max",
+        "type": "Integer",
+        "description": "Maximum value that should be returned"
+      },
+      {
+        "name": "isFloat",
+        "type": "Boolean",
+        "description": "Whether the number returned should be a floating point number. Default: false"
+      }
+    ],
+    "return": "Returns a randomized Array if parameter passed is an Array. Otherwise, returns a whole integer if isFloat is false or floating point number if isFloat is true."
+  }
+]

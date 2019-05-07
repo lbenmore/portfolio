@@ -1,0 +1,79 @@
+<div id="domSelector">$$(); // => returns body element
+$$('.container'); // => returns one or more element with the class name 'container'
+$$('.link:not([href*="#"]), .small'); // => returns any elements with classname 'link' that do not include '#' in the href attribute and all elements with classname 'small'</div>
+
+<div id="on">$$('.link').on('click', onLinkClick) // -> executes onLinkClick if user clicks on an element or elements with class 'link'
+$$('.container').on('swipeup', onContainerSwipeUp) // -> executes onContainerSwipeUp if user swipes up on element or elements with class 'container'
+// for swipeup, swiperight, swipedown, swipeleft, and tap, e.originalEvent contains the event object of the event start action</div>
+
+<div id="addClass">$$('.link').addClass('highlight');
+$$('.box').addClass('animate', 2000); // -> adds the class 'animate' to all elements with the class 'box' 2 seconds after execution
+</div>
+
+<div id="removeClass">$$('.button').removeClass('.highlight');
+$$('.box, .circle').removeClass('.animate', 1000); // -> removes 'animate' class from elements with class name 'box' or 'circle' after 1 second</div>
+
+<div id="replaceClass">$$('.megazord__powerRanger--tommy').replaceClass('green', 'white'); //
+$$('.megazord__powerRanger--tommy').replaceClass('green', 'white', 1500); // -> replaces element or elements with class 'green' with class 'white' after 1.5 seconds</div>
+
+<div id="css">$$('.box').css('background-color', 'blueviolet');
+$$('.box').css('background-color', 'blueviolet', 500); // -> changes CSS property of background-color to 'blueviolet' for element or elements with class 'box' after 0.5 seconds</div>
+
+<div id="animate">$$('.box').animate({
+  opacity: '1',
+  'background-color': 'blueviolet',
+  color: 'springgreen'
+}); // -> animates 'box' elements immediately over half a second with 'ease' timing function
+
+$$('.box').animate({
+  transform: 'rotate(360deg)'
+}, 1000, 2500, 'linear'); // -> animates box elements after 2.5 seconds for 1 second with 'linear' timing</div>
+
+<div id="raf">$$('.box').raf({
+  property: 'top',
+  destination: innerHeight
+}); // -> animates 'box' elements from their current location until they have a 'top' property equal to the height of the viewport</div>
+
+<div id="ajax">$$.ajax({
+  type: 'json',
+  url: './data.json',
+  params: {
+    api_key: 'dfsjklSJKLsdjklSDJKL235789SDLJKsdjklfds'
+  },
+  headers: {
+    'Content-Type', 'multipart/form-data'
+  },
+  callback: onAjaxSuccess,
+  error: onAjaxFail
+});
+
+$$.ajax({
+  type: 'ajax',
+  url: 'https://www.path.to/some/xml/feed.html',
+  callback: (html) => {
+    $$('.container').innerHTML = html;
+  }
+})</div>
+
+<div id="getParam">$$.getParam('page'); // => returns 'about' on page 'http://www.mypage.com/?page=about'</div>
+
+<div id="log">$$.log('here');
+$$.log(configurationObject, 'dir');
+$$.log('big purple text on a green background', 'font-size: 16px; color: blueviolet; background: springgreen');</div>
+
+<div id="ls">$$.ls('get', 'hasAnimated'); // => returns current value of hasAnimated from Local Storage or false if not present
+$$.ls('set', 'timestamp', new Date().getTime()); // => returns the new value of 'timestamp' from Local Storage
+$$.ls('clear');</div>
+
+<div id="preload">$$('./path/to/image.jpg', onImagePreload);
+$$([
+  './path/to/image1.jpg',
+  './path/to/image2.jpg',
+  './path/to/image3.jpg',
+  'http://www.path.to/another/image.png',
+  'http://www.path.to/another/image.gif',
+], onImagesPreload);</div>
+
+<div id="rand">$$.rand(50, 100); // => returns a whole integer between 50 and 100
+$$.rand(3, 15, true) // => returns a floating point number between 3 and 15
+$$.rand([1, 2, 3, 4, 5]) // => returns an Array with the original values randomized</div>
