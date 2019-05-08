@@ -33,7 +33,9 @@ body {
   --bkg-tertiary: darkgrey;
 
   --txt-primary: #fff;
-  
+  --txt-secondary: #f4f4f4;
+  --txt-tertiary: #e8e8e8;
+
   --vh: 1vh;
 
 }
@@ -44,6 +46,8 @@ body[data-darkmode=false] {
   --bkg-tertiary: #d0d0d0;
 
   --txt-primary: #111;
+  --txt-secondary: #222;
+  --txt-tertiary: #333;
 }
 
 body *,
@@ -72,6 +76,34 @@ a:not([href^='#'])::after {
   font-weight: 900;
   text-decoration: none;
 }
+
+button {
+  padding: 8px 24px;
+  background: transparent;
+  border: 1px solid var(--txt-primary);
+  color: var(--txt-primary);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+  button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--txt-primary);
+    transition: width 0.3s;
+  }
+
+  button:hover::before {
+    width: 100%;
+  }
+
+  button:hover {
+    color: var(--bkg-primary);
+  }
 
 img {
   background-color: var(--bkg-secondary);
@@ -169,15 +201,19 @@ ul {
 }
 
 .txt-primary {
-  background-color: var(--txt-primary);
+  color: var(--txt-primary);
 }
 
 .txt-secondary {
-  background-color: var(--txt-secondary);
+  color: var(--txt-secondary);
 }
 
 .txt-tertiary {
-  background-color: var(--txt-tertiary);
+  color: var(--txt-tertiary);
+}
+
+.text-left {
+  text-align: left;
 }
 
 .list-style-none {

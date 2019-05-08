@@ -34,9 +34,11 @@
       "name": "Contact",
       "html": "./html/pages/contact.html",
       "css": [
-        "./css/page.css"
+        "./css/page.css",
+        "./css/contact.css"
       ],
       "js": [
+        "./js/controllers/contact.js"
       ]
     },
     "projects/bnmr_library": {

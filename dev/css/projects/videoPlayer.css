@@ -9,16 +9,8 @@
   text-align: center;
 }
 
-  .options__button {
-    padding: 8px 24px;
-    background: transparent;
-    border: 1px solid var(--txt-primary);
-    color: var(--txt-primary);
-    cursor: pointer;
+  .options__button--toggle::after {
+    content: ' \A Current: ' attr(data-v-type);
+    font-size: 0.8em;
+    white-space: pre-wrap;
   }
-
-    .options__button--toggle::after {
-      content: ' \A Current: ' attr(data-v-type);
-      font-size: 0.8em;
-      white-space: pre-wrap;
-    }

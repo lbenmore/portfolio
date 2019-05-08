@@ -267,9 +267,9 @@
       break;
     }
   };
-  
+
   el.addClass = (cName, delay) => {
-	  setTimeout(() => { 
+	  setTimeout(() => {
 	  	if (el.length) {
 	  		for (const item of el) {
 		  		item.classList.add(cName);
@@ -277,11 +277,13 @@
 	  	} else {
 	  		el.classList.add(cName);
 	  	}
+
+      return el;
   	}, delay || 0);
   };
-  
+
   el.removeClass = (cName, delay) => {
-	  setTimeout(() => { 
+	  setTimeout(() => {
 	  	if (el.length) {
 	  		for (const item of el) {
 		  		item.classList.remove(cName);
@@ -289,11 +291,13 @@
 	  	} else {
 	  		el.classList.remove(cName);
 	  	}
+
+      return el;
   	}, delay || 0);
   };
-  
+
   el.replaceClass = (cName, cName2, delay) => {
-	  setTimeout(() => { 
+	  setTimeout(() => {
 	  	if (el.length) {
 	  		for (const item of el) {
 		  		item.className = item.className.replace(cName, cName2);
@@ -301,6 +305,8 @@
 	  	} else {
 	  		el.className = el.className.replace(cName, cName2);
 	  	}
+
+      return el;
   	}, delay || 0);
   };
 
@@ -397,9 +403,17 @@
       break;
 
       default:
-        el.addEventListener(evt, fn);
+        if (el.length) {
+          for (const item of el) {
+            item.addEventListener(evt, fn);
+          }
+        } else {
+          el.addEventListener(evt, fn);
+        }
       break;
     }
+
+    return el;
   };
 
   $$.ajax = ajax;

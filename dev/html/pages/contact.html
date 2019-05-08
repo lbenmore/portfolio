@@ -1,6 +1,31 @@
-<main>
+<main data-controller="Contact">
   <header>
     <span>Contact</span>
   </header>
+  <section>
+    <form>
+      <fieldset>
+        <legend>Get in Touch</legend>
+        <div class="inputWrapper" data-label="Your Email Address">
+          <input type="email" required placeholder="&nbsp;">
+        </div>
+        <div class="inputWrapper" data-label="Subject">
+          <input type="text" required placeholder="&nbsp;">
+        </div>
+        <div class="inputWrapper" data-label="Let me know how you really feel...">
+          <textarea required placeholder="&nbsp;"></textarea>
+        </div>
+        <button onclick="javascript:void(0)">
+          <span>Send</span>
+        </button>
+      </fieldset>
+    </form>
+    <p>
+      Also, my interactive r&eacute;sum&eacute; can be found <a href="http://www.lisabenmore.com/resume" target="_blank">here</a>.
+    </p>
+    <p>
+      Or you could check out my <a href="https://www.linkedin.com/in/lisabenmore/" target="_blank">LinkedIn profile here.</a>
+    </p>
+  </section>
 </main>
 <div data-include="./html/blocks/menu.html"></div>

@@ -12,11 +12,11 @@
       },
       {
         "name": "Source (ES6)",
-        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/libs/bnmr.js"
+        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/bnmr.js"
       },
       {
         "name": "Source (JavaScript)",
-        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/legacy.bnmr-1.2.0.js"
+        "url": "https://github.com/lbenmore/portfolio/blob/master/bnmr/bnmr.legacy.js"
       }
     ]
   },
@@ -119,6 +119,23 @@
       {
         "name": "Source",
         "url": "https://github.com/lbenmore/portfolio/tree/master/noteboard"
+      }
+    ]
+  },
+  {
+    "name": "CodePen Projects",
+    "thumbnail": "https://unsplash.it/300/300/?image=684",
+    "image": "https://unsplash.it/800/800/?image=684",
+    "technologies": "HTML, CSS, JavaScript, ES6",
+    "description": "Check out my (mostly) curated mini-projects on CodePen.",
+    "links": [
+      {
+        "name": "Most Recent",
+        "url": "https://codepen.io/lbenmore/pens/public/"
+      },
+      {
+        "name": "Most Popular",
+        "url": "https://codepen.io/lbenmore/pens/popular/"
       }
     ]
   }

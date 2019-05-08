@@ -1,0 +1,53 @@
+form {
+  margin: 0 auto;
+  padding: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+  fieldset {
+    padding: 32px;
+  }
+
+    legend {
+      padding: 0 8px;
+    }
+
+    form input,
+    form textarea {
+      margin-bottom: 32px;
+      padding: 8px;
+      width: 100%;
+      border: 0px solid transparent;
+      border-bottom: 1px solid var(--bkg-secondary);
+      border-radius: 0;
+      background: var(--bkg-primary);
+      color: var(--txt-primary);
+    }
+
+    form textarea {
+      height: 200px;
+      resize: none;
+    }
+
+    .inputWrapper::after {
+      content: attr(data-label);
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      color: var(--txt-secondary);
+      font-size: 0.9em;
+      pointer-events: none;
+      transition: transform 0.3s, font-size 0.3s;
+    }
+
+    form input:focus,
+    form textarea:focus {
+      border-bottom-color: var(--bkg-tertiary);
+      outline: none;
+    }
+
+    .inputWrapper.active::after {
+      font-size: 0.7em;
+      transform: translateY(-150%);
+    }

@@ -403,7 +403,13 @@
       break;
 
       default:
-        el.addEventListener(evt, fn);
+        if (el.length) {
+          for (const item of el) {
+            item.addEventListener(evt, fn);
+          }
+        } else {
+          el.addEventListener(evt, fn);
+        }
       break;
     }
 

@@ -28,7 +28,7 @@ core.controllers.WhackAMouse = () => {
   },
 
   eventListeners = () => {
-    window.onresize = responsify;
+    // window.onresize = responsify;
     document.querySelector('.btn--replay').onclick = initGameplay;
   },
 
@@ -146,6 +146,14 @@ core.controllers.WhackAMouse = () => {
     eventListeners();
     // responsify();
     initGameplay();
+
+    addEventListener('hashchange', () => { $$.log('leaving');
+      clearInterval(popAMole);
+      for (const mole of moles) {
+        clearTimeout(mole.warningTimeout);
+        clearTimeout(mole.finalCountdown);
+      }
+    }, {once: true});
   };
 
   if ($$.loaded) {

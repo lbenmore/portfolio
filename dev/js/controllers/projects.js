@@ -58,7 +58,7 @@ core.controllers.Projects = () => {
 
   setSectionFiller = (projects) => {
     if (768 < innerWidth) {
-      if (projects.length % 5 == 0) $$('section').classList.add('filler');
+      if ((projects.length + 1) % 3 == 0) $$('section').classList.add('filler');
     } else if (524 < innerWidth || innerWidth <= 768) {
       $$('section').classList.remove('filler');
     } else if (innerWidth <= 524) {
