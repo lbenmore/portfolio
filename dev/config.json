@@ -75,7 +75,7 @@
       ]
     },
     "projects/steve": {
-      "name": "BNMR Library",
+      "name": "Steve",
       "html": "./html/pages/projects/steve.html",
       "css": [
         "./css/page.css",
