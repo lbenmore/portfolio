@@ -1,18 +1,31 @@
 "use strict";
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+var $$;
 
-($$ = function (_$$) {
+function _typeof(obj) {
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+  return _typeof(obj);
+}
+
+($$ = function(_$$) {
   function $$() {
     return _$$.apply(this, arguments);
   }
 
-  $$.toString = function () {
+  $$.toString = function() {
     return _$$.toString();
   };
 
   return $$;
-}(function () {
+}(function() {
   var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'body';
   var el;
 
@@ -26,8 +39,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   }
 
   var ajax = function ajax() {
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var type = options.type || 'ajax',
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var type = options.type || 'ajax',
         method = options.method || 'GET',
         url = options.url || './',
         isAsync = options.async || true,
@@ -37,228 +50,228 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         error = options.error || null,
         xhr = new XMLHttpRequest(),
         fd = new FormData();
-    var data;
+      var data;
 
-    for (var param in params) {
-      fd.append(param, params[param]);
-    }
+      for (var param in params) {
+        fd.append(param, params[param]);
+      }
 
-    xhr.onload = function () {
-      switch (type) {
-        case 'json':
-          try {
-            data = JSON.parse(xhr.responseText);
-          } catch (e) {
-            $$.log(e, 'error');
+      xhr.onload = function() {
+        switch (type) {
+          case 'json':
+            try {
+              data = JSON.parse(xhr.responseText);
+            } catch (e) {
+              $$.log(e, 'error');
+              data = xhr.responseText;
+            }
+
+            break;
+
+          case 'xml':
+            data = xhr.responseXML;
+            break;
+
+          default:
             data = xhr.responseText;
-          }
-
-          break;
-
-        case 'xml':
-          data = xhr.responseXML;
-          break;
-
-        default:
-          data = xhr.responseText;
-          break;
-      }
-
-      if (callback) callback.call(null, data);
-    };
-
-    xhr.onerror = function () {
-      if (error) error.call();
-    };
-
-    xhr.open(method, url, isAsync);
-
-    for (var header in headers) {
-      xhr.setRequestHeader(header, headers[header]);
-    }
-
-    params ? xhr.send(fd) : xhr.send();
-  },
-      getParam = function getParam(param) {
-    var query = location.search.slice(1),
-        pairs = query.split('&');
-    var key, value;
-
-    for (var pair in pairs) {
-      key = pair.split('=')[0];
-
-      if (key == param) {
-        value = pair.split('=')[1];
-        return value;
-      }
-    }
-
-    return false;
-  },
-      log = function log(msg, style) {
-    var label = '';
-
-    try {
-      var err = new Error();
-      label = err.stack.split('\n')[2].split('/').pop().slice(0, -1);
-    } catch (e) {
-      label = 'Unknown source';
-    }
-
-    if (style) {
-      if (style in console) {
-        console.log("".concat(label, " ->"));
-        console[style](msg);
-      } else {
-        console.log('%c%s', style, "".concat(label, " -> ").concat(msg));
-      }
-    } else {
-      console.log("".concat(label, " -> ").concat(msg));
-    }
-  },
-      loadAsset = function loadAsset(assets, tracker, _callback) {
-    var asset = assets[tracker.current];
-    ajax({
-      url: asset,
-      callback: function callback() {
-        ++tracker.current;
-        prepareAssets(assets, tracker, _callback);
-      },
-      error: function error() {
-        $$.log("Could not preload file: ".concat(asset), 'error');
-        ++tracker.current;
-        prepareAssets(assets, tracker, _callback);
-      }
-    });
-  },
-      prepareAssets = function prepareAssets(assets, tracker, callback) {
-    if (tracker.current < tracker.total) {
-      loadAsset(assets, tracker, callback);
-    } else {
-      if (callback) callback.call();
-    }
-  },
-      preload = function preload(assets, callback) {
-    var tracker = {
-      current: 0,
-      total: 0
-    };
-    if (typeof assets == 'string') assets = [assets];
-    tracker.total = assets.length;
-    prepareAssets(assets, tracker, callback);
-  },
-      rand = function rand(min, max, isFloat) {
-    var result;
-
-    if (_typeof(min) == 'object' && typeof min != null) {
-      var arr = min;
-      result = [];
-
-      while (result.length < arr.length) {
-        var newIndex = Math.floor(Math.random() * arr.length);
-        --safety;
-
-        while (result.indexOf(arr[newIndex]) > -1) {
-          newIndex = Math.floor(Math.random() * arr.length);
-          --safety;
+            break;
         }
 
-        result.push(arr[newIndex]);
+        if (callback) callback.call(null, data);
+      };
+
+      xhr.onerror = function() {
+        if (error) error.call();
+      };
+
+      xhr.open(method, url, isAsync);
+
+      for (var header in headers) {
+        xhr.setRequestHeader(header, headers[header]);
       }
 
-      return result;
-    } else {
-      result = Math.random() * (max - min + 1) + min;
-      return isFloat ? result : Math.floor(result);
-    }
-  },
-      evaluateTouchEvents = function evaluateTouchEvents(el, startEvt, endEvt, evt, fn) {
-    var startX = startEvt.changedTouches ? startEvt.changedTouches[0].clientX : startEvt.clientX,
+      params ? xhr.send(fd) : xhr.send();
+    },
+    getParam = function getParam(param) {
+      var query = location.search.slice(1),
+        pairs = query.split('&');
+      var key, value;
+
+      for (var pair in pairs) {
+        key = pair.split('=')[0];
+
+        if (key == param) {
+          value = pair.split('=')[1];
+          return value;
+        }
+      }
+
+      return false;
+    },
+    log = function log(msg, style) {
+      var label = '';
+
+      try {
+        var err = new Error();
+        label = err.stack.split('\n')[2].split('/').pop().slice(0, -1);
+      } catch (e) {
+        label = 'Unknown source';
+      }
+
+      if (style) {
+        if (style in console) {
+          console.log("".concat(label, " ->"));
+          console[style](msg);
+        } else {
+          console.log('%c%s', style, "".concat(label, " -> ").concat(msg));
+        }
+      } else {
+        console.log("".concat(label, " -> ").concat(msg));
+      }
+    },
+    loadAsset = function loadAsset(assets, tracker, _callback) {
+      var asset = assets[tracker.current];
+      ajax({
+        url: asset,
+        callback: function callback() {
+          ++tracker.current;
+          prepareAssets(assets, tracker, _callback);
+        },
+        error: function error() {
+          $$.log("Could not preload file: ".concat(asset), 'error');
+          ++tracker.current;
+          prepareAssets(assets, tracker, _callback);
+        }
+      });
+    },
+    prepareAssets = function prepareAssets(assets, tracker, callback) {
+      if (tracker.current < tracker.total) {
+        loadAsset(assets, tracker, callback);
+      } else {
+        if (callback) callback.call();
+      }
+    },
+    preload = function preload(assets, callback) {
+      var tracker = {
+        current: 0,
+        total: 0
+      };
+      if (typeof assets == 'string') assets = [assets];
+      tracker.total = assets.length;
+      prepareAssets(assets, tracker, callback);
+    },
+    rand = function rand(min, max, isFloat) {
+      var result;
+
+      if (_typeof(min) == 'object' && typeof min != null) {
+        var arr = min;
+        result = [];
+
+        while (result.length < arr.length) {
+          var newIndex = Math.floor(Math.random() * arr.length);
+          --safety;
+
+          while (result.indexOf(arr[newIndex]) > -1) {
+            newIndex = Math.floor(Math.random() * arr.length);
+            --safety;
+          }
+
+          result.push(arr[newIndex]);
+        }
+
+        return result;
+      } else {
+        result = Math.random() * (max - min + 1) + min;
+        return isFloat ? result : Math.floor(result);
+      }
+    },
+    evaluateTouchEvents = function evaluateTouchEvents(el, startEvt, endEvt, evt, fn) {
+      var startX = startEvt.changedTouches ? startEvt.changedTouches[0].clientX : startEvt.clientX,
         startY = endEvt.changedTouches ? startEvt.changedTouches[0].clientY : startEvt.clientY,
         endX = endEvt.changedTouches ? endEvt.changedTouches[0].clientX : endEvt.clientX,
         endY = endEvt.changedTouches ? endEvt.changedTouches[0].clientY : endEvt.clientY,
         evtObj = {};
 
-    for (var prop in endEvt) {
-      evtObj[prop] = endEvt[prop];
-    }
+      for (var prop in endEvt) {
+        evtObj[prop] = endEvt[prop];
+      }
 
-    evtObj.originalEvent = startEvt;
-    evtObj.type = evt;
+      evtObj.originalEvent = startEvt;
+      evtObj.type = evt;
 
-    switch (evt) {
-      case 'swipeup':
-        if (Math.abs(startY - endY) > 100 && startY > endY && Math.abs(startX - endX) < 20) {
-          fn(evtObj);
-        }
+      switch (evt) {
+        case 'swipeup':
+          if (Math.abs(startY - endY) > 100 && startY > endY && Math.abs(startX - endX) < 20) {
+            fn(evtObj);
+          }
 
-        break;
+          break;
 
-      case 'swiperight':
-        if (Math.abs(startX - endX) > 100 && startX < endX && Math.abs(startY - endY) < 20) {
-          fn(evtObj);
-        }
+        case 'swiperight':
+          if (Math.abs(startX - endX) > 100 && startX < endX && Math.abs(startY - endY) < 20) {
+            fn(evtObj);
+          }
 
-        break;
+          break;
 
-      case 'swipedown':
-        if (Math.abs(startY - endY) > 100 && startY < endY && Math.abs(startX - endX) < 20) {
-          fn(evtObj);
-        }
+        case 'swipedown':
+          if (Math.abs(startY - endY) > 100 && startY < endY && Math.abs(startX - endX) < 20) {
+            fn(evtObj);
+          }
 
-        break;
+          break;
 
-      case 'swipeleft':
-        if (Math.abs(startX - endX) > 100 && startX > endX && Math.abs(startY - endY) < 20) {
-          fn(evtObj);
-        }
+        case 'swipeleft':
+          if (Math.abs(startX - endX) > 100 && startX > endX && Math.abs(startY - endY) < 20) {
+            fn(evtObj);
+          }
 
-        break;
+          break;
 
-      case 'tap':
-        if (Math.abs(startX - endX) < 10 && Math.abs(startY - endY) < 10) {
-          fn(evtObj);
-        }
+        case 'tap':
+          if (Math.abs(startX - endX) < 10 && Math.abs(startY - endY) < 10) {
+            fn(evtObj);
+          }
 
-        break;
-    }
-  },
-      initiateTouchEvents = function initiateTouchEvents(el, evt, fn) {
-    el.addEventListener('mousedown', function (downEvt) {
-      el.addEventListener('mouseup', function (upEvt) {
-        evaluateTouchEvents(el, downEvt, upEvt, evt, fn);
-      }, {
-        once: true
+          break;
+      }
+    },
+    initiateTouchEvents = function initiateTouchEvents(el, evt, fn) {
+      el.addEventListener('mousedown', function(downEvt) {
+        el.addEventListener('mouseup', function(upEvt) {
+          evaluateTouchEvents(el, downEvt, upEvt, evt, fn);
+        }, {
+          once: true
+        });
       });
-    });
-    el.addEventListener('touchstart', function (downEvt) {
-      el.addEventListener('touchend', function (upEvt) {
-        evaluateTouchEvents(el, downEvt, upEvt, evt, fn);
-      }, {
-        once: true
+      el.addEventListener('touchstart', function(downEvt) {
+        el.addEventListener('touchend', function(upEvt) {
+          evaluateTouchEvents(el, downEvt, upEvt, evt, fn);
+        }, {
+          once: true
+        });
       });
-    });
-  },
-      ls = function ls(type, key, value) {
-    switch (type) {
-      case 'get':
-        return localStorage.getItem(key);
-        break;
+    },
+    ls = function ls(type, key, value) {
+      switch (type) {
+        case 'get':
+          return localStorage.getItem(key);
+          break;
 
-      case 'set':
-        localStorage.setItem(key, value);
-        ls('get', key);
-        break;
+        case 'set':
+          localStorage.setItem(key, value);
+          ls('get', key);
+          break;
 
-      case 'clear':
-        localStorage.clear();
-        return true;
-        break;
-    }
-  };
+        case 'clear':
+          localStorage.clear();
+          return true;
+          break;
+      }
+    };
 
-  el.addClass = function (cName, delay) {
-    setTimeout(function () {
+  el.addClass = function(cName, delay) {
+    setTimeout(function() {
       if (el.length) {
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
@@ -291,8 +304,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }, delay || 0);
   };
 
-  el.removeClass = function (cName, delay) {
-    setTimeout(function () {
+  el.removeClass = function(cName, delay) {
+    setTimeout(function() {
       if (el.length) {
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
@@ -325,8 +338,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }, delay || 0);
   };
 
-  el.replaceClass = function (cName, cName2, delay) {
-    setTimeout(function () {
+  el.replaceClass = function(cName, cName2, delay) {
+    setTimeout(function() {
       if (el.length) {
         var _iteratorNormalCompletion3 = true;
         var _didIteratorError3 = false;
@@ -359,7 +372,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }, delay || 0);
   };
 
-  el.css = function (prop, value, delay, callback) {
+  el.css = function(prop, value, delay, callback) {
     if (el.length) {
       var _iteratorNormalCompletion4 = true;
       var _didIteratorError4 = false;
@@ -385,7 +398,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }
       }
     } else {
-      setTimeout(function () {
+      setTimeout(function() {
         el.style[prop] = value;
       }, delay || 0);
     }
@@ -394,7 +407,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return el;
   };
 
-  el.animate = function (props) {
+  el.animate = function(props) {
     var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;
     var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
     var ease = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'ease';
@@ -442,7 +455,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return el;
   };
 
-  el.raf = function () {
+  el.raf = function() {
     var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     if (el.length) {
@@ -471,12 +484,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
     } else {
       var property = options.property,
-          destination = options.destination;
+        destination = options.destination;
       var start = options.start || el.getBoundingClientRect()[property],
-          direction = options.direction || start < destination ? 1 : -1,
-          condition = direction == 1 ? start < destination : start > destination,
-          speed = options.speed || 1,
-          newValue;
+        direction = options.direction || start < destination ? 1 : -1,
+        condition = direction == 1 ? start < destination : start > destination,
+        speed = options.speed || 1,
+        newValue;
 
       if (condition) {
         newValue = "".concat(start + speed * direction, "px");
@@ -496,7 +509,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return el;
   };
 
-  el.on = function (evt, fn) {
+  el.on = function(evt, fn) {
     switch (evt) {
       case 'swipeup':
       case 'swiperight':
@@ -534,7 +547,35 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         break;
 
       default:
-        el.addEventListener(evt, fn);
+        if (el.length) {
+          var _iteratorNormalCompletion8 = true;
+          var _didIteratorError8 = false;
+          var _iteratorError8 = undefined;
+
+          try {
+            for (var _iterator8 = el[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+              var _item = _step8.value;
+
+              _item.addEventListener(evt, fn);
+            }
+          } catch (err) {
+            _didIteratorError8 = true;
+            _iteratorError8 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion8 && _iterator8.return != null) {
+                _iterator8.return();
+              }
+            } finally {
+              if (_didIteratorError8) {
+                throw _iteratorError8;
+              }
+            }
+          }
+        } else {
+          el.addEventListener(evt, fn);
+        }
+
         break;
     }
 

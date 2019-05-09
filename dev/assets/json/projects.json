@@ -1,8 +1,8 @@
 [
   {
     "name": "BNMR Library",
-    "thumbnail": "https://unsplash.it/300/300/?image=1063",
-    "image": "https://unsplash.it/800/800/?image=1063",
+    "thumbnail": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600",
+    "image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600",
     "technologies": "JavaScript, ES6",
     "description": "Utility library of commonly used functions including styling and animation, ajax requests, and stylized logging.",
     "links": [
@@ -22,8 +22,8 @@
   },
   {
     "name": "BNMR Core",
-    "thumbnail": "https://unsplash.it/300/300/?image=1028",
-    "image": "https://unsplash.it/800/800/?image=1028",
+    "thumbnail": "https://images.unsplash.com/photo-1520853962694-6dc0acf23bf3?w=600",
+    "image": "https://images.unsplash.com/photo-1520853962694-6dc0acf23bf3?w=600",
     "technologies": "JavaScript, ES6",
     "description": "Framework utilizing the BNMR Library to create a single-page app structure.",
     "links": [
@@ -43,8 +43,8 @@
   },
   {
     "name": "Video Player",
-    "thumbnail": "https://unsplash.it/300/300/?image=1039",
-    "image": "https://unsplash.it/800/800/?image=1039",
+    "thumbnail": "https://images.unsplash.com/photo-1497015289639-54688650d173?w=600",
+    "image": "https://images.unsplash.com/photo-1497015289639-54688650d173?w=600",
     "technologies": "HTML, CSS, JavaScript",
     "description": "It plays a video! Utilizes BNMR Library.",
     "links": [
@@ -60,21 +60,29 @@
   },
   {
     "name": "Carousels!",
-    "thumbnail": "https://unsplash.it/300/300/?image=907",
-    "image": "https://unsplash.it/800/800/?image=907",
+    "thumbnail": "https://images.unsplash.com/photo-1544212415-85fec3f52087?w=600",
+    "image": "https://images.unsplash.com/photo-1544212415-85fec3f52087?w=600",
     "technologies": "HTML, CSS, JavaScript, ES6",
     "description": "A few infinite-looping carousels.",
     "links": [
       {
         "name": "Demo",
         "url": "#/projects/carousels"
+      },
+      {
+        "name": "View Source (One-Item)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/controllers/projects/carousel_one-item.js"
+      },
+      {
+        "name": "View Source (Three-Item)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/controllers/projects/carousel_three-item.js"
       }
     ]
   },
   {
     "name": "Steve",
-    "thumbnail": "https://unsplash.it/300/300/?image=1032",
-    "image": "https://unsplash.it/800/800/?image=1032",
+    "thumbnail": "https://images.unsplash.com/photo-1517922522248-f8ae08b6b390?w=600",
+    "image": "https://images.unsplash.com/photo-1517922522248-f8ae08b6b390?w=600",
     "technologies": "HTML, CSS, ES6",
     "description": "A recreation of Google Chrome's game that becomes available when no network connection is available",
     "links": [
@@ -90,8 +98,8 @@
   },
   {
     "name": "Noteboard",
-    "thumbnail": "https://unsplash.it/300/300/?image=666",
-    "image": "https://unsplash.it/800/800/?image=666",
+    "thumbnail": "https://images.unsplash.com/photo-1527168027773-0cc890c4f42e?w=600",
+    "image": "https://images.unsplash.com/photo-1527168027773-0cc890c4f42e?w=600",
     "technologies": "PHP, HTML, CSS, JavaScript",
     "description": "A platform to jot down quick notes and store single files. Test account - username: root, password: alpine.",
     "links": [
@@ -107,8 +115,8 @@
   },
   {
     "name": "Whack-a-Mouse",
-    "thumbnail": "https://unsplash.it/300/300/?image=1016",
-    "image": "https://unsplash.it/800/800/?image=1016",
+    "thumbnail": "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=600",
+    "image": "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=600",
     "technologies": "HTML, CSS, ES6",
     "description": "A whack-a-mole game, but my drawing skills are minimal and the mouse became a mole.",
     "links": [
@@ -124,8 +132,8 @@
   },
   {
     "name": "CodePen Projects",
-    "thumbnail": "https://unsplash.it/300/300/?image=684",
-    "image": "https://unsplash.it/800/800/?image=684",
+    "thumbnail": "https://images.unsplash.com/photo-1455165814004-1126a7199f9b?w=600",
+    "image": "https://images.unsplash.com/photo-1455165814004-1126a7199f9b?w=600",
     "technologies": "HTML, CSS, JavaScript, ES6",
     "description": "Check out my (mostly) curated mini-projects on CodePen.",
     "links": [

@@ -16,12 +16,37 @@ header {
   transform: translateZ(0);
 }
 
-  header span {
+	header h1 {
+		display: inline-block;
+		margin-bottom: 12px;
+		font-size: 1.4em;
+		font-weight: 400;
+		letter-spacing: 0.275em;
+		text-transform: lowercase;
+	}
+
+		header h1::after {
+			content: ' | ';
+			display: inline-block;
+			margin: 0 8px;
+			font-size: 1.5em;
+			font-weight: normal;
+		}
+
+	header h2 {
+		display: inline-block;
+		font-size: 1.2em;
+		font-weight: 200;
+		letter-spacing: 0.8em;
+		text-transform: uppercase;
+	}
+
+  header div {
     font-size: 2em;
     font-weight: 100;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-}
+	}
 
 section {
   margin: 0 auto;
