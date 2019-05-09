@@ -36,6 +36,7 @@ header {
 	header h2 {
 		display: inline-block;
 		margin-bottom: 12px;
+		padding-right: 80px;
 		font-size: 1.2em;
 		font-weight: 200;
 		letter-spacing: 0.8em;
