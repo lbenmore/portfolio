@@ -5,7 +5,138 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=no'>
     <title>Lisa Benmore | R&eacute;sum&eacute;</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='./styles/stylesheet.css'>
+		<style>
+			@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i|Ubuntu:400,400i,700');
+			
+			* {
+			  position: relative;
+			  box-sizing: border-box;
+			  -moz-osx-font-smoothing: grayscale;
+			  -webkit-font-smoothing: antialiased;
+			}
+			
+			.dsp-blk {
+			  display: block;
+			}
+			
+			.font-serif {
+			  font-family: 'Playfair Display', serif;
+			}
+			
+			.font-sm {
+			  color: #000;
+			  font-size: 0.8em;
+			}
+			
+			.font-md {
+			  color: #101018;
+			  font-size: 1.2em;
+			}
+			
+			.font-lg {
+			  color: #202028;
+			  font-size: 1.4em;
+			}
+			
+			.font-x-lg {
+			  color: #303038;
+			  font-size: 1.8em;
+			}
+			
+			.font-b {
+			  font-weight: 700;
+			}
+			
+			.font-i {
+			  font-style: italic;
+			}
+			
+			.text-upp {
+			  text-transform: uppercase;
+			  letter-spacing: 0.2em;
+			}
+			
+			body {
+			  margin: 0;
+			  background-color: #e0e0e8;
+			  background-image: linear-gradient(0deg, #a8a8af, #e8e8ef);
+			}
+			
+			p {
+			  line-height: 1.5;
+			}
+			
+			a,
+			a:focus,
+			a:visited {
+			  color: #303038;
+			  text-decoration: none;
+			}
+			
+			a:hover {
+			  text-decoration: underline;
+			}
+			
+			.container {
+			  margin: 0 auto;
+			  padding: 16px;
+			  max-width: 720px;
+			  width: 90%;
+			  font-family: 'Ubuntu', sans-serif;
+			  font-size: 14px;
+			  background: #f8f8ff;
+			  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+			}
+			
+			  .section {
+			    margin-bottom: 32px;
+			  }
+			
+			      .entry {
+			        margin: 16px 0;
+			      }
+			
+			        input[type=checkbox] {
+			          display: none;
+			        }
+			
+			        input[type=checkbox]:checked ~ .entry__content {
+			          max-height: 600px;
+			        }
+			
+			        label {
+			          cursor: pointer;
+			        }
+			
+			          label::before {
+			            content: '+';
+			            content: '\f054';
+			            position: absolute;
+			            top: 4px;
+			            left: 16px;
+			            font-family: 'FontAwesome';
+			            font-size: 0.8em;
+			            -webkit-transform: translateX(-16px);
+			            transform: translateX(-16px);
+			          }
+			
+			          label > * {
+			            padding-left: 16px;
+			          }
+			
+			          input[type=checkbox]:checked + label::before {
+			            content: '-';
+			            content: '\f078';
+			          }
+			
+			        .entry__content {
+			          padding-left: 16px;
+			          max-height: 0;
+			          overflow: hidden;
+			          -webkit-transition: max-height 1.5s;
+			          transition: max-height 1.5s;
+			        }
+		</style>
   </head>
   <body>
     <div class='container'>
@@ -32,7 +163,7 @@
             </label>
             <div class='entry__content'>
               <p>
-                Initially, I was tasked with working on prototyping new ad formats using HTML5/CSS3/JavaScript in order to move away from ad units being built using Adobe Flash technology. From there, I began working with various ad-serving platforms in order to create ads built for their platforms utilizing their API services. This campaign work has continued to be a large part of my day-to-day tasks. After becoming Senior Developer in late 2016, I began focusing largely on internal projects including a workflow tool utilizing a good amount of JavaScript (including Angular 1) and PHP as well as a website for housing documentation, newsletters and articles, FAQs, and a showcase for our work. For the latter, I built out multiple features from scratch including a CMS, menu filtering system, and search feature. All campaign work and internal projects are now using a library I began writing to compile frequently-used functions and utilities.
+                My role began as an Interactive Developer on the in-house creative team for the media buying company, Xaxis. I converted Flash-based ads into HTML5 as well as created new HTML5 experiences for ad spaces with a focus on dynamic ads. These dynamic ads utilize our partnering creative platform’s data to inform the ad and personalize it in real time. Continuing on, I became Senior Developer and assisted in the development of a platform utilized by the majority of the employees of the company within the United States. I also began developing on other platforms, utilities, and pages for my team as well as other teams within the company. This development was either done on my own, collaborating with other members of my team, or collaborating with members of other teams either within my company or within partnering companies. As Lead Developer, I’ve continued developing out our platforms and utilities, created code style guides for my team, created and documented conventions for our partnering creative platforms, been the liaison with our partnering creative platforms, assisted other developers on the team with both debugging their code and troubleshooting platform setup.
               </p>
             </div>
           </div>
