@@ -118,7 +118,7 @@
     "thumbnail": "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=600",
     "image": "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=600",
     "technologies": "HTML, CSS, ES6",
-    "description": "A whack-a-mole game, but my drawing skills are minimal and the mouse became a mole.",
+    "description": "A whack-a-mole game, but my drawing skills are minimal, so the mole became a mouse.",
     "links": [
       {
         "name": "Demo",
