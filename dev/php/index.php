@@ -47,6 +47,10 @@ function send_mail ($internal, $from, $subject, $body) {
 		$output->add("message", "Email successfully sent");
 	} else {
 		$output->add("message", "Email not sent");
+		$output->add("to", $to);
+		$output->add("subject", $subject);
+		$output->add("body", $body);
+		$output->add("headers", $headers);
 	}
 	
 	$output->return($internal);		

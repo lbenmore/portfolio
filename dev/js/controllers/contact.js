@@ -28,11 +28,21 @@ core.controllers.Contact = () => {
         body: body
       },
       callback: (response) => {
-        $$.log(response, 'dir');
         $$('form button').innerHTML = 'Send';
-        $$('form input[type="email"]').value = "";
-        $$('form input[type="text"]').value = "";
-        $$('form textarea').value = "";
+        
+        try {
+	        $$.log(response, 'dir');
+	        
+        	if (response.status) {
+		        $$('form input[type="email"]').value = "";
+		        $$('form input[type="text"]').value = "";
+		        $$('form textarea').value = "";
+					} else {
+						$$.log(response.message, 'error');
+					}
+				} catch (e) {
+					$$.log(e.message, 'error');
+				}		        
       }
     });
   },
