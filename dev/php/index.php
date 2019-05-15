@@ -50,7 +50,7 @@ function send_mail ($internal, $from, $subject, $body) {
 
 
 
-$output = new Output;
+$output = new Output();
 $output->add("status", 0);
 
 if (array_key_exists("action", $_POST)) {
