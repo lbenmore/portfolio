@@ -36,16 +36,14 @@ function send_mail ($internal, $from, $subject, $body) {
 	$output->add("status", 0);
 	$output->add("message", "init send_mail");
 	
+	$to = "lbenmore@gmail.com";
 	$headers = "From: $from";
 	
-	if (mail("lbenmore@gmail.com", $subject, $body, $headers)) {
+	if (mail($to, $subject, $body, $headers)) {
 		$output->add("status", 1);
 		$output->add("message", "Email successfully sent");
 	} else {
 		$output->add("message", "Email not sent");
-		$output->add("from", $from);
-		$output->add("subject", $subject);
-		$output->add("body", $body);
 	}
 	
 	$output->return($internal);		
