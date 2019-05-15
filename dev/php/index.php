@@ -32,7 +32,7 @@ class Output {
 
 
 function send_mail ($internal, $from, $subject, $body) {
-	$output = new Output;
+	$output = new Output();
 	$output->add("status", 0);
 	$output->add("message", "init send_mail");
 	
