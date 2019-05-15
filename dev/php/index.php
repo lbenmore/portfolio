@@ -1,5 +1,8 @@
 <?php 
 
+ini_set("display_errors", "1");
+ini_set("error_reporting", E_ALL);
+
 class DB {
 	public static $con;
 	
@@ -43,8 +46,6 @@ function send_mail ($internal, $from, $subject, $body) {
 		$output->add("status", 1);
 		$output->add("message", "Email successfully sent");
 	} else {
-		ini_set("display_errors", 1);
-		ini_set("error_reporting", E_ALL);
 		$output->add("message", "Email not sent");
 	}
 	
