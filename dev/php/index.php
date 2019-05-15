@@ -18,7 +18,10 @@ $db = new DB();
 $sql = "SELECT * FROM users";
 if ($stmt = $db::$con->query($sql)) {
 	while ($row = $stmt->fetch_assoc()) {
-		echo $row;
+		foreach ($row as $key => $value) {
+			echo "$key: $value<br>";
+		}
+		echo "<br>";
 	}
 }
 
