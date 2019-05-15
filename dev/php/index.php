@@ -37,7 +37,7 @@ function send_mail ($internal, $from, $subject, $body) {
 	$output->add("message", "init send_mail");
 	
 	$to = "lbenmore@gmail.com";
-	$headers = "From: $from";
+	$headers = array("From" => $from);
 	
 	if (mail($to, $subject, $body, $headers)) {
 		$output->add("status", 1);
