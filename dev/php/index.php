@@ -53,7 +53,7 @@ function send_mail ($internal, $from, $subject, $body) {
 $output = new Output;
 $output->add("status", 0);
 
-if (array_key_exists("action", $_POST) {
+if (array_key_exists("action", $_POST)) {
 	switch ($_POST["action"]) {
 		case "send_email":
 			send_mail(false, $_POST["from"], $_POST["subject"], $_POST["body"]);
