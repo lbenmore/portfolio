@@ -118,6 +118,10 @@
     transform: rotate(-90deg);
     transition-delay: 0.3s;
   }
+  
+  	.menu__link::before {
+  		display: none;
+  	}
 
     .menu__link::after {
       content: attr(data-icon);
