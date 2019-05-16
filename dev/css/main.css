@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro|Raleway:100,400,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro|Raleway:100,400,700&display=swap');
 @import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
 
 /*=============================================>>>>>
@@ -24,6 +24,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: var(--bkg-primary);
+  font-display: swap;
   font-family: 'Raleway', Arial, sans-serif;
   font-size: 14px;
   overflow-x: hidden;
