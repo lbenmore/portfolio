@@ -46,7 +46,7 @@
     "thumbnail": "https://images.unsplash.com/photo-1497015289639-54688650d173?w=600",
     "image": "https://images.unsplash.com/photo-1497015289639-54688650d173?w=600",
     "technologies": "HTML, CSS, JavaScript",
-    "description": "It plays a video! Utilizes BNMR Library.",
+    "description": "Highly customizable HTML5 video player that can play single videos or playlists with custom controls.",
     "links": [
       {
         "name": "Demo",
