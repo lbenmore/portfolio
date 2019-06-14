@@ -99,13 +99,13 @@
 
     if (style) {
       if (style in console) {
-        console.log(`${label} ->`);
+        console.log(label + ' ->');
         console[style](msg);
       } else {
-        console.log('%c%s', style, `${label} -> ${msg}`);
+        console.log('%c%s', style, label + ' -> ' + msg);
       }
     } else {
-      console.log(`${label} -> ${msg}`);
+      console.log(label + ' -> ' + msg);
     }
   },
 
@@ -119,7 +119,7 @@
         prepareAssets(assets, tracker, callback);
       },
       error: function () {
-        $$.log(`Could not preload file: ${asset}`, 'error');
+        $$.log('Could not preload file: ' + asset, 'error');
         ++tracker.current;
         prepareAssets(assets, tracker, callback);
       }
@@ -343,7 +343,7 @@
       }
     } else {
       for (var prop in props) {
-        transitions += `${prop} ${duration}ms ${ease}, `;
+        transitions += prop + ' ' + duration + 'ms ' + ease + ', ';
       }
       transitions = transitions.slice(0, -2);
 
@@ -379,7 +379,7 @@
       newValue;
 
       if (condition) {
-        newValue = `${start + (speed * direction)}px`;
+        newValue = start + (speed * direction) + 'px';
         options.start = parseInt(newValue);
         options.direction = direction;
         el.style[property] = newValue;
