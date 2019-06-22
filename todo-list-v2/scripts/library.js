@@ -173,7 +173,7 @@ populateList = (listObj) => {
 
 	for (let i = 0; i < Math.max(listObj.items.length + 1, 10); i++) {
 		let
-		itemObj = $$.exists(listObj.items[i]) ? listObj.items[i] : {},
+		itemObj = listObj.items[i] ? listObj.items[i] : {},
 		item = document.createElement('li'),
 		label = document.createElement('label'),
 		chk = document.createElement('input'),
@@ -212,7 +212,7 @@ populateList = (listObj) => {
 },
 
 initList = () => {
-	if ($$.exists(ls('get', 'lists'))) {
+	if (ls('get', 'lists')) {
 		lists = JSON.parse(ls('get', 'lists'));
 	} else {
 		let newListObj = {};
