@@ -17,6 +17,7 @@
         "./css/components/page.css"
       ],
       "js": [
+      	"./js/components/menu.js"
       ]
     },
     "/projects": {
@@ -27,6 +28,7 @@
         "./css/controllers/projects.css"
       ],
       "js": [
+      	"./js/components/menu.js",
         "./js/controllers/projects.js"
       ]
     },
@@ -38,6 +40,7 @@
         "./css/controllers/contact.css"
       ],
       "js": [
+      	"./js/components/menu.js",
         "./js/controllers/contact.js"
       ]
     },
@@ -47,7 +50,9 @@
       "css": [
         "./css/components/page.css"
       ],
-      "js": []
+      "js": [
+      	"./js/components/menu.js"
+      ]
     },
     "/projects/videoPlayer": {
       "name": "Video Player",
@@ -58,6 +63,7 @@
         "./css/projects/videoPlayer.css"
       ],
       "js": [
+      	"./js/components/menu.js",
         "./js/controllers/projects/vplayer.js",
         "./js/controllers/projects/videoPlayer.js"
       ]
@@ -70,6 +76,7 @@
         "./css/projects/carousels.css"
       ],
       "js": [
+      	"./js/components/menu.js",
         "./js/controllers/projects/carousel_one-item.js",
         "./js/controllers/projects/carousel_three-item.js"
       ]
@@ -82,6 +89,7 @@
         "./css/projects/steve.css"
       ],
       "js": [
+      	"./js/components/menu.js",
       	"./js/controllers/projects/steve.js"
       ]
     },
@@ -93,6 +101,7 @@
         "./css/projects/whackAMouse.css"
       ],
       "js": [
+      	"./js/components/menu.js",
       	"./js/controllers/projects/whackAMouse.js"
       ]
     }
