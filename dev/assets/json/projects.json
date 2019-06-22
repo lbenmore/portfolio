@@ -131,6 +131,40 @@
     ]
   },
   {
+    "name": "Data Table",
+    "thumbnail": "https://images.unsplash.com/photo-1517340182-ddc4e441b011?w=600",
+    "image": "https://images.unsplash.com/photo-1517340182-ddc4e441b011?w=600",
+    "technologies": "HTML, CSS, ES6",
+    "description": "An interactive spreadsheet with the ability to add rows and columns, export as a CSV, import a CSV, and set custom color themes.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "http://www.lisabenmore.com/data-table"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/data-table"
+      }
+    ]
+  },
+  {
+    "name": "Lists",
+    "thumbnail": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600",
+    "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600",
+    "technologies": "HTML, CSS, ES6",
+    "description": "A list maker that uses the LocalStorage API to store an infinite number of check-off-able lists.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "http://www.lisabenmore.com/todo-list-v2"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/todo-list-v2"
+      }
+    ]
+  },
+  {
     "name": "CodePen Projects",
     "thumbnail": "https://images.unsplash.com/photo-1455165814004-1126a7199f9b?w=600",
     "image": "https://images.unsplash.com/photo-1455165814004-1126a7199f9b?w=600",
