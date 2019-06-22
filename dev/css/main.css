@@ -163,6 +163,18 @@ ul {
 	float: left;
 }
 
+.bkg-primary {
+  background-color: var(--bkg-primary);
+}
+
+.bkg-secondary {
+  background-color: var(--bkg-secondary);
+}
+
+.bkg-tertiary {
+  background-color: var(--bkg-tertiary);
+}
+
 .mono {
   font-family: 'Source Code Pro', monospace;
 }

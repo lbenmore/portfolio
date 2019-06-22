@@ -344,27 +344,27 @@ body {
   border-color: var(--tertiary);
 }
 
-.bkg-primary {
+.bg-primary {
   background-color: var(--primary);
 }
 
-.bkg-secondary {
+.bg-secondary {
   background-color: var(--secondary);
 }
 
-.bkg-tertiary {
+.bg-tertiary {
   background-color: var(--tertiary);
 }
 
-.bkg-primary-lt {
+.bg-primary-lt {
   background-color: var(--primary-lt);
 }
 
-.bkg-secondary-lt {
+.bg-secondary-lt {
   background-color: var(--secondary-lt);
 }
 
-.bkg-tertiary-lt {
+.bg-tertiary-lt {
   background-color: var(--tertiary-lt);
 }
 
