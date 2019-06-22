@@ -142,7 +142,7 @@ core.controllers.WhackAMouse = () => {
     popAMole = setInterval(newMole, Math.pow(multiplier, level) * 2000);
   },
 
-  initWhackAMouseFns = () => {
+  initFns = () => {
     eventListeners();
     // responsify();
     initGameplay();
@@ -155,10 +155,14 @@ core.controllers.WhackAMouse = () => {
       }
     }, {once: true});
   };
-
+  
+  initFns();
+  
+	/*
   if ($$.loaded) {
     initWhackAMouseFns();
   } else {
     addEventListener('LOAD_EVENT', initWhackAMouseFns);
   }
+  */
 };

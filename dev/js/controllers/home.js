@@ -3,7 +3,7 @@ core.controllers.Home = () => {
 	NUM_STARS = innerWidth * innerHeight / 2500,
 	NUM_STARFIELDS = 6,
 	
-	initHomeFns = () => {
+	initFns = () => {
 		new Warp($$('.container__content'));
 	};
 	
@@ -103,10 +103,14 @@ core.controllers.Home = () => {
 			}
 	  }
 	}
+	
+	initFns();
 
+	/*
   if ($$.loaded) {
     initHomeFns();
   } else {
     addEventListener('LOAD_EVENT', initHomeFns);
-  }   
+  }
+  */
 };

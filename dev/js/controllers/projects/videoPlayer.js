@@ -39,7 +39,7 @@ core.controllers.VideoPlayer = () => {
     $$('.options__button--toggle').on('tap', togglePlayerType);
   },
 
-  initVideoFns = () => {
+  initFns = () => {
     player = new VideoPlayer({
       target: $$('.vplayer'),
       playlist: [
@@ -54,10 +54,14 @@ core.controllers.VideoPlayer = () => {
 
     eventListeners();
   };
+  
+  initFns();
 
+	/*
   if ($$.loaded) {
     initVideoFns();
   } else {
     addEventListener('LOAD_EVENT', initVideoFns);
   }
+  */
 };

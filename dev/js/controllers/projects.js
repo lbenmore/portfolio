@@ -66,7 +66,7 @@ core.controllers.Projects = () => {
     }
   },
 
-  initProjectsFns = () => {
+  initFns = () => {
     $$.ajax({
       type: 'json',
       url: './assets/json/projects.json',
@@ -77,10 +77,14 @@ core.controllers.Projects = () => {
       }
     })
   };
+  
+  initFns();
 
+	/*
   if ($$.loaded) {
     initProjectsFns();
   } else {
     addEventListener('LOAD_EVENT', initProjectsFns);
   }
+  */
 };

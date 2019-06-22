@@ -66,13 +66,17 @@ core.controllers.Contact = () => {
     $$('form').onsubmit = onSubmitForm;
   },
 
-  initContactFns = () => {
+  initFns = () => {
     eventListeners();
   };
+  
+  initFns();
 
+	/*
   if ($$.loaded) {
     initContactFns();
   } else {
     addEventListener('LOAD_EVENT', initContactFns);
   }
+  */
 };

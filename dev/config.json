@@ -1,59 +1,59 @@
 {
   "pages": {
-    "home": {
+    "/home": {
       "name": "Home",
       "html": "./html/pages/home.html",
       "css": [
-        "./css/home.css"
+        "./css/controllers/home.css"
       ],
       "js": [
         "./js/controllers/home.js"
       ]
     },
-    "about": {
+    "/about": {
       "name": "About",
       "html": "./html/pages/about.html",
       "css": [
-        "./css/page.css"
+        "./css/components/page.css"
       ],
       "js": [
       ]
     },
-    "projects": {
+    "/projects": {
       "name": "Projects",
       "html": "./html/pages/projects.html",
       "css": [
-        "./css/page.css",
-        "./css/projects.css"
+        "./css/components/page.css",
+        "./css/controllers/projects.css"
       ],
       "js": [
         "./js/controllers/projects.js"
       ]
     },
-    "contact": {
+    "/contact": {
       "name": "Contact",
       "html": "./html/pages/contact.html",
       "css": [
-        "./css/page.css",
-        "./css/contact.css"
+        "./css/components/page.css",
+        "./css/controllers/contact.css"
       ],
       "js": [
         "./js/controllers/contact.js"
       ]
     },
-    "projects/bnmr_library": {
+    "/projects/bnmr_library": {
       "name": "BNMR Library",
       "html": "./html/pages/projects/bnmrLibrary.html",
       "css": [
-        "./css/page.css"
+        "./css/components/page.css"
       ],
       "js": []
     },
-    "projects/videoPlayer": {
+    "/projects/videoPlayer": {
       "name": "Video Player",
       "html": "./html/pages/projects/videoPlayer.html",
       "css": [
-        "./css/page.css",
+        "./css/components/page.css",
         "./css/projects/vplayer.css",
         "./css/projects/videoPlayer.css"
       ],
@@ -62,11 +62,11 @@
         "./js/controllers/projects/videoPlayer.js"
       ]
     },
-    "projects/carousels": {
+    "/projects/carousels": {
       "name": "Carousels",
       "html": "./html/pages/projects/carousels.html",
       "css": [
-        "./css/page.css",
+        "./css/components/page.css",
         "./css/projects/carousels.css"
       ],
       "js": [
@@ -74,22 +74,22 @@
         "./js/controllers/projects/carousel_three-item.js"
       ]
     },
-    "projects/steve": {
+    "/projects/steve": {
       "name": "Steve",
       "html": "./html/pages/projects/steve.html",
       "css": [
-        "./css/page.css",
+        "./css/components/page.css",
         "./css/projects/steve.css"
       ],
       "js": [
       	"./js/controllers/projects/steve.js"
       ]
     },
-    "projects/whackAMouse": {
+    "/projects/whackAMouse": {
       "name": "Whack-a-Mouse",
       "html": "./html/pages/projects/whackAMouse.html",
       "css": [
-        "./css/page.css",
+        "./css/components/page.css",
         "./css/projects/whackAMouse.css"
       ],
       "js": [
