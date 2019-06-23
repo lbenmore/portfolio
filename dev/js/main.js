@@ -10,6 +10,9 @@ initFns = () => {
   
   setVh();
   addEventListener('resize', setVh);
+  addEventListener('hashchange', () => {
+  	core.globals.pageTitle = core.pages[location.hash.slice(1)].name;
+  });
 };
 
 initFns();
