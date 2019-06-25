@@ -48,7 +48,6 @@ core.fns.initDOMStringReplacement = () => {
     }
   }
 
-  core.unloadedAssets = [];
   dispatchEvent(core.events.load);
 
   core.fns.setDOMStringReplacement();
@@ -58,6 +57,8 @@ core.fns.loadControllers = () => {
   for (const ctlr of document.querySelectorAll('*[data-controller]')) {
     if (core.controllers[ctlr.dataset.controller]) core.controllers[ctlr.dataset.controller]();
   }
+
+  core.unloadedAssets.splice(core.unloadedAssets.indexOf('data-controller'), 1);
 
   core.fns.initDOMStringReplacement();
 };
@@ -83,7 +84,10 @@ core.fns.loadIncludes = (callback) => {
             if (document.querySelectorAll('*[data-include]').length) {
               core.fns.loadIncludes(callback);
             } else if (callback) {
+              core.unloadedAssets.splice(core.unloadedAssets.indexOf('data-include'), 1);
               callback.call();
+            } else {
+              core.unloadedAssets.splice(core.unloadedAssets.indexOf('data-include'), 1);
             }
           }
         }
@@ -108,16 +112,17 @@ core.fns.loadPage = () => {
       js = core.pages[page].hasOwnProperty('js') ? core.pages[page].js : [],
       assets = core.pages[page].hasOwnProperty('assets') ? core.pages[page].assets : [],
       all = [...css, ...js, ...assets];
-
       let loaded = assets.length;
 
-      core.unloadedAssets = all;
+      core.unloadedAssets = [...css, ...js, ...assets];
 
       $$.ajax({
         url: html,
         callback: (response) => {
-          const onAssetLoad = (e) => {
+          const onAssetLoad = (asset, e) => {
             ++loaded;
+
+            core.unloadedAssets.splice(core.unloadedAssets.indexOf(asset), 1);
 
             if (loaded == all.length) {
               $$('.container').innerHTML = response;
@@ -133,27 +138,26 @@ core.fns.loadPage = () => {
             }
           };
 
-          if (assets.length != all.length) {
-            for (const stylesheet of css) {
-              const link = document.createElement('link');
-              link.rel = 'stylesheet';
-              link.href = stylesheet;
-              link.dataset.new = true;
-              $$('div[data-css]').appendChild(link);
+          if (response.includes('data-include')) core.unloadedAssets.push('data-include');
+          if (response.includes('data-controller')) core.unloadedAssets.push('data-controller');
 
-              link.onload = onAssetLoad;
-            }
+          for (const stylesheet of css) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = stylesheet;
+            link.dataset.new = true;
+            $$('div[data-css]').appendChild(link);
 
-            for (const scriptfile of js) {
-              const script = document.createElement('script');
-              script.src = scriptfile;
-              script.dataset.new = true;
-              $$('div[data-js]').appendChild(script);
+            link.onload = onAssetLoad.bind(null, stylesheet);
+          }
 
-              script.onload = onAssetLoad;
-            }
-          } else {
-            onAssetLoad();
+          for (const scriptfile of js) {
+            const script = document.createElement('script');
+            script.src = scriptfile;
+            script.dataset.new = true;
+            $$('div[data-js]').appendChild(script);
+
+            script.onload = onAssetLoad.bind(null, scriptfile);
           }
         }
       });
