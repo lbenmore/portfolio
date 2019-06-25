@@ -54,14 +54,6 @@ core.controllers.VideoPlayer = () => {
 
     eventListeners();
   };
-  
-  initFns();
 
-	/*
-  if ($$.loaded) {
-    initVideoFns();
-  } else {
-    addEventListener('LOAD_EVENT', initVideoFns);
-  }
-  */
+  initFns();
 };

@@ -3,24 +3,21 @@ setVh = () => {
 	document.body.style.setProperty('--vh', `${innerHeight * 0.01}px`);
 },
 
-initFns = () => {
+eventListeners = () => {
+	addEventListener('resize', setVh);
+},
+
+initFns = (e) => {
   if ($$.ls('get', 'darkmode')) {
     document.body.dataset.darkmode = $$.ls('get', 'darkmode');
   }
-  
+
   setVh();
-  addEventListener('resize', setVh);
-  addEventListener('hashchange', () => {
-  	core.globals.pageTitle = core.pages[location.hash.slice(1)].name;
-  });
+	eventListeners();
 };
 
-initFns();
-
-/*
-if ($$.loaded) {
-  initFns();
+if (core.isInitialized()) {
+	initFns();
 } else {
-  addEventListener('LOAD_EVENT', initFns);
+	addEventListener("coreload", initFns);
 }
-*/

@@ -1,12 +1,12 @@
 core.controllers.Home = () => {
-	const 
+	const
 	NUM_STARS = innerWidth * innerHeight / 2500,
 	NUM_STARFIELDS = 6,
-	
+
 	initFns = () => {
 		new Warp($$('.container__content'));
 	};
-	
+
 	class Star {
 		constructor (target, i) {
 	  	this.target = target;
@@ -27,7 +27,7 @@ core.controllers.Home = () => {
 	    this.target.appendChild(this.element);
 	  }
 	}
-	
+
 	class Starfield {
 		constructor (target, warp, index) {
 		  this.target = target;
@@ -61,7 +61,7 @@ core.controllers.Home = () => {
 	    this.populate();
 	  }
 	}
-	
+
 	class Warp {
 		constructor (target) {
 	  	this.target = target;
@@ -71,8 +71,8 @@ core.controllers.Home = () => {
 	      this.starfields.push(new Starfield(this.target, this, i));
 	    }
 	    
-	    this.target.addEventListener('mousemove', this.handleMouseEvent.bind(this));
-	    this.target.addEventListener('mouseout', this.handleMouseEvent.bind(this));
+	//     this.target.addEventListener('mousemove', this.handleMouseEvent.bind(this));
+	//     this.target.addEventListener('mouseout', this.handleMouseEvent.bind(this));
 	    
 	    // this.target.addEventListener('touchmove', this.handleMouseEvent.bind(this));
 	    // this.target.addEventListener('touchend', this.handleMouseEvent.bind(this));
@@ -82,7 +82,7 @@ core.controllers.Home = () => {
 	  	switch (e.type) {
 	    	case 'mousemove':
 				case 'touchmove':
-	        const 
+	        const
 	        mouseX = e.clientX || e.changedTouches[0].clientX,
 	        mouseY = e.clientY || e.changedTouches[0].clientY,
 	        midPointX = innerWidth / 2,
@@ -103,14 +103,6 @@ core.controllers.Home = () => {
 			}
 	  }
 	}
-	
-	initFns();
 
-	/*
-  if ($$.loaded) {
-    initHomeFns();
-  } else {
-    addEventListener('LOAD_EVENT', initHomeFns);
-  }
-  */
+	initFns();
 };

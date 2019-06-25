@@ -25,20 +25,22 @@ core.controllers.Projects = () => {
         if ((i + 1) % 3 == 0) {
           col = 0;
           ++row;
-        } else ++col;
-      } else if (524 < innerWidth || innerWidth <= 768) {
+        }
+        else ++col;
+      } else if (524 < innerWidth && innerWidth <= 768) {
         if ((i + 1) % 2 == 0) {
           col = 0;
           ++row;
-        } else ++col;
+        }
+        else ++col;
       } else if (innerWidth <= 524) {
-        // ¯\_(ツ)_/¯
+        ++row;
       }
 
       return `
-        <div class="card m-b p bkg-secondary opac-0 scale-075" data-row="${y}" data-col="${x}" style="background-image: url('${project.thumbnail}')">
+        <div class="card m-b p bkg-secondary opac-0 scale-075" data-row="${y}" data-col="${x}" style="background-image: url('${project.image}')">
           <h1 class="card__title m-b">${project.name}</h1>
-          <div class="card__thumb m-b" style="background-image: url('${project.thumbnail}')"></div>
+          <div class="card__thumb m-b" style="background-image: url('${project.image}')"></div>
           <p class="card__description m-b">
             ${project.description}
           </p>
@@ -71,20 +73,15 @@ core.controllers.Projects = () => {
       type: 'json',
       url: './assets/json/projects.json',
       callback: (projects) => {
-        writeProjects(projects, $$('section'));
-        setSectionFiller(projects);
-        addEventListener('resize', setSectionFiller.bind(null, projects));
+        const imgs = projects.map((proj) => proj.image);
+        $$.preload(imgs, () => {
+          writeProjects(projects, $$('section'));
+          setSectionFiller(projects);
+          addEventListener('resize', setSectionFiller.bind(null, projects));
+        });
       }
     })
   };
-  
-  initFns();
 
-	/*
-  if ($$.loaded) {
-    initProjectsFns();
-  } else {
-    addEventListener('LOAD_EVENT', initProjectsFns);
-  }
-  */
+  initFns();
 };

@@ -155,14 +155,6 @@ core.controllers.WhackAMouse = () => {
       }
     }, {once: true});
   };
-  
+
   initFns();
-  
-	/*
-  if ($$.loaded) {
-    initWhackAMouseFns();
-  } else {
-    addEventListener('LOAD_EVENT', initWhackAMouseFns);
-  }
-  */
 };

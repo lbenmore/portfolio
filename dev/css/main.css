@@ -29,26 +29,26 @@ body {
   font-size: 14px;
   overflow-x: hidden;
 
-  --bkg-primary: #333;
-  --bkg-secondary: grey;
-  --bkg-tertiary: darkgrey;
+  --bkg-primary: #343038;
+  --bkg-secondary: #646068;
+  --bkg-tertiary: #949098;
 
-  --txt-primary: #fff;
-  --txt-secondary: #f4f4f4;
-  --txt-tertiary: #e8e8e8;
+  --txt-primary: #f8f4f0;
+  --txt-secondary: #c8c4c0;
+  --txt-tertiary: #989490;
 
   --vh: 1vh;
 
 }
 
 body[data-darkmode=false] {
-  --bkg-primary: #f8f8f8;
-  --bkg-secondary: #e0e0e0;
-  --bkg-tertiary: #d0d0d0;
+  --bkg-primary: #f8f4f0;
+  --bkg-secondary: #d8d4d0;
+  --bkg-tertiary: #bfb8b0;
 
-  --txt-primary: #111;
-  --txt-secondary: #222;
-  --txt-tertiary: #333;
+  --txt-primary: #343038;
+  --txt-secondary: #c8c4c0;
+  --txt-tertiary: #989490;
 }
 
 body *,

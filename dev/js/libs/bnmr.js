@@ -1,4 +1,4 @@
-($$ = (selector = 'body') => {
+($$ = (selector = document.body) => {
   let el;
   const fns = {};
 
@@ -10,9 +10,9 @@
     const img = new Image();
     img.src = assets[tracker.curr];
 
-    img.onload = img.onerror = () => {
+    img.onload = () => {
       ++tracker.curr;
-      loadAssetHandler(assets,tracker, callback);
+      loadAssetHandler(assets, tracker, callback);
     };
   },
 

@@ -17,7 +17,11 @@
         "./css/components/page.css"
       ],
       "js": [
+      	"./js/components/header.js",
       	"./js/components/menu.js"
+      ],
+      "assets": [
+        "./assets/img/IMG_4289.jpg"
       ]
     },
     "/projects": {
@@ -28,6 +32,7 @@
         "./css/controllers/projects.css"
       ],
       "js": [
+      	"./js/components/header.js",
       	"./js/components/menu.js",
         "./js/controllers/projects.js"
       ]
@@ -40,18 +45,9 @@
         "./css/controllers/contact.css"
       ],
       "js": [
+      	"./js/components/header.js",
       	"./js/components/menu.js",
         "./js/controllers/contact.js"
-      ]
-    },
-    "/projects/bnmr_library": {
-      "name": "BNMR Library",
-      "html": "./html/pages/projects/bnmrLibrary.html",
-      "css": [
-        "./css/components/page.css"
-      ],
-      "js": [
-      	"./js/components/menu.js"
       ]
     },
     "/projects/videoPlayer": {
@@ -59,10 +55,11 @@
       "html": "./html/pages/projects/videoPlayer.html",
       "css": [
         "./css/components/page.css",
-        "./css/projects/vplayer.css",
-        "./css/projects/videoPlayer.css"
+        "./css/controllers/projects/vplayer.css",
+        "./css/controllers/projects/videoPlayer.css"
       ],
       "js": [
+      	"./js/components/header.js",
       	"./js/components/menu.js",
         "./js/controllers/projects/vplayer.js",
         "./js/controllers/projects/videoPlayer.js"
@@ -73,9 +70,10 @@
       "html": "./html/pages/projects/carousels.html",
       "css": [
         "./css/components/page.css",
-        "./css/projects/carousels.css"
+        "./css/controllers/projects/carousels.css"
       ],
       "js": [
+      	"./js/components/header.js",
       	"./js/components/menu.js",
         "./js/controllers/projects/carousel_one-item.js",
         "./js/controllers/projects/carousel_three-item.js"
@@ -86,9 +84,10 @@
       "html": "./html/pages/projects/steve.html",
       "css": [
         "./css/components/page.css",
-        "./css/projects/steve.css"
+        "./css/controllers/projects/steve.css"
       ],
       "js": [
+      	"./js/components/header.js",
       	"./js/components/menu.js",
       	"./js/controllers/projects/steve.js"
       ]
@@ -98,9 +97,10 @@
       "html": "./html/pages/projects/whackAMouse.html",
       "css": [
         "./css/components/page.css",
-        "./css/projects/whackAMouse.css"
+        "./css/controllers/projects/whackAMouse.css"
       ],
       "js": [
+      	"./js/components/header.js",
       	"./js/components/menu.js",
       	"./js/controllers/projects/whackAMouse.js"
       ]

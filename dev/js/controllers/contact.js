@@ -29,10 +29,10 @@ core.controllers.Contact = () => {
       },
       callback: (response) => {
         $$('form button').innerHTML = 'Send';
-        
+
         try {
 	        $$.log(response, 'dir');
-	        
+
         	if (response.status) {
 		        $$('form input[type="email"]').value = "";
 		        $$('form input[type="text"]').value = "";
@@ -42,7 +42,7 @@ core.controllers.Contact = () => {
 					}
 				} catch (e) {
 					$$.log(e.message, 'error');
-				}		        
+				}
       }
     });
   },
@@ -69,14 +69,6 @@ core.controllers.Contact = () => {
   initFns = () => {
     eventListeners();
   };
-  
-  initFns();
 
-	/*
-  if ($$.loaded) {
-    initContactFns();
-  } else {
-    addEventListener('LOAD_EVENT', initContactFns);
-  }
-  */
+  initFns();
 };
