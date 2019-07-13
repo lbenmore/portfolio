@@ -224,9 +224,11 @@ var VideoPlayer = function (options) {
         _this.elements.btnReplay.style.color = _this.color;
       }
     }
-
+    
     setDataAttributes();
     eventListeners();
     loadVideo(_this.playlist[_this.active], _this.autoplay);
   }
+
+	init();
 }
