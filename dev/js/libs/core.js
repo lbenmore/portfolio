@@ -36,10 +36,10 @@ core.fns.loadIncludes = (callback) => {
 	
 	const onIncludeLoad = (incUrl) => {
 		incUrls.splice(incUrls.indexOf(incUrl), 1);
-
-		if (document.body.innerHTML.includes('data-include')) return core.fns.loadIncludes(callback);
 		
 		if (!incUrls.length) {
+			if (document.body.innerHTML.includes('data-include')) return core.fns.loadIncludes(callback);
+		
 			core.events.load.assets.splice(core.events.load.assets.indexOf('data-include'), 1);
 			
 			if (callback) {
