@@ -80,15 +80,15 @@
     }
 
     .burrow__mole.good {
-      background-image: url('../../assets/img/good.png');
+      background-image: url('../../../assets/img/good.png');
     }
 
     .burrow__mole.warning {
-      background-image: url('../../assets/img/warning.png');
+      background-image: url('../../../assets/img/warning.png');
     }
 
     .burrow__mole.bad {
-      background-image: url('../../assets/img/bad.png');
+      background-image: url('../../../assets/img/bad.png');
     }
 
     .burrow__hole {

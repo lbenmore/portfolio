@@ -36,6 +36,8 @@ core.fns.loadIncludes = (callback) => {
 	
 	const onIncludeLoad = (incUrl) => {
 		incUrls.splice(incUrls.indexOf(incUrl), 1);
+
+		if (document.body.innerHTML.includes('data-include')) return core.fns.loadIncludes(callback);
 		
 		if (!incUrls.length) {
 			core.events.load.assets.splice(core.events.load.assets.indexOf('data-include'), 1);
@@ -59,13 +61,13 @@ core.fns.loadIncludes = (callback) => {
 					
 					el.innerHTML = html;
 					el.className = incEl.className;
+					el.attributes = incEl.attributes;
+					el.dataset = {};
 					
 					incEl.parentNode.insertBefore(el, incEl);
 					incEl.parentNode.removeChild(incEl);
 					
 					onIncludeLoad(incUrl);
-					
-					if (html.includes('data-include')) return core.fns.loadIncludes();
 				}
 			});
 		}

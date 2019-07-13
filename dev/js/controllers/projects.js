@@ -68,7 +68,7 @@ core.controllers.Projects = () => {
   },
 
   initFns = () => {
-		
+		/*
   	const xhr = new XMLHttpRequest();
   	
   	xhr.onload = () => {
@@ -89,12 +89,12 @@ core.controllers.Projects = () => {
   	xhr.send();
   	
   	return;
-  	
+  	*/
   
     $$.ajax({
       type: 'json',
       url: './assets/json/projects.json',
-      callback: (projects) => { return console.log(projects);
+      callback: (projects) => {
         const imgs = projects.map((proj) => proj.image);
         $$.preload(imgs, () => {
           writeProjects(projects, $$('section'));
