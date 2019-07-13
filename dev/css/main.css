@@ -20,7 +20,21 @@
 
 
 
+*,
+*::before,
+*::after {
+  position: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font: inherit;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
+  position: relative;
   margin: 0;
   box-sizing: border-box;
   background-color: var(--bkg-primary);
@@ -29,37 +43,30 @@ body {
   font-size: 14px;
   overflow-x: hidden;
 
-  --bkg-primary: #343038;
-  --bkg-secondary: #646068;
-  --bkg-tertiary: #949098;
+  --bg-primary: #343038;
+  --bg-secondary: #646068;
+  --bg-tertiary: #949098;
 
-  --txt-primary: #f8f4f0;
-  --txt-secondary: #c8c4c0;
-  --txt-tertiary: #989490;
+  --text-primary: #f8f4f0;
+  --text-secondary: #d8d4d0;
+  --text-tertiary: #c8c4c0;
+
+  --accent-primary: #8800ff;
+  --accent-secondary: #00ff88;
+  --accent-tertiary: #ff0044;
 
   --vh: 1vh;
 
 }
 
 body[data-darkmode=false] {
-  --bkg-primary: #f8f4f0;
-  --bkg-secondary: #d8d4d0;
-  --bkg-tertiary: #bfb8b0;
+  --bg-primary: #f8f4f0;
+  --bg-secondary: #d8d4d0;
+  --bg-tertiary: #c8c4c0;
 
-  --txt-primary: #343038;
-  --txt-secondary: #c8c4c0;
-  --txt-tertiary: #989490;
-}
-
-body *,
-body *::before,
-body *::after {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-  font: inherit;
-  -webkit-text-size-adjust: 100%;
+  --text-primary: #343038;
+  --text-secondary: #646068;
+  --text-tertiary: #949098;
 }
 
 a,
@@ -100,8 +107,8 @@ a:not([href^='#'])::after {
 button {
   padding: 8px 24px;
   background: transparent;
-  border: 1px solid var(--txt-primary);
-  color: var(--txt-primary);
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
   cursor: pointer;
   transition: color 0.3s;
 }
@@ -113,7 +120,7 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--txt-primary);
+    background-color: var(--text-primary);
     transition: transform 0.3s;
     transform-origin: 100% 50%;
     transform: scale(0, 1);
@@ -125,11 +132,11 @@ button {
   }
 
   button:hover {
-    color: var(--bkg-primary);
+    color: var(--bg-primary);
   }
 
 img {
-  background-color: var(--bkg-secondary);
+  background-color: var(--bg-secondary);
 }
 
 p {
@@ -161,18 +168,6 @@ ul {
 
 .float-left {
 	float: left;
-}
-
-.bkg-primary {
-  background-color: var(--bkg-primary);
-}
-
-.bkg-secondary {
-  background-color: var(--bkg-secondary);
-}
-
-.bkg-tertiary {
-  background-color: var(--bkg-tertiary);
 }
 
 .mono {

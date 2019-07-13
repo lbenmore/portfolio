@@ -55,5 +55,9 @@ core.controllers.VideoPlayer = () => {
     eventListeners();
   };
 
-  initFns();
+	if (core.isLoaded()) {
+		initFns();
+	} else {
+		core.events.addEventListener('load', initFns, {once: true});
+	}
 };

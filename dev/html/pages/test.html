@@ -1,0 +1,19 @@
+<main data-controller="Test">
+  <header data-include="./html/blocks/header.html"></header>
+  <section>
+    <div data-repeat="project in projects" class="card dsp-inline-block w-third v-top m-r m-b p-lg bg-secondary overflow-hidden" data-row="${y}" data-col="${x}" style="background-image: url('{{project.image}}')">
+      <h1 class="card__title m-b font-size-md l-s-0-2 text-align-center t-t-u">{{project.name}}</h1>
+      <div class="card__thumb m-b w-full" style="background-image: url('{{project.image}}')"></div>
+      <p class="card__description m-b">
+        {{project.description}}
+      </p>
+      <ul class="list-style-none">
+        <li data-repeat="link in project.links" class="card__link l-h-2">
+          <a href="{{link.url}}" target="_blank">
+            {{link.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>

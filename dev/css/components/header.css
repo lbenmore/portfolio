@@ -4,36 +4,14 @@ header {
   z-index: 1;
 }
 
-	header h1 {
+	header h1::after {
+		content: ' | ';
 		display: inline-block;
-		margin-bottom: 12px;
-		font-size: 1.4em;
-		font-weight: 400;
-		letter-spacing: 0.275em;
-		text-transform: lowercase;
+		margin: 0 8px;
+		font-size: 1.5em;
+		font-weight: normal;
 	}
-
-		header h1::after {
-			content: ' | ';
-			display: inline-block;
-			margin: 0 8px;
-			font-size: 1.5em;
-			font-weight: normal;
-		}
 
 	header h2 {
-		display: inline-block;
-		margin-bottom: 12px;
 		padding-right: 80px;
-		font-size: 1.2em;
-		font-weight: 200;
-		letter-spacing: 0.8em;
-		text-transform: uppercase;
-	}
-
-  header .header__title {
-    font-size: 2em;
-    font-weight: 100;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
 	}

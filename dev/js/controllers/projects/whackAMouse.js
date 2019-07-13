@@ -156,5 +156,9 @@ core.controllers.WhackAMouse = () => {
     }, {once: true});
   };
 
-  initFns();
+	if (core.isLoaded()) {
+		initFns();
+	} else {
+		core.events.addEventListener('load', initFns, {once: true});
+	}
 };

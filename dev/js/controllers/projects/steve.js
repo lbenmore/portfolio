@@ -301,7 +301,7 @@ core.controllers.Steve = () => {
     new Steve(document.querySelector('.game'));
   },
 
-  initGame = () => {
+  initFns = () => {
     new Background(document.querySelector('.game'));
     initSteve();
     // the method used in responsify fucks with cacti and steve speed
@@ -309,6 +309,9 @@ core.controllers.Steve = () => {
     // addEventListener('resize', responsify);
   };
 
-  // document.addEventListener('DOMContentLoaded', initGame);
-  initGame();
+	if (core.isLoaded()) {
+		initFns();
+	} else {
+		core.events.addEventListener('load', initFns, {once: true});
+	}
 };

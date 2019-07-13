@@ -7,11 +7,12 @@ core.controllers.Header = () => {
     const pageName = pageObj.name;
 
     _this.pageTitle = pageName;
+    $$('[data-controller=Header]').innerHTML = $$('[data-controller=Header]').innerHTML.replace(/\{\{pageTitle\}\}/g, pageName);
   };
 
-  if (core.isLoaded()) {
-    initFns();
-  } else {
-    addEventListener('coreload', initFns);
-  }
+	if (core.isLoaded()) {
+		initFns();
+	} else {
+		core.events.addEventListener('load', initFns, {once: true});
+	}
 };

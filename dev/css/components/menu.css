@@ -1,29 +1,22 @@
 .menu {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 1;
-  filter: drop-shadow(0px 0px 12px var(--bkg-primary));
+  top: var(--gutter);
+  right: var(--gutter);
+  filter: drop-shadow(0px 0px 12px var(--primary));
 }
 
   .menu__icon {
-    display: block;
+    right: 0;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: var(--bkg-secondary);
-    cursor: pointer;
-    z-index: 1;
   }
 
     .menu__icon span {
-      display: block;
-      position: absolute;
       top: 50%;
       left: 50%;
       width: 24px;
       height: 2px;
-      background-color: var(--txt-primary);
+      background: var(--text-primary);
       transform: translate(-50%, -50%);
       transition: transform 0.5s;
     }
@@ -61,14 +54,10 @@
         }
 
   .menu__link {
-    display: block;
-    position: absolute;
-    top: 24px;
+    top: var(--gutter);
     right: 64px;
     width: 40px;
     height: 40px;
-    text-decoration: none;
-    opacity: 0;
     transform: rotate(-90deg);
     transform-origin: 100% 0;
     transition: width 0.5s, transform 0.5s, opacity 0.5s;
@@ -128,8 +117,8 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: var(--bkg-tertiary);
-      color: var(--txt-primary);
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
       font-family: 'Font Awesome 5 Free';
       font-size: 14px;
       font-weight: 900;
@@ -154,15 +143,11 @@
     }
 
   .menu__darkmode {
-    position: absolute;
     top: 48px;
-    right: 24px;
+    right: 0;
     width: 50px;
     height: 20px;
     border-radius: 10px;
-    background: var(--bkg-secondary);
-    opacity: 0;
-    cursor: pointer;
     transition: opacity 0.5s, transform 0.5s;
     transition-delay: 0s;
   }
@@ -174,12 +159,10 @@
   }
 
     .menu__darkmode span {
-      position: absolute;
       top: -5px;
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      background: var(--bkg-tertiary);
       transition: transform 0.3s;
     }
 
@@ -189,6 +172,6 @@
 
 @media (min-width: 1008px) { /* 960 + 24 + 24 */
   .menu {
-    right: calc((100vw - 960px )/ 2);
+    right: calc((100vw - 960px ) / 2);
   }
 }

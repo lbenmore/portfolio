@@ -1,4 +1,5 @@
 {
+  "container": ".container",
   "pages": {
     "/home": {
       "name": "Home",
@@ -103,6 +104,19 @@
       	"./js/components/header.js",
       	"./js/components/menu.js",
       	"./js/controllers/projects/whackAMouse.js"
+      ]
+    },
+    "/test": {
+      "name": "Testing",
+      "html": "./html/pages/test.html",
+      "css": [
+        "./css/components/page.css",
+        "./css/controllers/test.css"
+      ],
+      "js": [
+      	"./js/components/header.js",
+      	"./js/components/menu.js",
+        "./js/controllers/test.js"
       ]
     }
   }

@@ -234,18 +234,26 @@ core.controllers.Tripousel = () => {
 		}
 	];
 
-	var trip = new Tripousel({
-		target: document.querySelector('.three-item-carousel'),
-		items: slides
-	});
+	const initFns = () => {
+		var trip = new Tripousel({
+			target: document.querySelector('.three-item-carousel'),
+			items: slides
+		});
+	
+		var rotateNTimes = 5;
+		var rotate = setInterval(function () {
+			if (rotateNTimes) {
+				trip.animate();
+				--rotateNTimes;
+			} else {
+				clearInterval(rotate);
+			}
+		}, 2000);
+	};
 
-	var rotateNTimes = 5;
-	var rotate = setInterval(function () {
-		if (rotateNTimes) {
-			trip.animate();
-			--rotateNTimes;
-		} else {
-			clearInterval(rotate);
-		}
-	}, 2000);
+	if (core.isLoaded()) {
+		initFns();
+	} else {
+		core.events.addEventListener('load', initFns, {once: true});
+	}
 };

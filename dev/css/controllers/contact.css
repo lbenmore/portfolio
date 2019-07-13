@@ -1,12 +1,17 @@
+p {
+  margin: var(--gutter) auto;
+  max-width: 400px;
+}
+
 form {
   margin: 0 auto;
-  padding: 16px;
+  padding: var(--gutter);
   width: 100%;
   max-width: 400px;
 }
 
   fieldset {
-    padding: 32px;
+    padding: calc(var(--gutter) * 2);
   }
 
     legend {
@@ -15,14 +20,14 @@ form {
 
     form input,
     form textarea {
-      margin-bottom: 32px;
+      margin-bottom: var(--gutter);
       padding: 8px;
       width: 100%;
       border: 0px solid transparent;
-      border-bottom: 1px solid var(--bkg-secondary);
+      border-bottom: 1px solid var(--bg-secondary);
       border-radius: 0;
-      background: var(--bkg-primary);
-      color: var(--txt-primary);
+      background: var(--bg-primary);
+      color: var(--text-primary);
     }
 
     form textarea {
@@ -35,7 +40,7 @@ form {
       position: absolute;
       top: 8px;
       left: 8px;
-      color: var(--txt-secondary);
+      color: var(--text-secondary);
       font-size: 0.9em;
       pointer-events: none;
       transition: transform 0.3s, font-size 0.3s;
@@ -43,7 +48,7 @@ form {
 
     form input:focus,
     form textarea:focus {
-      border-bottom-color: var(--bkg-tertiary);
+      border-bottom-color: var(--bg-tertiary);
       outline: none;
     }
 

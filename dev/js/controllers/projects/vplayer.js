@@ -229,6 +229,4 @@ var VideoPlayer = function (options) {
     eventListeners();
     loadVideo(_this.playlist[_this.active], _this.autoplay);
   }
-
-  init();
 }

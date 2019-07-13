@@ -16,8 +16,8 @@ initFns = (e) => {
 	eventListeners();
 };
 
-if (core.isInitialized()) {
+if (core.isInit()) {
 	initFns();
 } else {
-	addEventListener("coreload", initFns);
+	addEventListener('load', initFns);
 }

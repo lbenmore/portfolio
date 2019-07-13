@@ -1,15 +1,19 @@
 body {
-  --primary: #111;
-  --secondary: #333;
-  --tertiary: #666;
+  --bg-primary: #111;
+  --bg-secondary: #333;
+  --bg-tertiary: #666;
 
-  --primary-lt: #e8e8ef;
-  --secondary-lt: #e0e0e8;
-  --tertiary-lt: #c0c0c8;
+  --text-primary: #fff;
+  --text-secondary: #ddd;
+  --text-tertiary: #bbb;
+
+  --accent-primary: #08f;
+  --accent-secondary: #04f;
+  --accent-tertiary: #00f;
 
   --gutter: 16px;
 
-  --font-size: calc(0.8vw + 0.8vh);
+  --font-size: calc(0.6vw + 0.6vh);
 }
 
 .dsp-block {
@@ -64,6 +68,10 @@ body {
   position: sticky;
 }
 
+.m-xl {
+  margin: calc(var(--gutter) * 2));
+}
+
 .m-lg {
   margin: calc(var(--gutter) + calc(var(--gutter) / 2));
 }
@@ -82,6 +90,10 @@ body {
 
 .m-xs {
   margin: calc(var(--gutter) / 4);
+}
+
+.m-t-xl {
+  margin-top: calc(var(--gutter) * 2));
 }
 
 .m-t-lg {
@@ -104,6 +116,10 @@ body {
   margin-top: calc(var(--gutter) / 4);
 }
 
+.m-r-xl {
+  margin-right: calc(var(--gutter) * 2));
+}
+
 .m-r-lg {
   margin-right: calc(var(--gutter) + calc(var(--gutter) / 2));
 }
@@ -122,6 +138,10 @@ body {
 
 .m-r-xs {
   margin-right: calc(var(--gutter) / 4);
+}
+
+.m-b-xl {
+  margin-bottom: calc(var(--gutter) * 2);
 }
 
 .m-b-lg {
@@ -144,6 +164,10 @@ body {
   margin-bottom: calc(var(--gutter) / 4);
 }
 
+.m-l-xl {
+  margin-left: calc(var(--gutter) * 2));
+}
+
 .m-l-lg {
   margin-left: calc(var(--gutter) + calc(var(--gutter) / 2));
 }
@@ -162,6 +186,10 @@ body {
 
 .m-l-xs {
   margin-left: calc(var(--gutter) / 4);
+}
+
+.p-xl {
+  padding: calc(var(--gutter) * 2));
 }
 
 .p-lg {
@@ -184,6 +212,10 @@ body {
   padding: calc(var(--gutter) / 4);
 }
 
+.p-t-xl {
+  padding-top: calc(var(--gutter) * 2));
+}
+
 .p-t-lg {
   padding-top: calc(var(--gutter) + calc(var(--gutter) / 2));
 }
@@ -202,6 +234,10 @@ body {
 
 .p-t-xs {
   padding-top: calc(var(--gutter) / 4);
+}
+
+.p-r-xl {
+  padding-right: calc(var(--gutter) * 2));
 }
 
 .p-r-lg {
@@ -224,6 +260,10 @@ body {
   padding-right: calc(var(--gutter) / 4);
 }
 
+.p-b-xl {
+  padding-bottom: calc(var(--gutter) * 2));
+}
+
 .p-b-lg {
   padding-bottom: calc(var(--gutter) + calc(var(--gutter) / 2));
 }
@@ -242,6 +282,10 @@ body {
 
 .p-b-xs {
   padding-bottom: calc(var(--gutter) / 4);
+}
+
+.p-l-xl {
+  padding-left: calc(var(--gutter) * 2));
 }
 
 .p-l-lg {
@@ -269,15 +313,15 @@ body {
 }
 
 .w-half {
-  width: 50%;
+  width: calc(50% - var(--gutter));
 }
 
 .w-third {
-  width: 33%;
+  width: calc(33% - var(--gutter));
 }
 
 .w-quarter {
-  width: 25%;
+  width: calc(25% - var(--gutter));
 }
 
 .h-full {
@@ -345,107 +389,115 @@ body {
 }
 
 .bg-primary {
-  background-color: var(--primary);
+  background-color: var(--bg-primary);
 }
 
 .bg-secondary {
-  background-color: var(--secondary);
+  background-color: var(--bg-secondary);
 }
 
 .bg-tertiary {
-  background-color: var(--tertiary);
+  background-color: var(--bg-tertiary);
 }
 
-.bg-primary-lt {
-  background-color: var(--primary-lt);
+.color-primary {
+  color: var(--text-primary);
 }
 
-.bg-secondary-lt {
-  background-color: var(--secondary-lt);
+.color-secondary {
+  color: var(--text-secondary);
 }
 
-.bg-tertiary-lt {
-  background-color: var(--tertiary-lt);
+.color-tertiary {
+  color: var(--text-tertiary);
 }
 
-.text-primary {
-  color: var(--primary);
+.font-size-xxl {
+  font-size: calc(var(--font-size) * 3);
 }
 
-.text-secondary {
-  color: var(--secondary);
+.font-size-xl {
+  font-size: calc(var(--font-size) * 2.5);
 }
 
-.text-tertiary {
-  color: var(--tertiary);
-}
-
-.text-primary-lt {
-  color: var(--primary-lt);
-}
-
-.text-secondary-lt {
-  color: var(--secondary-lt);
-}
-
-.text-tertiary-lt {
-  color: var(--tertiary-lt);
-}
-
-.text-xxl {
+.font-size-lg {
   font-size: calc(var(--font-size) * 2);
 }
 
-.text-xl {
-  font-size: calc(var(--font-size) * 1.75);
-}
-
-.text-lg {
+.font-size-md {
   font-size: calc(var(--font-size) * 1.5);
 }
 
-.text-md {
-  font-size: calc(var(--font-size) * 1.25);
-}
-
-.text-normal {
+.font-size-normal {
   font-size: var(--font-size);
 }
 
-.text-sm {
-  font-size: calc(var(--font-size) * 0.9);
+.font-size-sm {
+  font-size: calc(var(--font-size) * 0.5);
 }
 
-.text-xs {
-  font-size: calc(var(--font-size) * 0.8);
+.font-size-xs {
+  font-size: calc(var(--font-size) * 0.25);
 }
 
-.text-xxs {
-  font-size: calc(var(--font-size) * 0.6);
+.font-size-xxs {
+  font-size: calc(var(--font-size) * 0.125);
 }
 
-.text-left {
+.text-align-left {
   text-align: left;
 }
 
-.text-center {
+.text-align-center {
   text-align: center;
 }
 
-.text-right {
+.text-align-right {
   text-align: right;
 }
 
-.text-b {
-  font-weight: bold;
+.font-weight-thin {
+  font-weight: 100;
 }
 
-.text-i {
+.font-weight-extra-light {
+  font-weight: 200;
+}
+
+.font-weight-light {
+  font-weight: 300;
+}
+
+.font-weight-normal {
+  font-weight: 400;
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-semi-bold {
+  font-weight: 600;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+.font-weight-extra-bold {
+  font-weight: 800;
+}
+
+.font-weight-black {
+  font-weight: 900;
+}
+
+.font-style-normal {
+  font-style: normal
+}
+
+.font-style-italic {
   font-style: italic;
-}
-
-.text-u {
-  text-decoration: underline;
 }
 
 .text-deco-none {
@@ -454,6 +506,106 @@ body {
 
 .text-deco-strikethrough {
   text-decoration: line-through;
+}
+
+.font-deco-underline {
+  text-decoration: underline;
+}
+
+.l-s-0-1 {
+  letter-spacing: 0.1em;
+}
+
+.l-s-0-2 {
+  letter-spacing: 0.2em;
+}
+
+.l-s-0-3 {
+  letter-spacing: 0.3em;
+}
+
+.l-s-0-4 {
+  letter-spacing: 0.4em;
+}
+
+.l-s-0-5 {
+  letter-spacing: 0.5em;
+}
+
+.l-s-0-6 {
+  letter-spacing: 0.6em;
+}
+
+.l-s-0-7 {
+  letter-spacing: 0.7em;
+}
+
+.l-s-0-8 {
+  letter-spacing: 0.8em;
+}
+
+.l-s-0-9 {
+  letter-spacing: 0.9em;
+}
+
+.l-s-1 {
+  letter-spacing: 1em;
+}
+
+.l-h-1 {
+  line-height: 1;
+}
+
+.l-h-1-1 {
+  line-height: 1.1;
+}
+
+.l-h-1-2 {
+  line-height: 1.2;
+}
+
+.l-h-1-3 {
+  line-height: 1.3;
+}
+
+.l-h-1-4 {
+  line-height: 1.4;
+}
+
+.l-h-1-5 {
+  line-height: 1.5;
+}
+
+.l-h-1-6 {
+  line-height: 1.6;
+}
+
+.l-h-1-7 {
+  line-height: 1.7;
+}
+
+.l-h-1-8 {
+  line-height: 1.8;
+}
+
+.l-h-1-9 {
+  line-height: 1.9;
+}
+
+.l-h-2 {
+  line-height: 2;
+}
+
+.t-t-l {
+  text-transform: lowercase;
+}
+
+.t-t-u {
+  text-transform: uppercase;
+}
+
+.t-t-c {
+  text-transform: capitalize;
 }
 
 .opac-100 {
@@ -510,4 +662,16 @@ body {
 
 .z-9 {
   z-index: 9;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

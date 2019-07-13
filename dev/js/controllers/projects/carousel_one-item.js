@@ -132,14 +132,22 @@ core.controllers.Carousel = () => {
 		}
 	}
 
-	const carousel = new Carousel({
-		target: document.querySelector('.one-item-carousel'),
-		images: [
-			'https://unsplash.it/800/600/?image=1079',
-			'https://unsplash.it/800/600/?image=1078',
-			'https://unsplash.it/800/600/?image=1077',
-			'https://unsplash.it/800/600/?image=1076',
-			'https://unsplash.it/800/600/?image=1075'
-		]
-	});
+	const initFns = () => {
+		const carousel = new Carousel({
+			target: document.querySelector('.one-item-carousel'),
+			images: [
+				'https://unsplash.it/800/600/?image=1079',
+				'https://unsplash.it/800/600/?image=1078',
+				'https://unsplash.it/800/600/?image=1077',
+				'https://unsplash.it/800/600/?image=1076',
+				'https://unsplash.it/800/600/?image=1075'
+			]
+		});
+	};
+
+	if (core.isLoaded()) {
+		initFns();
+	} else {
+		core.events.addEventListener('load', initFns, {once: true});
+	}
 };

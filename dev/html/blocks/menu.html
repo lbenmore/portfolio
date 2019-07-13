@@ -1,12 +1,14 @@
-<nav class="menu" data-controller="Menu">
+<nav class="menu pos-fix z-1" data-controller="Menu">
   <input type="checkbox" id="menu__input" class="hide">
-  <label class="menu__icon" for="menu__input"><span></span></label>
-  <a href="#/home" class="menu__link menu__link--home" data-icon="&#xf015" title="Home"></a>
-  <a href="#/about" class="menu__link menu__link--about" data-icon="&#xf129" title="About"></a>
-  <a href="#/projects" class="menu__link menu__link--projects" data-icon="&#xf7d9" title="Projects"></a>
-  <a href="#/contact" class="menu__link menu__link--contact" data-icon="&#xf095" title="Contact"></a>
-  <label class="menu__darkmode" title="Toggle Dark Mode">
+  <label class="menu__icon dsp-block pos-rel bg-secondary cursor-pointer z-1" for="menu__input">
+    <span class="dsp-block pos-abs"></span>
+  </label>
+  <a href="#/home" class="menu__link menu__link--home dsp-block pos-abs text-deco-none opac-0" data-icon="&#xf015" title="Home"></a>
+  <a href="#/about" class="menu__link menu__link--about dsp-block pos-abs text-deco-none opac-0" data-icon="&#xf129" title="About"></a>
+  <a href="#/projects" class="menu__link menu__link--projects dsp-block pos-abs text-deco-none opac-0" data-icon="&#xf7d9" title="Projects"></a>
+  <a href="#/contact" class="menu__link menu__link--contact dsp-block pos-abs text-deco-none opac-0" data-icon="&#xf095" title="Contact"></a>
+  <label class="menu__darkmode pos-abs bg-secondary opac-0 cursor-pointer" title="Toggle Dark Mode">
     <input type="checkbox" class="hide" selected>
-    <span></span>
+    <span class="pos-abs bg-tertiary"></span>
   </label>
 </nav>

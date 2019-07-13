@@ -71,8 +71,8 @@ core.controllers.Home = () => {
 	      this.starfields.push(new Starfield(this.target, this, i));
 	    }
 	    
-	//     this.target.addEventListener('mousemove', this.handleMouseEvent.bind(this));
-	//     this.target.addEventListener('mouseout', this.handleMouseEvent.bind(this));
+			// this.target.addEventListener('mousemove', this.handleMouseEvent.bind(this));
+			// this.target.addEventListener('mouseout', this.handleMouseEvent.bind(this));
 	    
 	    // this.target.addEventListener('touchmove', this.handleMouseEvent.bind(this));
 	    // this.target.addEventListener('touchend', this.handleMouseEvent.bind(this));
@@ -104,5 +104,9 @@ core.controllers.Home = () => {
 	  }
 	}
 
-	initFns();
+	if (core.isLoaded()) {
+		initFns();
+	} else {
+		core.events.addEventListener('load', initFns, {once: true});
+	}
 };

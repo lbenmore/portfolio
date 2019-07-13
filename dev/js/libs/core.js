@@ -1,205 +1,169 @@
-const
-core = {};
+const core = {};
+
 core.fns = {};
 core.controllers = {};
-core.events = {};
-core.unloadedAssets = [];
+core.pages = {};
+core.events = document.createElement('event');
 
-core.events.init = new CustomEvent("coreinit");
-core.events.load = new CustomEvent("coreload");
+core.events.load = new CustomEvent('load');
+core.events.init = new CustomEvent('init');
 
-core.isInitialized = () => false;
-core.isLoaded = () => core.unloadedAssets.length == 0;
+core.events.load.assets = [];
+core.events.init.hasLoaded = false;
 
-core.fns.getContainingControllerElement = (el) => {
-  if (el.dataset.hasOwnProperty('controller')) return el;
-  else if (el.parentNode) return core.fns.getContainingControllerElement(el.parentNode);
-  else return false;
-};
-
-core.fns.setDOMStringReplacement = () => {
-  for (const el of document.querySelectorAll('[data-var]')) {
-    const containingController = core.fns.getContainingControllerElement(el);
-    const ctlrName = containingController.dataset.controller;
-    let ctlr = core.controllers[ctlrName];
-
-    el.innerHTML = ctlr[el.dataset.var];
-  }
-};
-
-core.fns.initDOMStringReplacement = () => {
-  for (const el of document.querySelectorAll('*')) {
-    if (el.children.length) continue;
-
-    if (el.textContent.includes('{{') && el.textContent.includes('}}')) {
-      const varName = el.textContent.split('{{')[1].split('}}')[0];
-      const containingController = core.fns.getContainingControllerElement(el);
-      const ctlrName = containingController.dataset.controller;
-
-      el.innerHTML = el.innerHTML.replace(`{{${varName}}}`, `<custom data-var="${varName}">${varName}</custom>`);
-
-      core.controllers[ctlrName] = new Proxy(core.controllers[ctlrName], {
-        set: (o, p, v) => {
-          o[p] = v;
-          core.fns.setDOMStringReplacement();
-          return true;
-        }
-      });
-    }
-  }
-
-  dispatchEvent(core.events.load);
-
-  core.fns.setDOMStringReplacement();
-};
+core.isLoaded = () => core.events.load.assets.length == 0;
+core.isInit = () => core.events.init.hasLoaded;
 
 core.fns.loadControllers = () => {
-  for (const ctlr of document.querySelectorAll('*[data-controller]')) {
-    if (core.controllers[ctlr.dataset.controller]) core.controllers[ctlr.dataset.controller]();
-  }
+	const ctlrs = Array.from(document.querySelectorAll('[data-controller]'));
+	
+	for (const ctlr of ctlrs) {
+		try {
+			core.controllers[ctlr.dataset.controller]();
+		} catch (e) {
+			$$.log(`loadControllers -> ${e.message}`, 'error');
+		}
+	}
 
-  core.unloadedAssets.splice(core.unloadedAssets.indexOf('data-controller'), 1);
-
-  core.fns.initDOMStringReplacement();
+	core.events.load.assets.splice(core.events.load.assets.indexOf('data-controller'), 1);
+	
+	core.events.dispatchEvent(core.events.load);
 };
 
 core.fns.loadIncludes = (callback) => {
-  const total = document.querySelectorAll('*[data-include]').length;
-  let curr = 0;
-
-  if (total) {
-    for (const inc of document.querySelectorAll('*[data-include]')) {
-      const el = document.createElement(inc.tagName.toLowerCase());
-      $$.ajax({
-        url: inc.dataset.include,
-        callback: (html) => {
-          el.innerHTML = html;
-          el.className = inc.className
-          inc.parentNode.insertBefore(el, inc);
-          inc.parentNode.removeChild(inc);
-
-          ++curr;
-
-          if (curr == total) {
-            if (document.querySelectorAll('*[data-include]').length) {
-              core.fns.loadIncludes(callback);
-            } else if (callback) {
-              core.unloadedAssets.splice(core.unloadedAssets.indexOf('data-include'), 1);
-              callback.call();
-            } else {
-              core.unloadedAssets.splice(core.unloadedAssets.indexOf('data-include'), 1);
-            }
-          }
-        }
-      });
-    }
-  } else {
-    if (callback) callback.call();
-  }
-};
-
-core.fns.pageLoadError = () => {
-  $$.log('The page your are trying to load does not exist. Redirecting...', 'error');
-  core.fns.go(Object.keys(core.pages)[0]);
+	const incEls = Array.from(document.querySelectorAll('[data-include]'));
+	const incUrls = incEls.filter((inc) => inc.dataset.include);
+	
+	const onIncludeLoad = (incUrl) => {
+		incUrls.splice(incUrls.indexOf(incUrl), 1);
+		
+		if (!incUrls.length) {
+			core.events.load.assets.splice(core.events.load.assets.indexOf('data-include'), 1);
+			
+			if (callback) {
+				callback.call();
+			} else {
+				core.events.dispatchEvent(core.events.load);
+			}
+		}
+	};
+		
+	if (incEls.length) {
+		for (const incEl of incEls) {
+			const incUrl = incEl.dataset.include;
+			
+			$$.ajax({
+				url: incUrl,
+				callback: (html) => {
+					const el = document.createElement(incEl.tagName.toLowerCase());
+					
+					el.innerHTML = html;
+					el.className = incEl.className;
+					
+					incEl.parentNode.insertBefore(el, incEl);
+					incEl.parentNode.removeChild(incEl);
+					
+					onIncludeLoad(incUrl);
+					
+					if (html.includes('data-include')) return core.fns.loadIncludes();
+				}
+			});
+		}
+	} else {
+		onIncludeLoad(null);
+	}
 };
 
 core.fns.loadPage = () => {
-  const page = window.location.hash.slice(1);
-    if (core.pages[page]) {
-      const
-      html = core.pages[page].html,
-      css = core.pages[page].hasOwnProperty('css') ? core.pages[page].css : [],
-      js = core.pages[page].hasOwnProperty('js') ? core.pages[page].js : [],
-      assets = core.pages[page].hasOwnProperty('assets') ? core.pages[page].assets : [],
-      all = [...css, ...js, ...assets];
-      let loaded = assets.length;
+	try {
+		const pageId = location.hash.slice(1);
+		if (!pageId in core.pages) core.fns.go(Object.keys(core.pages)[0]);
+		const page = core.pages[pageId];
+		
+		const htmlUrl = page.html;
+		const stylesheets = 'css' in page ? page.css : [];
+		const scripts = 'js' in page ? page.js : [];
+		const assets = 'assets' in page ? page.assets : [];
+		
+		const onAssetLoad = (assetUrl, html) => {
+			core.events.load.assets.splice(core.events.load.assets.indexOf(assetUrl), 1);
 
-      core.unloadedAssets = [...css, ...js, ...assets];
-
-      $$.ajax({
-        url: html,
-        callback: (response) => {
-          const onAssetLoad = (asset, e) => {
-            ++loaded;
-
-            core.unloadedAssets.splice(core.unloadedAssets.indexOf(asset), 1);
-
-            if (loaded == all.length) {
-              $$('.container').innerHTML = response;
-              core.fns.loadIncludes(core.fns.loadControllers);
-
-              for (const asset of document.querySelectorAll('div[data-css] *, div[data-js] *')) {
-                if (asset.dataset.new == 'true') {
-                  asset.dataset.new = null;
-                } else {
-                  asset.parentNode.removeChild(asset);
-                }
-              }
-            }
-          };
-
-          if (response.includes('data-include')) core.unloadedAssets.push('data-include');
-          if (response.includes('data-controller')) core.unloadedAssets.push('data-controller');
-
-          for (const stylesheet of css) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = stylesheet;
-            link.dataset.new = true;
-            $$('div[data-css]').appendChild(link);
-
-            link.onload = onAssetLoad.bind(null, stylesheet);
-          }
-
-          for (const scriptfile of js) {
-            const script = document.createElement('script');
-            script.src = scriptfile;
-            script.dataset.new = true;
-            $$('div[data-js]').appendChild(script);
-
-            script.onload = onAssetLoad.bind(null, scriptfile);
-          }
-        }
-      });
-    } else {
-      core.fns.pageLoadError();
-    }
+			if (!core.events.load.assets.length) {
+				$$('.container').innerHTML = html;
+				
+				if (html.indexOf('data-include') > -1) core.events.load.assets.push('data-include');
+				if (html.indexOf('data-controller') > -1) core.events.load.assets.push('data-controller');
+				
+				core.fns.loadIncludes(core.fns.loadControllers);
+			}
+		};
+		
+		core.events.load.assets = [...stylesheets, ...scripts, ...assets];
+		
+		$$.ajax({
+			url: htmlUrl,
+			callback: (html) => {
+				$$('div[data-css]').innerHTML = '';
+				for (const resourceUrl of stylesheets) {
+					const link = document.createElement('link');
+					
+					link.rel = 'stylesheet';
+					link.href = resourceUrl;
+					
+					link.onload = onAssetLoad.bind(null, resourceUrl, html);
+					
+					$$('div[data-css]').appendChild(link);
+				}
+				
+				$$('div[data-js]').innerHTML = '';
+				for (const resourceUrl of scripts) {
+					const script = document.createElement('script');
+					
+					script.src = resourceUrl;
+					
+					script.onload = onAssetLoad.bind(null, resourceUrl, html);
+					
+					$$('div[data-js]').appendChild(script);
+				}
+				
+				for (const resourceUrl of assets) {
+					const img = new Image();
+					
+					img.src = resourceUrl;
+					
+					img.onload = img.onerror = onAssetLoad.bind(null, resourceUrl, html);
+				}
+			}
+		});
+	} catch (e) {
+		$$.log(`loadPage -> ${e.message}`, 'error');
+	}
 };
 
-core.fns.go = (page) => {
-  if (core.pages[page]) {
-    window.location.hash = page;
-  } else {
-    core.fns.pageLoadError();
-  }
+core.fns.go = (pageId) => {
+	try {
+		location.hash = `#${pageId}`;
+	} catch (e) {
+		$$.log(`go -> ${e.message}`, 'error');
+	}
 };
 
-core.fns.initCore = () => {
-  $$.ajax({
-    type: 'json',
-    url: './config.json',
-    callback: (response) => {
-      try {
-        if (response) {
-          if (response.pages) {
-            Object.assign(core, response);
-
-            addEventListener('hashchange', core.fns.loadPage);
-
-            if (!window.location.hash) core.fns.go(Object.keys(core.pages)[0]);
-            else core.fns.loadPage();
-
-            core.isInitialzed = () => true;
-            dispatchEvent(core.events.init);
-          }
-        } else {
-          $$.log('Error retrieving config: No response', 'error');
-        }
-      } catch (e) {
-        $$.log('Error retrieving config: ' + e.message, 'error');
-      }
-    }
-  })
+core.fns.init = () => {
+	$$.ajax({
+		type: 'json',
+		url: './config.json',
+		callback: (config) => {
+			Object.assign(core, config);
+			
+			if (location.hash) core.fns.loadPage();
+			else core.fns.go(Object.keys(core.pages)[0]);
+			
+			addEventListener('hashchange', core.fns.loadPage);
+			
+			core.events.init.hasLoaded = true;
+			core.events.dispatchEvent(core.events.init);
+		}
+	});
 };
 
-document.addEventListener('DOMContentLoaded', core.fns.initCore);
+$$(document).on('DOMContentLoaded', core.fns.init);
