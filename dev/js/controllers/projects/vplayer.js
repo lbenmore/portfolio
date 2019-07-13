@@ -74,7 +74,7 @@ var VideoPlayer = function (options) {
     if (prm != undefined) {
       prm
         .then(function () {
-          console.log('playing');
+          // console.log('playing');
         })
         .catch (function (err) {
           console.error('your mom says: ' + err);

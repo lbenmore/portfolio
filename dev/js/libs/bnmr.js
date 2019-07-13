@@ -17,10 +17,10 @@
 		let event = {};
 		
 		const 
-		startX = fns.isMobile() ? config.startEvt.changedTouches[0].clientX : config.startEvt.layerX,
-		endX = fns.isMobile() ? config.endEvt.changedTouches[0].clientX : config.endEvt.layerX,
-		startY = fns.isMobile() ? config.startEvt.changedTouches[0].clientY : config.startEvt.layerY,
-		endY = fns.isMobile() ? config.endEvt.changedTouches[0].clientY : config.endEvt.layerY;
+		startX = 'changedTouches' in config.startEvt ? config.startEvt.changedTouches[0].clientX : config.startEvt.layerX,
+		endX = 'changedTouches' in config.endEvt ? config.endEvt.changedTouches[0].clientX : config.endEvt.layerX,
+		startY = 'changedTouches' in config.startEvt ? config.startEvt.changedTouches[0].clientY : config.startEvt.layerY,
+		endY = 'changedTouches' in config.endEvt ? config.endEvt.changedTouches[0].clientY : config.endEvt.layerY;
 		
 		for (const prop in config.endEvt) {
 			event[prop] = config.endEvt[prop];
@@ -87,8 +87,16 @@
 	},
 	
 	setTouchPoints = config => {
-		el. addEventListener('touchstart', startEvt => {
-			el.addEventListener('touchend', endEvt => {
+		if (fns.isMobile()) {
+			el. addEventListener('touchstart', startEvt => {
+				el.addEventListener('touchend', endEvt => {
+					evalTouchPoints({evt: config.evt, fn: config.fn, startEvt, endEvt});
+				}, {once: true});
+			});
+		}
+		
+		el. addEventListener('mousedown', startEvt => {
+			el.addEventListener('mouseup', endEvt => {
 				evalTouchPoints({evt: config.evt, fn: config.fn, startEvt, endEvt});
 			}, {once: true});
 		});

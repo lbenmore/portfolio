@@ -23,14 +23,19 @@ core.controllers.VideoPlayer = () => {
           playlist: [
             'http://lisabenmore.com/video/onething.mp4',
             'http://lisabenmore.com/video/fromeden.mp4',
-            'http://lisabenmore.com/video/sedated.mp4'
+            'http://lisabenmore.com/video/sedated.mp4',
+            'http://lisabenmore.com/video/tobealone.mp4'
           ],
           muted: true,
           color: '#0f8'
         });
 
-                e.target.dataset.vType = 'Playlist';
+				e.target.dataset.vType = 'Playlist';
         $$('.vplayer').dataset.vType = 'playlist';
+      break;
+      
+      default:
+      	$$.log($$('.vplayer').dataset.vType);
       break;
     }
   },
