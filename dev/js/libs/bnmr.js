@@ -200,7 +200,7 @@
 				break;
 				
 				case line.indexOf('at') > -1:
-					fnName = line.split('.')[1].split(' ')[0];
+					fnName = line.split('at ')[1].split(' ')[0];
 				break;
 			}
 			
