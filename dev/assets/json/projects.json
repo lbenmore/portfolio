@@ -76,6 +76,22 @@
     ]
   },
   {
+    "name": "Alien Attack",
+    "image": "https://images.unsplash.com/photo-1537420327992-d6e192287183?w=600",
+    "technologies": "HTML, CSS, ES6",
+    "description": "Single-player shooter game. Get the aliens!",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "#/projects/alienAttack"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/steve"
+      }
+    ]
+  },
+  {
     "name": "Steve",
     "image": "https://images.unsplash.com/photo-1517922522248-f8ae08b6b390?w=600",
     "technologies": "HTML, CSS, ES6",

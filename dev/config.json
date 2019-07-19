@@ -106,17 +106,17 @@
       	"./js/controllers/projects/whackAMouse.js"
       ]
     },
-    "/test": {
-      "name": "Testing",
-      "html": "./html/pages/test.html",
+    "/projects/alienAttack": {
+      "name": "Alien Attack",
+      "html": "./html/pages/projects/alienAttack.html",
       "css": [
         "./css/components/page.css",
-        "./css/controllers/test.css"
+        "./css/controllers/projects/alienAttack.css"
       ],
       "js": [
       	"./js/components/header.js",
       	"./js/components/menu.js",
-        "./js/controllers/test.js"
+        "./js/controllers/projects/alienAttack.js"
       ]
     }
   }
