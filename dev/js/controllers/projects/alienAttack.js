@@ -380,7 +380,6 @@ core.controllers.MissileShooter = () => {
 	      this.isMobile = true;
 	      this.controls = CONTROLS;
 	    } else {
-				alert('not mobile');
 	      this.isMobile = false;
 	    }
 	
@@ -486,9 +485,7 @@ core.controllers.MissileShooter = () => {
 	const newGame = core.controllers.MissileShooter.newGame = function newGame () {
 		new Game(document.querySelector('.game'));
 	}
-	
-	newGame();
 
 
-	core.isLoaded() ? newGame() : core.events.addEventListener('load', newGame);
+	core.isLoaded() ? newGame() : core.events.addEventListener('load', newGame, {once: true});
 };
