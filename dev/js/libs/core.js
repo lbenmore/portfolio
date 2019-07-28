@@ -93,6 +93,14 @@ core.fns.loadPage = () => {
 			if (!core.events.load.assets.length) {
 				$$('.container').innerHTML = html;
 				
+				$$('div[data-css] *, div[data-js] *').forEach((el) => {
+					if (el.dataset.loaded == 'true') {
+						el.parentNode.removeChild(el);
+					} else {
+						el.dataset.loaded = true;
+					}
+				});
+				
 				if (html.indexOf('data-include') > -1) core.events.load.assets.push('data-include');
 				if (html.indexOf('data-controller') > -1) core.events.load.assets.push('data-controller');
 				
@@ -105,23 +113,23 @@ core.fns.loadPage = () => {
 		$$.ajax({
 			url: htmlUrl,
 			callback: (html) => {
-				$$('div[data-css]').innerHTML = '';
 				for (const resourceUrl of stylesheets) {
 					const link = document.createElement('link');
 					
 					link.rel = 'stylesheet';
 					link.href = resourceUrl;
+					link.dataset.loaded = false;
 					
 					link.onload = onAssetLoad.bind(null, resourceUrl, html);
 					
 					$$('div[data-css]').appendChild(link);
 				}
 				
-				$$('div[data-js]').innerHTML = '';
 				for (const resourceUrl of scripts) {
 					const script = document.createElement('script');
 					
 					script.src = resourceUrl;
+					script.dataset.loaded = false;
 					
 					script.onload = onAssetLoad.bind(null, resourceUrl, html);
 					
