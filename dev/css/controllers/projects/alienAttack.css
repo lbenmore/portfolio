@@ -7,6 +7,45 @@ main[data-controller=MissileShooter] section {
 	font-size: 12px;
 }
 
+/*=============================================>>>>>
+= Reset button styling =
+===============================================>>>>>*/
+
+button {
+  padding: initial
+  background: initial;
+  border: initial;
+  color: initial;
+  cursor: initial;
+  transition: initial;
+}
+
+  button::before {
+    content: initial;
+    position: initial;
+    top: initial;
+    left: initial;
+    width: initial;
+    height: initial;
+    background-color: initial;
+    transition: initial;
+    transform-origin: initial;
+    transform: initial;
+  }
+
+  button:hover::before {
+    transform: initial;
+    transform-origin: initial;
+  }
+
+  button:hover {
+    color: initial;
+  }
+
+/*= End of Reset button styling =*/
+/*=============================================<<<<<*/
+
+
 td {
 	vertical-align: middle;
 	text-align: center;
@@ -136,22 +175,27 @@ section[data-mobile=true] *[data-desktop] {
 }
 
 .modal__button--neutral {
-	color: #888;
-	border-color: currentcolor;
+	border-color: #888;
+}
+
+.modal__button--neutral:hover {
+	background-color: #888;
 }
 
 .modal__button--cancel {
-	color: #f04;
-	border-color: currentcolor;
+	border-color: #f04;
+}
+
+.modal__button--cancel:hover {
+	background-color: #f04;
 }
 
 .modal__button--confirm {
-	color: #08f;
-	border-color: currentcolor;
+	border-color: #0f8;
 }
 
-.modal__button:hover {
-	background-color: currentcolor;
+.modal__button--confirm:hover {
+	background-color: #0f8;
 }
 
 .modal__button:not(:first-of-type) {
