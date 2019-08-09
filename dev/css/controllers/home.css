@@ -8,12 +8,16 @@ main {
 	overflow: hidden;
 }
 
+.warp {
+	height: calc(var(--vh) * 100);
+	perspective: 100vw;
+	transform-style: preserve-3d;
+}
+
 .container__content {
 	top: 0;
 	left: 0;
 	height: calc(var(--vh) * 100);
-	perspective: 100vw;
-	transform-style: preserve-3d;
 }
 
 .container__header {
