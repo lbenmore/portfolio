@@ -21,5 +21,3 @@ if (core.isInit()) {
 } else {
 	addEventListener('load', initFns);
 }
-
-// github test
