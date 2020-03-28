@@ -118,8 +118,8 @@ body[data-is-logged-in='true'] header nav {
 	transform: translateY(8px);
 }
 
-#toggleMenu:checked ~ .nav__icon span::before,
-#toggleMenu:checked ~ .nav__icon span::after {
+#toggleMenu:checked ~ header .nav__icon span::before,
+#toggleMenu:checked ~ header .nav__icon span::after {
 	transform: rotate(-90deg);
 }
 
