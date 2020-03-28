@@ -3,7 +3,7 @@
 	var console = win.console;
 	var html = {
 		notes: '<tr><td contenteditable="true" data-note-id="{{NOTE_ID}}">{{NOTE}}</td><td width="1px"><button class="btn btn--board btn--notes btn--delete" data-note-id="{{NOTE_ID}}">X</button></td></tr>',
-		files: '<tr><td>{{FILE_NAME}}</td><td width="1px"><button class="btn btn--board btn--files btn--download" data-user-id="{{USER_ID}}" data-file-name="{{FILE_NAME}}">Ø</button></td><td width="1px"><button class="btn btn--board btn--files btn--delete" data-user-id="{{USER_ID}}" data-file-name="{{FILE_NAME}}">X</button></td></tr>'
+		files: '<tr><td>{{FILE_NAME}}</td><td width="1px"><a href="./files/{{USER_ID}}/{{FILE_NAME}}" download="{{FILE_NAME}}" target="_blank"><button class="btn btn--board btn--files btn--download">Ø</button></a></td><td width="1px"><button class="btn btn--board btn--files btn--delete" data-user-id="{{USER_ID}}" data-file-name="{{FILE_NAME}}">X</button></td></tr>'
 	};
 	var to;
 
@@ -329,7 +329,7 @@
 			});
 			
 			$$('.board__list--files .btn--download', true).forEach(function (btnDownload) {
-				btnDownload.onclick = downloadFile.bind(this, user, btnDownload.dataset.fileName);
+				// btnDownload.onclick = downloadFile.bind(this, user, btnDownload.dataset.fileName);
 			});
 			
 			$$('.board__list--files .btn--delete', true).forEach(function (btnDelete) {
