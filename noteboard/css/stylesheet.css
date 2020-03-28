@@ -1,0 +1,520 @@
+*,
+*::before,
+*::after {
+	position: relative;
+	box-sizing: border-box;
+	transition: transform 0.3s;
+}
+
+*:focus {
+	outline: none;
+}
+
+*::selection {
+	background-color: blueviolet;
+	color: white;
+}
+
+body {
+	margin: 0;
+	width: 100vw;
+	min-height: 100vh;
+	font-family: sans-serif;
+	font-size: 14px;
+	-moz-osx-font-smoothing: antialiased;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+	margin-top: 0;
+	font-weight: 100;
+	text-transform: uppercase;
+	letter-spacing: 0.4em;
+}
+
+a {
+	font: inherit;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+header {
+	display: table;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 60px;
+	background-color: blueviolet;
+	color: white;
+	z-index: 2;
+}
+
+header > * {
+	display: table-cell;
+	vertical-align: middle;
+	border-spacing: 0;
+}
+
+header h1 {
+	padding: 16px;
+	font-size: 1.67em;
+	font-weight: 100;
+	text-align: center;
+	text-transform: lowercase;
+}
+
+header nav {
+	display: none;
+	width: 120px;
+	max-height: 60px;
+}
+
+body[data-is-logged-in='true'] header nav {
+	display: table-cell;
+}
+
+.nav__icon {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.nav__icon span {
+	display: block;
+	top: 50%;
+	left: 50%;
+	width: 24px;
+	height: 2px;
+	background-color: white;
+	transform: translate(-50%, -50%);
+}
+
+#toggleMenu:checked ~ .nav__icon span {
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.nav__icon span::before,
+.nav__icon span::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: inherit;
+}
+
+.nav__icon span::before {
+	transform: translateY(-8px);
+}
+
+.nav__icon span::after {
+	transform: translateY(8px);
+}
+
+#toggleMenu:checked ~ .nav__icon span::before,
+#toggleMenu:checked ~ .nav__icon span::after {
+	transform: rotate(-90deg);
+}
+
+.nav__list {
+	position: fixed;
+	top: 60px;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	height: calc(100% - 60px);
+	background-color: white;
+	color: black;
+	border-left: 1px solid;
+	border-color: blueviolet;
+	transform: translateX(100%);
+}
+
+#toggleMenu:checked ~ header .nav__list {
+	transform: translateX(0);
+}
+
+.nav__list label {
+	display: block;
+	padding: 12px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.nav__label--darkmode span {
+	display: block;
+	margin-top: 8px;
+	padding: 0;
+	width: 48px;
+	height: 24px;
+	border: none;
+	border-radius: 12px;
+	background-color: #f04;
+	box-shadow: 0px 0px 4px #c1c1c1 inset;
+}
+
+#toggleDarkMode:checked ~ header .nav__label--darkmode span {
+	background-color: #0c4;
+}
+
+.nav__label--darkmode span::before {
+	content: '';
+	display: block;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background-color: #c8c8c8;
+	transform: translateX(0);
+	transition: transform 0.3s, background-color 0.3s;
+}
+	
+#toggleDarkMode:checked ~ header .nav__label--darkmode span::before {
+	background-color: #666;
+	transform: translateX(100%);
+}
+
+main {
+	margin: 76px auto 0;
+	padding: 16px;
+	right: 0;
+	left: 0;
+	max-width: 960px;
+}
+
+#toggleMenu:checked ~ main {
+	transform: translateX(-200px);
+}
+
+.main__section {
+	display: none;
+}
+
+#toggleSignin:checked ~ main .main__section--signin {
+	display: block;
+}
+
+#toggleBoard:checked ~ main .main__section--board {
+	display: block;
+}
+
+#toggleProfile:checked ~ main .main__section--profile {
+	display: block;
+}
+
+.main__section::after {
+	content: "";
+	display: block;
+	float: none;
+	clear: both;
+}
+
+.signin__form {
+	display: none;
+}
+
+#toggleSigninForm:checked ~ main .form--signin {
+	display: block;
+}
+
+#toggleRegisterForm:checked ~ main .form--register {
+	display: block;
+}
+
+.section__section {
+	margin-bottom: 32px;
+}
+
+table {
+	width: 100%;
+}
+
+fieldset {
+	margin-bottom: 16px;
+	border: 1px solid #e8e8e8;
+}
+
+legend {
+	padding: 0 8px;
+	letter-spacing: 0.4em;
+	text-transform: uppercase;
+}
+
+input:not([hidden]) {
+	display: block;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+	padding: 8px 16px;
+	color: inherit;
+	font: inherit;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid blueviolet;
+	border-radius: 0;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus {
+	border-width: 2px;
+}
+
+button {
+	display: table;
+	margin: 16px 0;
+	padding: 8px 24px;
+	border: 1px solid blueviolet;
+	background-color: transparent;
+	color: blueviolet;
+	font: inherit;
+	font-size: 12px;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	transition: color 0.3s;
+	z-index: 1;
+}
+
+button:focus {
+	box-shadow: 0px 0px 4px blueviolet;
+}
+
+button:hover {
+	color: white;
+}
+
+button::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: blueviolet;
+	transform-origin: 100% 0;
+	transform: scaleX(0);
+	z-index: -1;
+}
+
+button:hover::before {
+	transform: scaleX(1);
+	transform-origin: 0 0;
+}
+
+/* PAGE SPECIFIC */
+
+.main__section--signin,
+.main__section--profile {
+	margin: auto;
+	max-width: 480px;
+}
+
+.signin__form input,
+.main__section--profile input{
+	width: 100%;
+}
+
+.section__section--files,
+.section__section--notes {
+	display: inline-block;
+	width: calc(65% - 16px);
+}
+
+.section__section--files {
+	width: 35%;
+	float: right;
+}
+
+.board__input--note {
+	width: calc(100% - 16px);
+}
+
+.board__list {
+	border-spacing: 0;
+}
+
+.board__list tr:nth-of-type(2n + 1) {
+	background-color: rgba(0, 0, 0, 0.15);
+}
+
+.board__list td {
+	padding: 8px;
+}
+
+.board__list td:first-of-type {
+	max-width: 1vw;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.board__list td:hover:first-of-type {
+	max-width: initial;
+	white-space: initial;
+	overflow: initial;
+	text-overflow: initial;
+}
+
+.board__list .btn {
+	margin: 0;
+}
+
+.btn--board {
+	display: inline-block;
+	padding: 4px 8px;
+	font-size: 10px;
+}
+
+.btn--add {
+	color: #0c4;
+	border-color: #0c4;
+}
+
+.btn--add::before {
+	background-color: #0c4;
+}
+
+.btn--add:focus {
+	box-shadow: 0px 0px 4px #0c4;
+}
+
+.btn--download {
+	color: dodgerblue;
+	border-color: dodgerblue;
+}
+
+.btn--download::before {
+	background-color: dodgerblue;
+}
+
+.btn--download:focus {
+	box-shadow: 0px 0px 4px dodgerblue;
+}
+
+.btn--delete {
+	margin-left: 8px;
+	color: crimson;
+	border-color: crimson;
+}
+
+.btn--delete::before {
+	background-color: crimson;
+}
+
+.btn--delete:focus {
+	box-shadow: 0px 0px 4px crimson;
+}
+
+.section__section--files label {
+	display: table;
+	margin-bottom: 16px;
+	width: 100%;
+	height: 200px;
+	border: 1px dotted blueviolet;
+	overflow-y: auto;
+}
+
+.section__section--files label::before {
+	content: attr(data-file-list);
+	display: table-cell;
+	vertical-align: middle;
+	padding: 16px;
+	width: 100%;
+	color: #888;
+	letter-spacing: 0.2em;
+	text-align: center;
+	text-transform: uppercase;
+	white-space: pre-wrap;
+	overflow-y: auto;
+}
+
+.section__section--files input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+.main__section--profile fieldset {
+	padding-bottom: 16px;
+}
+
+/* MESSAGE HANDLING */
+[data-error]::after,
+[data-error]::after {
+	content: attr(data-error);
+	display: block;
+	margin-top: 16px;
+	font-size: 12px;
+	color: #f04;
+}
+
+[data-success]::before {
+	content: attr(data-success);
+	display: block;
+	margin-bottom: 16px;
+	font-size: 12px;
+	color: #0c4;
+}
+
+.curtain {
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(255, 255, 255, 0.75);
+	z-index: 3;
+}
+
+.curtain::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 24px;
+	height: 24px;
+	border-top: 2px solid;
+	border-right: 2px solid;
+	border-bottom: 2px solid;
+	border-color: blueviolet;
+	border-left: 2px solid transparent;
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-name: loading;
+	animation-timing-function: linear;
+}
+
+@keyframes loading {
+	from { transform: translate(-50%, -50%) rotate(0deg); }
+	to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* PORTRAIT TABLET AND SMALLER */
+
+@media (max-width: 768px) {
+	.section__section--notes,
+	.section__section--files {
+		display: block;
+		width: 100%;
+	}
+
+	.section__section--files {
+		float: none;
+	}
+}

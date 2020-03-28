@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+    <title>Noteboard</title>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+  </head>
+  <body>
+    <input type="checkbox" id="toggleMenu" hidden>
+    <input type="radio" name="signin" id="toggleSigninForm" hidden checked>
+    <input type="radio" name="signin" id="toggleRegisterForm" hidden>
+    <input type="radio" name="navigation" id="toggleSignin" hidden checked>
+    <input type="radio" name="navigation" id="toggleBoard" hidden>
+    <input type="radio" name="navigation" id="toggleProfile" hidden>
+    <input type="checkbox" id="toggleDarkMode" hidden>
+
+    <header>
+      <h1>Noteboard</h1>
+      <nav>
+        <label class="nav__icon" for="toggleMenu">
+          <span></span>
+        </label>
+        <div class="nav__list">
+          <label class="nav__label nav__label--board" for="toggleBoard" data-destination-page-toggle="toggleBoard">Board</label>
+          <label class="nav__label nav__label--profile" for="toggleProfile" data-destination-page-toggle="toggleProfile">Profile</label>
+          <label class="nav__label nav__label--signout" for="toggleSignin" data-destination-page-toggle="toggleSignin">Sign Out</label>
+          <label class="nav__label nav__label--darkmode" for="toggleDarkMode">Dark Mode<br><span></span></label>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+
+      <section class="main__section main__section--signin" id="signin">
+        <h1>Welcome</h1>
+        <form class="signin__form form--signin">
+          <fieldset>
+            <legend>Sign In</legend>
+            <input type="email" placeholder="Email Address">
+            <input type="password" placeholder="Password">
+            <button class="signin__btn signin__btn--signin">Sign In</button>
+          </fieldset>
+          <fieldset>
+            <legend>Not a User?</legend>
+            <button data-destination-page-toggle="toggleRegisterForm">Register</button>
+          </fieldset>
+        </form>
+        <form class="signin__form form--register">
+          <fieldset>
+            <legend>Register</legend>
+            <input type="email" placeholder="Email Address">
+            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Confirm Password">
+            <button class="signin__btn signin__btn--register">Register</button>
+          </fieldset>
+          <fieldset>
+            <legend>Already a User?</legend>
+            <button data-destination-page-toggle="toggleSigninForm">Sign In</button>
+          </fieldset>
+        </form>
+      </section>
+      
+      <section class="main__section main__section--board" id="board">
+        <h1>Welcome, <span data-replace="user"></span>!</h1>
+        <section class="section__section section__section--notes">
+          <h1>Notes</h1>
+          <form>
+            <table class="board__new">
+              <tr>
+                <td>
+                  <input type="text" class="board__input board__input--note" placeholder="Type your new note here...">
+                </td>
+                <td width="1px">
+                  <button class="btn btn--board btn--notes btn--add">+</button>
+                </td>
+              </tr>
+            </table>
+          </form>
+          <table class="board__list board__list--notes">
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <section class="section__section section__section--files">
+          <h1>Files</h1>
+          <div>
+            <label data-file-list="Drag and drop files here">
+            </label>
+            <input type="file" multiple class="board__input--files">
+          </div>
+          <table class="board__list board__list--files">
+            <tbody></tbody>
+          </table>
+        </section>
+      </section>
+      
+      <section class="main__section main__section--profile" id="profile">
+        <h1>Profile of <span data-replace="user"></span></h1>
+        <form>
+          <fieldset>
+            <legend>Update Name</legend>
+            <input type="text" placeholder="First Name" class="profile__input profile__input--firstName" data-column="first_name">
+            <input type="text" placeholder="Last Name" class="profile__input profile__input--lastName" data-column="last_name">
+          </fieldset>	
+          <fieldset>
+            <legend>Update Email</legend>
+            <input type="email" placeholder="New Email Address" class="profile__input profile__input--emailAddress" data-column="email_address">
+          </fieldset>
+          <fieldset>
+            <legend>Update Password</legend>
+            <input type="password" placeholder="Current Password" class="profile__input profile__input--passwordOrig">
+            <input type="password" placeholder="New Password" class="profile__input profile__input--password">
+            <input type="password" placeholder="Confirm Password" class="profile__input profile__input--passwordConf" data-column="password">
+          </fieldset>
+          <button class="btn--update">Update</button>
+        </form>
+      </section>
+      
+    </main>
+      
+    <div class="curtain"></div>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
