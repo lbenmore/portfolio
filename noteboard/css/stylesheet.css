@@ -94,7 +94,7 @@ body[data-is-logged-in='true'] header nav {
 	transform: translate(-50%, -50%);
 }
 
-#toggleMenu:checked ~ .nav__icon span {
+#toggleMenu:checked ~ header .nav__icon span {
 	transform: translate(-50%, -50%) rotate(45deg);
 }
 
