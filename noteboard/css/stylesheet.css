@@ -183,7 +183,8 @@ body[data-is-logged-in='true'] header nav {
 }
 
 main {
-	margin: 76px auto 0;
+	top: 60px;
+	margin: 0 auto;
 	padding: 16px;
 	right: 0;
 	left: 0;

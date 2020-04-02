@@ -268,13 +268,13 @@
 						$$('.profile__input--password').parentNode.dataset.error = res.error || 'Unknown error occurred';
 					}
 				}, function () {
-					ajax({ params }, onSuccessfulUpdate);
+					ajax({ params: params }, onSuccessfulUpdate);
 				});
 			} else {
 				$$('.profile__input--password').parentNode.dataset.error = 'Passwords do not match';
 			}
 		} else {
-			ajax({ params }, onSuccessfulUpdate);
+			ajax({ params: params }, onSuccessfulUpdate);
 		}
 	}
 	
@@ -309,7 +309,7 @@
 					params: {
 						action: 'add_file',
 						user_id: user.user_id,
-						file
+						file: file
 					}
 				}, function () {
 					getFiles(user);
@@ -378,7 +378,7 @@
 			params: {
 				action: 'add_note',
 				user_id: user.user_id,
-				note
+				note: note
 			}
 		}, function () {
 			getNotes(user);
@@ -511,7 +511,7 @@
 				params: {
 					action: 'register_user',
 					email_address: emailAddress,
-					password
+					password: password
 				},
 				onerror: function (res) {
 					form.dataset.error = res.error || 'Could not create a new user';
