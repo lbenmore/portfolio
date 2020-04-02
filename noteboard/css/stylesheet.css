@@ -337,12 +337,16 @@ button:hover::before {
 	float: right;
 }
 
-.board__new {
+.board__new td {
 	padding: 8px;
 }
 
+.board__new td:first-of-type {
+	padding-left: 0;
+}
+
 .board__input--note {
-	width: calc(100% - 16px);
+	width: 100%;
 }
 
 .board__list {
