@@ -337,6 +337,10 @@ button:hover::before {
 	float: right;
 }
 
+.board__new {
+	padding: 8px;
+}
+
 .board__input--note {
 	width: calc(100% - 16px);
 }
