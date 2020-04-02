@@ -563,7 +563,7 @@
 		
 		$$('.nav__label--signout').addEventListener('click', signoutUser);
 
-		$$('#toggleDarkMode').addEventListener('input', function () {
+		$$('#toggleDarkMode').addEventListener('change', function () {
 			darkModeHandler(!!this.checked);
 		});
 	}
