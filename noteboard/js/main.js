@@ -70,6 +70,11 @@
 			
 			if (options.debug) console.log(result);
 		});
+		
+		xhr.addEventListener('error', function (err) {
+			$$('.curtain').style.display = 'none';
+			console.error(err);
+		});
 
 		xhr.open(method, url, isAsync);
 		for (var header in headers) {
