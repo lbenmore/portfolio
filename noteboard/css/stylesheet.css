@@ -81,7 +81,7 @@ body[data-is-logged-in='true'] header nav {
 	top: 0;
 	right: 0;
 	width: 100%;
-	height: 100%;
+	height: 60px;
 }
 
 .nav__icon span {
@@ -183,6 +183,7 @@ body[data-is-logged-in='true'] header nav {
 }
 
 main {
+	display: block;
 	top: 60px;
 	margin: 0 auto;
 	padding: 16px;
