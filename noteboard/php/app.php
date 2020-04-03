@@ -174,7 +174,7 @@ function get_notes ($internal, $user_id) {
 
   $db = new DB;
 
-  $sql = "SELECT * FROM notes WHERE user_id='$user_id'";
+  $sql = "SELECT * FROM notes WHERE user_id='$user_id' ORDER BY note_id DESC";
 
   if ($stmt = $db::$conn->query($sql)) {
     $rows = $db::$conn->affected_rows;

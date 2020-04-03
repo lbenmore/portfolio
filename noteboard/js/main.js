@@ -25,7 +25,8 @@
 		var isAsync = options.async || true;
 		var headers = options.headers || {};
 		var params = options.params || {};
-		var onProgress = options.onProgress || function () {};
+		var onProgress = options.onprogress || function () {};
+		var onError = options.onerror || function () {};
 		var xhr = new win.XMLHttpRequest();
 		var fd = new win.FormData();
 		var result;
@@ -35,8 +36,6 @@
 		for (var param in params) {
 			fd.append(param, params[param]);
 		}
-
-		xhr.onprogress = onProgress;
 
 		xhr.addEventListener('load', function () {
 			$$('.curtain').style.display = 'none';
@@ -73,9 +72,12 @@
 		
 		xhr.addEventListener('error', function (err) {
 			$$('.curtain').style.display = 'none';
-			console.error(err);
+			onError.call(this, err);
 		});
-
+		
+		if (xhr.upload) xhr.upload.onprogress = onProgress;
+		else xhr.onprogress = onProgress;
+		
 		xhr.open(method, url, isAsync);
 		for (var header in headers) {
 			xhr.setRequestHeader(header, headers[header]);
@@ -310,8 +312,22 @@
 						action: 'add_file',
 						user_id: user.user_id,
 						file: file
+					},
+					onerror: function (err) {
+						$$('.section__section--files div').dataset.error = 'File(s) could not be uploaded';
+						$$('.files__progress').style.display = 'none';
+						$$('.files__progress span').style.width = '0%';
+						setTimeout(function () {
+							$$('.section__section--files div').dataset.error = '';
+						}, 3000);
+					},
+					onprogress: function (evt) {
+						$$('.files__progress').style.display = 'block';
+						$$('.files__progress span').style.width = (evt.loaded / evt.total * 100) + '%';
 					}
 				}, function () {
+					$$('.files__progress').style.display = 'none';
+					$$('.files__progress span').style.width = '0%';
 					getFiles(user);
 				});
 			});
