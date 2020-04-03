@@ -313,6 +313,33 @@ button:hover::before {
 	transform-origin: 0 0;
 }
 
+.passwordWrapper {}
+
+input.passwordInput[type='password'],
+input.passwordInput[type='text'] {
+	padding-right: calc(2em + 16px);
+}
+
+.passwordIcon {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: auto;
+	width: 2em;
+	height: 100%;
+}
+
+.passwordIcon::before {
+	content: 'i';
+	position: absolute;
+	top: 50%;
+	right: 8px;
+	color: inherit;
+	font: inherit;
+	transform: translateY(-50%);
+}
+
 /* PAGE SPECIFIC */
 
 .main__section--signin,

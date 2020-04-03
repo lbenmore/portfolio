@@ -608,8 +608,47 @@
 			onSuccessfulSignIn(res.user);
 		});
 	}
+	
+	function addPasswordPeaks () {
+		var inputs = $$('input[type="password"]', true);
+		
+		function handlePasswordViewToggle (input, evt) {
+			switch (evt.type) {
+				case 'mousedown':
+				case 'touchstart':
+					input.setAttribute('type', 'text');
+					break;
+					
+				case 'mouseup':
+				case 'touchend':
+					input.setAttribute('type', 'password');
+					break;
+			}
+		}
+		
+		function wrapPasswordInput (input) {
+			var div = document.createElement('div');
+			var span = document.createElement('span');
+			
+			div.className += ' passwordWrapper';
+			input.className += ' passwordInput';
+			span.className += ' passwordIcon';
+			
+			input.parentNode.insertBefore(div, input);
+			div.appendChild(input);
+			div.appendChild(span);
+			
+			span.addEventListener('mousedown', handlePasswordViewToggle.bind(span, input));
+			span.addEventListener('touchstart', handlePasswordViewToggle.bind(span, input));
+			span.addEventListener('mouseup', handlePasswordViewToggle.bind(span, input));
+			span.addEventListener('touchend', handlePasswordViewToggle.bind(span, input));
+		}
+		
+		inputs.forEach(wrapPasswordInput);
+	}
 
 	function init () {
+		addPasswordPeaks();
 		checkForLoggedIn();
 		eventListeners();
 		getLsOptions();
