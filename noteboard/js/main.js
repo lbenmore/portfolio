@@ -39,40 +39,51 @@
 
 		xhr.addEventListener('load', function () {
 			$$('.curtain').style.display = 'none';
-			switch (type) {
-				case 'json':
-					try {
-						result = JSON.parse(xhr.responseText);
+			if (xhr.status === 200) {
+				switch (type) {
+					case 'json':
+						try {
+							result = JSON.parse(xhr.responseText);
+									
+							if (result.status) {
+								debug && console.log(result.message);
+								callback && callback.call(this, result);
+							} else {
+								if (result.error) console.error(result.error);
+								else console.error('Unknown error occurred');
 								
-						if (result.status) {
-							debug && console.log(result.message);
-							callback && callback.call(this, result);
-						} else {
-							if (result.error) console.error(result.error);
-							else {
-								console.error('Unknown error occurred');
+								onError.call(this, result);
 							}
-							
-							options.onerror && options.onerror.call(this, result);
+						} catch (e) {
+							console.error('Error parsing response from XHR', e, xhr.responseText);
+							result = xhr.responseText;
+							onError.call(xhr, result);
 						}
-					} catch (e) {
-						console.error('Error parsing response from XHR', e, xhr.responseText);
+						break;
+	
+					default:
 						result = xhr.responseText;
-					}
-					break;
-
-				default:
-					result = xhr.responseText;
-					callback && callback.call(null, result);
-					break;
+						callback && callback.call(null, result);
+						break;
+				}
+			} else {
+				switch (xhr.status) {
+					case 413:
+						onError.call(xhr, 'File size too large to upload');
+						break;
+					
+					default:
+						console.error('Unhandled error occurred: ' + xhr.status);
+						break;
+				}
 			}
-			
+				
 			if (options.debug) console.log(result);
 		});
 		
-		xhr.addEventListener('error', function (err) {
+		xhr.addEventListener('error', function (evt) {
 			$$('.curtain').style.display = 'none';
-			onError.call(this, err);
+			onError.call(this);
 		});
 		
 		if (xhr.upload) xhr.upload.onprogress = onProgress;
@@ -314,20 +325,24 @@
 						file: file
 					},
 					onerror: function (err) {
-						$$('.section__section--files div').dataset.error = 'File(s) could not be uploaded';
+						$$('.section__section--files div').dataset.error = err || 'File(s) could not be uploaded';
 						$$('.files__progress').style.display = 'none';
 						$$('.files__progress span').style.width = '0%';
+						$$('.board__input--files').value = null;
 						setTimeout(function () {
 							$$('.section__section--files div').dataset.error = '';
 						}, 3000);
 					},
-					onprogress: function (evt) {
+					onprogress: function () {
+						$$('.section__section--files div').dataset.error = '';
 						$$('.files__progress').style.display = 'block';
 						$$('.files__progress span').style.width = (evt.loaded / evt.total * 100) + '%';
 					}
 				}, function () {
+					$$('.section__section--files div').dataset.error = '';
 					$$('.files__progress').style.display = 'none';
 					$$('.files__progress span').style.width = '0%';
+					$$('.board__input--files').value = null;
 					getFiles(user);
 				});
 			});
