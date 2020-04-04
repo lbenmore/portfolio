@@ -3,7 +3,8 @@
 	var console = win.console;
 	var html = {
 		notes: '<tr><td contenteditable="true" data-note-id="{{NOTE_ID}}">{{NOTE}}</td><td width="1px"><button class="btn btn--board btn--notes btn--delete" data-note-id="{{NOTE_ID}}">X</button></td></tr>',
-		files: '<tr><td>{{FILE_NAME}}</td><td width="1px"><a href="./files/{{USER_ID}}/{{FILE_NAME}}" download="{{FILE_NAME}}" target="_blank"><button class="btn btn--board btn--files btn--download">Ø</button></a></td><td width="1px"><button class="btn btn--board btn--files btn--delete" data-user-id="{{USER_ID}}" data-file-name="{{FILE_NAME}}">X</button></td></tr>'
+		files: '<tr><td>{{FILE_NAME}}</td><td width="1px"><a href="./files/{{USER_ID}}/{{FILE_NAME}}" download="{{FILE_NAME}}" target="_blank"><button class="btn btn--board btn--files btn--download">Ø</button></a></td><td width="1px"><button class="btn btn--board btn--files btn--delete" data-user-id="{{USER_ID}}" data-file-name="{{FILE_NAME}}">X</button></td></tr>',
+		passwordIcon: 'i'
 	};
 	var to;
 
@@ -326,22 +327,22 @@
 					},
 					onerror: function (err) {
 						$$('.section__section--files div').dataset.error = err || 'File(s) could not be uploaded';
-						$$('.files__progress').style.display = 'none';
-						$$('.files__progress span').style.width = '0%';
+						$$('.curtain__progress').style.display = 'none';
+						$$('.curtain__progress span').style.width = '0%';
 						$$('.board__input--files').value = null;
 						setTimeout(function () {
 							$$('.section__section--files div').dataset.error = '';
 						}, 3000);
 					},
-					onprogress: function () {
+					onprogress: function (evt) {
 						$$('.section__section--files div').dataset.error = '';
-						$$('.files__progress').style.display = 'block';
-						$$('.files__progress span').style.width = (evt.loaded / evt.total * 100) + '%';
+						$$('.curtain__progress').style.display = 'block';
+						$$('.curtain__progress span').style.width = (evt.loaded / evt.total * 100) + '%';
 					}
 				}, function () {
 					$$('.section__section--files div').dataset.error = '';
-					$$('.files__progress').style.display = 'none';
-					$$('.files__progress span').style.width = '0%';
+					$$('.curtain__progress').style.display = 'none';
+					$$('.curtain__progress span').style.width = '0%';
 					$$('.board__input--files').value = null;
 					getFiles(user);
 				});
@@ -634,6 +635,8 @@
 			input.className += ' passwordInput';
 			span.className += ' passwordIcon';
 			
+			span.innerHTML = html.passwordIcon;
+			
 			input.parentNode.insertBefore(div, input);
 			div.appendChild(input);
 			div.appendChild(span);
@@ -646,12 +649,43 @@
 		
 		inputs.forEach(wrapPasswordInput);
 	}
+	
+	function populateButtonsWithSvg () {
+		var getTrash = new XMLHttpRequest();
+		var getDownload = new XMLHttpRequest();
+		var getEye = new XMLHttpRequest();
+		
+		getTrash.onload = function () {
+			html.notes = html.notes.replace(/X/g, getTrash.responseText);
+			html.files = html.files.replace(/X/g, getTrash.responseText);
+		};
+		
+		getDownload.onload = function () {
+			html.files = html.files.replace(/Ø/g, getDownload.responseText);
+		};
+		
+		getEye.onload = function () {
+			html.passwordIcon = getEye.responseText;
+			$$('.passwordIcon', true).forEach(function (icon) {
+				icon.innerHTML = getEye.responseText;
+			});
+		};
+		
+		getTrash.open('GET', './img/trash.php?width=12&height=12', true);
+		getDownload.open('GET', './img/download.php?width=12&height=12', true);
+		getEye.open('GET', './img/eye.php?width=20&height=20', true);
+		
+		getTrash.send();
+		getDownload.send();
+		getEye.send();
+	}
 
 	function init () {
+		populateButtonsWithSvg();
 		addPasswordPeaks();
-		checkForLoggedIn();
 		eventListeners();
 		getLsOptions();
+		checkForLoggedIn();
 	}
 
 	if (doc.readyState === 'complete') {
