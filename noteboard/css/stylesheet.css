@@ -326,7 +326,7 @@ input.passwordInput[type='text'] {
 	top: 0;
 	right: 0;
 	left: auto;
-	padding-top: 6px;
+	padding-top: 8px;
 	width: 2em;
 	height: 100%;
 	opacity: 0.5;

@@ -673,7 +673,7 @@
 		
 		getTrash.open('GET', './img/trash.php?width=12&height=12', true);
 		getDownload.open('GET', './img/download.php?width=12&height=12', true);
-		getEye.open('GET', './img/eye.php?width=20&height=20', true);
+		getEye.open('GET', './img/eye.php?width=16&height=16', true);
 		
 		getTrash.send();
 		getDownload.send();
