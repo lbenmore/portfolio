@@ -1,5 +1,11 @@
 <?php
 
+ini_set("max_upload_size", "2048M");
+ini_set("max_post_size", "2148M");
+ini_set("memory_limit", "2248M");
+ini_set("max_input_time", "999");
+ini_set("max_execution_time", "999");
+
 class DB {
   public static $conn;
 
