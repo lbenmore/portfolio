@@ -78,7 +78,7 @@ function add_file ($internal, $user_id) {
 
   if (file_put_contents($path, $content)) {
     $output->add("status", 1);
-    $output->add("message", "Successfully uploaded $file");
+    $output->add("message", "Successfully uploaded $file_name");
   } else {
     $output->add("error", "Could not upload $file");
   }
