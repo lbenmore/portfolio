@@ -14,8 +14,8 @@
 	*/
 
 	function $$ (selector, forceAll) {
-		return forceAll || doc.querySelectorAll(selector).length > 1 ? 
-			Object.keys(doc.querySelectorAll(selector)).map(function (key) { return doc.querySelectorAll(selector)[key]; }) : 
+		return forceAll || doc.querySelectorAll(selector).length > 1 ?
+			Object.keys(doc.querySelectorAll(selector)).map(function (key) { return doc.querySelectorAll(selector)[key]; }) :
 			doc.querySelector(selector);
 	}
 
@@ -31,7 +31,7 @@
 		var xhr = new win.XMLHttpRequest();
 		var fd = new win.FormData();
 		var result;
-		
+
 		$$('.curtain').style.display = 'block';
 
 		for (var param in params) {
@@ -45,14 +45,14 @@
 					case 'json':
 						try {
 							result = JSON.parse(xhr.responseText);
-									
+
 							if (result.status) {
 								debug && console.log(result.message);
 								callback && callback.call(this, result);
 							} else {
 								if (result.error) console.error(result.error);
 								else console.error('Unknown error occurred');
-								
+
 								onError.call(this, result);
 							}
 						} catch (e) {
@@ -61,7 +61,7 @@
 							onError.call(xhr, result);
 						}
 						break;
-	
+
 					default:
 						result = xhr.responseText;
 						callback && callback.call(null, result);
@@ -72,24 +72,24 @@
 					case 413:
 						onError.call(xhr, 'File size too large to upload');
 						break;
-					
+
 					default:
 						console.error('Unhandled error occurred: ' + xhr.status);
 						break;
 				}
 			}
-				
+
 			if (options.debug) console.log(result);
 		});
-		
+
 		xhr.addEventListener('error', function (evt) {
 			$$('.curtain').style.display = 'none';
 			onError.call(this);
 		});
-		
+
 		if (xhr.upload) xhr.upload.onprogress = onProgress;
 		else xhr.onprogress = onProgress;
-		
+
 		xhr.open(method, url, isAsync);
 		for (var header in headers) {
 			xhr.setRequestHeader(header, headers[header]);
@@ -101,8 +101,8 @@
 		if ('localStorage' in win) {
 			switch (type) {
 				case 'set':
-					typeof value === 'object' ? 
-						win.localStorage.setItem(key, JSON.stringify(value)) : 
+					typeof value === 'object' ?
+						win.localStorage.setItem(key, JSON.stringify(value)) :
 						win.localStorage.setItem(key, value);
 					return ls('get', key);
 
@@ -188,7 +188,7 @@
 	/**
 	* API functions
 	*/
-	
+
 	function signoutUser () {
 		ajax({
 			params: {
@@ -196,33 +196,33 @@
 			}
 		}, function () {
 			var userName = '';
-			
+
 			$$('body').dataset.isLoggedIn = false;
-			
+
 			$$('[data-error]', true).forEach(function (errEl) {
 				errEl.dataset.error = '';
 			});
-			
+
 			$$('.signin__form input', true).forEach(function (input) {
 				input.value = '';
 			});
-			
-			
+
+
 			$$('.btn--add').onclick = null;
 			$$('.btn--update', true).forEach(function (btnUpdate) {
 				btnUpdate.onclick = null;
 			});
-	
+
 			$$('.board__input--files').oninput = null;
-			
+
 			$$('[data-replace="user"]', true).forEach(function (el) {
 				el.innerHTML = userName;
 			});
-			
+
 			triggerPageToggle('toggleSignin');
 		});
 	}
-	
+
 	function updateProfile (user) {
 		var columns = $$('[data-column]', true)
 			.filter(function (input) {
@@ -233,12 +233,12 @@
 				result[input.dataset.column] = input.value;
 				return result;
 			});
-			
+
 		var params = {
 			action: 'update_profile',
 			user_id: user.user_id
 		};
-		
+
 		function onSuccessfulUpdate (res) {
 			$$('.main__section--profile form').dataset.success = 'Profile successfully updated!';
 			win.setTimeout(function () {
@@ -246,16 +246,16 @@
 			}, 3000);
 			onSuccessfulSignIn(res.user, 'toggleProfile');
 		}
-		
+
 		columns.forEach(function (col) {
 			for (var prop in col) {
 				params[prop] = col[prop];
 			}
 		});
-		
+
 		$$('.profile__input--password').parentNode.dataset.error = '';
 		$$('.profile__input--emailAddress').parentNode.dataset.error = '';
-		
+
 		if ('email_address' in params) {
 			if (
 				params.email_address.indexOf('@') === -1 ||
@@ -265,12 +265,12 @@
 				return $$('.profile__input--emailAddress').parentNode.dataset.error = 'Please provide a valid email address';
 			}
 		}
-		
+
 		if ('password' in params) {
 			var pass = $$('.profile__input--password').value;
 			var passConf = $$('.profile__input--passwordConf').value;
 			var passOrig = $$('.profile__input--passwordOrig').value;
-			
+
 			if (pass === passConf) {
 				ajax({
 					params: {
@@ -291,7 +291,7 @@
 			ajax({ params: params }, onSuccessfulUpdate);
 		}
 	}
-	
+
 	function deleteFile (user, fileName) {
 		ajax({
 			params: {
@@ -303,20 +303,20 @@
 			getFiles(user);
 		});
 	}
-	
+
 	function downloadFile (user, fileName) {
 		var a = doc.createElement('a');
-		
+
 		a.setAttribute('download', fileName);
 		a.setAttribute('href', './files/' + user.user_id + '/' + fileName);
-		
+
 		a.click();
 	}
-	
+
 	function addFile (user, evt) {
 		var filesRaw = evt.target.files;
 		var files = Object.keys(filesRaw).map(function (file) { return filesRaw[file]; });
-		
+
 		if (files.length) {
 			files.forEach(function (file) {
 				ajax({
@@ -358,23 +358,23 @@
 			}
 		}, function (res) {
 			var files = res.files;
-			
+
 			$$('.board__list--files tbody').innerHTML = '';
-			
+
 			files.forEach(function (file) {
 				$$('.board__list--files tbody').innerHTML += html.files.replace(/{{FILE_NAME}}/g, file).replace(/{{USER_ID}}/g, user.user_id);
 			});
-			
+
 			$$('.board__list--files .btn--download', true).forEach(function (btnDownload) {
 				// btnDownload.onclick = downloadFile.bind(this, user, btnDownload.dataset.fileName);
 			});
-			
+
 			$$('.board__list--files .btn--delete', true).forEach(function (btnDelete) {
 				btnDelete.onclick = deleteFile.bind(this, user, btnDelete.dataset.fileName);
 			});
 		});
 	}
-	
+
 	function deleteNote (user, noteId) {
 		ajax({
 			params: {
@@ -386,7 +386,7 @@
 			getNotes(user);
 		});
 	}
-	
+
 	function updateNote (user, input) {
 		win.clearTimeout(to);
 		to = win.setTimeout(function () {
@@ -401,11 +401,11 @@
 			});
 		}, 1000);
 	}
-	
+
 	function addNote (user) {
 		var inputNote = $$('.board__input--note');
 		var note = win.btoa(inputNote.value);
-		
+
 		ajax({
 			params: {
 				action: 'add_note',
@@ -426,54 +426,54 @@
 			}
 		}, function (res) {
 			var notes = res.notes;
-			
+
 			$$('.board__list--notes tbody').innerHTML = '';
 
 			notes.length && notes.forEach(function (note) {
 				$$('.board__list--notes tbody').innerHTML += html.notes.replace(/{{NOTE}}/g, win.atob(note.note_content)).replace(/{{NOTE_ID}}/g, note.note_id);
 			});
-			
+
 			$$('.board__list--notes .btn--delete', true).forEach(function (btnDelete) {
 				btnDelete.onclick = deleteNote.bind(this, user, btnDelete.dataset.noteId);
 			});
-			
+
 			$$('.board__list--notes [contenteditable="true"]', true).forEach(function (input) {
 				input.oninput = updateNote.bind(this, user, input);
 			});
 		});
 	}
-	
+
 	function onSuccessfulSignIn (user, goToPage) {
-		var userName = (user.first_name || user.last_name) ? 
-			((user.first_name || '') + ' ' + (user.last_name || '')).trim() : 
+		var userName = (user.first_name || user.last_name) ?
+			((user.first_name || '') + ' ' + (user.last_name || '')).trim() :
 			user.email_address;
-		
+
 		$$('body').dataset.isLoggedIn = true;
-		
+
 		$$('[data-error]', true).forEach(function (errEl) {
 			errEl.dataset.error = '';
 		});
-		
+
 		$$('.signin__form input', true).forEach(function (input) {
 			input.value = '';
 		});
-		
-		
+
+
 		$$('.btn--add').onclick = addNote.bind(this, user);
 		$$('.btn--update', true).forEach(function (btnUpdate) {
 			btnUpdate.onclick = updateProfile.bind(this, user);
 		});
 
 		$$('.board__input--files').onchange = addFile.bind(this, user);
-		
+
 		$$('[data-replace="user"]', true).forEach(function (el) {
 			el.innerHTML = userName;
 		});
-		
+
 		getNotes(user);
 		getFiles(user);
 		triggerPageToggle(goToPage || 'toggleBoard');
-		
+
 		ajax({
 			params: {
 				action: 'set_user_cookie',
@@ -488,7 +488,7 @@
 
 		var eml = emailAddress || inputEmailAddress.value;
 		var pwd = password || inputPassword.value;
-		
+
 		var form = inputEmailAddress.parentNode;
 
 		if (eml && pwd) {
@@ -518,7 +518,7 @@
 		var passwordConf = inputPasswordConf.value;
 
 		var isValid = false;
-		
+
 		form.dataset.error = '';
 
 		if (
@@ -579,7 +579,7 @@
 				evt.preventDefault();
 			});
 		});
-		
+
 		$$('.nav__label:not(.nav__label--darkmode)', true).forEach(function (navItem) {
 			navItem.addEventListener('click', function () {
 				$$('#toggleMenu').checked = null;
@@ -592,7 +592,7 @@
 
 		$$('.signin__btn--register').addEventListener('click', registerUser);
 		$$('.signin__btn--signin').addEventListener('click', signinUser);
-		
+
 		$$('.nav__label--signout').addEventListener('click', signoutUser);
 
 		$$('#toggleDarkMode').addEventListener('change', function () {
@@ -606,75 +606,75 @@
 				action: 'get_user_cookie'
 			}
 		}, function (res) {
-			onSuccessfulSignIn(res.user);
+			if (!res.error) onSuccessfulSignIn(res.user);
 		});
 	}
-	
+
 	function addPasswordPeaks () {
 		var inputs = $$('input[type="password"]', true);
-		
+
 		function handlePasswordViewToggle (input, evt) {
 			switch (evt.type) {
 				case 'mousedown':
 				case 'touchstart':
 					input.setAttribute('type', 'text');
 					break;
-					
+
 				case 'mouseup':
 				case 'touchend':
 					input.setAttribute('type', 'password');
 					break;
 			}
 		}
-		
+
 		function wrapPasswordInput (input) {
 			var div = document.createElement('div');
 			var span = document.createElement('span');
-			
+
 			div.className += ' passwordWrapper';
 			input.className += ' passwordInput';
 			span.className += ' passwordIcon';
-			
+
 			span.innerHTML = html.passwordIcon;
-			
+
 			input.parentNode.insertBefore(div, input);
 			div.appendChild(input);
 			div.appendChild(span);
-			
+
 			span.addEventListener('mousedown', handlePasswordViewToggle.bind(span, input));
 			span.addEventListener('touchstart', handlePasswordViewToggle.bind(span, input));
 			span.addEventListener('mouseup', handlePasswordViewToggle.bind(span, input));
 			span.addEventListener('touchend', handlePasswordViewToggle.bind(span, input));
 		}
-		
+
 		inputs.forEach(wrapPasswordInput);
 	}
-	
+
 	function populateButtonsWithSvg () {
 		var getTrash = new XMLHttpRequest();
 		var getDownload = new XMLHttpRequest();
 		var getEye = new XMLHttpRequest();
-		
+
 		getTrash.onload = function () {
 			html.notes = html.notes.replace(/X/g, getTrash.responseText);
 			html.files = html.files.replace(/X/g, getTrash.responseText);
 		};
-		
+
 		getDownload.onload = function () {
 			html.files = html.files.replace(/Ø/g, getDownload.responseText);
 		};
-		
+
 		getEye.onload = function () {
 			html.passwordIcon = getEye.responseText;
 			$$('.passwordIcon', true).forEach(function (icon) {
 				icon.innerHTML = getEye.responseText;
 			});
 		};
-		
+
 		getTrash.open('GET', './img/trash.php?width=12&height=12', true);
 		getDownload.open('GET', './img/download.php?width=12&height=12', true);
 		getEye.open('GET', './img/eye.php?width=16&height=16', true);
-		
+
 		getTrash.send();
 		getDownload.send();
 		getEye.send();

@@ -404,18 +404,18 @@ function get_user_cookie ($internal) {
   $output = new Output;
   $output->add("message", "Get User Cookie initialized");
 
-  $cookie = $_COOKIE["noteboard_user"];
+  $cookie = array_key_exists("noteboard_user", $_COOKIE) ? $_COOKIE["noteboard_user"] : false;
 
   if ($cookie) {
     $user_id = substr($cookie, strpos($cookie, "=") + 1);
     $output->add("cookie", $_COOKIE["noteboard_user"]);
     $output->add("user", get_user(true, $user_id)["user"]);
-    $output->add("status", 1);
     $output->add("message", "Successfully retrieved user cookie");
   } else {
     $output->add("error", "Could not retrieve user cookie");
   }
 
+  $output->add("status", 1);
   return $output->return($internal);
 }
 
