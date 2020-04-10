@@ -313,8 +313,6 @@ button:hover::before {
 	transform-origin: 0 0;
 }
 
-.passwordWrapper {}
-
 input.passwordInput[type='password'],
 input.passwordInput[type='text'] {
 	padding-right: calc(2em + 16px);
