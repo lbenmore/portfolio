@@ -146,18 +146,10 @@
 
 	function darkModeHandler (darkMode) {
 		if (darkMode) {
-			doc.body.style.backgroundColor = '#222';
-			doc.body.style.color = 'white';
-			$$('header nav div').style.backgroundColor = '#222';
-			$$('header nav div').style.color = 'white';
-			$$('.curtain').style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
+			$$('body').dataset.theme = 'dark';
 			$$('#toggleDarkMode').checked = true;
 		} else {
-			doc.body.style.backgroundColor = 'white';
-			doc.body.style.color = 'black';
-			$$('header nav div').style.backgroundColor = 'white';
-			$$('header nav div').style.color = 'black';
-			$$('.curtain').style.backgroundColor = 'rgba(255, 255, 255, 0.75)';
+			$$('body').dataset.theme = '';
 			$$('#toggleDarkMode').checked = null;
 		}
 

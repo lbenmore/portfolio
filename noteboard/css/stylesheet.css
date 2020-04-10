@@ -418,7 +418,7 @@ input.passwordInput[type='text'] {
 }
 
 .btn--download {
-	color: dodgerblue;
+	color: dobackground-colordgerblue;
 	border-color: dodgerblue;
 }
 
@@ -560,7 +560,6 @@ input.passwordInput[type='text'] {
 }
 
 /* PORTRAIT TABLET AND SMALLER */
-
 @media (max-width: 768px) {
 	.section__section--notes,
 	.section__section--files {
@@ -571,4 +570,15 @@ input.passwordInput[type='text'] {
 	.section__section--files {
 		float: none;
 	}
+}
+
+/* DARK MODE MODIFICATIONS */
+body[data-theme="dark"],
+body[data-theme="dark"] header nav div {
+	background-color: #222;
+	color: white;
+}
+
+body[data-theme="dark"] .curtain {
+	background-color: rgba(0, 0, 0, 0.75);
 }
