@@ -184,8 +184,13 @@
 					action: 'import_data',
 					file: file
 				},
+				onerror: function () {
+					var dummy = d.createElement('div');
+					dummy.innerHTML = this.responseText;
+					
+					message('Error', dummy.textContent, 'error';
+				},
 				callback: function (res) {
-					console.log(res);
 					if (res.status) {
 						message('Success!', 'Your file was successfully imported to your data table. You\'re welcome.', 'success');
 						populateTable(res.matrix);
