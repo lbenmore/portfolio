@@ -274,7 +274,7 @@
 	}
 	
 	function sortTableByColumn (matrix, evt) {
-		var cell = evt.target;
+		var cell = evt.target.parentNode;
 		var col = cell.dataset.col;
 		var asc = cell.dataset.sort === 'asc' ? 1 : 0;
 		var mtx = trimMatrix(matrix);
@@ -296,6 +296,7 @@
 	
 	function freezeColumns (evt) {
 		evt.stopPropagation();
+		
 		var col = evt.target.parentNode.dataset.col;
 		var rows = $$('table tr', true);
 		var isFrozen = evt.target.dataset.freeze === 'true';
@@ -440,12 +441,12 @@
 			var th = document.createElement('th');
 			th.dataset.row = 0;
 			th.dataset.col = i;
-			th.innerHTML = header + '<span></span>';
+			th.innerHTML = '<span class="sort"></span>' + header + '<span class="freezer"></span>';
 			th.setAttribute('contenteditable', 'true');
-			th.querySelector('span').addEventListener('click', freezeColumns);			
+			th.querySelector('.sort').addEventListener('click', sortTableByColumn.bind(this, matrix));			
+			th.querySelector('.freezer').addEventListener('click', freezeColumns);			
 			th.addEventListener('focus', selectContent);
 			th.addEventListener('blur', updateContent.bind(this, matrix));
-			th.addEventListener('click', sortTableByColumn.bind(this, matrix));
 			$$('thead tr').appendChild(th);
 		});
 		

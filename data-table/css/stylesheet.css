@@ -172,6 +172,7 @@ table {
 th,
 td {
 	padding: 8px;
+	padding-left: 20px;
 	width: 200px;
 	border: 1px solid currentcolor;
 	background-color: white;
@@ -183,31 +184,30 @@ td.freeze {
 	z-index: 1;
 }
 
-th[data-sort] {
-	padding-left: 16px;
-	border-color: currentcolor;
-}
-
-th[data-sort]::before {
+th .sort::before {
 	content: '';
 	position: absolute;
 	top: calc(50% - 4px);
-	transform: translateX(-16px);
-}
-
-th[data-sort='asc']::before {
 	border-right: 6px solid transparent;
 	border-bottom: 8px solid currentcolor;
 	border-left: 6px solid transparent;
+	opacity: 0.5;
+	transform: translateX(-20px);
 }
 
-th[data-sort='dsc']::before {
+th[data-sort='asc'] .sort::before {
+	opacity: 1;
+}
+
+th[data-sort='dsc'] .sort::before {
 	border-top: 8px solid currentcolor;
 	border-right: 6px solid transparent;
+	border-bottom: none;
 	border-left: 6px solid transparent;
+	opacity: 1;
 }
 
-th span::before {
+.freezer::before {
 	content: 'Ø';
 	display: inline-block;
 	position: relative;
