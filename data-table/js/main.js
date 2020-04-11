@@ -148,6 +148,12 @@
 				action: 'export_data',
 				matrix: JSON.stringify(trimMatrix(matrix))
 			},
+			onerror: function () {
+				var dummy = d.createElement('div');
+				dummy.innerHTML = this.responseText;
+				
+				message('Error', dummy.textContent, 'error');
+			},
 			callback: function (res) {
 				console.log(res);
 				if (res.status) {
@@ -188,7 +194,7 @@
 					var dummy = d.createElement('div');
 					dummy.innerHTML = this.responseText;
 					
-					message('Error', dummy.textContent, 'error';
+					message('Error', dummy.textContent, 'error');
 				},
 				callback: function (res) {
 					if (res.status) {
@@ -256,6 +262,12 @@
 				matrix.push(Array(numCells).fill(''));
 			}
 			matrix[row][col] = content;
+		}
+		
+		if (Number(row) === 0 && cell.querySelectorAll('span').length < 2) {
+			cell.innerHTML = '<span class="sort"></span>' + content + '<span class="freezer"></span>';
+			cell.querySelector('.sort').addEventListener('click', sortTableByColumn.bind(this, matrix));			
+			cell.querySelector('.freezer').addEventListener('click', freezeColumns);
 		}
 
 		$$('.nav__link--save').onclick = saveData.bind(this, matrix);
@@ -449,7 +461,7 @@
 			th.innerHTML = '<span class="sort"></span>' + header + '<span class="freezer"></span>';
 			th.setAttribute('contenteditable', 'true');
 			th.querySelector('.sort').addEventListener('click', sortTableByColumn.bind(this, matrix));			
-			th.querySelector('.freezer').addEventListener('click', freezeColumns);			
+			th.querySelector('.freezer').addEventListener('click', freezeColumns);
 			th.addEventListener('focus', selectContent);
 			th.addEventListener('blur', updateContent.bind(this, matrix));
 			$$('thead tr').appendChild(th);
