@@ -27,12 +27,6 @@ body {
 	line-height: 1.3;
 }
 
-h1 {
-	font-weight: 100;
-	letter-spacing: 0.4em;
-	text-transform: lowercase;
-}
-
 header {
 	display: table;
 	position: fixed;
@@ -51,7 +45,11 @@ header > * {
 }
 
 header > h1 {
+	padding: 16px;
+	font-size: 1.67em;
+	font-weight: 100;
 	text-align: center;
+	text-transform: lowercase
 }
 
 header nav {
