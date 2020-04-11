@@ -1,45 +1,44 @@
 <!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=no'>
-    <title>The Grid</title>
-    <link rel='stylesheet' href='./styles/stylesheet.css'>
-  </head>
-  <body>
-    <input type='radio' name='theme' value='red' id='menu__option--red'>
-    <input type='radio' name='theme' value='orange' id='menu__option--orange'>
-    <input type='radio' name='theme' value='yellow' id='menu__option--yellow'>
-    <input type='radio' name='theme' value='green' id='menu__option--green'>
-    <input type='radio' name='theme' value='blue' id='menu__option--blue'>
-    <input type='radio' name='theme' value='purple' id='menu__option--purple'>
-    <input type='radio' name='theme' value='grey' id='menu__option--grey' checked>
-    <input type='radio' name='theme' value='night' id='menu__option--night'>
-    <input type='file' id='menu__action--import'>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Data Table</title>
+        <link rel="stylesheet" href="./css/stylesheet.css">
+    </head>
+    <body>
+        <input type="checkbox" id="toggleMenu" hidden>
+        <header>
+            <h1>Data Table</h1>
+            <nav>
+                <label for="toggleMenu"><span></span></label>
+                <ul>
+                    <li class="nav__link nav__link--import">Import</li>
+                    <li class="nav__link nav__link--export">Export</li>
+                    <li class="nav__link nav__link--save">Save</li>
+                    <li class="nav__link nav__link--clear">Clear</li>
+                    <li class="nav__link nav__link--darkmode">Dark Mode<br><span></span></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <table>
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+            <div class="curtain">
+                <div class="lightbox">
+                    <div class="lightboxLeft">
+                        <button class="btn--importFromLocal">Import from Locally Saved Table</button>
+                    </div>
+                    <div class="lightboxRight">
+                        <label class="label--importFromFile"></label>
+                        <input type="file" class="input--importFromFile">
+                    </div>
+                </div>
+            </div>
+        </main>
 
-    <div class='table'></div>
-
-    <div class='menu'>
-    	<div class='menu__options'>
-    		<div class='menu__header'>Do things...</div>
-    		<div class='menu__option menu__action menu__action--addCol' data-bkg-hex='var(--primary)'><span>Add Column</span></div>
-    		<div class='menu__option menu__action menu__action--addRow' data-bkg-hex='var(--primary)'><span>Add Row</span></div>
-    		<div class='menu__option menu__action menu__action--clear' data-bkg-hex='var(--primary)'><span>Clear Data</span></div>
-    		<div class='menu__option menu__action menu__action--export' data-bkg-hex='var(--primary)'><span>Export Data</span></div>
-    		<label class='menu__option menu__action' for='menu__action--import' data-bkg-hex='var(--primary)'><span>Import Data</span></label>
-    		<div class='menu__header'>Color theme...</div>
-    		<label class='menu__option' for='menu__option--red' data-bkg-hex='#f04'><span>Red</span></label>
-    		<label class='menu__option' for='menu__option--orange' data-bkg-hex='#f80'><span>Orange</span></label>
-    		<label class='menu__option' for='menu__option--yellow' data-bkg-hex='#ff0'><span>Yellow</span></label>
-    		<label class='menu__option' for='menu__option--green' data-bkg-hex='#0f8'><span>Green</span></label>
-    		<label class='menu__option' for='menu__option--blue' data-bkg-hex='#08f'><span>Blue</span></label>
-    		<label class='menu__option' for='menu__option--purple' data-bkg-hex='#80f'><span>Purple</span></label>
-    		<label class='menu__option active' for='menu__option--grey' data-bkg-hex='#444'><span>Grey</span></label>
-    		<label class='menu__option' for='menu__option--night' data-bkg-hex='#313131'><span>Night</span></label>
-    	</div>
-    </div>
-
-    <script type='text/javascript' src='./scripts/bnmr.js'></script>
-    <script type='text/javascript' src='./scripts/library.js'></script>
-  </body>
+        <script src="./js/main.js"></script>
+    </body>
 </html>
