@@ -270,6 +270,7 @@ th span::before {
 .lightbox > * {
 	display: table-cell;
 	vertical-align: middle;
+	padding: 16px;
 	text-align: center;
 }
 
