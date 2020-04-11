@@ -13,9 +13,9 @@
             <nav>
                 <label for="toggleMenu"><span></span></label>
                 <ul>
-                    <li class="nav__link nav__link--save">Save</li>
                     <li class="nav__link nav__link--import">Import</li>
                     <li class="nav__link nav__link--export">Export</li>
+                    <li class="nav__link nav__link--save">Save</li>
                     <li class="nav__link nav__link--clear">Clear</li>
                     <li class="nav__link nav__link--darkmode">Dark Mode<br><span></span></li>
                 </ul>
@@ -26,6 +26,17 @@
                 <thead></thead>
                 <tbody></tbody>
             </table>
+            <div class="curtain">
+                <div class="lightbox">
+                    <div class="lightboxLeft">
+                        <button class="btn--importFromLocal">Import from Locally Saved Table</button>
+                    </div>
+                    <div class="lightboxRight">
+                        <label class="label--importFromFile"></label>
+                        <input type="file" class="input--importFromFile">
+                    </div>
+                </div>
+            </div>
         </main>
 
         <script src="./js/main.js"></script>

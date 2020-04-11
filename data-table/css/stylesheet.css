@@ -246,13 +246,76 @@ th span::before {
 	color: #333;
 }
 
-/** dark mode **/
-body[data-theme="dark"] {
-	background-color: #333;
-	color: white;
+.curtain {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(255, 255, 255, 0.75);
+	z-index: 1;
 }
 
-body[data-theme="dark"] header ul {
+.lightbox {
+	display: table;
+	table-layout: fixed;
+	top: 10vh;
+	left: 10vw;
+	width: 80vw;
+	height: 80vh;
+	background-color: white;
+}
+
+.lightbox > * {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.lightbox button {
+	padding: 8px 24px;
+	font-size: 14px;
+	border: 2px solid blueviolet;
+	border-radius: 0;
+	background-color: transparent;
+	color: inherit;
+	user-select: none;
+}
+
+.lightbox label {
+	display: block;
+	top: 10%;
+	left: 10%;
+	width: 80%;
+	height: 80%;
+	border: 1px dotted blueviolet;
+}
+
+.lightbox label::before {
+	content: 'Drop file here or click here to select';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	padding: 16px;
+	color: #888;
+	transform: translate(-50%, -50%);
+}
+
+.lightbox input {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+/** dark mode **/
+body[data-theme="dark"],
+body[data-theme="dark"] header ul,
+body[data-theme="dark"] .lightbox {
 	background-color: #333;
 	color: white;
 }
@@ -272,4 +335,8 @@ body[data-theme="dark"] header li span {
 
 body[data-theme="dark"] header li span::before {
 	transform: translateX(100%);
+}
+
+body[data-theme="dark"] .curtain {
+	background-color: rgba(0, 0, 0, 0.75);
 }

@@ -115,11 +115,10 @@
 		return matrix;
 	}
 
-	function exportData (matrix) {
+	function cleanupTmp () {
 		ajax({
 			params: {
-				action: 'export_data',
-				matrix: JSON.stringify(trimMatrix(matrix))
+				action: "cleanup_tmp"
 			},
 			onerror: function () {
 				console.error(this.responseText);
@@ -127,8 +126,33 @@
 			},
 			callback: function (res) {
 				console.log(res);
+			}
+		});
+	}
+
+	function downloadFile (filePath) {
+		var a = document.createElement('a');
+		var fileName = filePath.split('/').slice(-1).join('');
+
+		a.setAttribute('target', '_blank');
+		a.setAttribute('href', filePath);
+		a.setAttribute('download', fileName);
+		a.click();
+
+		setTimeout(cleanupTmp, 500);
+	}
+
+	function exportData (matrix) {
+		ajax({
+			params: {
+				action: 'export_data',
+				matrix: JSON.stringify(trimMatrix(matrix))
+			},
+			callback: function (res) {
+				console.log(res);
 				if (res.status) {
 					message('Success!', res.message, 'success');
+					downloadFile(res.file_name);
 				} else if (res.error) {
 					message('Error', res.error, 'error');
 				} else {
@@ -138,9 +162,48 @@
 			}
 		})
 	}
+
+	function importFromFile (curtain) {
+		event.stopPropagation();
+
+		var files = event.target.files;
+		var file = files.length && files[0];
+
+		$$('.curtain').style.display = 'none';
+
+		if (file) {
+			var ext = file.name.split('.').pop();
+
+			if (ext.toLowerCase() !== 'csv') {
+				message('Error', 'Please upload a valid csv file', 'error');
+				return;
+			}
+
+			ajax({
+				params: {
+					action: 'import_data',
+					file: file
+				},
+				callback: function (res) {
+					console.log(res);
+					if (res.status) {
+						message('Success!', 'Your file was successfully imported to your data table. You\'re welcome.', 'success');
+						populateTable(res.matrix);
+					} else if (res.error) {
+						message('Error', res.error, 'error');
+					} else {
+						message('Error', 'Unknown error has occurred.', 'error');
+					}
+				}
+			})
+		}
+	}
 	
-	function importData () {
-		$$('#toggleMenu').checked = null;
+	function importFromLocal(curtain) {
+		event.stopPropagation();
+
+		$$('.curtain').style.display = 'none';
+
 		if ('localStorage' in w) {
 			var matrix = localStorage.getItem('matrix');
 			try {
@@ -157,13 +220,18 @@
 			return false;
 		}
 	}
+
+	function importData () {
+		$$('#toggleMenu').checked = null;
+		$$('.curtain').style.display = 'block';
+	}
 	
 	function saveData (matrix) {
 		var mtx = trimMatrix(matrix);
 		$$('#toggleMenu').checked = null;
 		if ('localStorage' in w) {
 			localStorage.setItem('matrix', btoa(JSON.stringify(mtx)));
-			message('Success!', 'Your data table has been saved. When this is working on an actual server, a file would begin downloading now. You\'re welcome.', 'success');
+			message('Success!', 'Your data table has successfully been saved locally. You\'re welcome.', 'success');
 			return true;
 		} else {
 			message('Error!', 'Local Storage not supported by your browser. Please upgrade to a modern browser.', 'error');
@@ -416,9 +484,14 @@
 
 	function eventListeners () {
 		w.addEventListener('resize', onResize);
+
 		$$('.nav__link--import').addEventListener('click', importData);
 		$$('.nav__link--clear').addEventListener('click', generateDefaultMatrix);
 		$$('.nav__link--darkmode').addEventListener('click', toggleDarkMode);
+
+		$$('.btn--importFromLocal').addEventListener('click', importFromLocal)
+		$$('.input--importFromFile').addEventListener('change', importFromFile);
+		$$('.curtain').addEventListener('click', function () { $$('.curtain').style.display = 'none'; });
 	}
 	
 	function readLS () {
