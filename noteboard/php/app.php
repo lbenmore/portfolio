@@ -1,7 +1,4 @@
 <?php
-# local testing:
-# /opt/lampp/*run
-# /opt/lampp/apache2/conf/httpd.conf
 
 # below does not seem to be working
 ini_set("max_upload_size", "2048M");

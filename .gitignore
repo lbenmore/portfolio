@@ -1,4 +1,5 @@
 .DS_Store
 .ftpconfig
+index.html
 noteboard/php/db_creds.php
 noteboard/files/*
