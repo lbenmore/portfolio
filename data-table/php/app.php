@@ -1,5 +1,4 @@
 <?php 
-# local testing - update config at /opt/lampp/apache2/conf/httpd.conf
 
 class Output {
     private static $arr = array();

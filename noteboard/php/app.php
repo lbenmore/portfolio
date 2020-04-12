@@ -1,10 +1,15 @@
 <?php
+# local testing:
+# /opt/lampp/*run
+# /opt/lampp/apache2/conf/httpd.conf
 
+# below does not seem to be working
 ini_set("max_upload_size", "2048M");
 ini_set("max_post_size", "2148M");
 ini_set("memory_limit", "2248M");
 ini_set("max_input_time", "999");
 ini_set("max_execution_time", "999");
+####
 
 class DB {
   public static $conn;
@@ -61,6 +66,27 @@ function delete_file ($internal, $user_id, $file_name) {
   return $output->return($internal);
 }
 
+function update_file ($internal, $user_id, $current_file_name, $new_file_name) {
+  $output = new Output;
+  $output->add("message", "Update File initialized.");
+
+  $path = "../files/$user_id";
+  $user_files = scandir($path);
+
+  if (in_array($current_file_name, $user_files)) {
+    if (rename("$path/$current_file_name", "$path/$new_file_name")) {
+      $output->add("status", 1);
+      $output->add("message", "Successfully renamed file.");
+    } else {
+      $output->add("error", "Could not rename file.");
+    }
+  } else {
+    $output->add("error", "File does not exist in user's directory.");
+  }
+
+  return $output->return($internal);
+}
+
 function add_file ($internal, $user_id) {
   $output = new Output;
   $output->add("message", "Add File initialized");
@@ -80,7 +106,7 @@ function add_file ($internal, $user_id) {
     $output->add("status", 1);
     $output->add("message", "Successfully uploaded $file_name");
   } else {
-    $output->add("error", "Could not upload $file");
+    $output->add("error", "Could not upload $file_name");
   }
 
   return $output->return($internal);
@@ -576,6 +602,18 @@ if (array_key_exists("action", $_POST)) {
       if ($user_id) add_file(false, $user_id);
       else {
         $output->add("error", "No user ID provided");
+        $output->return(false);
+      }
+      break;
+
+    case "update_file":
+      $user_id = array_key_exists("user_id", $_POST) ? $_POST["user_id"] : false;
+      $current_file_name = array_key_exists("current_file_name", $_POST) ? $_POST["current_file_name"] : false;
+      $new_file_name = array_key_exists("new_file_name", $_POST) ? $_POST["new_file_name"] : false;
+
+      if ($user_id && $current_file_name && $new_file_name) update_file(false, $user_id, $current_file_name, $new_file_name);
+      else {
+        $output->add("error", "No user ID and/or current file name and/or new file name provided");
         $output->return(false);
       }
       break;

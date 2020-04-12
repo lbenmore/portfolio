@@ -3,7 +3,7 @@
 	var console = win.console;
 	var html = {
 		notes: '<tr><td contenteditable="true" data-note-id="{{NOTE_ID}}">{{NOTE}}</td><td width="1px"><button class="btn btn--board btn--notes btn--delete" data-note-id="{{NOTE_ID}}">X</button></td></tr>',
-		files: '<tr><td>{{FILE_NAME}}</td><td width="1px"><a href="./files/{{USER_ID}}/{{FILE_NAME}}" download="{{FILE_NAME}}" target="_blank"><button class="btn btn--board btn--files btn--download">Ø</button></a></td><td width="1px"><button class="btn btn--board btn--files btn--delete" data-user-id="{{USER_ID}}" data-file-name="{{FILE_NAME}}">X</button></td></tr>',
+		files: '<tr><td contenteditable="true" data-file-name="{{FILE_NAME}}">{{FILE_NAME}}</td><td width="1px"><a href="./files/{{USER_ID}}/{{FILE_NAME}}" download="{{FILE_NAME}}" target="_blank"><button class="btn btn--board btn--files btn--download">Ø</button></a></td><td width="1px"><button class="btn btn--board btn--files btn--delete" data-user-id="{{USER_ID}}" data-file-name="{{FILE_NAME}}">X</button></td></tr>',
 		passwordIcon: 'i'
 	};
 	var to;
@@ -296,13 +296,21 @@
 		});
 	}
 
-	function downloadFile (user, fileName) {
-		var a = doc.createElement('a');
-
-		a.setAttribute('download', fileName);
-		a.setAttribute('href', './files/' + user.user_id + '/' + fileName);
-
-		a.click();
+	function updateFile (user, input, evt) {
+		clearTimeout(win.to);
+		win.to = setTimeout(function () {
+			ajax({
+				debug: true,
+				params: {
+					action: 'update_file',
+					user_id: user.user_id,
+					current_file_name: evt.target.dataset.fileName,
+					new_file_name: input.textContent
+				}
+			}, function (res) {
+				console.log(res);
+			});
+		}, 1000);
 	}
 
 	function addFile (user, evt) {
@@ -357,12 +365,12 @@
 				$$('.board__list--files tbody').innerHTML += html.files.replace(/{{FILE_NAME}}/g, file).replace(/{{USER_ID}}/g, user.user_id);
 			});
 
-			$$('.board__list--files .btn--download', true).forEach(function (btnDownload) {
-				// btnDownload.onclick = downloadFile.bind(this, user, btnDownload.dataset.fileName);
-			});
-
 			$$('.board__list--files .btn--delete', true).forEach(function (btnDelete) {
 				btnDelete.onclick = deleteFile.bind(this, user, btnDelete.dataset.fileName);
+			});
+
+			$$('.board__list--files [contenteditable="true"]', true).forEach(function (input) {
+				input.oninput = updateFile.bind(this, user, input);
 			});
 		});
 	}
