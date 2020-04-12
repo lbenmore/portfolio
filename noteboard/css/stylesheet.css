@@ -15,6 +15,13 @@
 	color: white;
 }
 
+/*
+*:not([contenteditable]):not(input) {
+	-webkit-user-select: none;
+	user-select: none;
+}
+*/
+
 body {
 	margin: 0;
 	width: 100vw;
@@ -89,7 +96,7 @@ body[data-is-logged-in='true'] header nav {
 	top: 50%;
 	left: 50%;
 	width: 24px;
-	height: 2px;
+	height: 1px;
 	background-color: white;
 	transform: translate(-50%, -50%);
 }
