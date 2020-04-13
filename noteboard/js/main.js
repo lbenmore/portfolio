@@ -74,7 +74,7 @@
 						break;
 
 					default:
-						console.error('Unhandled error occurred: ' + xhr.status);
+						onError.call(xhr, 'Unhandled error occurred: ' + xhr.status);
 						break;
 				}
 			}
