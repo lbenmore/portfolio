@@ -7,7 +7,7 @@
     "links": [
       {
         "name": "Documentation",
-        "url": "http://lisabenmore.com/bnmr/documentation"
+        "url": "{{HOST}}/bnmr/documentation"
       },
       {
         "name": "Source (ES6)",
@@ -27,7 +27,7 @@
     "links": [
       {
         "name": "Demo",
-        "url": "http://lisabenmore.com/core/"
+        "url": "{{HOST}}/core/"
       },
       {
         "name": "Source (ES5)",
@@ -115,7 +115,7 @@
     "links": [
       {
         "name": "Demo",
-        "url": "http://www.lisabenmore.com/noteboard"
+        "url": "{{HOST}}/noteboard"
       },
       {
         "name": "Source",
@@ -147,7 +147,7 @@
     "links": [
       {
         "name": "Demo",
-        "url": "http://www.lisabenmore.com/data-table"
+        "url": "{{HOST}}/data-table"
       },
       {
         "name": "Source",
@@ -163,7 +163,7 @@
     "links": [
       {
         "name": "Demo",
-        "url": "http://www.lisabenmore.com/todo-list-v2"
+        "url": "{{HOST}}/todo-list-v2"
       },
       {
         "name": "Source",

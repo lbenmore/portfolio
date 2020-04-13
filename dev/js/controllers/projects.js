@@ -56,7 +56,7 @@ core.controllers.Projects = () => {
           <ul class="list-style-none">
             ${
               project.links.map((link) => {
-                return `<li class="card__link l-h-2"><a href="${link.url}" target="${link.url.slice(0, 1) == '#' ? '_self' : '_blank'}">${link.name}</a></li>`;
+                return `<li class="card__link l-h-2"><a href="${window.location.protocol}//${link.url.replace(/{{HOST}}/g, window.location.host)}" target="${link.url.slice(0, 1) == '#' ? '_self' : '_blank'}">${link.name}</a></li>`;
               }).join('')
             }
           </ul>
