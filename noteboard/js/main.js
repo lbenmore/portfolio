@@ -308,7 +308,7 @@
 					new_file_name: input.textContent
 				}
 			}, function (res) {
-				console.log(res);
+				getFiles(user);
 			});
 		}, 1000);
 	}
