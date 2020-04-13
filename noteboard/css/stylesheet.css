@@ -15,10 +15,15 @@
 	color: white;
 }
 
-/* *:not([contenteditable]):not(input) {
+*:not([contenteditable]):not(input) {
 	-webkit-user-select: none;
 	user-select: none;
-} */
+}
+
+[contenteditable] {
+	-webkit-user-select: auto;
+	user-select: auto;
+}
 
 body {
 	margin: 0;
