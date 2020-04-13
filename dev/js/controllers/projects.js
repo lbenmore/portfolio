@@ -68,38 +68,33 @@ core.controllers.Projects = () => {
   },
 
   initFns = () => {
-		/*
-  	const xhr = new XMLHttpRequest();
-  	
-  	xhr.onload = () => {
-  		try {
-				const projects = JSON.parse(xhr.response);
-        const imgs = projects.map((proj) => proj.image);
-        $$.preload(imgs, () => {
-          writeProjects(projects, $$('section'));
-          setSectionFiller(projects);
-          addEventListener('resize', setSectionFiller.bind(null, projects));
-        });
-  		} catch (e) {
-  			console.error(e);
-  		}
-  	};
-  	
-  	xhr.open('GET', './assets/json/projects.json', true);
-  	xhr.send();
-  	
-  	return;
-  	*/
-  
+    const progBar = document.createElement('div');
+    const progStatus = document.createElement('div');
+
+    progBar.classList.add('progressBar');
+    progStatus.classList.add('progressBar__status');
+
+    $$('body').dataset.loading = 'true';
     $$.ajax({
       type: 'json',
       url: './assets/json/projects.json',
       callback: (projects) => {
         const imgs = projects.map((proj) => proj.image);
+
+        $$('main').appendChild(progBar);
+        progBar.appendChild(progStatus);
+
         $$.preload(imgs, () => {
           writeProjects(projects, $$('section'));
           setSectionFiller(projects);
           addEventListener('resize', setSectionFiller.bind(null, projects));
+          $$('body').dataset.loading = null;
+          progBar.parentNode.removeChild(progBar);
+        }, (assetObj) => {
+          const { active, total } = assetObj;
+          const perc = active / total * 100;
+
+          $$('.progressBar__status').style.width = `${perc}%`;
         });
       }
     })

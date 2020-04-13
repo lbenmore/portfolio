@@ -102,20 +102,21 @@
 		});
 	},
 	
-	loadAsset = assetObj => {
+	loadAsset = (assetObj, onprogress) => {
 		const img = new Image();
 		
 		img.onload = () => {
 			++assetObj.active;
-			assetLoadHandler(assetObj);
+			assetLoadHandler(assetObj, onprogress);
 		};
 		
 		img.src = assetObj.assets[assetObj.active];
 	},
 	
-	assetLoadHandler = assetObj => {
+	assetLoadHandler = (assetObj, onprogress) => {
+		onprogress.call(this, assetObj);
 		if (assetObj.active < assetObj.total) {
-			loadAsset(assetObj);
+			loadAsset(assetObj, onprogress);
 		} else {
 			assetObj.callback.call(null, assetObj.assets);
 		}
@@ -132,6 +133,9 @@
 		params = options.params,
 		headers = options.headers,
 		callback = options.callback,
+		onuploadprogress = options.onuploadprogress || function () {},
+		onprogress = options.onprogress || function () {},
+		onerror = options.onerror || function () {},
 		fd = new FormData();
 		xhr = new XMLHttpRequest();
 		
@@ -160,6 +164,10 @@
 			
 			if (callback) callback.call(null, data);
 		};
+
+		xhr.onerror = onerror;
+		xhr.upload.onprogress = onuploadprogress;
+		xhr.onprogress = onprogress;
 		
 		xhr.open(method, reqUrl, isAsync);
 		for (const hdr in headers) {
@@ -255,7 +263,7 @@
 		}
 	};
 	
-	fns.preload = (assets, callback) => {
+	fns.preload = (assets, callback, onprogress) => {
 		const assetObj = {
 			active: 0,
 			assets: [],
@@ -271,7 +279,7 @@
 		
 		assetObj.total = assetObj.assets.length;
 		
-		assetLoadHandler(assetObj);
+		assetLoadHandler(assetObj, onprogress);
 	};
 	
 	fns.rand = (min, max, isFloat) => {
