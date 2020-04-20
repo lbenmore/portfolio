@@ -147,11 +147,11 @@
     "links": [
       {
         "name": "Demo",
-        "url": "{{HOST}}/todo-list-v2"
+        "url": "{{HOST}}/lists_v3"
       },
       {
         "name": "Source",
-        "url": "https://github.com/lbenmore/portfolio/tree/master/todo-list-v2"
+        "url": "https://github.com/lbenmore/portfolio/tree/master/lists_v3"
       }
     ]
   },
