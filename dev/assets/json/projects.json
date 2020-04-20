@@ -43,7 +43,7 @@
     "name": "Noteboard",
     "image": "https://images.unsplash.com/photo-1527168027773-0cc890c4f42e?w=600",
     "technologies": "HTML, CSS, JavaScript, PHP",
-    "description": "A web-app-ready platform to jot down quick notes and store files. Test account - email: testing@example.com, password: alpine.",
+    "description": "A web-app-ready platform to jot down notes and store files. <br>Test account: <br>email: testing@example.com <br>password: alpine.",
     "links": [
       {
         "name": "Demo",
@@ -127,7 +127,7 @@
     "name": "Whack-a-Mouse",
     "image": "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=600",
     "technologies": "HTML, CSS, ES6",
-    "description": "A whack-a-mole game, but my drawing skills are minimal, so the mole became a mouse.",
+    "description": "A whack-a-mole game, but my drawing skills are limited, so the mole became a mouse.",
     "links": [
       {
         "name": "Demo",
@@ -175,7 +175,7 @@
     "name": "CodePen Projects",
     "image": "https://images.unsplash.com/photo-1455165814004-1126a7199f9b?w=600",
     "technologies": "HTML, CSS, JavaScript, ES6",
-    "description": "Check out my (mostly) curated mini-projects on CodePen.",
+    "description": "Check out my (somewhat) curated mini-projects on CodePen.",
     "links": [
       {
         "name": "Most Recent",
