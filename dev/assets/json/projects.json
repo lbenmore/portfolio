@@ -59,7 +59,7 @@
     "name": "Data Table",
     "image": "https://images.unsplash.com/photo-1517340182-ddc4e441b011?w=600",
     "technologies": "HTML, CSS, ES6, PHP",
-    "description": "An interactive spreadsheet with the ability to add rows and columns, save to Local Storage, export to a csv file, and import from Local Storage or a csv file.",
+    "description": "An interactive spreadsheet with the ability to add infinite rows and columns, save to Local Storage, export to a csv file, and import from Local Storage or a csv file.",
     "links": [
       {
         "name": "Demo",
