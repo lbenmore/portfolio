@@ -42,7 +42,7 @@
   {
     "name": "Noteboard",
     "image": "https://images.unsplash.com/photo-1527168027773-0cc890c4f42e?w=600",
-    "technologies": "PHP, HTML, CSS, JavaScript",
+    "technologies": "HTML, CSS, JavaScript, PHP",
     "description": "A web-app-ready platform to jot down quick notes and store files. Test account - email: testing@example.com, password: alpine.",
     "links": [
       {
@@ -58,7 +58,7 @@
   {
     "name": "Data Table",
     "image": "https://images.unsplash.com/photo-1517340182-ddc4e441b011?w=600",
-    "technologies": "HTML, CSS, ES6",
+    "technologies": "HTML, CSS, ES6, PHP",
     "description": "An interactive spreadsheet with the ability to add rows and columns, save to Local Storage, export to a csv file, and import from Local Storage or a csv file.",
     "links": [
       {
@@ -75,7 +75,7 @@
     "name": "Carousels!",
     "image": "https://images.unsplash.com/photo-1544212415-85fec3f52087?w=600",
     "technologies": "HTML, CSS, JavaScript, ES6",
-    "description": "A few infinite-looping carousels.",
+    "description": "A couple of infinite-looping carousels.",
     "links": [
       {
         "name": "Demo",
