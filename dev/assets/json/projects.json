@@ -40,18 +40,34 @@
     ]
   },
   {
-    "name": "Video Player",
-    "image": "https://images.unsplash.com/photo-1497015289639-54688650d173?w=600",
-    "technologies": "HTML, CSS, JavaScript",
-    "description": "Highly customizable HTML5 video player that can play single videos or playlists with custom controls.",
+    "name": "Noteboard",
+    "image": "https://images.unsplash.com/photo-1527168027773-0cc890c4f42e?w=600",
+    "technologies": "PHP, HTML, CSS, JavaScript",
+    "description": "A platform to jot down quick notes and store single files. Test account - username: root, password: alpine.",
     "links": [
       {
         "name": "Demo",
-        "url": "#/projects/videoPlayer"
+        "url": "{{HOST}}/noteboard"
       },
       {
         "name": "Source",
-        "url": "https://github.com/lbenmore/portfolio/blob/master/core/js/components/videoplayer.js"
+        "url": "https://github.com/lbenmore/portfolio/tree/master/noteboard"
+      }
+    ]
+  },
+  {
+    "name": "Data Table",
+    "image": "https://images.unsplash.com/photo-1517340182-ddc4e441b011?w=600",
+    "technologies": "HTML, CSS, ES6",
+    "description": "An interactive spreadsheet with the ability to add rows and columns, export as a CSV, import a CSV, and set custom color themes.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "{{HOST}}/data-table"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/data-table"
       }
     ]
   },
@@ -108,22 +124,6 @@
     ]
   },
   {
-    "name": "Noteboard",
-    "image": "https://images.unsplash.com/photo-1527168027773-0cc890c4f42e?w=600",
-    "technologies": "PHP, HTML, CSS, JavaScript",
-    "description": "A platform to jot down quick notes and store single files. Test account - username: root, password: alpine.",
-    "links": [
-      {
-        "name": "Demo",
-        "url": "{{HOST}}/noteboard"
-      },
-      {
-        "name": "Source",
-        "url": "https://github.com/lbenmore/portfolio/tree/master/noteboard"
-      }
-    ]
-  },
-  {
     "name": "Whack-a-Mouse",
     "image": "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=600",
     "technologies": "HTML, CSS, ES6",
@@ -140,22 +140,6 @@
     ]
   },
   {
-    "name": "Data Table",
-    "image": "https://images.unsplash.com/photo-1517340182-ddc4e441b011?w=600",
-    "technologies": "HTML, CSS, ES6",
-    "description": "An interactive spreadsheet with the ability to add rows and columns, export as a CSV, import a CSV, and set custom color themes.",
-    "links": [
-      {
-        "name": "Demo",
-        "url": "{{HOST}}/data-table"
-      },
-      {
-        "name": "Source",
-        "url": "https://github.com/lbenmore/portfolio/tree/master/data-table"
-      }
-    ]
-  },
-  {
     "name": "Lists",
     "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600",
     "technologies": "HTML, CSS, ES6",
@@ -168,6 +152,22 @@
       {
         "name": "Source",
         "url": "https://github.com/lbenmore/portfolio/tree/master/todo-list-v2"
+      }
+    ]
+  },
+  {
+    "name": "Video Player",
+    "image": "https://images.unsplash.com/photo-1497015289639-54688650d173?w=600",
+    "technologies": "HTML, CSS, JavaScript",
+    "description": "Highly customizable HTML5 video player that can play single videos or playlists with custom controls.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "#/projects/videoPlayer"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/core/js/components/videoplayer.js"
       }
     ]
   },
