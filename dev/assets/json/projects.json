@@ -43,7 +43,7 @@
     "name": "Noteboard",
     "image": "https://images.unsplash.com/photo-1527168027773-0cc890c4f42e?w=600",
     "technologies": "PHP, HTML, CSS, JavaScript",
-    "description": "A platform to jot down quick notes and store single files. Test account - username: root, password: alpine.",
+    "description": "A platform to jot down quick notes and store single files. Test account - email: testing@example.com, password: alpine.",
     "links": [
       {
         "name": "Demo",
