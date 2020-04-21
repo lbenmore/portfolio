@@ -145,15 +145,11 @@
 	*/
 
 	function darkModeHandler (darkMode) {
-		if (darkMode) {
-			$$('body').dataset.theme = 'dark';
-			$$('#toggleDarkMode').checked = true;
-		} else {
-			$$('body').dataset.theme = '';
-			$$('#toggleDarkMode').checked = null;
-		}
+		const theme = darkMode && darkMode !== 'null' ? 'dark' : null;
+		$$('body').dataset.theme = theme;
+		$$('#toggleDarkMode').checked = theme;
 
-		return ls('set', 'darkmode', darkMode);
+		return ls('set', 'theme', theme);
 	}
 
 	/**
@@ -566,8 +562,8 @@
 
 		for (var key in currentLs) {
 			switch (key) {
-				case 'darkmode':
-					darkModeHandler(currentLs[key] === 'true');
+				case 'theme':
+					darkModeHandler(currentLs[key] === 'dark');
 					break;
 			}
 		}

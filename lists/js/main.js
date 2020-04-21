@@ -237,9 +237,7 @@
     const parsed = decoded && json('parse', decoded);
     const theme = ls('get', 'theme');
 
-    if (theme) {
-      toggleDarkMode(theme);
-    }
+    if (theme) toggleDarkMode(theme);
 
     eventListeners(parsed);
   }
