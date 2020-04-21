@@ -68,8 +68,10 @@
       }
     };
 
-    for (const fn in public) {
-      el[fn] = public[fn];
+    if (el) {
+      for (const fn in public) {
+        el[fn] = public[fn];
+      }
     }
 
     return el;
