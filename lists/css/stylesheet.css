@@ -224,3 +224,8 @@ body[data-theme=dark] {
 body[data-theme=dark] header nav ul {
   background-color: #222;
 }
+
+body[data-theme=dark] .lightbox {
+  background-color: #222;
+  color: white;
+}
