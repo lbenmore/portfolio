@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+    <title>Lists</title>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+  </head>
+  <body>
+    <input type="checkbox" id="toggleMenu" hidden>
+
+    <header>
+      <h1>Lists</h1>
+      <nav>
+        <label for="toggleMenu">
+          <span></span>
+        </label>
+        <ul>
+          <li data-fn="new-list">New List</li>
+          <li data-fn="switch-list">Choose List</li>
+          <li data-fn="delete-list">Delete List</li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h1 contenteditable="true">New List</h1>
+        <ul></ul>
+      </section>
+    </main>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
