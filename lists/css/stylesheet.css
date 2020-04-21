@@ -49,12 +49,12 @@ header nav {
   height: 100%;
 }
 
-header nav label {
+header [for=toggleMenu] {
   display: block;
   height: 100%;
 }
 
-header nav span {
+header [for=toggleMenu] span {
   display: block;
   top: 29px;
   left: 18px;
@@ -63,12 +63,12 @@ header nav span {
   background-color: white;
 }
 
-#toggleMenu:checked ~ header nav span {
+#toggleMenu:checked ~ header [for=toggleMenu] span {
   transform: rotate(45deg);
 }
 
-header nav span::before,
-header nav span::after {
+header [for=toggleMenu] span::before,
+header [for=toggleMenu] span::after {
   content: '';
   position: absolute;
   top: 0;
@@ -78,16 +78,16 @@ header nav span::after {
   background: inherit;
 }
 
-#toggleMenu:checked ~ header nav span::before,
-#toggleMenu:checked ~ header nav span::after {
+#toggleMenu:checked ~ header [for=toggleMenu] span::before,
+#toggleMenu:checked ~ header [for=toggleMenu] span::after {
   transform: rotate(-90deg);
 }
 
-header nav span::before {
+header [for=toggleMenu] span::before {
   transform: translateY(-8px);
 }
 
-header nav span::after {
+header [for=toggleMenu] span::after {
   transform: translateY(8px);
 }
 
@@ -97,7 +97,6 @@ header nav ul {
   right: 0;
   width: 200px;
   height: calc(100vh - 60px);
-  background-color: white;
   border-left: 1px solid blueviolet;
   list-style: none;
   transform: translateX(100%);
@@ -111,6 +110,34 @@ header nav ul li {
   padding: 16px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
   cursor: pointer;
+}
+
+header [for=toggleTheme] {
+  display: block;
+  margin-top: 8px;
+  width: 48px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: #f04;
+  transition: background-color 0.3s;
+}
+
+#toggleTheme:checked ~ header [for=toggleTheme] {
+  background-color: springgreen;
+}
+
+header [for=toggleTheme] span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: #888;
+}
+
+#toggleTheme:checked ~ header [for=toggleTheme] span {
+  transform: translateX(100%);
 }
 
 main {
@@ -180,4 +207,9 @@ section ul li {
   display: inline-block;
   padding: 8px 0;
   cursor: pointer;
+}
+
+body[data-theme=dark] {
+  background-color: #222;
+  color: white;
 }

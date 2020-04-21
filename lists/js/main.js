@@ -58,6 +58,14 @@
       console.error('Local Storage API not available.');
     }
   }
+  
+  function toggleDarkMode (evt) {
+    const dark = evt.target ? evt.target.checked : evt;
+    const theme = dark && dark !== 'null' ? 'dark' : null;
+    $$('body').dataset.theme = theme;
+    $$('#toggleTheme').checked = !!theme;
+    ls('set', 'theme', theme);
+  }
 
   function handleMenu (toOpen) {
     if (toOpen === undefined) {
@@ -220,12 +228,18 @@
     $$('[data-fn="switch-list"], [data-fn="delete-list"]').forEach(function (link) {
       link.addEventListener('click', chooseDeleteList.bind(this, lists));
     });
+    $$('#toggleTheme').addEventListener('input', toggleDarkMode);
   }
 
   function init () {
-    const fromLs = ls('get', 'lists');
-    const decoded = fromLs && decode(fromLs);
+    const lists = ls('get', 'lists');
+    const decoded = lists && decode(lists);
     const parsed = decoded && json('parse', decoded);
+    const theme = ls('get', 'theme');
+
+    if (theme) {
+      toggleDarkMode(theme);
+    }
 
     eventListeners(parsed);
   }
