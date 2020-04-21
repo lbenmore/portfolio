@@ -10,20 +10,11 @@
 
   const hasLS = !!('localStorage' in win);
 
-  let to;
-
   function firstUnusedId (lists) {
-    let id = 0;
+    const ids = lists.map(list => list.id);
+    const sorted = ids.sort((a, b) => a > b ? 1 : a < b ? -1 : 0);
 
-    for (let i = 0; i < lists.length; i++) {
-      if (lists[i].id > id) {
-        const list = lists.filter(x => x.id === id);
-        id = lists[i].id;
-        if (!list.length); return id;
-      }
-    }
-
-    return 100000;
+    return Number(sorted.pop()) + 1;
   }
 
   function json (type, value, arr) {
@@ -68,6 +59,87 @@
     }
   }
 
+  function handleMenu (toOpen) {
+    if (toOpen === undefined) {
+      if ($$('#toggleMenu').checked) $$('#toggleMenu').checked = null;
+      else $$('#toggleMenu').checked = true;
+    } else {
+      $$('#toggleMenu').checked = toOpen ? true : null;
+    }
+  }
+
+  function chooseDeleteList (lists, evt) {
+    function onListSelect (selectEvt) {
+      const list = lists.filter(x => x.id === Number(selectEvt.target.dataset.listId))[0];
+      
+      switch (evt.target.dataset.fn) {
+        case "switch-list":
+          const toList = lists.splice(lists.indexOf(list), 1)[0];
+          lists.unshift(toList);
+          break;
+
+        case "delete-list":
+          lists.splice(lists.indexOf(list), 1)[0];
+          if (!lists.length) {
+            lists.push({
+              id: firstUnusedId(lists),
+              name: 'New List',
+              items: []
+            });
+          }
+          break;
+      }
+
+      populateList(lists);
+      handleMenu(false);
+      overlay.parentNode.removeChild(overlay);
+      ls('set', 'lists', encode(json('stringify', lists)));
+    }
+
+    function createListLink (list) {
+      const span = doc.createElement('span');
+      span.textContent = list.name;
+      span.dataset.listId = list.id;
+      return span.outerHTML;
+    }
+
+    const overlay = doc.createElement('div');
+    const lightboxHtml = `
+      <div class='lightboxContainer'>
+        <div class='lightbox'>
+          ${ lists.map(list => createListLink(list)).join('<br>') }
+        </div>
+      </div>
+    `;
+
+    overlay.classList.add('overlay');
+    overlay.innerHTML = lightboxHtml;
+
+    $$('body').appendChild(overlay);
+
+    $$('.lightbox span', true).forEach(link => {
+      link.addEventListener('click', onListSelect);
+    });
+
+    $$('.overlay').addEventListener('click', function () {
+      if (event.target === $$('.lightboxContainer')) {
+        overlay.parentNode.removeChild(overlay);
+        handleMenu(false);
+      }
+    });
+  }
+
+  function createNewList (lists) {
+    lists.unshift({
+      id: firstUnusedId(lists),
+      name: 'New List',
+      items: []
+    });
+
+    populateList(lists);
+    handleMenu(false);
+  }
+
   function addNewItemLine (lists, value) {
     const newItem = doc.createElement('li');
 
@@ -75,50 +147,62 @@
     else newItem.classList.add('add-icon');
 
     newItem.setAttribute('contenteditable', 'true');
+    newItem.addEventListener('keydown', function () {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        event.stopPropagation();
+        newItem.parentNode.querySelectorAll('li[contenteditable]:last-of-type')[0].focus();
+      }
+    });
     newItem.addEventListener('input', updateListItem.bind(this, lists));
 
     $$('section ul').appendChild(newItem);
   }
 
-  function updateListItem (lists, evt) {
-    evt.target.classList.remove('add-icon');
+  function updateListItem(lists, evt) {
+    const chdn = Object.keys(evt.target.parentNode.children).map(x => evt.target.parentNode.children[x]);
+    const i = chdn.indexOf(evt.target);
 
-    if (!$$('.add-icon', true).length) addNewItemLine(lists);
+    if (evt.target.textContent) {
+      evt.target.classList.remove('add-icon');
 
-    to = setTimeout(function () {
-      const chdn = Object.keys(evt.target.parentNode.children).map(x => evt.target.parentNode.children[x]);
-      const i = chdn.indexOf(evt.target);
+      if (!$$('.add-icon', true).length) addNewItemLine(lists);
+
       lists[0].items[i] = evt.target.textContent;
-      console.log(lists);
-      ls('set', 'lists', encode(json('stringify', lists)));
-    }, 750);
+    } else {
+      evt.target.classList.add('add-icon');
+      for (let ii = i, len = chdn.length - 1; ii < len; ii++) {
+        evt.target.parentNode.children[ii].remove();
+      }
+      lists[0].items.splice(i, 1);
+      $$('section li[contenteditable]:last-of-type').focus();
+    }
+
+    ls('set', 'lists', encode(json('stringify', lists)));
   }
 
   function updateListName (lists, evt) {
-    clearTimeout(to);
+    const name = (evt && evt.target && evt.target.textContent);
+    
+    lists[0].name = name;
+    ls('set', 'lists', encode(json('stringify', lists)));
+  }
 
-    const name = (evt && evt.target && evt.target.textContent) || 'New List';
-    
-    to = setTimeout(function () {
-      lists[0].name = name;
-      console.log(lists);
-      ls('set', 'lists', encode(json('stringify', lists)));
-    }, 750);
-    
-    evt.target.textContent = name;
+  function populateList (lists) {
+    $$('section h1').textContent = lists[0].name;
+    $$('section ul').innerHTML = '';
+
+    lists[0].items.forEach(function (item) {
+      addNewItemLine(lists, item);
+    });
+
+    addNewItemLine(lists);
   }
 
   function eventListeners (currentLists) {
     let lists = currentLists;
 
-    if (lists) {
-      $$('section h1').textContent = lists[0].name;
-      lists.forEach(function (list) {
-        list.items.forEach(function (item) {
-          addNewItemLine(lists, item);
-        });
-      });
-    } else {
+    if (!lists) {
       lists = [
         {
           "id": 100000,
@@ -128,15 +212,21 @@
       ];
     }
 
-    addNewItemLine(lists);
+    populateList(lists);
 
     $$('section h1[contenteditable]').addEventListener('input', updateListName.bind(this, lists));
+
+    $$('[data-fn="new-list"]').addEventListener('click', createNewList.bind(this, lists));
+    $$('[data-fn="switch-list"], [data-fn="delete-list"]').forEach(function (link) {
+      link.addEventListener('click', chooseDeleteList.bind(this, lists));
+    });
   }
 
   function init () {
     const fromLs = ls('get', 'lists');
     const decoded = fromLs && decode(fromLs);
     const parsed = decoded && json('parse', decoded);
+
     eventListeners(parsed);
   }
 

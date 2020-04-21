@@ -110,6 +110,7 @@ header nav ul {
 header nav ul li {
   padding: 16px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  cursor: pointer;
 }
 
 main {
@@ -147,4 +148,36 @@ section ul li {
 
 .add-icon::after {
   content: attr(placeholder);
+}
+
+.overlay {
+  display: table;
+  vertical-align: middle;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 2;
+}
+
+.lightboxContainer {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.lightbox {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.lightbox span {
+  display: inline-block;
+  padding: 8px 0;
+  cursor: pointer;
 }
