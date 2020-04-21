@@ -147,11 +147,11 @@
     "links": [
       {
         "name": "Demo",
-        "url": "{{HOST}}/lists_v3"
+        "url": "{{HOST}}/lists"
       },
       {
         "name": "Source",
-        "url": "https://github.com/lbenmore/portfolio/tree/master/lists_v3"
+        "url": "https://github.com/lbenmore/portfolio/tree/master/lists"
       }
     ]
   },
