@@ -167,6 +167,10 @@ section ul li {
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
 }
 
+section ul li s {
+  color: #888;
+}
+
 .add-icon::before {
   content: '+';
   position: absolute;
