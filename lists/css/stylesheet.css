@@ -99,6 +99,7 @@ header nav ul {
   width: 200px;
   height: calc(100vh - 60px);
   border-left: 1px solid blueviolet;
+  background-color: white;
   list-style: none;
   transform: translateX(100%);
 }
@@ -214,4 +215,8 @@ section ul li {
 body[data-theme=dark] {
   background-color: #222;
   color: white;
+}
+
+body[data-theme=dark] header nav ul {
+  background-color: #222;
 }
