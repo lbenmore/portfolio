@@ -1,8 +1,77 @@
 (function (win, doc) {
   const $$ = (selector, forceArray) => {
-    return forceArray || doc.querySelectorAll(selector).length > 1 
-      ? Object.keys(doc.querySelectorAll(selector)).map(x => doc.querySelectorAll(selector)[x])
-      : doc.querySelector(selector);
+    const el = (selector instanceof HTMLElement) ? selector :
+      forceArray || doc.querySelectorAll(selector).length > 1 
+        ? Object.keys(doc.querySelectorAll(selector)).map(x => doc.querySelectorAll(selector)[x])
+        : doc.querySelector(selector);
+
+    const public = {};
+
+    function evalTouchPoints (initEvt, evtName, cb) {
+      const endEvt = initEvt.type === 'mousedown' ? 'mouseup' : 'touchend';
+
+      this.addEventListener(endEvt, function () {
+        const start = {}, end = {}, evt = {};
+
+        start.x = (initEvt.changedTouches && initEvt.changedTouches[0].clientX) || initEvt.clientX;
+        start.y = (initEvt.changedTouches && initEvt.changedTouches[0].clientY) || initEvt.clientY;
+        end.x = (event.changedTouches && event.changedTouches[0].clientX) || event.clientX;
+        end.y = (event.changedTouches && event.changedTouches[0].clientY) || event.clientY;
+
+        for (const prop in event) {
+          evt[prop] = event[prop];
+        }
+        evt.type = evtName;
+
+        switch (evtName) {
+          case 'swipeup':
+            if (Math.abs(start.y - end.y) >= 80 && start.y > end.y) cb.call(this, evt);
+            break;
+
+          case 'swiperight':
+            if (Math.abs(start.x - end.x) >= 80 && end.x > start.x) cb.call(this, evt);
+            break;
+
+          case 'swipedown':
+            if (Math.abs(start.y - end.y) >= 80 && end.y > start.y) cb.call(this, evt);
+            break;
+
+          case 'swipeleft':
+            if (Math.abs(start.x - end.x) >= 80 && start.x > end.x) cb.call(this, evt);
+            break;
+        }
+      });
+    }
+
+    function initTouchPoints(evtName, cb) {
+      el.addEventListener('mousedown', function () { evalTouchPoints.call(this, event, evtName, cb) }, { once: true });
+      el.addEventListener('touchstart', function () { evalTouchPoints.call(this, event, evtName, cb) }, { once: true });
+    }
+
+    public.on = function (evt, cb) {
+      switch (evt) {
+        case 'swipeup':
+        case 'swiperight':
+        case 'swipedown':
+        case 'swipeleft':
+          if (el.length) {
+            for (const element of el) {
+              $$(element).on(evt, cb);
+            }
+          } else {
+            initTouchPoints(evt, cb);
+          }
+          break;
+        default:
+          break;
+      }
+    };
+
+    for (const fn in public) {
+      el[fn] = public[fn];
+    }
+
+    return el;
   };
 
   const encode = win.btoa;
