@@ -1,5 +1,5 @@
 (function (win, doc) {
-  const $$ = (selector, forceArray) => {
+  function $$ (selector, forceArray) {
     const el = (selector instanceof HTMLElement) ? selector :
       forceArray || doc.querySelectorAll(selector).length > 1 
         ? Object.keys(doc.querySelectorAll(selector)).map(x => doc.querySelectorAll(selector)[x])
@@ -40,12 +40,12 @@
             if (Math.abs(start.x - end.x) >= 80 && start.x > end.x) cb.call(this, evt);
             break;
         }
-      });
+      }, { once: true });
     }
 
     function initTouchPoints(evtName, cb) {
-      el.addEventListener('mousedown', function () { evalTouchPoints.call(this, event, evtName, cb) }, { once: true });
-      el.addEventListener('touchstart', function () { evalTouchPoints.call(this, event, evtName, cb) }, { once: true });
+      el.addEventListener('mousedown', function () { evalTouchPoints.call(this, event, evtName, cb) });
+      el.addEventListener('touchstart', function () { evalTouchPoints.call(this, event, evtName, cb) });
     }
 
     public.on = function (evt, cb) {
@@ -63,6 +63,7 @@
           }
           break;
         default:
+          el.addEventListener(evt, cb);
           break;
       }
     };
@@ -217,10 +218,39 @@
     handleMenu(false);
   }
 
+  function getItemIndex (el) {
+    const chdn = el.parentNode.children;
+    const arrChdn = Object.keys(chdn).map(x => chdn[x]);
+    const i = arrChdn.indexOf(el);
+    return i;
+  }
+
+  function crossOutItemLine (lists, evt) {
+    const content = evt.target.innerHTML;
+    const textContent = content.match(/<s>(.*)<\/s>/);
+    const newContent = textContent ? textContent[1] : '<s>' + content + '</s>';
+    const i = getItemIndex(evt.target);
+
+    lists[0].items.splice(i, 1, newContent);
+    ls('set', 'lists', encode(json('stringify', lists)));
+
+    evt.target.innerHTML = newContent;
+    evt.target.blur();
+  }
+
+  function deleteItemLine (lists, evt) {
+    const i = getItemIndex(evt.target);
+
+    lists[0].items.splice(i, 1);
+    ls('set', 'lists', encode(json('stringify', lists)));
+
+    evt.target.parentNode.removeChild(evt.target);
+  }
+
   function addNewItemLine (lists, value) {
     const newItem = doc.createElement('li');
 
-    if (value) newItem.textContent = value;
+    if (value) newItem.innerHTML = value;
     else newItem.classList.add('add-icon');
 
     newItem.setAttribute('contenteditable', 'true');
@@ -231,14 +261,15 @@
         newItem.parentNode.querySelectorAll('li[contenteditable]:last-of-type')[0].focus();
       }
     });
-    newItem.addEventListener('input', updateListItem.bind(this, lists));
 
     $$('section ul').appendChild(newItem);
+    $$(newItem).on('input', updateListItem.bind(this, lists));
+    $$(newItem).on('swiperight', crossOutItemLine.bind(this, lists));
+    $$(newItem).on('swipeleft', deleteItemLine.bind(this, lists));
   }
 
   function updateListItem(lists, evt) {
-    const chdn = Object.keys(evt.target.parentNode.children).map(x => evt.target.parentNode.children[x]);
-    const i = chdn.indexOf(evt.target);
+    const i = getItemIndex(evt.target);
 
     if (evt.target.textContent) {
       evt.target.classList.remove('add-icon');
