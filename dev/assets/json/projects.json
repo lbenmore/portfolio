@@ -72,26 +72,6 @@
     ]
   },
   {
-    "name": "Carousels!",
-    "image": "https://images.unsplash.com/photo-1544212415-85fec3f52087?w=600",
-    "technologies": "HTML, CSS, JavaScript, ES6",
-    "description": "A couple of infinite-looping carousels.",
-    "links": [
-      {
-        "name": "Demo",
-        "url": "#/projects/carousels"
-      },
-      {
-        "name": "View Source (One-Item)",
-        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/controllers/projects/carousel_one-item.js"
-      },
-      {
-        "name": "View Source (Three-Item)",
-        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/controllers/projects/carousel_three-item.js"
-      }
-    ]
-  },
-  {
     "name": "Alien Attack",
     "image": "https://images.unsplash.com/photo-1537420327992-d6e192287183?w=600",
     "technologies": "HTML, CSS, ES6",
@@ -156,6 +136,22 @@
     ]
   },
   {
+    "name": "Slideshow",
+    "image": "https://images.unsplash.com/photo-1472805911884-dc4c5797ee37?w=600",
+    "technologies": "HTML, CSS, ES6, PHP, MySQL",
+    "description": "A customizable slideshow component that includes the ability for users to control settings by right clicking.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "#/projects/slideshow"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/portfolio/tree/master/slideshow"
+      }
+    ]
+  },
+  {
     "name": "Video Player",
     "image": "https://images.unsplash.com/photo-1497015289639-54688650d173?w=600",
     "technologies": "HTML, CSS, JavaScript",
@@ -168,6 +164,26 @@
       {
         "name": "Source",
         "url": "https://github.com/lbenmore/portfolio/blob/master/core/js/components/videoplayer.js"
+      }
+    ]
+  },
+  {
+    "name": "Carousels",
+    "image": "https://images.unsplash.com/photo-1544212415-85fec3f52087?w=600",
+    "technologies": "HTML, CSS, JavaScript, ES6",
+    "description": "A couple of infinite-looping carousels.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "#/projects/carousels"
+      },
+      {
+        "name": "View Source (One-Item)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/controllers/projects/carousel_one-item.js"
+      },
+      {
+        "name": "View Source (Three-Item)",
+        "url": "https://github.com/lbenmore/portfolio/blob/master/dev/js/controllers/projects/carousel_three-item.js"
       }
     ]
   },

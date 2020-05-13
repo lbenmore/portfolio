@@ -114,9 +114,22 @@
         "./css/controllers/projects/alienAttack.css"
       ],
       "js": [
-      	"./js/components/header.js",
-      	"./js/components/menu.js",
+        "./js/components/header.js",
+        "./js/components/menu.js",
         "./js/controllers/projects/alienAttack.js"
+      ]
+    },
+    "/projects/slideshow": {
+      "name": "Slideshow",
+      "html": "./html/pages/projects/slideshow.html",
+      "css": [
+        "./css/components/page.css",
+        "./css/controllers/projects/slideshow.css"
+      ],
+      "js": [
+        "./js/components/header.js",
+        "./js/components/menu.js",
+        "./js/controllers/projects/slideshow.js"
       ]
     }
   }
