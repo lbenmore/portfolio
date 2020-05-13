@@ -1,11 +1,12 @@
 (function (win, doc) {
   const init = () => {
     new Slideshow({
-      toggle: true,
-      settings: true,
       target: document.querySelector('.container'),
       directory: '../images',
       api: './php/slideshow.php',
+      speed: 1000,
+      toggle: true,
+      settings: true,
       removeImages: false
     });
   };

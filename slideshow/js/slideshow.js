@@ -349,10 +349,19 @@ class Slideshow {
         body: fd
       })
         .then(res => res.json())
-        .catch(e => { console.error(e); return []; });
+        .catch(e => {
+          console.error(e);
+          return {
+            status: 0,
+            error: 'fetch error: ' + e.message,
+          };
+        });
     } catch (e) {
       console.error(e);
-      return [];
+      return {
+        status: 0,
+        error: 'caught error: ' + e.message,
+      };
     }
   }
 

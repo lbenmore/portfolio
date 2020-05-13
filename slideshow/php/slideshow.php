@@ -73,8 +73,8 @@
     $files = scandir($directory);
     $images = array_filter($files, function ($item) use ($directory) {
       return substr($item, 0, 1) !== "." && 
-      exif_imagetype("$directory/$item") !== false && 
-      !is_dir("$directory/$item");
+        !is_dir("$directory/$item") &&
+        exif_imagetype("$directory/$item") !== false;
     });
     $images = array_values($images);
     $output->add("images", $images);

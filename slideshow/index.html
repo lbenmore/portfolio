@@ -10,6 +10,29 @@
   <body>
     <div class="container"></div>
 
+    <script>
+      // because debugging the fetch api is a b*
+      const debug = params => {
+        const xhr = new XMLHttpRequest();
+        const fd = new FormData();
+
+        for (const key in params) fd.append(key, params[key]);
+
+        xhr.onload = () => {
+          let res;
+          try {
+            res = JSON.parse(xhr.responseText);
+          } catch (e) {
+            console.error(e.message);
+            res = xhr.responseText;
+          }
+          console.log(res);
+        };
+
+        xhr.open('POST', './php/slideshow.php', true);
+        xhr.send(fd);
+      }
+    </script>
     <script src="./js/slideshow.js"></script>
     <script src="./js/main.js"></script>
   </body>
