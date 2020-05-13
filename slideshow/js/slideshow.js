@@ -163,9 +163,19 @@ class SettingsLightbox {
 
 class ContextMenu {
   getOffset (el, prop, value, endEl) {
-    if (el.parentNode) return this.getOffset(el.parentNode, prop, value + el[prop]);
-    else if (el === endEl) return value;
+    if (el === endEl) return value;
+    else if (el.parentNode) return this.getOffset(el.parentNode, prop, value + el[prop], endEl);
     else return value;
+  }
+
+  updatePosition(evt) {
+    const x = this.getOffset(event.target, 'offsetLeft', evt.offsetX, this.slideshow.target);
+    const y = this.getOffset(event.target, 'offsetTop', evt.offsetY, this.slideshow.target);
+
+    Object.assign(this.menu.style, {
+      top: `${y}px`,
+      left: `${x}px`
+    });
   }
 
   close() {
@@ -176,16 +186,6 @@ class ContextMenu {
     evt.preventDefault();
     this.updatePosition(evt);
     this.menu.style.display = 'block';
-  }
-
-  updatePosition (evt) {
-    const x = this.getOffset(event.target, 'offsetLeft', evt.offsetX, this.slideshow.target);
-    const y = this.getOffset(event.target, 'offsetTop', evt.offsetY, this.slideshow.target);
-
-    Object.assign(this.menu.style, {
-      top: `${y}px`,
-      left: `${x}px`
-    });
   }
 
   handleMenu () {
