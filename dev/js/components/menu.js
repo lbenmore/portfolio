@@ -2,8 +2,10 @@ core.controllers.Menu = () => {
 	const initFns = () => {
 		const
 		setDarkMode = () => {
-		  document.body.dataset.darkmode = document.body.dataset.darkmode == 'true' ? 'false' : 'true';
-		  $$.ls('set', 'darkmode', document.body.dataset.darkmode);
+      var toMode = document.body.dataset.darkmode == 'true' ? 'false' : 'true';
+		  document.body.dataset.darkmode = toMode;
+      $$('meta[name="theme-color"]').setAttribute('content', '#' + (toMode === 'true' ? '343038' : 'f8f4f0'));
+		  $$.ls('set', 'darkmode', toMode);
 		};
 	
 		$$('.menu__darkmode input').on('change', setDarkMode);
