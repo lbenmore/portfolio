@@ -7,7 +7,7 @@
     "links": [
       {
         "name": "Documentation",
-        "url": "{{HOST}}/bnmr/documentation"
+        "url": "{{HOST}}/external/documentation"
       },
       {
         "name": "Source (ES6)",
@@ -27,7 +27,7 @@
     "links": [
       {
         "name": "Demo",
-        "url": "{{HOST}}/core/"
+        "url": "{{HOST}}/external/core/"
       },
       {
         "name": "Source (ES5)",
@@ -53,7 +53,8 @@
         "name": "Source",
         "url": "https://github.com/lbenmore/portfolio/tree/master/noteboard"
       }
-    ]
+    ],
+    "hidden": true
   },
   {
     "name": "Data Table",
@@ -69,7 +70,8 @@
         "name": "Source",
         "url": "https://github.com/lbenmore/portfolio/tree/master/data-table"
       }
-    ]
+    ],
+    "hidden": true
   },
   {
     "name": "Alien Attack",

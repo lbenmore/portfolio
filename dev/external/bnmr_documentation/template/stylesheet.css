@@ -1,0 +1,103 @@
+@charset 'UTF-8';
+/* CSS Document */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: 90vw;
+  max-width: 1280px;
+  height: 100vh;
+  font-family: 'PT Sans Caption', 'Lucida Sans', Arial, sans-serif;
+  color: #333;
+}
+
+  .container__sidebar {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    top: 0;
+    left: 0;
+    padding: 16px;
+    width: calc(20% - 3px);
+    height: 100%;
+    background-color: #eee;
+    box-sizing: border-box;
+    overflow-y: scroll;
+  }
+  
+    .sidebar__link {
+      display: block;
+      color: #888;
+      line-height: 1.5;
+    } .sidebar__link:hover {
+      color: #333;
+    }
+  
+  .container__content {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    padding: 16px;
+    width: calc(80% - 3px);
+    height: 100vh;
+    box-sizing: border-box;
+    border-right: 1px solid #eee;
+    overflow-y: scroll;
+  }
+  
+    .content__card {
+      position: relative;
+      margin-bottom: 16px;
+      padding: 16px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      border-radius: 8px;
+    }
+    
+      .card__title {
+        margin: 0 0 8px;
+        color: #888;
+        font-family: 'PT Mono', 'Lucida Console', Courier, monospace;
+        font-size: 1.2em;
+      }
+      
+      .card__description {
+        margin-bottom: 8px;
+      }
+      
+      .card__parameters {
+        margin-bottom: 16px;
+        padding: 8px;
+        background-color: #eee;
+        box-sizing: border-box;
+      }
+      
+        .parameters__table {
+          border-collapse: collapse;
+        }
+      
+          .parameters__row {
+            padding: 4px 0;
+            border-bottom: 1px solid #808080;
+          }
+            
+            .parameters__header {
+              vertical-align: top;
+              padding: 4px;
+              padding-right: 76px;
+              box-sizing: border-box;
+              font-weight: bold;
+            }
+            
+            .parameters__cell {
+              vertical-align: top;
+              padding: 8px;
+              padding-right: 76px;
+              box-sizing: border-box;
+            }

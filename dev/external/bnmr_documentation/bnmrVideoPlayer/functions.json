@@ -1,0 +1,156 @@
+[
+  {
+    "name": "BnmrVideoPlayer",
+    "syntax": "BnmrVideoPlayer()",
+    "description": "Class used to setup a new video player component.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example": "var video = new BnmrVideoPlayer();"
+  },
+  {
+    "name": "setup",
+    "syntax": "setup(options)",
+    "description": "Initializes configuration for video player component.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "options",
+        "type": "Object",
+        "description": "\"autoplay\": Boolean of whether the video should start playing upon load. Default: true.<br><br>\"controls\": Boolean of whether the video should have controls visible when the user mouses over the video. Default true.<br><br>\"file\"*: If no playlist is provided, the string value of the path to the video file.<br><br>\"height\": Number value of the number of pixels the video should have in height or the string \"auto\". Default: \"auto\".<br><br>\"location\"*: CSS selector for the DOM element to contain the video. Default: \"body\".<br><br>\"loop\": Boolean of whether the video should restart upon completion. If a playlist, plays through all before replaying. Default: true.<br><br>\"muted\": Boolean of whether the video should start muted. Default: false.<br><br>\"playlist\"*: If no file is provided, an array of string values of the paths to video files.<br><br>\"poster\": String value of the path to a poster image for the video. Default: null.<br><br>\"width\": Number value of the number of pixels the video should have in height or the string \"auto\". Default: \"auto\"."
+      }
+    ],
+    "example" : "&lt;div id=\"video-container\"&gt;&lt;/div&gt;\r&lt;div id=\"video2\"&gt;&lt;/div&gt;\r&lt;script type=\"text/javascript\"&gt;\rvar video = new BnmrVideoPlayer();\rvar video2 = new BnmrVideoPlayer();\r\rvideo.setup({\r\tautoplay : \"true\",\r\tcontrols : \"true\",\r\theight : 180,\r\tlocation : \"#video-container\",\r\tloop : \"true\",\r\tmuted : \"false\",\r\tplaylist : [\r\t\t\"videos/video4.mp4\",\r\t\t\"videos/video5.mp4\",\r\t\t\"videos/video6.mp4\",\r\t\t\"videos/video1.mp4\",\r\t\t\"videos/video2.mp4\",\r\t\t\"videos/video3.mp4\"\r\t],\r\twidth : 320\r});\r\rvideo2.setup({\r\tautoplay : \"false\",\r\tcontrols : \"true\",\r\tfile : \"videos/video.mp4\",\r\theight : 450,\r\tlocation : \"#video2\",\r\tloop : \"false\",\r\tmuted : \"true\",\r\twidth : 800\r});\r&lt;/script&gt;"
+  },
+  {
+    "name": "play",
+    "syntax": "play()",
+    "description": "Begins or resumes playback of video.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.play();"
+  },
+  {
+    "name": "pause",
+    "syntax": "pause()",
+    "description": "Pauses playback of video.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.pause();"
+  },
+  {
+    "name": "pause",
+    "syntax": "pause()",
+    "description": "Pauses playback of video.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.pause();"
+  },
+  {
+    "name": "volume",
+    "syntax": "volume()",
+    "description": "Toggles whether the video is muted or unmuted.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.volume();"
+  },
+  {
+    "name": "mute",
+    "syntax": "mute()",
+    "description": "Mutes the playback of the video.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.mute();"
+  },
+  {
+    "name": "unmute",
+    "syntax": "unmute()",
+    "description": "Unmutes the playback of the video.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.unmute();"
+  },
+  {
+    "name": "replay",
+    "syntax": "replay()",
+    "description": "Restarts video or playlist of videos",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.replay();"
+  },
+  {
+    "name": "next",
+    "syntax": "next()",
+    "description": "If the component has a playlist, skips to the next video. If at the last video, begins playback of the first video and plays through playlist again",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.next();"
+  },
+  {
+    "name": "previous",
+    "syntax": "previous()",
+    "description": "If the component has a playlist, begins playback of previous video. If at first video, begins playback of last video in playlist.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "N/A"
+      }
+    ],
+    "example" : "var video = new BnmrVideoPlayer();\r...\rvideo.previous();"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "function1",
+    "syntax": "function1(param1, param2)",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis aliquam velit. Nulla tristique diam vitae accumsan maximus. In iaculis enim tempor lorem pellentesque, sit amet luctus purus ornare.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "param1",
+        "type": "String",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      },
+      {
+        "required": false,
+        "name": "param2",
+        "type": "Object",
+        "description": ""
+      }
+    ],
+    "example": "function1('hello, world', {\r\t'prop1': true,\r\t'prop2': 1\r});"
+  }
+]

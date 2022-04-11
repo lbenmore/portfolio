@@ -1,0 +1,59 @@
+<div class='wrapper'>
+  <div class='max-600 m-h-auto'>
+    <div>
+      <div class='text-md'>Video Player</div>
+      <div>
+        The video player components is a completely custom HTML5 video player with CSS controls and completely customizable functionality.
+        Use <code>new&nbsp;VideoPlayer(options)</code> to create a new instance of a video player, and pass an object as the <code>options</code> parameter.
+        The <code>target</code> property of the parameter object should take in the HTML Node of the containing element of the video player.
+        It should <span class='font-bold'>not</span> be a <code>&lt;video&gt;</code> element itself.
+        Either a string of the URL path to a single video should be passed to the <code>video</code> property <span class='font-bold'>or</span> an array of strings of URL paths to videos can be passed to the <code>playlist</code> property.
+      </div>
+      <div class='m-t'>
+        <div>The following properties are all optional:</div>
+        <table cellspacing='24'>
+          <tr>
+            <td>
+              <code>autoplay</code>
+            </td>
+            <td>
+              Boolean: Whether the video or first video should automatically start playing
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>controls</code>
+            </td>
+            <td>
+              Boolean: Whether there should be controls at the bottom of the player
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>loop</code>
+            </td>
+            <td>
+              Boolean: Whether the video or playlist should automatically restart upon completion
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>muted</code>
+            </td>
+            <td>
+              Boolean: Whether the video or playlist should start playing with the sound off
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>color</code>
+            </td>
+            <td>
+              String: CSS value for a color to use for the controls of the video player
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
