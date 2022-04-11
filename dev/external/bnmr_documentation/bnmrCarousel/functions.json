@@ -1,0 +1,50 @@
+[
+  {
+    "name": "BnmrCarousel",
+    "syntax": "BnmrCarousel(options)",
+    "description": "Class used to configure new carousel component.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "options",
+        "type": "Object",
+        "description": "\"location\"*: String of the CSS selector of the DOM element to contain the carousel. Default: \"body\".<br><br>\"images\"*: Array of strings of image paths.<br><br>\"width\"*: Number of the width in pixels of the carousel. Default: 0. <br><br>\"height\"*: Number of the height in pixels of the carousel. Default: 0.<br><br>\"transition\"*: String of the type of transition between images. Options: \"slide\". Default: \"slide\".<br><br>\"animDuration\": Number in milliseconds of the length of the animation between images. Default: 1000.<br><br>\"animDelay\": Number in milliseconds of the length of the delay between image transitions. Default: 3000.<br><br>\"animTimingFunction\": String of the CSS timing function to be used between image transitions. Default: \"ease\".<br><br>\"arrows\": Boolean of whether to include clickable arrows to navigate through images. Default: true.<br><br>\"pagination\": Boolean of whether to include clickable pagination bubbles at the bottom of the carousel to navigate through images. Default: true.<br><br>\"autorotate\": Boolean of whether to automatically animate through images. Default: true.<br><br>\"iterations\": Number of cycles through all images before automatically stopping autorotation."
+      }
+    ],
+    "example": "<div id=\"carousel\"></div>\rlet carousel = new BnmrCarousel({\r\tlocation: \"#carousel\",\r\twidth: 300,\r\theight: 250,\r\ttransition: \"slide\",\r\tanimDuration: 1000,\r\tanimDelay: 3000,\r\tanimTimingFunction: \"ease\",\r\timages: [\r\t\t\"path/to/image1.png\",\r\t\t\"path/to/image2.jpg\",\r\t\t\"path/to/image3.gif\",\r\t\t\"path/to/image4.bmp\"\r\t]\r\tautorotate: true,\r\titerations: 3\r});"
+  },
+  {
+    "name": "slide",
+    "syntax": "slide(event, direction)",
+    "description": "Force the carousel to transition to the next or previous image by sliding.",
+    "parameters": [
+      {
+        "required": true,
+        "name": "event",
+        "type": "Object",
+        "description": "Event object automatically passed by mouse click or must be manually passed with the type property set to \"auto\"."
+      },
+        {
+          "required": true,
+          "name": "direction",
+          "type": "String",
+          "description": "Direction the carousel should move in. Options: right, left."
+        }
+    ],
+    "example": "carousel.slide({type: \"auto\"}, \"right\");"
+  },
+  {
+    "name": "stop",
+    "syntax": "stop()",
+    "description": " Stop the carousel from automatically advancing through images.",
+    "parameters": [
+      {
+        "required": false,
+        "name": "N/A",
+        "type": "N/A",
+        "description": "This function does not take in parameters."
+      }
+    ],
+    "example": "carousel.stop();"
+  }
+]

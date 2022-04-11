@@ -1,0 +1,29 @@
+<div class='wrapper'>
+  <div class='max-600 m-h-auto'>
+    <div>
+      These components can be easily implemented into any project utilizing the Bnmr Library.
+      They each have their own encapsulated styles as well as a library file.
+    </div>
+    <div class='m-t'>
+      <div class='text-md'>Carousel</div>
+      To use the image carousel component, create a new instance using <code>new&nbsp;Carousel(options)</code> and pass the desired parameters via the <code>options</code> object.
+      The expected properties of the options object are <code>target</code>, <code>images</code>, <code>arrows</code>, and <code>pagination</code>.
+      The <code>target</code> and <code>images</code> parameters are both required.
+      An HTML node should be passed to <code>target</code> and will be the containing element for the carousel.
+      An array of URL paths as strings should be passed to the <code>images</code> property.
+      The other two properties are optional.
+      If provided, <code>arrows</code> is a boolean of whether right and left arrows should be present on the carousel.
+      If the <code>pagination</code> boolean determine if there is navigable image indicators on the carousel.
+      Both optional parameters are <code>true</code> by default.
+    </div>
+    <div class='m-t'>
+      <div class='text-md'>Lazy Loader</div>
+      The lazy loading components is also a factory function that allows you to create new instances using <code>new&nbsp;LazyLoader(options)</code> where <code>options</code> is an object.
+      The <code>options</code> parameter object expects two properties: <code>target</code> and <code>items</code>.
+      Pass an HTML node to the <code>target</code> property that will contain the content.
+      Currently, the <code>items</code> property expects an array of image paths.
+      This will be updated in the future to take in differnt types of content.
+      Both parameters are required.
+    </div>
+  </div>
+</div>

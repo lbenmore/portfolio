@@ -25,7 +25,7 @@ core.controllers.Projects = () => {
     target.classList.add('flex');
     target.classList.add('wrap');
     target.classList.add('justify-space-between');
-    target.innerHTML = projects.map((project, i) => {
+    target.innerHTML = projects.filter(proj => !proj.hidden === true).map((project, i) => {
       let
       x = col,
       y = row;

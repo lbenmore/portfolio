@@ -1,0 +1,14 @@
+<div core-controller='VideoPlayer'>
+  <div class='videoPlayer'>
+    <div class='bnmr-video-player'></div>
+    <button class='videoPlayer__button m-t' core-click ='updateVideoPlayer("single")'>Single Video</button>
+    <button class='videoPlayer__button m-t m-l' core-click ='updateVideoPlayer("playlist")'>Playlist</button>
+    <div></div>
+    <button class='videoPlayer__button m-t m-r' core-click ='externalControls("play")'>Play</button>
+    <button class='videoPlayer__button m-t m-r' core-click ='externalControls("pause")'>Pause</button>
+    <button class='videoPlayer__button m-t m-r' core-click ='externalControls("mute")'>Mute</button>
+    <button class='videoPlayer__button m-t m-r' core-click ='externalControls("unmute")'>Unmute</button>
+    <button class='videoPlayer__button m-t m-r playlistOnly' core-click ='externalControls("previous")'>Previous</button>
+    <button class='videoPlayer__button m-t m-r playlistOnly' core-click ='externalControls("next")'>Next</button>
+  </div>
+</div>
