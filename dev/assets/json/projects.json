@@ -90,6 +90,38 @@
     ]
   },
   {
+    "name": "Winter Wonderblocks",
+    "image": "./assets/img/projects/winter.jpg",
+    "technologies": "HTML, CSS, ES6",
+    "description": "A game of fitting together blocks of various sizes and shapes that definitely has never been copyrighted with a wintery theme. Graphics by Lorrie Larribas.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "{{HOST}}/external/winter_wonderblocks"
+      },
+      {
+        "name": "Game Source",
+        "url": "https://github.com/lbenmore/blocks"
+      }
+    ]
+  },
+  {
+    "name": "Scroller UI",
+    "image": "./assets/img/projects/scroll.jpg",
+    "technologies": "HTML, CSS, ES6",
+    "description": "A UI implementation that triggers animation and functionality based on user scroll position.",
+    "links": [
+      {
+        "name": "Demo",
+        "url": "{{HOST}}/external/scroller"
+      },
+      {
+        "name": "Source",
+        "url": "https://github.com/lbenmore/scroller"
+      }
+    ]
+  },
+  {
     "name": "Steve",
     "image": "./assets/img/projects/dinosaur.jpg",
     "technologies": "HTML, CSS, ES6",
@@ -151,7 +183,8 @@
         "name": "Source",
         "url": "https://github.com/lbenmore/portfolio/tree/master/slideshow"
       }
-    ]
+    ],
+    "hidden": true
   },
   {
     "name": "Video Player",

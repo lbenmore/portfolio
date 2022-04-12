@@ -1,0 +1,76 @@
+[class*="section--article"] {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+[class*="section--article"] .hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50vw;
+  height: 100vh;
+  background: radial-gradient(grey, black);
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+[class*="section--article"] .blockquote {
+  display: table;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100vh;
+  padding: 2vh;
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+[class*="section--article"] .blockquote .center {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+[class*="section--article"] .blockquote .center span {
+  font-size: 6vh;
+}
+
+[class*="section--article"] .article {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+[class*="section--article"] .article .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60vw;
+  height: 60vh;
+  padding: 0 16px 16px;
+  background-color: white;
+  box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+}
+
+[class*="section--article"] .article .article__header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background-color: white;
+  text-align: right;
+}
+
+[class*="section--article"] .article .btn--close {
+  display: inline-block;
+  margin-right: 16px;
+}

@@ -1,0 +1,121 @@
+@keyframes elf-torso {
+  0% {
+    transform: scaleY(1);
+    /*animation-timing-function: ease-out;*/
+  }
+  
+  50% {
+    transform: scaleY(0.8);
+    /*animation-timing-function: ease-in;*/
+  }
+  
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes elf-bowtie {
+  0% {
+    transform: translateY(0%);
+    /*animation-timing-function: ease-out;*/
+  }
+  
+  50% {
+    transform: translateY(30%);
+    /*animation-timing-function: ease-in;*/
+  }
+  
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes elf-head {
+  0% {
+    transform: translateY(0%) rotate(-5deg);
+    /*animation-timing-function: ease-out;*/
+  }
+  
+  25% {
+    transform: translateY(10%) rotate(5deg);
+    /*animation-timing-function: ease-in;*/
+  }
+  
+  50% {
+    transform: translateY(0%) rotate(15deg);
+    /*animation-timing-function: ease-out;*/
+  }
+  
+  75% {
+    transform: translateY(10%) rotate(5deg);
+    /*animation-timing-function: ease-in;*/
+  }
+  
+  100% {
+    transform: translateY(0%) rotate(-5deg);
+  }
+}
+
+@keyframes elf-arm-right {
+  0% {
+    transform: translateY(0%) rotate(0deg);
+    /*animation-timing-function: ease-in;*/
+  }
+  
+  50% {
+    transform: translateY(15%) rotate(10deg);
+    /*animation-timing-function: ease-out;*/
+  }
+  
+  100% {
+    transform: translateY(0%) rotate(0deg);
+  }
+}
+
+@keyframes elf-arm-left {
+  0% {
+    transform: translateY(0%) rotate(0deg);
+    /*animation-timing-function: ease-in;*/
+  }
+  
+  50% {
+    transform: translateY(15%) rotate(-10deg);
+    /*animation-timing-function: ease-out;*/
+  }
+  
+  100% {
+    transform: translateY(0%) rotate(0deg);
+  }
+}
+
+@keyframes elf-leg-left {
+  0% {
+    transform: rotate(-5deg);
+    /*animation-timing-function: ease-in;*/
+  }
+  
+  50% {
+    transform: translateY(3%) rotate(5deg);
+    /*animation-timing-function: ease-out;*/
+  }
+  
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes elf-leg-right {
+  0% {
+    transform: rotate(5deg);
+    /*animation-timing-function: ease-in;*/
+  }
+  
+  50% {
+    transform: translateY(3%) rotate(-5deg);
+    /*animation-timing-function: ease-out;*/
+  }
+  
+  100% {
+    transform: rotate(5deg);
+  }
+}

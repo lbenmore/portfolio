@@ -1,0 +1,57 @@
+[class*="section--outside"] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(#081122, #000810);
+}
+
+[class*="section--outside"] .moon {
+  position: absolute;
+  top: 10vh;
+  left: 20vw;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+  background-image: radial-gradient(#fffff0, #ffffc0);
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+[class*="section--outside"] .title {
+  position: absolute;
+  top: 45vh;
+  width: 100%;
+  letter-spacing: 0.4em;
+  color: white;
+  font-size: 10vh;
+  font-weight: 100;
+  text-align: center;
+  text-shadow: 0px 0px 2vh #40281f;
+  opacity: 0;
+}
+
+[class*="section--outside"] .mountain {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 75vh;
+  background-image: linear-gradient(#40281f, #110800);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%, 0 100%);
+  opacity: 0;
+  transform: translateY(50%);
+}
+
+[class*="section--outside"] .trees {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  background-image: url('https://cdn.pixabay.com/photo/2019/05/16/06/20/forest-4206553_1280.png');
+  background-position: center top;
+  background-size: cover;
+  opacity: 0;
+  transform: translateY(100%);
+}
