@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
+    <title>Winter Wonderblocks</title>
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+  
+  <body>
+    <header>
+      <div class="header__content">
+        <div class="header__cell"></div>
+        <div class="header__cell header__cell--title">
+          <h1>Winter Wonderblocks</h1>
+        </div>
+        <div class="header__cell">
+          <div class="header__btn--togglePlay">
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <main>
+      <div class="background">
+        <div class="background__ground"></div>
+        <div class="background__snow"></div>
+        <div class="background__tree background__tree--1"></div>
+        <div class="background__tree background__tree--2"></div>
+        <div class="background__tree background__tree--3"></div>
+        <div class="background__reindeer"></div>
+        <div class="background__elf elf">
+          <div class="elf__head"></div>
+          <div class="elf__torso"></div>
+          <div class="elf__leg elf__leg--right"></div>
+          <div class="elf__leg elf__leg--left"></div>
+          <div class="elf__arm elf__arm--right"></div>
+          <div class="elf__arm elf__arm--left"></div>
+          <div class="elf__bowtie"></div>
+        </div>
+      </div>
+      
+      <div class="controls">
+        <div class="controls__group controls__group--left">
+          <div class="controls__rotate controls__rotate--left"></div>
+          <div class="controls__arrow controls__arrow--left"></div>
+        </div>
+        <div class="controls__group">
+          <div class="controls__rotate"></div>
+          <div class="controls__arrow controls__arrow--right"></div>
+        </div>
+      </div>
+      
+      <div class="game"></div>
+      
+      <div class="info">
+        <input type="checkbox" id="info__toggle--snow" hidden checked>
+        <input type="checkbox" id="info__toggle--controls" hidden>
+        <div class="info__start">
+          <div class="info__content">
+            <h2>Welcome to Winter Wonderblocks!</h2>
+            <p>
+              Click below to start the game. Use the left and right arrow keys
+              to move blocks back and forth, and use the shift key to rotate them. 
+              On mobile devices, you can swipe left and right to move the blocks,
+              and tap to rotate them. Or just turn on the on-screen controls! Fill 
+              all the spaces in a row to clear it. Don't reach the top of the game 
+              board or game over!
+            </p>
+            <label class="info__toggle info__toggle--snow" for="info__toggle--snow">
+              Snow:
+              <span></span>
+            </label>
+            <label class="info__toggle info__toggle--controls" for="info__toggle--controls">
+              On-Screen Controls:
+              <span></span>
+            </label>
+            <button class="info__btn info__btn--start"><span>Start Game</span></button>
+          </div>
+        </div>
+        
+        <div class="info__pause">
+          <div class="info__content"> 
+            <h2>Hold your horses! And your reindeer! <br>It's time for a pause.</h2>
+            <label class="info__toggle info__toggle--snow" for="info__toggle--snow">
+              Snow:
+              <span></span>
+            </label>
+            <label class="info__toggle info__toggle--controls" for="info__toggle--controls">
+              On-Screen Controls:
+              <span></span>
+            </label>
+            <button class="info__btn info__btn--resume"><span>Resume Game</span></button>
+            <button class="info__btn info__btn--start"><span>Restart Game</span></button>
+          </div>
+        </div>
+        
+        <div class="info__end">
+          <div class="info__content">
+            <h2>Game Over!</h2>
+            <p>
+              Well that was fun! What do you say we do it again?
+            </p>
+            <div class="info__score"></div>
+            <div class="info__hiscore"></div>
+            <button class="info__btn info__btn--start">
+              <span>Restart Game</span>
+            </button>
+          </div>
+        </div>
+      </div>  
+    </main>
+    
+    <!-- <script src="./js/visualConsole.js"></script> -->
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "target": ".scroller",
+  "sections": [
+    {
+      "name": "outside",
+      "label": "Outside Page",
+      "height": 5,
+      "content": {
+        "html": "./js/scroller/content/outside/index.html",
+        "css": [
+          "./js/scroller/content/outside/styles.css"
+        ],
+        "js": [
+          "./js/scroller/content/outside/scripts.js"
+        ]
+      }
+    },
+    {
+      "name": "article",
+      "label": "Article Page",
+      "height": 3,
+      "content": {
+        "html": "./js/scroller/content/article/index.html",
+        "css": [
+          "./js/scroller/content/article/styles.css"
+        ],
+        "js": [
+          "./js/scroller/content/article/scripts.js"
+        ]
+      }
+    },
+    {
+      "name": "game",
+      "label": "Game Page ",
+      "height": 7,
+      "content": {
+        "html": "./js/scroller/content/game/index.html",
+        "css": [
+          "./js/scroller/content/game/styles.css"
+        ],
+        "js": [
+          "./js/scroller/content/game/scripts.js",
+          "./js/scroller/content/game/blocks.js"
+        ]
+      }
+    }
+  ]
+}

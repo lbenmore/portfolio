@@ -1,0 +1,43 @@
+[class*="section--game"] {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+[class*="section--game"] .game {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vh;
+  height: 100vh;
+  transform: translateX;
+  opacity: 0;
+  box-shadow: 0px 0px 8px grey;
+  transform: translateX(-50%);
+}
+
+[class*="section--game"] .door {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25vw;
+  height: 100vh;
+  opacity: 0;
+  transform: translateX(calc(50vw - 50%));
+}
+  
+[class*="section--game"] .door--1 {
+  background-color: #f04;
+}
+
+[class*="section--game"] .door--4 {
+  background-color: #80f;
+}
+
+[class*="section--game"] .door--2 {
+  background-color: #ff0;
+}
+
+[class*="section--game"] .door--3 {
+  background-color: #0f8;
+}
