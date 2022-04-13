@@ -7,7 +7,7 @@
     "links": [
       {
         "name": "Documentation",
-        "url": "{{HOST}}/external/documentation/bnmr/"
+        "url": "{{HOST}}/external/bnmr_documentation/bnmr/"
       },
       {
         "name": "Source (ES6)",

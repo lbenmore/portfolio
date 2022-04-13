@@ -87,7 +87,8 @@ class Scroller {
       Object.assign(this.elements.container.style, {
         position: 'relative',
         width: '100%',
-        height: `${targetHeight * heightMultiplier}px`
+        height: `${targetHeight * heightMultiplier}px`,
+        pointerEvents: 'none'
       });
       
       this.sections.forEach(section => {
