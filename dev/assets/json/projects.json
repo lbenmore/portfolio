@@ -7,7 +7,7 @@
     "links": [
       {
         "name": "Documentation",
-        "url": "{{HOST}}/external/bnmr_documentation/bnmr/"
+        "url": "{{HOST}}/demo/bnmr_documentation/bnmr/"
       },
       {
         "name": "Source (ES6)",
@@ -27,7 +27,7 @@
     "links": [
       {
         "name": "Demo",
-        "url": "{{HOST}}/external/core/"
+        "url": "{{HOST}}/demo/core/"
       },
       {
         "name": "Source (ES5)",
@@ -97,7 +97,7 @@
     "links": [
       {
         "name": "Demo",
-        "url": "{{HOST}}/external/winter_wonderblocks/"
+        "url": "{{HOST}}/demo/winter_wonderblocks/"
       },
       {
         "name": "Game Source",
@@ -113,7 +113,7 @@
     "links": [
       {
         "name": "Demo",
-        "url": "{{HOST}}/external/scroller/"
+        "url": "{{HOST}}/demo/scroller/"
       },
       {
         "name": "Source",
