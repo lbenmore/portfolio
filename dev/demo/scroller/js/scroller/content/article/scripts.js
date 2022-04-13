@@ -87,8 +87,11 @@ function init (tries = 20) {
   
   const article = section.querySelector('.article');
   
+  article.style.pointerEvents = 'auto';
+  
   section.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('click', toggleArticle.bind(null, article));
+    btn.style.pointerEvents = 'auto';
   });
 }
 
