@@ -70,18 +70,18 @@ class Scroller {
       
       const { width: targetWidth, height: targetHeight } = this.target.getBoundingClientRect();
       const heightMultiplier = this.sections.reduce((result, section ) => ((result += section.height) && result), 0);
-      const width = `${targetWidth}px`;
-      const height = `${targetHeight}px`;
+      const [ width, height ] = [ targetWidth, targetHeight ].map(x => `${x}px`);
       
+      this.target.style.overflow = 'auto';
       this.target.style.transform = 'translateZ(0)';
       
       Object.assign(this.elements.main.style, {
         position: 'fixed',
         top: '0',
         left: '0',
-        width: width,
-        height: height,
-        overflow: 'auto'
+        overflow: 'auto',
+        width,
+        height
       });
       
       Object.assign(this.elements.container.style, {

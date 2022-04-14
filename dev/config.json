@@ -131,6 +131,20 @@
         "./js/components/menu.js",
         "./js/controllers/projects/slideshow.js"
       ]
+    },
+    "/projects/scroller": {
+      "name": "Scroller UI",
+      "html": "./html/pages/projects/scroller.html",
+      "css": [
+        "./css/components/page.css",
+        "./css/controllers/projects/scroller.css"
+      ],
+      "js": [
+        "./js/components/header.js",
+        "./js/components/menu.js",
+        "./js/controllers/projects/scroller.js",
+        "module:./js/controllers/projects/scroller/js/main.js"
+      ]
     }
   }
 }

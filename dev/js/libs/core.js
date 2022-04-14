@@ -125,9 +125,13 @@ core.fns.loadPage = () => {
 					$$('div[data-css]').appendChild(link);
 				}
 				
-				for (const resourceUrl of scripts) {
+				for (let resourceUrl of scripts) {
 					const script = document.createElement('script');
-					
+          
+          if (resourceUrl.includes('module:')) {
+            script.type = 'module';
+            resourceUrl = resourceUrl.replace('module:', '');
+          }
 					script.src = resourceUrl;
 					script.dataset.loaded = false;
 					

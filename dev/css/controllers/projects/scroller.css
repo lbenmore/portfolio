@@ -1,0 +1,13 @@
+body {
+  --1w: 1vw;
+  --1h: 1vh;
+}
+
+.scroll-container {
+  position: relative;
+  margin: 0 auto;
+  width: 640px;
+  max-width: 100%;
+  height: 360px;
+  background-image: linear-gradient(0deg, #20282f, #40484f);
+}
