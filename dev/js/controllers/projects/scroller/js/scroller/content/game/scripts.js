@@ -224,12 +224,12 @@ function updateStyles (tries = 20) {
   const h = parseFloat(document.body.style.getPropertyValue('--h'));
   
   if (win.innerWidth > win.innerHeight) {
-    Object.assign(game, {
+    Object.assign(game.style, {
       width: `${100 * h}px`,
       height: `${100 * h}px`
     });
   } else {
-    Object.assign(game, {
+    Object.assign(game.style, {
       width: `${100 * w}px`,
       height: `${100 * w}px`
     });
