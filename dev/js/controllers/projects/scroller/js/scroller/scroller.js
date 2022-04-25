@@ -95,7 +95,7 @@ class Scroller {
         Object.assign(section.container.style, {
           height: `${targetHeight * section.height}px`
         });
-      })
+      });
     } catch (err) {
       console.log('ERROR:', err.message);
     }

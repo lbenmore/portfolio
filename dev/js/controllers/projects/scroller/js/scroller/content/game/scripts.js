@@ -10,10 +10,12 @@ function stylizeDoor1 (el, percent) {
   const doorPercEnd = 0.8;
   const doorPerc = (percent - doorPercStart) / (doorPercEnd - doorPercStart);
   
+  const w = parseFloat(document.body.style.getPropertyValue('--w'));
+  
   if (startPerc < percent && percent < endPerc) {
     Object.assign(el.style, {
       opacity: `${1 * perc}`,
-      transform: `translateX(calc(${50 * (1 - perc)}vw - ${50 * (1 - perc)}%))`
+      transform: `translateX(calc(${(50 * (1 - perc)) * w}px - ${50 * (1 - perc)}%))`
     });
   } else if (percent < startPerc) {
     Object.assign(el.style, {
@@ -27,11 +29,11 @@ function stylizeDoor1 (el, percent) {
     });
   } else if (doorPercStart < percent && percent < doorPercEnd) {
     Object.assign(el.style, {
-      transform: `translateX(${-50 * doorPerc}vw)`
+      transform: `translateX(${(-50 * doorPerc) * w}px)`
     });
   } else if (percent > doorPercEnd) {
     Object.assign(el.style, {
-      transform: `translateX(-50vw)`
+      transform: `translateX(${-50 * w}px)`
     });
   }
 }
@@ -45,10 +47,12 @@ function stylizeDoor4 (el, percent) {
   const doorPercEnd = 0.8;
   const doorPerc = (percent - doorPercStart) / (doorPercEnd - doorPercStart);
   
+  const w = parseFloat(document.body.style.getPropertyValue('--w'));
+  
   if (startPerc < percent && percent < endPerc) {
     Object.assign(el.style, {
       opacity: `${1 * perc}`,
-      transform: `translateX(calc(${75 - ((75 - 50) * (1 - perc))}vw - ${50 * (1 - perc)}%))`
+      transform: `translateX(calc(${(75 - ((75 - 50) * (1 - perc))) * w}px - ${50 * (1 - perc)}%))`
     });
   } else if (percent < startPerc) {
     Object.assign(el.style, {
@@ -58,15 +62,15 @@ function stylizeDoor4 (el, percent) {
   } else if (endPerc < percent && percent < doorPercStart) {
     Object.assign(el.style, {
       opacity: `1`,
-      transform: `translateX(75vw)`
+      transform: `translateX(${75 * w}px)`
     });
   } else if (doorPercStart < percent && percent < doorPercEnd) {
     Object.assign(el.style, {
-      transform: `translateX(${75 + ((125 - 75) * doorPerc)}vw)`
+      transform: `translateX(${(75 + ((125 - 75) * doorPerc)) * w}px)`
     });
   } else if (percent > doorPercEnd) {
     Object.assign(el.style, {
-      transform: `translateX(125vw)`
+      transform: `translateX(${125 * w}px)`
     });
   }
 }
@@ -80,10 +84,12 @@ function stylizeDoor2 (el, percent) {
   const doorPercEnd = 0.8;
   const doorPerc = (percent - doorPercStart) / (doorPercEnd - doorPercStart);
   
+  const w = parseFloat(document.body.style.getPropertyValue('--w'));
+  
   if (startPerc < percent && percent < endPerc) {
     Object.assign(el.style, {
       opacity: `${1 * perc}`,
-      transform: `translateX(calc(${50 - (25 * perc)}vw - ${50 * (1 - perc)}%))`
+      transform: `translateX(calc(${(50 - (25 * perc)) * w}px - ${50 * (1 - perc)}%))`
     });
   } else if (percent < startPerc) {
     Object.assign(el.style, {
@@ -93,15 +99,15 @@ function stylizeDoor2 (el, percent) {
   } else if (endPerc < percent && percent < doorPercStart) {
     Object.assign(el.style, {
       opacity: `1`,
-      transform: `translateX(25vw)`
+      transform: `translateX(${25 * w}px)`
     });
   } else if (doorPercStart < percent && percent < doorPercEnd) {
     Object.assign(el.style, {
-      transform: `translateX(${-25 + (50 * (1 - doorPerc))}vw)`
+      transform: `translateX(${(-25 + (50 * (1 - doorPerc))) * w}px)`
     });
   } else if (percent > doorPercEnd) {
     Object.assign(el.style, {
-      transform: `translateX(-25vw)`
+      transform: `translateX(${-25 * w}px)`
     });
   }
 }
@@ -115,10 +121,12 @@ function stylizeDoor3 (el, percent) {
   const doorPercEnd = 0.8;
   const doorPerc = (percent - doorPercStart) / (doorPercEnd - doorPercStart);
   
+  const w = parseFloat(document.body.style.getPropertyValue('--w'));
+  
   if (startPerc < percent && percent < endPerc) {
     Object.assign(el.style, {
       opacity: `${1 * perc}`,
-      transform: `translateX(calc(50vw - ${50 * (1 - perc)}%))`
+      transform: `translateX(calc(${50 * w}px - ${50 * (1 - perc)}%))`
     });
   } else if (percent < startPerc) {
     Object.assign(el.style, {
@@ -128,15 +136,15 @@ function stylizeDoor3 (el, percent) {
   } else if (endPerc < percent && percent < doorPercStart) {
     Object.assign(el.style, {
       opacity: `1`,
-      transform: `translateX(50vw)`
+      transform: `translateX(${50 * w}px)`
     });
   } else if (doorPercStart < percent && percent < doorPercEnd) {
     Object.assign(el.style, {
-      transform: `translateX(${50 + (50 * doorPerc)}vw)`
+      transform: `translateX(${(50 + (50 * doorPerc)) * w}px)`
     });
   } else if (percent > doorPercEnd) {
     Object.assign(el.style, {
-      transform: `translateX(100vw)`
+      transform: `translateX(${100 * w})`
     });
   }
 }
@@ -177,7 +185,8 @@ function startGame (target) {
   const gameEl = target && target.querySelector('.game');
   gameEl.style.opacity = '1';
   if (!blocks.game) {
-    blocks.game = new Blocks(gameEl); 
+    blocks.game = new Blocks(gameEl);
+    console.log(blocks.game);
   } else if (!blocks.game.playing) {
     blocks.game.start();
   }
@@ -211,15 +220,18 @@ function updateStyles (tries = 20) {
   if (!section && tries) return setTimeout(updateStyles, 50, --tries);
   const game = section.querySelector('.game');
   
+  const w = parseFloat(document.body.style.getPropertyValue('--w'));
+  const h = parseFloat(document.body.style.getPropertyValue('--h'));
+  
   if (win.innerWidth > win.innerHeight) {
     Object.assign(game, {
-      width: '100vh',
-      height: '100vh'
+      width: `${100 * h}px`,
+      height: `${100 * h}px`
     });
   } else {
     Object.assign(game, {
-      width: '100vw',
-      height: '100vw'
+      width: `${100 * w}px`,
+      height: `${100 * w}px`
     });
   }
 }

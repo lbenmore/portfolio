@@ -39,8 +39,8 @@
           "./js/controllers/projects/scroller/js/scroller/content/game/styles.css"
         ],
         "js": [
-          "./js/controllers/projects/scroller/js/scroller/content/game/scripts.js",
-          "./js/controllers/projects/scroller/js/scroller/content/game/blocks.js"
+          "./js/controllers/projects/scroller/js/scroller/content/game/blocks.js",
+          "./js/controllers/projects/scroller/js/scroller/content/game/scripts.js"
         ]
       }
     }

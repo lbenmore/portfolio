@@ -4,12 +4,26 @@
   left: 0;
 }
 
+[class*="section--article"] .btn,
+[class*="section--article"] .btn:hover {
+  display: inline-block;
+  position: relative;
+  margin-right: 16px;
+  background: white;
+  color: black;
+  border-color: black;
+}
+
+[class*="section--article"] .btn::before {
+  background: transparent;
+}
+
 [class*="section--article"] .hero {
   position: absolute;
   top: 0;
   left: 0;
-  width: 50vw;
-  height: 100vh;
+  width: calc(50 * var(--w));
+  height: calc(100 * var(--h));
   background: radial-gradient(grey, black);
   opacity: 0;
   transform: translateX(-100%);
@@ -20,21 +34,25 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 50vw;
-  height: 100vh;
-  padding: 2vh;
+  width: calc(50 * var(--w));
+  height: calc(100 * var(--h));
+  padding: calc(2 * var(--h));
   opacity: 0;
   transform: translateX(100%);
+  background: linear-gradient(red, blue);
 }
 
 [class*="section--article"] .blockquote .center {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
+  background: green;
 }
 
 [class*="section--article"] .blockquote .center span {
-  font-size: 6vh;
+  display: inline-block;
+  font-size: calc(6 * var(--h));
+  background: blue;
 }
 
 [class*="section--article"] .article {
@@ -42,20 +60,21 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: calc(100 * var(--w));
+  height: calc(100 * var(--h));
   background-color: rgba(255, 255, 255, 0.8);
+  color: #222;
 }
 
 [class*="section--article"] .article .content {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 60vw;
-  height: 60vh;
+  width: calc(60 * var(--w));
+  height: calc(60 * var(--h));
   padding: 0 16px 16px;
   background-color: white;
-  box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px calc(2 * var(--h)) rgba(0, 0, 0, 0.3);
   overflow-y: auto;
   transform: translate(-50%, -50%);
 }
@@ -68,9 +87,9 @@
   padding: 16px;
   background-color: white;
   text-align: right;
+  z-index: 1;
 }
 
-[class*="section--article"] .article .btn--close {
-  display: inline-block;
-  margin-right: 16px;
+[class*="section--article"] .article .content p {
+  position: relative; 
 }
