@@ -75,20 +75,22 @@ class Scroller {
       this.target.style.overflow = 'auto';
       this.target.style.transform = 'translateZ(0)';
       
-      Object.assign(this.elements.main.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        overflow: 'auto',
-        width,
-        height
-      });
-      
       Object.assign(this.elements.container.style, {
         position: 'relative',
         width: '100%',
         height: `${targetHeight * heightMultiplier}px`,
         pointerEvents: 'none'
+      });
+      
+      Object.assign(this.elements.main.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        padding: '0',
+        overflow: 'auto',
+        minHeight: '0',
+        width,
+        height
       });
       
       this.sections.forEach(section => {
