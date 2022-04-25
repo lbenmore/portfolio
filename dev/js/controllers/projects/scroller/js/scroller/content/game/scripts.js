@@ -217,12 +217,13 @@ function onScroll (evt) {
 function updateStyles (tries = 20) {
   const section = document.querySelector(`[class*="section--${name}"]`);
   if (!section && tries) return setTimeout(updateStyles, 50, --tries);
+  const { width: sectionW, height: sectionH } = section.getBoundingClientRect();
   const game = section.querySelector('.game');
   
   const w = parseFloat(document.body.style.getPropertyValue('--w'));
   const h = parseFloat(document.body.style.getPropertyValue('--h'));
   
-  if (win.innerWidth > win.innerHeight) {
+  if (sectionW > sectionH) {
     Object.assign(game.style, {
       width: `${100 * h}px`,
       height: `${100 * h}px`
