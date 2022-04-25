@@ -1,6 +1,6 @@
 class Piece {
   isAtBottom () {
-    return this.y + this.height - 1 === this.game.size;
+    return this.y + this.height === this.game.size;
   }
   
   pieceIsBelow () {
@@ -8,13 +8,12 @@ class Piece {
       if (result) return result;
       row.forEach((cell, x) => {
         const cellHasValue = !!cell;
+        const nextRowOnBoardHasValue = !!this.game.board[this.y + y + 1] && !!this.game.board[this.y + y + 1][this.x + x];
         const nextRowInShapeHasValue = !!this.shape[y + 1] ? !!this.shape[y + 1][x] : false;
-        const nextRowOnBoardHasValue = !!this.game.board[this.y + y][this.x + x];
         if (cellHasValue && nextRowOnBoardHasValue && !nextRowInShapeHasValue) result = true;
       });
       return result;
     }, false);
-    
     return hasCollisions;
   }
   
@@ -37,28 +36,21 @@ class Piece {
     }
   }
   
-  updatePlacement () {
-    if (!this.canContinue()) {
-      this.game.checkForCompleteRow()
-      this.game.active = false;
-    } else {
-      this.y - 1 >= 0 && this.game.board[this.y - 1].splice(this.x, this.width, ...Array(this.width).fill(0));
-      this.shape.forEach((row, y) => {
-        const values = row.map((cell, x) => {
-          const thisShapeHasValue = !!cell;
-          const clearCell = y !== this.shape.length - 1 && !cell;
-          const boardCellValue = this.game.board[this.y + y][this.x + x];
-          return thisShapeHasValue ? this.color : clearCell ? 0 : boardCellValue || 0;
-        });
-        this.game.board[this.y + y].splice(this.x, row.length, ...values);
+  updatePlacement (adjustments) {
+    this.y - 1 >= 0 && this.game.board[this.y - 1].splice(this.x, this.width, ...Array(this.width).fill(0));
+    this.shape.forEach((row, y) => {
+      const values = row.map((cell, x) => {
+        if (adjustments) {
+          adjustments.x && (x += adjustments.x);
+          adjustments.y && (y += adjustments.y);
+        }
+        const thisCellHasValue = !!cell;
+        const clearCell = !thisCellHasValue && this.shape[y + 1] && this.shape[y + 1][x];
+        const boardCellValue = this.game.board[this.y + y][this.x + x];
+        return thisCellHasValue ? this.color : clearCell ? 0 : boardCellValue || 0;
       });
-      
-      this.game.updateView();
-      
-      ++this.y;
-      
-      this.y === 1 && !this.canContinue() && this.game.gameOver();
-    }
+      this.game.board[this.y + y].splice(this.x, row.length, ...values);
+    });
   }
   
   initOnBoard () {
@@ -165,74 +157,126 @@ class Blocks {
   
   controls (evt) {
     const _this = this;
+    const { active } = this;
+    const stormtrooper = this.board.map(row => row.map(x => x));
     
-    if (!this.active || !this.active.canContinue()) return;
+    if (!active) return;
     
-    function clearCurrent () {
-      _this.active.shape.forEach((row, y) => {
+    function clearActiveFromBoard (board) {
+      active.shape.forEach((row, y) => {
         row.forEach((cell, x) => {
-          _this.board[_this.active.y - 1 + y][_this.active.x + x] = 0;  
+          const value = active.shape[y][x] ? 0 : board[active.y + y][active.x + x] || 0;
+          board[active.y + y][active.x + x] = value;
         });
       });
     }
     
-    this.stop();
-    clearCurrent();
+    function canMove (board) {
+      return active.shape.reduce((result, row, y) => {
+        const { shape } = active;
+        if (!result) return result;
+        row.forEach((cell, x) => {
+          const cellHasValue = !!cell;
+          const boardHasValue = board[active.y + y] && board[active.y + y][active.x + x];
+          if (cellHasValue && boardHasValue) result = false;
+        });
+        return result;
+      }, true);
+    }
+    
+    clearActiveFromBoard(stormtrooper);
     
     switch (evt.keyCode) {
       case 37:
-        if (!this.active) break;
-        if (this.active.x === 0) break;
+        if (!active) break;
+        if (active.x === 0) break;
         
-        --this.active.x;
-        if (this.active.canContinue()) this.active.updatePlacement();
-        else ++this.active.x;
-        break;
+        --active.x;
+        
+        if (canMove(stormtrooper)) {
+          this.board = stormtrooper;
+          active.updatePlacement({ x: -1 });
+          this.updateView();
+        } else {
+          ++active.x;
+        }
+      break;
         
       case 39:
-        if (!this.active) break;
-        if (this.active.x === this.size - this.active.width ) break;
+        if (!active) break;
+        if (active.x === this.size - active.width ) break;
         
-        ++this.active.x;
-        if (this.active.canContinue()) this.active.updatePlacement();
-        else --this.active.x;
-        break;
+        ++active.x;
+        
+        if (canMove(stormtrooper)) {
+          this.board = stormtrooper;
+          active.updatePlacement({ x: 1 });
+          this.updateView();
+        } else {
+          --active.x;
+        }
+      break;
         
       case 40:
-        if (this.active.y + this.active.height === this.size) break;
+        if (active.y + active.height === this.size) break;
       
-        ++this.active.y;
-        if (this.active.canContinue()) this.active.updatePlacement();
-        else --this.active.y;
-        break;
+        ++active.y;
+        
+        if (active.canContinue()) {
+          this.board = stormtrooper;
+          active.updatePlacement();
+          this.updateView();
+        } else {
+          --active.y;
+        }
+      break;
         
       case 16:
-        if (!this.active) return false;
+        if (!active) return false;
         
-        const currentShape = [ ...this.active.shape ];
-        const currentX = this.active.x;
+        const currentShape = [ ...active.shape ];
+        const {
+          x: currentX,
+          width: currentWidth,
+          height: currentHeight
+        } = active;
         const shape = [];
-        for (let i = this.active.shape[0].length - 1; i >= 0; i--) {
+        
+        for (let i = active.shape[0].length - 1; i >= 0; i--) {
           const row = [];
-          for (let j = 0; j < this.active.shape.length; j++) {
-            row.push(this.active.shape[j][i]);
+          for (let j = 0; j < active.shape.length; j++) {
+            row.push(active.shape[j][i]);
           }
           shape.push(row);
         }
         
-        this.active.shape = shape;
-        this.active.height = shape.length;
-        this.active.width = shape[0].length;
-        if (this.active.x + this.active.width > this.size - 1) --this.active.x;
+        active.shape = shape;
+        active.height = shape.length;
+        active.width = shape[0].length;
+        if (active.x + active.width > this.size - 1) --active.x;
         
-        if (this.active.canContinue()) this.active.updatePlacement();
-        else {
-          this.active.shape = currentShape;
-          this.active.x = currentX;
+        if (canMove(stormtrooper)) {
+          this.board = stormtrooper;
+          active.updatePlacement();
+          this.updateView();
+        } else {
+          active.shape = currentShape;
+          active.x = currentX;
+          active.width = currentWidth;
+          active.height = currentHeight;
         }
+      break;
     }
-    
-    this.start();
+  }
+  
+  gameOver () {
+    this.stop();
+    this.fireEvent('gameover');
+  }
+  
+  checkForGameOver () {
+    const gameover = !!this.board[0].filter(cell => !!cell).length;
+    return true;
   }
   
   checkForCompleteRow () {
@@ -243,11 +287,13 @@ class Blocks {
         chunkToMoveDown.pop();
         this.board.unshift(Array(this.size).fill(0), ...chunkToMoveDown);
         this.updateView();
+        this.fireEvent('rowcleared');
       }
-    })
+    });
   }
   
   advanceActivePiece () {
+    ++this.active.y;
     this.active.updatePlacement();
     this.updateView();
   }
@@ -256,24 +302,32 @@ class Blocks {
     const rand = Math.floor(Math.random() * this.shapes.length);
     const shape = this.shapes[rand];
     this.active = new shape(this);
+    this.fireEvent('newpiece');
+    
+    if (this.active.pieceIsBelow()) this.gameOver();
+  }
+  
+  gameplay () {
+    if (this.active && this.active.canContinue()) {
+      this.advanceActivePiece();
+    } else {
+      this.active = null;
+      this.checkForCompleteRow();
+      this.generatePiece();
+      this.updateView();
+    }
   }
   
   stop () {
     clearInterval(this.playInterval);
     this.playing = false;
+    this.fireEvent('pause');
   }
   
   start () {
-    this.playInterval = setInterval((_this) => {
-      if (!_this.active) _this.generatePiece();
-      else _this.advanceActivePiece();
-    }, this.speed, this);
+    this.playInterval = setInterval(this.gameplay.bind(this), this.speed);
     this.playing = true;
-  }
-  
-  gameOver () {
-    this.stop();
-    console.log('game over');
+    this.fireEvent('play');
   }
   
   initBoard () {
@@ -299,30 +353,41 @@ class Blocks {
       }
     `;
     
-    document.head.appendChild(style);
+    this.target.parentNode.appendChild(style);
+  }
+  
+  namespace (...args) {
+    return [ this.name, ...args ].join('.');
+  }
+  
+  fireEvent (...args) {
+    this.events.dispatchEvent(new CustomEvent(this.namespace(...args)));
   }
   
   eventListeners () {
     addEventListener('keyup', this.controls.bind(this));
     addEventListener('resize', this.stylize.bind(this));
   }
-
+  
   constructor (target, options = {}) {
     this.target = target;
     this.size = options.size || 12;
     this.speed = options.speed || 1000;
     this.colors = options.colors || [ '#f04', '#0f8', '#08f', '#80f' ];
+    this.name = options.name || 'blocks';
+    this.events = document.createElement('div');
     this.board = this.initBoard();
     this.pieces = [];
+    this.shapes = [];
+    this.id = Math.random().toString(16).slice(2);
     this.shapes = [
       ShapeL,
-      ShapeT,
-      ShapeI,
       ShapeZ,
+      ShapeT,
       ShapeS,
+      ShapeI,
       ShapeBox
     ];
-    this.id = Math.random().toString(16).slice(2);
     
     this.updateView();
     this.stylize();

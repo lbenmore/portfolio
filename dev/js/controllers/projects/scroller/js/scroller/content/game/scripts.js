@@ -186,7 +186,6 @@ function startGame (target) {
   gameEl.style.opacity = '1';
   if (!blocks.game) {
     blocks.game = new Blocks(gameEl);
-    console.log(blocks.game);
   } else if (!blocks.game.playing) {
     blocks.game.start();
   }

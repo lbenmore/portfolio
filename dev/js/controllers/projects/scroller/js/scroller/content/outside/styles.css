@@ -27,7 +27,11 @@
   font-size: calc(10 * var(--h));
   font-weight: 100;
   text-align: center;
-  text-shadow: 0px 0px calc(2 * var(--h)) #40281f;
+  text-shadow: 
+    0px 0px calc(1 * var(--h)) #000, 
+    0px 0px calc(2 * var(--h)) #000, 
+    0px 0px calc(3 * var(--h)) #000, 
+    0px 0px calc(4 * var(--h)) #000;
   opacity: 0;
 }
 
