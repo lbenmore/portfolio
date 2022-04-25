@@ -37,22 +37,25 @@
   width: calc(50 * var(--w));
   height: calc(100 * var(--h));
   padding: calc(2 * var(--h));
+  background: white;
+  color: black;
   opacity: 0;
   transform: translateX(100%);
-  background: linear-gradient(red, blue);
+}
+
+[class*="section--article"] .blockquote * {
+  position: relative;
 }
 
 [class*="section--article"] .blockquote .center {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  background: green;
 }
 
 [class*="section--article"] .blockquote .center span {
   display: inline-block;
   font-size: calc(6 * var(--h));
-  background: blue;
 }
 
 [class*="section--article"] .article {

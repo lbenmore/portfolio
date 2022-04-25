@@ -89,6 +89,7 @@ class Scroller {
         padding: '0',
         overflow: 'auto',
         minHeight: '0',
+        background: 'white',
         width,
         height
       });
