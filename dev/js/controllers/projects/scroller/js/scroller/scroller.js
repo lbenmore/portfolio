@@ -70,19 +70,10 @@ class Scroller {
       
       const { width: targetWidth, height: targetHeight } = this.target.getBoundingClientRect();
       const heightMultiplier = this.sections.reduce((result, section ) => ((result += section.height) && result), 0);
-      const width = `${targetWidth}px`;
-      const height = `${targetHeight}px`;
+      const [ width, height ] = [ targetWidth, targetHeight ].map(x => `${x}px`);
       
+      this.target.style.overflow = 'auto';
       this.target.style.transform = 'translateZ(0)';
-      
-      Object.assign(this.elements.main.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: width,
-        height: height,
-        overflow: 'auto'
-      });
       
       Object.assign(this.elements.container.style, {
         position: 'relative',
@@ -91,11 +82,23 @@ class Scroller {
         pointerEvents: 'none'
       });
       
+      Object.assign(this.elements.main.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        padding: '0',
+        overflow: 'auto',
+        minHeight: '0',
+        background: 'white',
+        width,
+        height
+      });
+      
       this.sections.forEach(section => {
         Object.assign(section.container.style, {
           height: `${targetHeight * section.height}px`
         });
-      })
+      });
     } catch (err) {
       console.log('ERROR:', err.message);
     }

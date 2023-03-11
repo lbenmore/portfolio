@@ -8,10 +8,10 @@
 
 [class*="section--outside"] .moon {
   position: absolute;
-  top: 10vh;
-  left: 20vw;
-  width: 40vw;
-  height: 40vw;
+  top: calc(10 * var(--h));
+  left: calc(20 * var(--w));
+  width: calc(40 * var(--w));
+  height: calc(40 * var(--w));
   border-radius: 50%;
   background-image: radial-gradient(#fffff0, #ffffc0);
   opacity: 0;
@@ -20,14 +20,18 @@
 
 [class*="section--outside"] .title {
   position: absolute;
-  top: 45vh;
+  top: calc(45 * var(--h));
   width: 100%;
   letter-spacing: 0.4em;
   color: white;
-  font-size: 10vh;
+  font-size: calc(10 * var(--h));
   font-weight: 100;
   text-align: center;
-  text-shadow: 0px 0px 2vh #40281f;
+  text-shadow: 
+    0px 0px calc(1 * var(--h)) #000, 
+    0px 0px calc(2 * var(--h)) #000, 
+    0px 0px calc(3 * var(--h)) #000, 
+    0px 0px calc(4 * var(--h)) #000;
   opacity: 0;
 }
 
@@ -35,8 +39,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100vw;
-  height: 75vh;
+  width: calc(100 * var(--h));
+  height: calc(75 * var(--h));
   background-image: linear-gradient(#40281f, #110800);
   clip-path: polygon(0 100%, 50% 0, 100% 100%, 0 100%);
   opacity: 0;
@@ -48,7 +52,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50vh;
+  height: calc(50 * var(--h));
   background-image: url('https://cdn.pixabay.com/photo/2019/05/16/06/20/forest-4206553_1280.png');
   background-position: center top;
   background-size: cover;

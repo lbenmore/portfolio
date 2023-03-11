@@ -5,14 +5,15 @@
 }
 
 [class*="section--game"] .game {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 50%;
-  width: 100vh;
-  height: 100vh;
+  width: calc(100 * var(--w));
+  height: calc(100 * var(--h));
   transform: translateX;
   opacity: 0;
   box-shadow: 0px 0px 8px grey;
+  overflow: hidden;
   transform: translateX(-50%);
 }
 
@@ -20,10 +21,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 25vw;
-  height: 100vh;
+  width: calc(25 * var(--w));
+  height: calc(100 * var(--h));
   opacity: 0;
-  transform: translateX(calc(50vw - 50%));
+  transform: translateX(calc((50 * var(--w)) - 50%));
 }
   
 [class*="section--game"] .door--1 {
